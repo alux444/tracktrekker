@@ -68,11 +68,7 @@ const useSpotify = () => {
         }
     };
 
-    const getSearch = async (
-        accessToken: string,
-        query: string,
-        type: string
-    ) => {
+    const getSearch = async (accessToken: string, query: string) => {
         const url = "https://api.spotify.com/v1/search";
 
         const headers = {
@@ -84,7 +80,7 @@ const useSpotify = () => {
                 headers,
                 params: {
                     q: query,
-                    type: type,
+                    type: "track,artist",
                 },
             });
             console.log(response.data);
