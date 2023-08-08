@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { recommendForm } from "../interfaces/recommendForm";
 import useSpotify from "../utils/useSpotify";
 import SongDisplay from "./SongDisplay";
 import { SongInfo } from "../interfaces/songInfo";
 import CriteriaForm from "./CriteriaForm";
 import SearchForm from "./SearchForm";
+import { TokenContext } from "../App";
 
 const HomePage = () => {
-    const [token, setToken] = useState<string | null>(null);
+    const { token, setToken } = useContext(TokenContext);
+
     const [songForm, setSongForm] = useState<recommendForm>({
         seed_artists: "2OxyMQXlbUfE4zpHG3fwqk",
         seed_genres: "hardstyle",

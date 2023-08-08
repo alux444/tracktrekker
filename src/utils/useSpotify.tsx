@@ -81,6 +81,7 @@ const useSpotify = () => {
                 params: {
                     q: query,
                     type: "track,artist",
+                    limit: 10,
                 },
             });
             console.log(response.data);
