@@ -27,7 +27,7 @@ function App() {
                             <ArtistInfoContext.Provider
                                 value={{ artists, setArtists }}
                             >
-                                <p className="text-[red]">Recommendify</p>
+                                <p className="title">Recommendify</p>
                                 <button onClick={() => console.log(songSeeds)}>
                                     test
                                 </button>

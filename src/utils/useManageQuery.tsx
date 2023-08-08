@@ -6,6 +6,7 @@ import {
     SongsInfoContext,
 } from "../App";
 import { SongInfo } from "../interfaces/songInfo";
+import { ArtistInfo } from "../interfaces/artistInfo";
 
 const useManageQuery = () => {
     const { songSeeds, setSongSeeds } = useContext(SongSeedContext);
@@ -31,17 +32,9 @@ const useManageQuery = () => {
         setSongs(updatedSongs);
     };
 
-    const addArtist = (seed: string) => {
-        const updatedArtistSeeds = [...artistSeeds, seed];
-        setArtistSeeds(updatedArtistSeeds);
-    };
+    const addArtist = (artist: ArtistInfo) => {};
 
-    const removeArtist = (seedToRemove: string) => {
-        const updatedArtistSeeds = songSeeds.filter(
-            (seed) => seed !== seedToRemove
-        );
-        setArtistSeeds(updatedArtistSeeds);
-    };
+    const removeArtist = (artist: ArtistInfo) => {};
 
     return { addSong, removeSong, addArtist, removeArtist };
 };

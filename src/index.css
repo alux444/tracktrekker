@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
 
 .button1 {
     position: relative;
@@ -39,4 +40,23 @@
         rgba(99, 88, 238, 1) 94.3%
     );
     transition: all 0.475s;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 600;
+    font-family: "Marcellus", Arial, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-image: linear-gradient(to left, #4816d2, #5382e1);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out;
+    --text-stroke-color: rgba(255, 255, 255, 0.6);
+    --animation-color: #37ff8b;
+    --fs-size: 2em;
+    letter-spacing: 3px;
+    font-size: var(--fs-size);
 }

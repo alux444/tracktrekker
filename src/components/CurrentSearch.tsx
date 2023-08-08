@@ -10,8 +10,14 @@ const CurrentSearch = () => {
     ));
 
     return (
-        <div className="flex flex-col text-xs h-full overflow-auto">
-            {allSongs}
+        <div className="flex flex-col text-xs h-full overflow-auto items-center">
+            <p>Im looking for...</p>
+            {songs.length > 0 && (
+                <div>
+                    <small>Songs like:</small>
+                    {allSongs}
+                </div>
+            )}
         </div>
     );
 };

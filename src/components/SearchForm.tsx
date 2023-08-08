@@ -45,7 +45,7 @@ const SearchForm = ({ type }: { type: string }) => {
     ));
 
     const artists = artistReults?.map((artist) => (
-        <ArtistDisplay key={artist.id} artist={artist} />
+        <ArtistDisplay key={artist.id} artist={artist} fromSearch={true} />
     ));
 
     return (
@@ -64,9 +64,14 @@ const SearchForm = ({ type }: { type: string }) => {
                     <span className="button1-content">Search</span>
                 </button>
             </form>
-            <div className="p-5 block h-[50vh] overflow-auto">
-                {type === "track" ? tracks : artists}
-            </div>
+
+            {type === "track" ? (
+                <div className="p-5 block h-[50vh] overflow-auto">{tracks}</div>
+            ) : (
+                <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
+                    {artists}
+                </div>
+            )}
         </div>
     );
 };

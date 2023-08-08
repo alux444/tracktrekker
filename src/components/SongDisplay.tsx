@@ -22,7 +22,7 @@ const SongDisplay = ({
                 <img src={songInfo.album.images[2].url} />
                 <div className="block">
                     <a href={songInfo.external_urls.spotify}>
-                        <h2>{songInfo.name}</h2>
+                        <h2 className="text-xl">{songInfo.name}</h2>
                     </a>
                     <div className="flex gap-2">{artists}</div>
                 </div>

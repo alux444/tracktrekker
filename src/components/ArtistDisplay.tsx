@@ -1,19 +1,35 @@
 import { ArtistInfo } from "../interfaces/artistInfo";
+import useManageQuery from "../utils/useManageQuery";
 
-const ArtistDisplay = ({ artist }: { artist: ArtistInfo }) => {
-    if (
-        !artist ||
-        !artist.images ||
-        !artist.images[0] ||
-        !artist.images[0].url
-    ) {
-        return null;
-    }
+const ArtistDisplay = ({
+    artist,
+    fromSearch,
+}: {
+    artist: ArtistInfo;
+    fromSearch: boolean;
+}) => {
+    const { addArtist, removeArtist } = useManageQuery();
 
     return (
-        <div>
-            <img src={artist.images[1].url} alt={artist.name} />
+        <div className="flex flex-col gap-2 items-center border-[1px]">
+            <img
+                className="w-[20vw] "
+                src={artist.images[2].url}
+                alt={artist.name}
+            />
             <h2>{artist.name}</h2>
+            {fromSearch ? (
+                <button className="button1" onClick={() => addArtist(artist)}>
+                    <span className="button1-content">+</span>
+                </button>
+            ) : (
+                <button
+                    className="button1"
+                    onClick={() => removeArtist(artist)}
+                >
+                    <span className="button1-content">x</span>
+                </button>
+            )}
         </div>
     );
 };
