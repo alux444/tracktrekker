@@ -37,18 +37,6 @@
     color: #333;
 }
 
-.divider {
-    background-color: #777;
-    align-self: stretch;
-    width: 0.05em;
-}
-
-.caret {
-    translate: 0 25%;
-    border: 0.25em solid transparent;
-    border-top-color: #777;
-}
-
 .options {
     position: absolute;
     margin: 0;
@@ -74,7 +62,6 @@
     padding: 0.25em 0.5em;
     cursor: pointer;
 }
-
 .option.selected {
     background-color: hsl(200, 100%, 70%);
 }
@@ -82,4 +69,28 @@
 .option.highlighted {
     background-color: hsl(200, 100%, 50%);
     color: white;
+}
+
+.option-badge {
+    display: flex;
+    align-items: center;
+    border: 0.05em solid #777;
+    padding: 0.15em 0.25em;
+    cursor: pointer;
+    outline: none;
+}
+
+.option-badge:hover,
+.option-badge:focus {
+    background-color: transparent;
+    border-color: red;
+}
+
+.option-badge:hover > .remove-btn,
+.option-badge:focus > .remove-btn {
+    color: red;
+}
+
+.option-badge:hover > .remove-btn {
+    color: #777;
 }

@@ -9,10 +9,12 @@ interface AskForGenresProps {
 }
 const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
     const [allGenres, setAllGenres] = useState<SelectOption[]>([]);
-    const [value, setValue] = useState<SelectOption>({
-        label: "hardstyle",
-        value: "hardstyle",
-    });
+    const [value, setValue] = useState<SelectOption[]>([
+        {
+            label: "hardstyle",
+            value: "hardstyle",
+        },
+    ]);
     const { token } = useContext(TokenContext);
 
     const { getGenres } = useSpotify();
@@ -32,7 +34,12 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
     return (
         <div className="flex flex-col gap-2 justify-center items-center p-5">
             <h2>Select Genres (Minimum 1)</h2>
-            <Select options={allGenres} value={value} />
+            <Select
+                multiple
+                options={allGenres}
+                value={value}
+                onChange={(option) => setValue(option)}
+            />
             <div className="flex gap-2">
                 <button className="button1" onClick={goBack}>
                     <span className="button1-content">Back</span>
