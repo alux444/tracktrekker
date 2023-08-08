@@ -19,14 +19,23 @@ type SingleSelectProps = {
 };
 
 type SelectProps = {
-    options: SelectOption[];
+    optionsRaw: SelectOption[];
 } & (SingleSelectProps | MultipleSelectProps);
 
-export function Select({ multiple, value, onChange, options }: SelectProps) {
+export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
     const [open, setOpen] = useState<boolean>(false);
     const [highlighted, setHighlighted] = useState<number>(0);
+    const [search, setSearch] = useState<string>("");
 
     const containerRef = useRef<HTMLDivElement>(null);
+
+    const options = optionsRaw.filter((option) =>
+        option.label.includes(search)
+    );
+
+    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    };
 
     const clearOptions = () => {
         multiple ? onChange([]) : onChange(undefined);
@@ -80,8 +89,15 @@ export function Select({ multiple, value, onChange, options }: SelectProps) {
                 case "Escape":
                     setOpen(false);
                     break;
-                default:
+                case "Backspace":
+                    setSearch((prevSearch) =>
+                        prevSearch.slice(0, prevSearch.length - 1)
+                    );
                     break;
+                default:
+                    if (e.key.match(/^[a-zA-Z]$/)) {
+                        setSearch((prevSearch) => prevSearch + e.key);
+                    }
             }
         };
 
@@ -94,8 +110,13 @@ export function Select({ multiple, value, onChange, options }: SelectProps) {
 
     return (
         <>
-            <div>
-                <label>Filter</label>
+            <div className="flex flex-col items-center">
+                <label>Filter:</label>
+                <input
+                    value={search}
+                    onChange={handleSearchChange}
+                    className="border-2"
+                />
             </div>
             <div
                 ref={containerRef}

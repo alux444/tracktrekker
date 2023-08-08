@@ -36,7 +36,6 @@ const useSpotify = () => {
 
         try {
             const response = await axios.get(url, { headers });
-            console.log(response.data);
             // You can access the artist data from the response here:
             return response.data.genres;
         } catch (error) {

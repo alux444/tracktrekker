@@ -24,7 +24,7 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
             const genres = await getGenres(token);
             const filteredGenres = genres.map((genre) => ({
                 value: genre,
-                label: genre.replace(/-/g, " "),
+                label: genre.replace(/-/g, ""),
             }));
             setAllGenres(filteredGenres);
         };
@@ -36,7 +36,7 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
             <h2>Select Genres (Minimum 1)</h2>
             <Select
                 multiple
-                options={allGenres}
+                optionsRaw={allGenres}
                 value={value}
                 onChange={(option) => setValue(option)}
             />
