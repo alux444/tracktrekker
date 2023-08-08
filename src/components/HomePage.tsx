@@ -4,11 +4,12 @@ import useSpotify from "../utils/useSpotify";
 import SongDisplay from "./SongDisplay";
 import { SongInfo } from "../interfaces/songInfo";
 import CriteriaForm from "./CriteriaForm";
+import SearchForm from "./SearchForm";
 
 const HomePage = () => {
-    const [token, setToken] = useState<string | undefined>();
+    const [token, setToken] = useState<string | null>(null);
     const [songForm, setSongForm] = useState<recommendForm>({
-        seed_artists: "4NHQUGzhtTLFvgF5SZesLK",
+        seed_artists: "2OxyMQXlbUfE4zpHG3fwqk",
         seed_genres: "hardstyle",
         seed_tracks: "0c6xIDDpzE81m2q797ordA",
     });
@@ -46,13 +47,19 @@ const HomePage = () => {
 
     return (
         <div className="flex gap-2 flex-col">
-            <button onClick={setAccessToken}>Get Token</button>
-            <button onClick={() => getArtistData(token)}>artist</button>
-            <button onClick={getSongs}>get songs</button>
-            <CriteriaForm />
-            <div className="flex gap-4 flex-wrap justify-between p-5">
-                {results}
-            </div>
+            {token === null ? (
+                <button onClick={setAccessToken}>Get Token</button>
+            ) : (
+                <>
+                    <button onClick={() => getArtistData(token)}>artist</button>
+                    <button onClick={getSongs}>get songs</button>
+                    <SearchForm token={token} />
+                    <CriteriaForm />
+                    <div className="flex gap-4 flex-wrap justify-between p-5">
+                        {results}
+                    </div>
+                </>
+            )}
         </div>
     );
 };

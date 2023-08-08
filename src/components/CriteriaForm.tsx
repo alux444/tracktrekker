@@ -28,7 +28,7 @@ const CriteriaForm = () => {
 
     return (
         <div className="border-2 flex flex-col justify-center">
-            <label>Or Paste Spotify Link to Arist/Track</label>
+            <label>Or Paste Spotify Link to Artist/Track</label>
             <input
                 type="text"
                 placeholder="URL"

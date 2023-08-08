@@ -68,7 +68,35 @@ const useSpotify = () => {
         }
     };
 
-    return { getAccessToken, getArtistData, getRecommended };
+    const getSearch = async (
+        accessToken: string,
+        query: string,
+        type: string
+    ) => {
+        const url = "https://api.spotify.com/v1/search";
+
+        const headers = {
+            Authorization: `Bearer ${accessToken}`,
+        };
+
+        try {
+            const response = await axios.get(url, {
+                headers,
+                params: {
+                    q: query,
+                    type: type,
+                },
+            });
+            console.log(response.data);
+            return response.data;
+            // You can access the artist data from the response here:
+        } catch (error) {
+            console.error("Error:", error);
+            return null;
+        }
+    };
+
+    return { getAccessToken, getArtistData, getRecommended, getSearch };
 };
 
 export default useSpotify;
