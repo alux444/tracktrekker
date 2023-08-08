@@ -45,9 +45,9 @@ const HomePage = () => {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full h-full">
             <div className="flex">
-                <div className="w-[80%] border-2">
+                <div className="w-[80%]  border-2 max-h-[80vh]">
                     {token !== null && !songSelected && (
                         <AskForSongs submit={alternateSongSelect} />
                     )}
@@ -67,7 +67,7 @@ const HomePage = () => {
                             />
                         )}
                 </div>
-                <div className="w-[20%] border-2">
+                <div className="w-[20%] border-2 max-h-[80vh]">
                     <CurrentSearch />
                 </div>
             </div>

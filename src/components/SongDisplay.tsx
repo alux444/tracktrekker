@@ -1,8 +1,14 @@
 import { SongInfo } from "../interfaces/songInfo";
-import useAddSeed from "../utils/useAddSeed";
+import useManageQuery from "../utils/useManageQuery";
 
-const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
-    const { addSongSeed } = useAddSeed();
+const SongDisplay = ({
+    songInfo,
+    fromSearch,
+}: {
+    songInfo: SongInfo;
+    fromSearch: boolean;
+}) => {
+    const { addSong, removeSong } = useManageQuery();
 
     const artists = songInfo.artists.map((artist) => (
         <a key={artist.id} href={artist.external_urls.spotify}>
@@ -22,12 +28,21 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                 </div>
             </div>
             <div>
-                <button
-                    className="button1"
-                    onClick={() => addSongSeed(songInfo.id)}
-                >
-                    <span className="button1-content">Add</span>
-                </button>
+                {fromSearch ? (
+                    <button
+                        className="button1"
+                        onClick={() => addSong(songInfo)}
+                    >
+                        <span className="button1-content">Add</span>
+                    </button>
+                ) : (
+                    <button
+                        className="button1"
+                        onClick={() => removeSong(songInfo)}
+                    >
+                        <span className="button1-content">x</span>
+                    </button>
+                )}
             </div>
         </div>
     );

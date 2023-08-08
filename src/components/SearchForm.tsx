@@ -37,7 +37,11 @@ const SearchForm = ({ type }: { type: string }) => {
         : [];
 
     const tracks = uniqueTracks.map((song) => (
-        <SongDisplay key={song.external_ids.isrc} songInfo={song} />
+        <SongDisplay
+            key={song.external_ids.isrc}
+            songInfo={song}
+            fromSearch={true}
+        />
     ));
 
     const artists = artistReults?.map((artist) => (
