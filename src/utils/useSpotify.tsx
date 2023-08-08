@@ -60,6 +60,7 @@ const useSpotify = () => {
                 params: songForm,
             });
             console.log(response.data);
+            return response.data;
             // You can access the artist data from the response here:
         } catch (error) {
             console.error("Error:", error);
