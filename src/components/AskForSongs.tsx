@@ -1,9 +1,15 @@
-import React from "react";
+import SearchForm from "./SearchForm";
 
-const AskForSongs = () => {
+interface AskForSongsProps {
+    submit: () => void;
+}
+
+const AskForSongs = ({ submit }: AskForSongsProps) => {
     return (
         <div>
             <h2>Select Songs (Minimum 1)</h2>
+            <SearchForm type="track" />
+            <button onClick={submit}>Submit</button>
         </div>
     );
 };

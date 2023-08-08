@@ -13,6 +13,18 @@ const HomePage = () => {
 
     const { getAccessToken } = useSpotify();
 
+    const alternateSongSelect = () => {
+        setSongSelected(!songSelected);
+    };
+
+    const alternateArtistSelect = () => {
+        setArtistSelected(!artistSelected);
+    };
+
+    const alternateGenreSelected = () => {
+        setGenreSelected(!genreSelected);
+    };
+
     const setAccessToken = async () => {
         const token: string | null = await getAccessToken();
         if (token !== null) {
@@ -28,14 +40,24 @@ const HomePage = () => {
             {token === null && (
                 <button onClick={setAccessToken}>Get Token</button>
             )}
-            {token !== null && !songSelected && <AskForSongs />}
+            {token !== null && !songSelected && (
+                <AskForSongs submit={alternateSongSelect} />
+            )}
             {token !== null && songSelected && !artistSelected && (
-                <AskForArtists />
+                <AskForArtists
+                    submit={alternateArtistSelect}
+                    goBack={alternateSongSelect}
+                />
             )}
             {token !== null &&
                 songSelected &&
                 artistSelected &&
-                !genreSelected && <AskForGenres />}
+                !genreSelected && (
+                    <AskForGenres
+                        submit={alternateArtistSelect}
+                        goBack={alternateGenreSelected}
+                    />
+                )}
         </div>
     );
 };
