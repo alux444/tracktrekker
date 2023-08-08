@@ -11,21 +11,21 @@ function App() {
     const [artistSeeds, setArtistSeeds] = useState<string[]>([]);
 
     return (
-        <>
+        <div className="flex gap-2 flex-col justify-center align-center items-center min-h-screen w-screen">
             <TokenContext.Provider value={{ token, setToken }}>
                 <SongSeedContext.Provider value={{ songSeeds, setSongSeeds }}>
                     <ArtistSeedContext.Provider
                         value={{ artistSeeds, setArtistSeeds }}
                     >
-                        <p className="text-[red]">Hello</p>
+                        <p className="text-[red]">Recommendify</p>
                         <button onClick={() => console.log(songSeeds)}>
-                            aaa
+                            test
                         </button>
                         <HomePage />
                     </ArtistSeedContext.Provider>
                 </SongSeedContext.Provider>
             </TokenContext.Provider>
-        </>
+        </div>
     );
 }
 

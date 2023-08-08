@@ -11,13 +11,24 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
     ));
 
     return (
-        <div>
-            <img src={songInfo.album.images[1].url} />
-            <a href={songInfo.external_urls.spotify}>
-                <h2>{songInfo.name}</h2>
-            </a>
-            <div className="flex gap-2">{artists}</div>
-            <button onClick={() => addSongSeed(songInfo.id)}>Add</button>
+        <div className="flex justify-between items-center border-[1px] p-5">
+            <div className="flex p-1 gap-5 items-center">
+                <img src={songInfo.album.images[2].url} />
+                <div className="block">
+                    <a href={songInfo.external_urls.spotify}>
+                        <h2>{songInfo.name}</h2>
+                    </a>
+                    <div className="flex gap-2">{artists}</div>
+                </div>
+            </div>
+            <div>
+                <button
+                    className="button1"
+                    onClick={() => addSongSeed(songInfo.id)}
+                >
+                    <span className="button1-content">Add</span>
+                </button>
+            </div>
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 
-const CriteriaForm = () => {
+const CustomUrlForm = () => {
     const [url, setUrl] = useState<string>("");
 
     const getIDFromSpotifyURL = (url: string) => {
@@ -40,4 +40,4 @@ const CriteriaForm = () => {
     );
 };
 
-export default CriteriaForm;
+export default CustomUrlForm;

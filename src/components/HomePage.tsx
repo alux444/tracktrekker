@@ -4,6 +4,7 @@ import { TokenContext } from "../App";
 import AskForSongs from "./AskForSongs";
 import AskForArtists from "./AskForArtists";
 import AskForGenres from "./AskForGenres";
+import CurrentSearch from "./CurrentSearch";
 
 const HomePage = () => {
     const { token, setToken } = useContext(TokenContext);
@@ -35,29 +36,41 @@ const HomePage = () => {
         }
     };
 
+    if (token === null) {
+        return (
+            <button className="button1" onClick={setAccessToken}>
+                <span className="button1-content">Get Started</span>
+            </button>
+        );
+    }
+
     return (
-        <div className="flex gap-2 flex-col">
-            {token === null && (
-                <button onClick={setAccessToken}>Get Token</button>
-            )}
-            {token !== null && !songSelected && (
-                <AskForSongs submit={alternateSongSelect} />
-            )}
-            {token !== null && songSelected && !artistSelected && (
-                <AskForArtists
-                    submit={alternateArtistSelect}
-                    goBack={alternateSongSelect}
-                />
-            )}
-            {token !== null &&
-                songSelected &&
-                artistSelected &&
-                !genreSelected && (
-                    <AskForGenres
-                        submit={alternateArtistSelect}
-                        goBack={alternateGenreSelected}
-                    />
-                )}
+        <div className="w-full">
+            <div className="flex">
+                <div className="w-[80%] border-2">
+                    {token !== null && !songSelected && (
+                        <AskForSongs submit={alternateSongSelect} />
+                    )}
+                    {token !== null && songSelected && !artistSelected && (
+                        <AskForArtists
+                            submit={alternateArtistSelect}
+                            goBack={alternateSongSelect}
+                        />
+                    )}
+                    {token !== null &&
+                        songSelected &&
+                        artistSelected &&
+                        !genreSelected && (
+                            <AskForGenres
+                                submit={alternateArtistSelect}
+                                goBack={alternateGenreSelected}
+                            />
+                        )}
+                </div>
+                <div className="w-[20%] border-2">
+                    <CurrentSearch />
+                </div>
+            </div>
         </div>
     );
 };

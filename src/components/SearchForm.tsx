@@ -45,12 +45,22 @@ const SearchForm = ({ type }: { type: string }) => {
     ));
 
     return (
-        <div className="border-2 flex flex-col">
-            <form onSubmit={searchQuery}>
-                <input type="text" value={query} onChange={handleQueryChange} />
-                <button type="submit">Search</button>
+        <div className="flex flex-col p-2">
+            <form
+                className="flex flex-col gap-2 items-center"
+                onSubmit={searchQuery}
+            >
+                <input
+                    className="border-2 w-[40vw]"
+                    type="text"
+                    value={query}
+                    onChange={handleQueryChange}
+                />
+                <button className="button1 w-[20vw]" type="submit">
+                    <span className="button1-content">Search</span>
+                </button>
             </form>
-            <div className="flex gap-4 flex-wrap justify-center p-5">
+            <div className="p-5 block h-[50vh] overflow-auto">
                 {type === "track" ? tracks : artists}
             </div>
         </div>
