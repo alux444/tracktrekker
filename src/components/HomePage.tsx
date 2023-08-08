@@ -5,12 +5,14 @@ import AskForSongs from "./AskFor/AskForSongs";
 import AskForArtists from "./AskFor/AskForArtists";
 import AskForGenres from "./AskFor/AskForGenres";
 import CurrentSearch from "./CurrentSearch";
+import AskForExtra from "./AskFor/AskForExtra";
 
 const HomePage = () => {
     const { token, setToken } = useContext(TokenContext);
     const [songSelected, setSongSelected] = useState<boolean>(false);
     const [artistSelected, setArtistSelected] = useState<boolean>(false);
     const [genreSelected, setGenreSelected] = useState<boolean>(false);
+    const [extraSelected, setExtraSelected] = useState<boolean>(false);
 
     const { getAccessToken } = useSpotify();
 
@@ -62,6 +64,16 @@ const HomePage = () => {
                         artistSelected &&
                         !genreSelected && (
                             <AskForGenres
+                                submit={alternateGenreSelected}
+                                goBack={alternateArtistSelect}
+                            />
+                        )}
+                    {token !== null &&
+                        songSelected &&
+                        artistSelected &&
+                        genreSelected &&
+                        !extraSelected && (
+                            <AskForExtra
                                 submit={alternateGenreSelected}
                                 goBack={alternateArtistSelect}
                             />

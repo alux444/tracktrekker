@@ -1,7 +1,7 @@
-export interface recommendForm {
-    seed_artists: string;
-    seed_genres: string;
-    seed_tracks: string;
+export interface RecommendForm {
+    seed_artists: string[];
+    seed_genres: string[];
+    seed_tracks: string[];
     minAcoustic?: number;
     maxAcoustic?: number;
     targAcoustic?: number;

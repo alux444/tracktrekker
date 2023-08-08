@@ -32,9 +32,25 @@ const useManageQuery = () => {
         setSongs(updatedSongs);
     };
 
-    const addArtist = (artist: ArtistInfo) => {};
+    const addArtist = (artist: ArtistInfo) => {
+        if (!artistSeeds.includes(artist.id)) {
+            const updatedArtistSeeds = [...artistSeeds, artist.id];
+            setArtistSeeds(updatedArtistSeeds);
+            const updatedArtists = [...artists, artist];
+            setArtists(updatedArtists);
+        }
+    };
 
-    const removeArtist = (artist: ArtistInfo) => {};
+    const removeArtist = (artist: ArtistInfo) => {
+        const updatedArtistSeeds = artistSeeds.filer(
+            (seed) => seed !== artist.id
+        );
+        const updatedArtists = artists.filter(
+            (thisArtist) => thisArtist.id !== artist.id
+        );
+        setArtistSeeds(updatedArtistSeeds);
+        setArtists(updatedArtists);
+    };
 
     return { addSong, removeSong, addArtist, removeArtist };
 };

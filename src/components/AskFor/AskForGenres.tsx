@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TokenContext } from "../../App";
+import { GenreContext, TokenContext } from "../../App";
 import useSpotify from "../../utils/useSpotify";
 import { Select, SelectOption } from "../Multiselect/Select";
 
@@ -9,13 +9,8 @@ interface AskForGenresProps {
 }
 const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
     const [allGenres, setAllGenres] = useState<SelectOption[]>([]);
-    const [value, setValue] = useState<SelectOption[]>([
-        {
-            label: "hardstyle",
-            value: "hardstyle",
-        },
-    ]);
     const { token } = useContext(TokenContext);
+    const { genres, setGenres } = useContext(GenreContext);
 
     const { getGenres } = useSpotify();
 
@@ -37,8 +32,8 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
             <Select
                 multiple
                 optionsRaw={allGenres}
-                value={value}
-                onChange={(option) => setValue(option)}
+                value={genres}
+                onChange={(option) => setGenres(option)}
             />
             <div className="flex gap-2">
                 <button className="button1" onClick={goBack}>

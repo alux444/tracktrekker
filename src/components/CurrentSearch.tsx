@@ -1,12 +1,18 @@
 import { useContext } from "react";
-import { SongsInfoContext } from "../App";
+import { ArtistInfoContext, SongsInfoContext } from "../App";
 import SongDisplay from "./Displays/SongDisplay";
+import ArtistDisplay from "./Displays/ArtistDisplay";
 
 const CurrentSearch = () => {
-    const { songs, setSongs } = useContext(SongsInfoContext);
+    const { songs } = useContext(SongsInfoContext);
+    const { artists } = useContext(ArtistInfoContext);
 
     const allSongs = songs.map((song) => (
         <SongDisplay songInfo={song} fromSearch={false} />
+    ));
+
+    const allArtists = artists.map((artist) => (
+        <ArtistDisplay artist={artist} fromSearch={false} />
     ));
 
     return (
@@ -16,6 +22,12 @@ const CurrentSearch = () => {
                 <div>
                     <small>Songs like:</small>
                     {allSongs}
+                </div>
+            )}
+            {artists.length > 0 && (
+                <div>
+                    <small>Artists like:</small>
+                    {allArtists}
                 </div>
             )}
         </div>
