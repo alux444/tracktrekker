@@ -26,8 +26,9 @@ const useSpotify = () => {
         }
     };
 
-    const getArtistData = async (accessToken: string) => {
-        const url = "https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb";
+    const getGenres = async (accessToken: string) => {
+        const url =
+            "https://api.spotify.com/v1/recommendations/available-genre-seeds";
 
         const headers = {
             Authorization: `Bearer ${accessToken}`,
@@ -37,7 +38,7 @@ const useSpotify = () => {
             const response = await axios.get(url, { headers });
             console.log(response.data);
             // You can access the artist data from the response here:
-            return response.data;
+            return response.data.genres;
         } catch (error) {
             console.error("Error:", error);
             return null;
@@ -93,7 +94,7 @@ const useSpotify = () => {
         }
     };
 
-    return { getAccessToken, getArtistData, getRecommended, getSearch };
+    return { getAccessToken, getGenres, getRecommended, getSearch };
 };
 
 export default useSpotify;

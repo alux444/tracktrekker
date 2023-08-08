@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import useSpotify from "../utils/useSpotify";
 import { TokenContext } from "../App";
-import AskForSongs from "./AskForSongs";
-import AskForArtists from "./AskForArtists";
-import AskForGenres from "./AskForGenres";
+import AskForSongs from "./AskFor/AskForSongs";
+import AskForArtists from "./AskFor/AskForArtists";
+import AskForGenres from "./AskFor/AskForGenres";
 import CurrentSearch from "./CurrentSearch";
 
 const HomePage = () => {
@@ -62,8 +62,8 @@ const HomePage = () => {
                         artistSelected &&
                         !genreSelected && (
                             <AskForGenres
-                                submit={alternateArtistSelect}
-                                goBack={alternateGenreSelected}
+                                submit={alternateGenreSelected}
+                                goBack={alternateArtistSelect}
                             />
                         )}
                 </div>

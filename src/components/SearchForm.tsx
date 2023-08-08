@@ -2,8 +2,8 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import useSpotify from "../utils/useSpotify";
 import { ArtistInfo } from "../interfaces/artistInfo";
 import { SongInfo } from "../interfaces/songInfo";
-import ArtistDisplay from "./ArtistDisplay";
-import SongDisplay from "./SongDisplay";
+import ArtistDisplay from "./Displays/ArtistDisplay";
+import SongDisplay from "./Displays/SongDisplay";
 import { TokenContext } from "../App";
 
 const SearchForm = ({ type }: { type: string }) => {

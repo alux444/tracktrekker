@@ -1,5 +1,5 @@
-import { SongInfo } from "../interfaces/songInfo";
-import useManageQuery from "../utils/useManageQuery";
+import { SongInfo } from "../../interfaces/songInfo";
+import useManageQuery from "../../utils/useManageQuery";
 
 const SongDisplay = ({
     songInfo,
@@ -40,7 +40,7 @@ const SongDisplay = ({
                         className="button1"
                         onClick={() => removeSong(songInfo)}
                     >
-                        <span className="button1-content">x</span>
+                        <span className="button1-content">&times;</span>
                     </button>
                 )}
             </div>

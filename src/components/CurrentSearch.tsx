@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { SongsInfoContext } from "../App";
-import SongDisplay from "./SongDisplay";
+import SongDisplay from "./Displays/SongDisplay";
 
 const CurrentSearch = () => {
     const { songs, setSongs } = useContext(SongsInfoContext);

@@ -1,5 +1,5 @@
-import { ArtistInfo } from "../interfaces/artistInfo";
-import useManageQuery from "../utils/useManageQuery";
+import { ArtistInfo } from "../../interfaces/artistInfo";
+import useManageQuery from "../../utils/useManageQuery";
 
 const ArtistDisplay = ({
     artist,
@@ -27,7 +27,7 @@ const ArtistDisplay = ({
                     className="button1"
                     onClick={() => removeArtist(artist)}
                 >
-                    <span className="button1-content">x</span>
+                    <span className="button1-content">&times;</span>
                 </button>
             )}
         </div>

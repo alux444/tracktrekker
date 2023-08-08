@@ -3,7 +3,7 @@ import { recommendForm } from "../interfaces/recommendForm";
 import { SongInfo } from "../interfaces/songInfo";
 import useSpotify from "../utils/useSpotify";
 import { TokenContext } from "../App";
-import SongDisplay from "./SongDisplay";
+import SongDisplay from "./Displays/SongDisplay";
 
 const ResultsPage = () => {
     const { token } = useContext(TokenContext);

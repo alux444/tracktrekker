@@ -1,4 +1,4 @@
-import SearchForm from "./SearchForm";
+import SearchForm from "../SearchForm";
 
 interface AskForSongsProps {
     submit: () => void;
