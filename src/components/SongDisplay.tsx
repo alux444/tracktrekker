@@ -2,7 +2,7 @@ import { SongInfo } from "../interfaces/songInfo";
 
 const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
     const artists = songInfo.artists.map((artist) => (
-        <a href={artist.external_urls.spotify}>
+        <a key={artist.id} href={artist.external_urls.spotify}>
             <span>{artist.name}</span>
         </a>
     ));

@@ -3,6 +3,7 @@ import { recommendForm } from "../interfaces/recommendForm";
 import useSpotify from "../utils/useSpotify";
 import SongDisplay from "./SongDisplay";
 import { SongInfo } from "../interfaces/songInfo";
+import CriteriaForm from "./CriteriaForm";
 
 const HomePage = () => {
     const [token, setToken] = useState<string | undefined>();
@@ -40,7 +41,7 @@ const HomePage = () => {
     };
 
     const results = songs.map((song) => (
-        <SongDisplay key={song.id} songInfo={song} />
+        <SongDisplay key={song.external_ids.isrc} songInfo={song} />
     ));
 
     return (
@@ -48,6 +49,7 @@ const HomePage = () => {
             <button onClick={setAccessToken}>Get Token</button>
             <button onClick={() => getArtistData(token)}>artist</button>
             <button onClick={getSongs}>get songs</button>
+            <CriteriaForm />
             <div className="flex gap-4 flex-wrap justify-between p-5">
                 {results}
             </div>
