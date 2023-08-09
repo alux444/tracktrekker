@@ -62,7 +62,7 @@ const useSpotify = () => {
             if (
                 songForm.seed_tracks.length === 0 &&
                 songForm.seed_artists.length === 0 &&
-                songForm.seed_tracks.length === 0
+                songForm.seed_genres.length === 0
             ) {
                 return 1;
             }
