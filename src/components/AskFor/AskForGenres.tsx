@@ -35,7 +35,7 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
                 value={genres}
                 onChange={(option) => setGenres(option)}
             />
-            <div className="flex gap-2">
+            <div className="flex gap-2 mt-3">
                 <button className="button1" onClick={goBack}>
                     <span className="button1-content">Back</span>
                 </button>

@@ -55,9 +55,21 @@ const useSpotify = () => {
         };
 
         try {
+            const arrayToString = (array: string[]) => {
+                return array.join(",");
+            };
+
+            const query = {
+                seed_tracks: arrayToString(songForm.seed_tracks),
+                seed_artists: arrayToString(songForm.seed_artists),
+                seed_genres: arrayToString(songForm.seed_genres),
+                // You can add other parameters here as needed
+            };
+            console.log(query);
+
             const response = await axios.get(url, {
                 headers,
-                params: songForm,
+                params: query,
             });
             console.log(response.data);
             return response.data;

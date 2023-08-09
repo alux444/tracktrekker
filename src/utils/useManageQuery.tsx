@@ -42,7 +42,7 @@ const useManageQuery = () => {
     };
 
     const removeArtist = (artist: ArtistInfo) => {
-        const updatedArtistSeeds = artistSeeds.filer(
+        const updatedArtistSeeds = artistSeeds.filter(
             (seed) => seed !== artist.id
         );
         const updatedArtists = artists.filter(

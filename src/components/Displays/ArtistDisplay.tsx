@@ -10,13 +10,12 @@ const ArtistDisplay = ({
 }) => {
     const { addArtist, removeArtist } = useManageQuery();
 
+    const imageSrc =
+        artist.images && artist.images.length >= 3 ? artist.images[2].url : "";
+
     return (
         <div className="flex flex-col gap-2 items-center border-[1px]">
-            <img
-                className="w-[20vw] "
-                src={artist.images[2].url}
-                alt={artist.name}
-            />
+            <img className="w-[20vw] " src={imageSrc} alt={artist.name} />
             <h2>{artist.name}</h2>
             {fromSearch ? (
                 <button className="button1" onClick={() => addArtist(artist)}>

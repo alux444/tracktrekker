@@ -120,9 +120,8 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
             </div>
             <div
                 ref={containerRef}
-                onFocus={() => setOpen(true)}
                 onClick={() => setOpen(true)}
-                onBlur={() => setOpen(!open)}
+                onBlur={() => setOpen(false)}
                 tabIndex={0}
                 className="container"
             >
