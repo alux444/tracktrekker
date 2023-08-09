@@ -9,7 +9,6 @@ import {
 import AskForSongs from "./AskFor/AskForSongs";
 import AskForArtists from "./AskFor/AskForArtists";
 import AskForGenres from "./AskFor/AskForGenres";
-import CurrentSearch from "./CurrentSearch";
 import AskForExtra from "./AskFor/AskForExtra";
 import { RecommendForm } from "../interfaces/recommendForm";
 import ResultsPage from "./ResultsPage";
@@ -114,14 +113,14 @@ const HomePage = () => {
                                         Genres
                                     </span>
                                 </button>
-                                <button
+                                {/* <button
                                     className="button1"
                                     onClick={() => setExtraSelected(true)}
                                 >
                                     <span className="button1-content">
                                         Extra
                                     </span>
-                                </button>
+                                </button> */}
                                 <button
                                     className="button1"
                                     onClick={() => {

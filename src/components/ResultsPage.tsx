@@ -10,7 +10,7 @@ const ResultsPage = ({
     goBack,
 }: {
     query: RecommendForm;
-    goBack: any;
+    goBack: () => void;
 }) => {
     const { token } = useContext(TokenContext);
     const { getRecommended } = useSpotify();
