@@ -33,12 +33,7 @@ function App() {
                                 <GenreContext.Provider
                                     value={{ genres, setGenres }}
                                 >
-                                    <p className="title">Recommendify</p>
-                                    <button
-                                        onClick={() => console.log(songSeeds)}
-                                    >
-                                        test
-                                    </button>
+                                    <p className="title"></p>
                                     <HomePage />
                                 </GenreContext.Provider>
                             </ArtistInfoContext.Provider>

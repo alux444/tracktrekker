@@ -81,45 +81,78 @@ const HomePage = () => {
     }
 
     return (
-        <div className="w-full h-full">
-            <div className="flex">
-                <div className="w-[80%]  border-2 max-h-[80vh]">
-                    {!songSelected && (
+        <div className="w-[80%] h-[80vh]">
+            <div className="flex h-full">
+                <div className="w-full h-full flex items-center">
+                    {!songSelected &&
+                        !artistSelected &&
+                        !genreSelected &&
+                        !extraSelected &&
+                        !completedQuery && (
+                            <div className="flex flex-col justify-center align-center items-center w-full gap-2 h-full">
+                                <button
+                                    className="button1"
+                                    onClick={() => setSongSelected(true)}
+                                >
+                                    <span className="button1-content">
+                                        Songs
+                                    </span>
+                                </button>
+                                <button
+                                    className="button1"
+                                    onClick={() => setArtistSelected(true)}
+                                >
+                                    <span className="button1-content">
+                                        Artist
+                                    </span>
+                                </button>
+                                <button
+                                    className="button1"
+                                    onClick={() => setGenreSelected(true)}
+                                >
+                                    <span className="button1-content">
+                                        Genres
+                                    </span>
+                                </button>
+                                <button
+                                    className="button1"
+                                    onClick={() => setExtraSelected(true)}
+                                >
+                                    <span className="button1-content">
+                                        Extra
+                                    </span>
+                                </button>
+                                <button
+                                    className="button1"
+                                    onClick={() => {
+                                        setCompletedQuery(true);
+                                        generateForm();
+                                    }}
+                                >
+                                    <span className="button1-content">
+                                        Get results
+                                    </span>
+                                </button>
+                            </div>
+                        )}
+                    {songSelected && (
                         <AskForSongs submit={alternateSongSelect} />
                     )}
-                    {songSelected && !artistSelected && (
-                        <AskForArtists
-                            submit={alternateArtistSelect}
-                            goBack={alternateSongSelect}
-                        />
+                    {artistSelected && (
+                        <AskForArtists submit={alternateArtistSelect} />
                     )}
-                    {songSelected && artistSelected && !genreSelected && (
-                        <AskForGenres
-                            submit={alternateGenreSelected}
-                            goBack={alternateArtistSelect}
-                        />
+                    {genreSelected && (
+                        <AskForGenres submit={alternateGenreSelected} />
                     )}
-                    {songSelected &&
-                        artistSelected &&
-                        genreSelected &&
-                        !extraSelected && (
-                            <AskForExtra
-                                submit={() => {
-                                    alternateExtraSelected();
-                                    generateForm();
-                                }}
-                                goBack={alternateGenreSelected}
-                            />
-                        )}
+                    {extraSelected && (
+                        <AskForExtra submit={alternateExtraSelected} />
+                    )}
                     {completedQuery && currentQuery !== undefined && (
                         <ResultsPage
                             query={currentQuery}
-                            goBack={alternateGenreSelected}
+                            goBack={() => setCompletedQuery(false)}
                         />
                     )}
-                </div>
-                <div className="w-[20%] border-2 max-h-[80vh]">
-                    <CurrentSearch />
                 </div>
             </div>
         </div>

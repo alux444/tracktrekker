@@ -5,9 +5,8 @@ import { Select, SelectOption } from "../Multiselect/Select";
 
 interface AskForGenresProps {
     submit: () => void;
-    goBack: () => void;
 }
-const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
+const AskForGenres: React.FC<AskForGenresProps> = ({ submit }) => {
     const [allGenres, setAllGenres] = useState<SelectOption[]>([]);
     const { token } = useContext(TokenContext);
     const { genres, setGenres } = useContext(GenreContext);
@@ -27,8 +26,8 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
     }, []);
 
     return (
-        <div className="flex flex-col gap-2 justify-center items-center p-5">
-            <h2>Select Genres (Minimum 1)</h2>
+        <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
+            <h2>Select Genres</h2>
             <Select
                 multiple
                 optionsRaw={allGenres}
@@ -36,9 +35,6 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit, goBack }) => {
                 onChange={(option) => setGenres(option)}
             />
             <div className="flex gap-2 mt-3">
-                <button className="button1" onClick={goBack}>
-                    <span className="button1-content">Back</span>
-                </button>
                 <button className="button1" onClick={submit}>
                     <span className="button1-content">Submit</span>
                 </button>

@@ -10,8 +10,8 @@ const SearchForm = ({ type }: { type: string }) => {
     const { token } = useContext(TokenContext);
 
     const [query, setQuery] = useState<string>("");
-    const [trackResults, setTrackResults] = useState<SongInfo[]>();
-    const [artistReults, setArtistResults] = useState<ArtistInfo[]>();
+    const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
+    const [artistReults, setArtistResults] = useState<ArtistInfo[]>([]);
 
     const { getSearch } = useSpotify();
 
@@ -44,7 +44,7 @@ const SearchForm = ({ type }: { type: string }) => {
         />
     ));
 
-    const artists = artistReults?.map((artist) => (
+    const artists = artistReults.map((artist) => (
         <ArtistDisplay key={artist.id} artist={artist} fromSearch={true} />
     ));
 
@@ -65,9 +65,10 @@ const SearchForm = ({ type }: { type: string }) => {
                 </button>
             </form>
 
-            {type === "track" ? (
+            {type === "track" && uniqueTracks.length > 0 && (
                 <div className="p-5 block h-[50vh] overflow-auto">{tracks}</div>
-            ) : (
+            )}
+            {type !== "track" && artistReults.length > 0 && (
                 <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
                     {artists}
                 </div>

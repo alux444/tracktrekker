@@ -15,6 +15,7 @@ const ResultsPage = ({
     const { token } = useContext(TokenContext);
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
+    const [message, setMessage] = useState<string>("");
 
     useEffect(() => {
         getSongs();
@@ -23,27 +24,44 @@ const ResultsPage = ({
     const getSongs = async () => {
         if (typeof token === "string") {
             const res = await getRecommended(token, query);
-            if (res !== null) {
-                console.log(res);
-                setSongs(res.tracks);
-            } else {
-                console.log("error getting tracks");
+            if (res === 1) {
+                setMessage(
+                    "You need to select one artist, song or genre to search."
+                );
+                return;
             }
-        } else {
-            console.log("Not a valid token.");
+
+            if (res === 2) {
+                setMessage(
+                    "Sorry... there were no matches for your search.Maybe your tracks/artists were too obscure, or your search was too complicated"
+                );
+            }
+
+            console.log(res);
+            setSongs(res.tracks);
         }
     };
 
     const results = songs.map((song) => <SongDisplay songInfo={song} />);
 
     return (
-        <div>
-            <h2>results</h2>
-            <button onClick={getSongs}>aaa</button>
-            <div className="flex gap-2 flex-wrap">{results}</div>
+        <div className="h-full flex flex-col items-center align-center w-full gap-2">
+            <h2>Results</h2>
             <button className="button1" onClick={goBack}>
                 <span className="button1-content">Back</span>
             </button>
+            <button className="button1" onClick={getSongs}>
+                <span className="button1-content">Reroll</span>
+            </button>
+            {songs.length > 0 ? (
+                <div className="p-5 block h-[50vh] overflow-auto">
+                    {results}
+                </div>
+            ) : (
+                <div>
+                    <p>{message}</p>
+                </div>
+            )}
         </div>
     );
 };

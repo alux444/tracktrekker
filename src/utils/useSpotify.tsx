@@ -40,7 +40,7 @@ const useSpotify = () => {
             return response.data.genres;
         } catch (error) {
             console.error("Error:", error);
-            return null;
+            return [];
         }
     };
 
@@ -59,6 +59,14 @@ const useSpotify = () => {
                 return array.join(",");
             };
 
+            if (
+                songForm.seed_tracks.length === 0 &&
+                songForm.seed_artists.length === 0 &&
+                songForm.seed_tracks.length === 0
+            ) {
+                return 1;
+            }
+
             const query = {
                 seed_tracks: arrayToString(songForm.seed_tracks),
                 seed_artists: arrayToString(songForm.seed_artists),
@@ -76,7 +84,7 @@ const useSpotify = () => {
             // You can access the artist data from the response here:
         } catch (error) {
             console.error("Error:", error);
-            return null;
+            return 2;
         }
     };
 
