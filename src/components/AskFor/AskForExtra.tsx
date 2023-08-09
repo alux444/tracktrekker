@@ -1,4 +1,10 @@
-const AskForExtra = ({ submit }) => {
+import React from "react";
+
+interface AskForExtrasProps {
+    submit: () => void;
+}
+
+const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
     return (
         <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
             <h1>TODO: Extra criteria</h1>

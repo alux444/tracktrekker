@@ -1,5 +1,5 @@
 import axios from "axios";
-import { recommendForm } from "../interfaces/recommendForm";
+import { RecommendForm } from "../interfaces/recommendForm";
 const useSpotify = () => {
     const getAccessToken = async () => {
         const url = "https://accounts.spotify.com/api/token";
@@ -46,7 +46,7 @@ const useSpotify = () => {
 
     const getRecommended = async (
         accessToken: string,
-        songForm: recommendForm
+        songForm: RecommendForm
     ) => {
         const url = "https://api.spotify.com/v1/recommendations";
 

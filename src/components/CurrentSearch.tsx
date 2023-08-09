@@ -9,14 +9,14 @@ const CurrentSearch = () => {
     const { genres } = useContext(GenreContext);
 
     const allSongs = songs.map((song) => (
-        <SongDisplay songInfo={song} fromSearch={false} />
+        <SongDisplay songInfo={song} type={2} />
     ));
 
     const allArtists = artists.map((artist) => (
         <ArtistDisplay artist={artist} fromSearch={false} />
     ));
 
-    const allGenres = genres.map((genre) => <h2>{genre}</h2>);
+    const allGenres = genres.map((genre) => <h2>{genre.label}</h2>);
 
     return (
         <div className="flex flex-col flex-wrap max-h-[60vh] w-[80vw] overflow-auto items-center">

@@ -17,9 +17,11 @@ const SearchForm = ({ type }: { type: string }) => {
 
     const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const res = await getSearch(token, query);
-        setTrackResults(res.tracks.items);
-        setArtistResults(res.artists.items);
+        if (token) {
+            const res = await getSearch(token, query);
+            setTrackResults(res.tracks.items);
+            setArtistResults(res.artists.items);
+        }
     };
 
     const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +39,7 @@ const SearchForm = ({ type }: { type: string }) => {
         : [];
 
     const tracks = uniqueTracks.map((song) => (
-        <SongDisplay
-            key={song.external_ids.isrc}
-            songInfo={song}
-            fromSearch={true}
-        />
+        <SongDisplay key={song.external_ids.isrc} songInfo={song} type={1} />
     ));
 
     const artists = artistReults.map((artist) => (

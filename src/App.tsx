@@ -5,12 +5,53 @@ import { ArtistInfo } from "./interfaces/artistInfo";
 import { SelectOption } from "./components/Multiselect/Select";
 import CurrentSearch from "./components/CurrentSearch";
 
-export const TokenContext = createContext();
-export const SongSeedContext = createContext();
-export const ArtistSeedContext = createContext();
-export const SongsInfoContext = createContext();
-export const ArtistInfoContext = createContext();
-export const GenreContext = createContext();
+export const TokenContext = createContext<{
+    token: string | null;
+    setToken: React.Dispatch<React.SetStateAction<string | null>>;
+}>({
+    token: null,
+    setToken: () => {},
+});
+
+export const SongSeedContext = createContext<{
+    songSeeds: string[];
+    setSongSeeds: React.Dispatch<React.SetStateAction<string[]>>;
+}>({
+    songSeeds: [],
+    setSongSeeds: () => {},
+});
+
+export const ArtistSeedContext = createContext<{
+    artistSeeds: string[];
+    setArtistSeeds: React.Dispatch<React.SetStateAction<string[]>>;
+}>({
+    artistSeeds: [],
+    setArtistSeeds: () => {},
+});
+
+export const SongsInfoContext = createContext<{
+    songs: SongInfo[];
+    setSongs: React.Dispatch<React.SetStateAction<SongInfo[]>>;
+}>({
+    songs: [],
+    setSongs: () => {},
+});
+
+export const ArtistInfoContext = createContext<{
+    artists: ArtistInfo[];
+    setArtists: React.Dispatch<React.SetStateAction<ArtistInfo[]>>;
+}>({
+    artists: [],
+    setArtists: () => {},
+});
+
+export const GenreContext = createContext<{
+    genres: SelectOption[];
+    setGenres: React.Dispatch<React.SetStateAction<SelectOption[]>>;
+}>({
+    genres: [],
+    setGenres: () => {},
+});
 
 function App() {
     const [token, setToken] = useState<string | null>(null);

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RecommendForm } from "../interfaces/recommendForm";
 import { SongInfo } from "../interfaces/songInfo";
 import useSpotify from "../utils/useSpotify";
@@ -42,7 +42,9 @@ const ResultsPage = ({
         }
     };
 
-    const results = songs.map((song) => <SongDisplay songInfo={song} />);
+    const results = songs.map((song) => (
+        <SongDisplay songInfo={song} type={3} />
+    ));
 
     return (
         <div className="h-full flex flex-col items-center align-center w-full gap-2">

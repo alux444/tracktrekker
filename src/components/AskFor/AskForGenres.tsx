@@ -15,12 +15,14 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit }) => {
 
     useEffect(() => {
         const setGenres = async () => {
-            const genres = await getGenres(token);
-            const filteredGenres = genres.map((genre) => ({
-                value: genre,
-                label: genre.replace(/-/g, ""),
-            }));
-            setAllGenres(filteredGenres);
+            if (token) {
+                const genres = await getGenres(token);
+                const filteredGenres = genres.map((genre: SelectOption) => ({
+                    value: genre.value,
+                    label: genre.label.replace(/-/g, ""),
+                }));
+                setAllGenres(filteredGenres);
+            }
         };
         setGenres();
     }, []);

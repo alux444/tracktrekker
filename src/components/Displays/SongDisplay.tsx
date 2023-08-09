@@ -3,10 +3,10 @@ import useManageQuery from "../../utils/useManageQuery";
 
 const SongDisplay = ({
     songInfo,
-    fromSearch,
+    type,
 }: {
     songInfo: SongInfo;
-    fromSearch: boolean;
+    type: number;
 }) => {
     const { addSong, removeSong } = useManageQuery();
 
@@ -28,14 +28,15 @@ const SongDisplay = ({
                 </div>
             </div>
             <div>
-                {fromSearch ? (
+                {type === 1 && (
                     <button
                         className="button1"
                         onClick={() => addSong(songInfo)}
                     >
                         <span className="button1-content">Add</span>
                     </button>
-                ) : (
+                )}{" "}
+                {type === 2 && (
                     <button
                         className="button1"
                         onClick={() => removeSong(songInfo)}
