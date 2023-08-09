@@ -17,9 +17,9 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit }) => {
         const setGenres = async () => {
             if (token) {
                 const genres = await getGenres(token);
-                const filteredGenres = genres.map((genre: SelectOption) => ({
-                    value: genre.value,
-                    label: genre.label.replace(/-/g, ""),
+                const filteredGenres = genres.map((genre: string) => ({
+                    value: genre,
+                    label: genre.replace(/-/g, ""),
                 }));
                 setAllGenres(filteredGenres);
             }
