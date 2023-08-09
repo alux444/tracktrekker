@@ -3,6 +3,7 @@ import HomePage from "./components/HomePage";
 import { SongInfo } from "./interfaces/songInfo";
 import { ArtistInfo } from "./interfaces/artistInfo";
 import { SelectOption } from "./components/Multiselect/Select";
+import CurrentSearch from "./components/CurrentSearch";
 
 export const TokenContext = createContext();
 export const SongSeedContext = createContext();
@@ -19,6 +20,8 @@ function App() {
     const [artists, setArtists] = useState<ArtistInfo[]>([]);
     const [genres, setGenres] = useState<SelectOption[]>([]);
 
+    const [viewSearch, setViewSearch] = useState<boolean>(false);
+
     return (
         <div className="flex gap-2 flex-col justify-center align-center items-center h-screen w-screen">
             <TokenContext.Provider value={{ token, setToken }}>
@@ -34,7 +37,23 @@ function App() {
                                     value={{ genres, setGenres }}
                                 >
                                     <p className="title"></p>
-                                    <HomePage />
+                                    <button
+                                        className="button1"
+                                        onClick={() =>
+                                            setViewSearch(!viewSearch)
+                                        }
+                                    >
+                                        <span className="button1-content">
+                                            {viewSearch
+                                                ? "Return"
+                                                : "View Search"}
+                                        </span>
+                                    </button>
+                                    {viewSearch ? (
+                                        <CurrentSearch />
+                                    ) : (
+                                        <HomePage />
+                                    )}
                                 </GenreContext.Provider>
                             </ArtistInfoContext.Provider>
                         </SongsInfoContext.Provider>
