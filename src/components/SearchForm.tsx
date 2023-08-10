@@ -1,14 +1,11 @@
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import useSpotify from "../utils/useSpotify";
 import { ArtistInfo } from "../interfaces/artistInfo";
 import { SongInfo } from "../interfaces/songInfo";
 import ArtistDisplay from "./Displays/ArtistDisplay";
 import SongDisplay from "./Displays/SongDisplay";
-import { TokenContext } from "../App";
 
 const SearchForm = ({ type }: { type: string }) => {
-    const { token } = useContext(TokenContext);
-
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
     const [artistReults, setArtistResults] = useState<ArtistInfo[]>([]);
@@ -17,11 +14,9 @@ const SearchForm = ({ type }: { type: string }) => {
 
     const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (token) {
-            const res = await getSearch(token, query);
-            setTrackResults(res.tracks.items);
-            setArtistResults(res.artists.items);
-        }
+        const res = await getSearch(query);
+        setTrackResults(res.tracks.items);
+        setArtistResults(res.artists.items);
     };
 
     const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
