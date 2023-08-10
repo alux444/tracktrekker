@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { ArtistInfoContext, GenreContext, SongsInfoContext } from "../App";
 import SongDisplay from "./Displays/SongDisplay";
 import ArtistDisplay from "./Displays/ArtistDisplay";
+import useManageQuery from "../utils/useManageQuery";
 
 const CurrentSearch = () => {
     const { songs } = useContext(SongsInfoContext);
     const { artists } = useContext(ArtistInfoContext);
     const { genres } = useContext(GenreContext);
+    const { removeGenre } = useManageQuery();
 
     const allSongs = songs.map((song) => (
         <SongDisplay songInfo={song} type={2} />
@@ -16,22 +18,29 @@ const CurrentSearch = () => {
         <ArtistDisplay artist={artist} fromSearch={false} />
     ));
 
-    const allGenres = genres.map((genre) => <h2>{genre.label}</h2>);
+    const allGenres = genres.map((genre) => (
+        <div className="flex gap-2 items-center rounded-lg p-2 border-[1px]">
+            {genre.label}
+            <button onClick={() => removeGenre(genre)} className="buttoncancel">
+                <span>&times;</span>
+            </button>
+        </div>
+    ));
 
     return (
-        <div className="flex flex-col flex-wrap max-h-[60vh] w-[80vw] overflow-auto items-center">
+        <div className="flex flex-col overflow-auto h-[60vh] w-[80vw] gap-2">
             {songs.length > 0 && (
-                <div className="flex flex-wrap w-full items-center justify-center">
+                <div className="flex flex-wrap w-full items-center justify-center gap-1">
                     {allSongs}
                 </div>
             )}
             {artists.length > 0 && (
-                <div className="flex flex-wrap w-full items-center justify-center">
+                <div className="flex flex-wrap w-full items-center justify-center gap-1">
                     {allArtists}
                 </div>
             )}
             {genres.length > 0 && (
-                <div className="flex flex-wrap w-full items-center justify-center">
+                <div className="flex flex-wrap w-full items-center justify-center gap-1">
                     {allGenres}
                 </div>
             )}

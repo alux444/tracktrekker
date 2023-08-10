@@ -49,16 +49,16 @@ const SearchForm = ({ type }: { type: string }) => {
     return (
         <div className="flex flex-col p-2">
             <form
-                className="flex flex-col gap-2 items-center"
+                className="flex flex-col gap-4 items-center"
                 onSubmit={searchQuery}
             >
                 <input
-                    className="border-2 w-[40vw]"
+                    className="border-2 w-[400px]"
                     type="text"
                     value={query}
                     onChange={handleQueryChange}
                 />
-                <button className="button1 w-[20vw]" type="submit">
+                <button className="button1 w-[150pxs] mb-4" type="submit">
                     <span className="button1-content">Search</span>
                 </button>
             </form>

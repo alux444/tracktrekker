@@ -2,17 +2,20 @@ import { useContext } from "react";
 import {
     ArtistInfoContext,
     ArtistSeedContext,
+    GenreContext,
     SongSeedContext,
     SongsInfoContext,
 } from "../App";
 import { SongInfo } from "../interfaces/songInfo";
 import { ArtistInfo } from "../interfaces/artistInfo";
+import { SelectOption } from "../components/Multiselect/Select";
 
 const useManageQuery = () => {
     const { songSeeds, setSongSeeds } = useContext(SongSeedContext);
     const { artistSeeds, setArtistSeeds } = useContext(ArtistSeedContext);
     const { songs, setSongs } = useContext(SongsInfoContext);
     const { artists, setArtists } = useContext(ArtistInfoContext);
+    const { genres, setGenres } = useContext(GenreContext);
 
     const addSong = (song: SongInfo) => {
         if (!songSeeds.includes(song.id)) {
@@ -52,7 +55,14 @@ const useManageQuery = () => {
         setArtists(updatedArtists);
     };
 
-    return { addSong, removeSong, addArtist, removeArtist };
+    const removeGenre = (genreToRemove: SelectOption) => {
+        const updatedGenres = genres.filter(
+            (genre) => genre.value !== genreToRemove.value
+        );
+        setGenres(updatedGenres);
+    };
+
+    return { addSong, removeSong, addArtist, removeArtist, removeGenre };
 };
 
 export default useManageQuery;
