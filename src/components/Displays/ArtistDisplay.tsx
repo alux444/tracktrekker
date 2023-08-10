@@ -37,18 +37,17 @@ const ArtistDisplay = ({
                         <span className="button1-content">+</span>
                     </button>
                 )}
-                {!fromSearch ||
-                    (selected && (
-                        <button
-                            className="buttoncancel"
-                            onClick={() => {
-                                removeArtist(artist);
-                                setSelected(false);
-                            }}
-                        >
-                            <span>&times;</span>
-                        </button>
-                    ))}
+                {(!fromSearch || selected) && (
+                    <button
+                        className="buttoncancel"
+                        onClick={() => {
+                            removeArtist(artist);
+                            setSelected(false);
+                        }}
+                    >
+                        <span>&times;</span>
+                    </button>
+                )}
             </div>
         </div>
     );

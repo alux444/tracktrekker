@@ -47,18 +47,17 @@ const SongDisplay = ({
                         <span className="button1-content">+</span>
                     </button>
                 )}{" "}
-                {type === 2 ||
-                    (selected && (
-                        <button
-                            className="buttoncancel"
-                            onClick={() => {
-                                removeSong(songInfo);
-                                setSelected(false);
-                            }}
-                        >
-                            <span>&times;</span>
-                        </button>
-                    ))}
+                {(type === 2 || selected) && (
+                    <button
+                        className="buttoncancel"
+                        onClick={() => {
+                            removeSong(songInfo);
+                            setSelected(false);
+                        }}
+                    >
+                        <span>&times;</span>
+                    </button>
+                )}
             </div>
         </div>
     );
