@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
+import useSpotify from "../../utils/useSpotify";
 
 const SongDisplay = ({
     songInfo,
@@ -11,6 +12,15 @@ const SongDisplay = ({
 }) => {
     const [selected, setSelected] = useState(false);
     const { addSong, removeSong } = useManageQuery();
+
+    const { getFeatures } = useSpotify();
+
+    useEffect(() => {
+        const fetchFeaturesForThisSong = async () => {
+            await getFeatures(songInfo.id);
+        };
+        fetchFeaturesForThisSong();
+    }, []);
 
     const artists = songInfo.artists.map((artist) => (
         <a key={artist.id} href={artist.external_urls.spotify}>

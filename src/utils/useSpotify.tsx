@@ -24,7 +24,20 @@ const useSpotify = () => {
     };
 
     const getFeatures = async (songId: string) => {
-        return songId;
+        const url = `https://api.spotify.com/v1/audio-features/${songId}`;
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        try {
+            const response = await axios.get(url, { headers });
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
     };
 
     const getRecommended = async (songForm: RecommendForm) => {
@@ -93,7 +106,7 @@ const useSpotify = () => {
         }
     };
 
-    return { getGenres, getRecommended, getSearch };
+    return { getGenres, getRecommended, getSearch, getFeatures };
 };
 
 export default useSpotify;
