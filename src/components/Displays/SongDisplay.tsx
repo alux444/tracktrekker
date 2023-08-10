@@ -21,7 +21,7 @@ const SongDisplay = ({
     ));
 
     return (
-        <div className="flex justify-between items-center border-[1px] p-5">
+        <div className="flex justify-between items-center border-[1px] p-5 max-w-[90vw]">
             <div className="flex p-1 gap-5 items-center">
                 <img src={songInfo.album.images[2].url} />
                 <div className="block">

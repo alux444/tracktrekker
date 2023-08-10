@@ -6,7 +6,7 @@
     position: relative;
     overflow: hidden;
     height: 3rem;
-    padding: 0 1.5rem;
+    padding: 0 1.3rem;
     border-radius: 1.5rem;
     background: #3d3a4e;
     background-size: 400%;
@@ -47,7 +47,7 @@
     padding: 0px 10px;
     display: flex;
     align-items: center;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;

@@ -53,7 +53,7 @@ const SearchForm = ({ type }: { type: string }) => {
                 onSubmit={searchQuery}
             >
                 <input
-                    className="border-2 w-[400px]"
+                    className="border-2 w-[280px]"
                     type="text"
                     value={query}
                     onChange={handleQueryChange}
