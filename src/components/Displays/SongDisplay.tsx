@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import useSpotify from "../../utils/useSpotify";
+import { AudioFeatures } from "../../interfaces/audioFeatures";
+import FeaturesDisplay from "./FeaturesDisplay";
 
 const SongDisplay = ({
     songInfo,
@@ -11,13 +13,17 @@ const SongDisplay = ({
     type: number;
 }) => {
     const [selected, setSelected] = useState(false);
+    const [features, setFeatures] = useState<AudioFeatures | undefined>();
     const { addSong, removeSong } = useManageQuery();
 
     const { getFeatures } = useSpotify();
 
     useEffect(() => {
         const fetchFeaturesForThisSong = async () => {
-            await getFeatures(songInfo.id);
+            const res: AudioFeatures | undefined = await getFeatures(
+                songInfo.id
+            );
+            setFeatures(res);
         };
         fetchFeaturesForThisSong();
     }, []);
@@ -45,7 +51,7 @@ const SongDisplay = ({
                     <div className="flex flex-col gap-1s">{artists}</div>
                 </div>
             </div>
-            <div>
+            <div className="flex gap-2">
                 {type === 1 && !selected && (
                     <button
                         className="button1"
@@ -68,6 +74,7 @@ const SongDisplay = ({
                         <span>&times;</span>
                     </button>
                 )}
+                {features && <FeaturesDisplay features={features} />}
             </div>
         </div>
     );

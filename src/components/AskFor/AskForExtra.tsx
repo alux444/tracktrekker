@@ -57,8 +57,10 @@ const descriptions = {
 
 const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
     const [form, setForm] = useState<ExtraCriteria>({});
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [currentDescription, setCurrentDescription] = useState("");
 
-    const handleChange = (
+    const handleChangeZeroToOne = (
         criteria: keyof ExtraCriteria,
         value: number | undefined
     ) => {
@@ -86,6 +88,15 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
         }));
     };
 
+    const handleDialogOpen = (description: string) => {
+        setCurrentDescription(description);
+        setDialogOpen(true);
+    };
+
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+    };
+
     return (
         <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
             <form className="flex flex-col gap-2">
@@ -96,7 +107,7 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
                         placeholder="Min Acoustic"
                         value={form.minAcoustic}
                         onChange={(e) =>
-                            handleChange(
+                            handleChangeZeroToOne(
                                 "minAcoustic",
                                 parseInt(e.target.value) || undefined
                             )
@@ -108,7 +119,7 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
                         placeholder="Max Acoustic"
                         value={form.maxAcoustic}
                         onChange={(e) =>
-                            handleChange(
+                            handleChangeZeroToOne(
                                 "maxAcoustic",
                                 parseInt(e.target.value) || undefined
                             )
@@ -120,17 +131,35 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
                         placeholder="Target Acoustic"
                         value={form.targAcoustic}
                         onChange={(e) =>
-                            handleChange(
+                            handleChangeZeroToOne(
                                 "targAcoustic",
                                 parseInt(e.target.value) || undefined
                             )
                         }
                     />
+                    <button
+                        type="button"
+                        onClick={() =>
+                            handleDialogOpen(descriptions.acousticness)
+                        }
+                    >
+                        ?
+                    </button>
                 </div>
             </form>
             <button className="button1" onClick={submit}>
                 <span className="button1-content">Submit</span>
             </button>
+            <dialog
+                className="border-[1px] p-2"
+                open={dialogOpen}
+                onClose={handleDialogClose}
+            >
+                <div className="dialog-content flex gap-2 items-center align-center justify-center">
+                    <p>{currentDescription}</p>
+                    <button onClick={handleDialogClose}>&times;</button>
+                </div>
+            </dialog>
         </div>
     );
 };
