@@ -51,7 +51,7 @@ const SongDisplay = ({
                     <div className="flex flex-col gap-1s">{artists}</div>
                 </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
                 {type === 1 && !selected && (
                     <button
                         className="button1"
@@ -74,7 +74,12 @@ const SongDisplay = ({
                         <span>&times;</span>
                     </button>
                 )}
-                {features && <FeaturesDisplay features={features} />}
+                {features && (
+                    <FeaturesDisplay
+                        features={features}
+                        popularity={songInfo.popularity}
+                    />
+                )}
             </div>
         </div>
     );

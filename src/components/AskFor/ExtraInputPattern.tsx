@@ -15,9 +15,7 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
 }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = parseInt(e.target.value);
-        if (!isNaN(inputValue) || inputValue === undefined) {
-            changeFunction(inputValue || undefined);
-        }
+        changeFunction(inputValue || undefined);
     };
     return (
         <div>

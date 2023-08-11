@@ -65,27 +65,9 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
         criteria: keyof ExtraCriteria,
         value: number | undefined
     ) => {
-        if (value === undefined) {
-            setForm((prevForm) => ({
-                ...prevForm,
-                [criteria]: value,
-            }));
-            return;
-        }
-
-        let finalValue: number = value;
-
-        if (value > 1) {
-            finalValue = 1;
-        }
-
-        if (value < 0) {
-            finalValue = 0;
-        }
-
         setForm((prevForm) => ({
             ...prevForm,
-            [criteria]: finalValue,
+            [criteria]: value,
         }));
     };
 
@@ -109,6 +91,22 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
                             handleChangeZeroToOne("minAcoustic", val)
                         }
                         type="Min"
+                    />
+                    <ExtraInputPattern
+                        label="Acoustic"
+                        value={form.maxAcoustic}
+                        changeFunction={(val) =>
+                            handleChangeZeroToOne("maxAcoustic", val)
+                        }
+                        type="Max"
+                    />
+                    <ExtraInputPattern
+                        label="Acoustic"
+                        value={form.targAcoustic}
+                        changeFunction={(val) =>
+                            handleChangeZeroToOne("targAcoustic", val)
+                        }
+                        type="Target"
                     />
                     <button
                         type="button"

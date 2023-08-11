@@ -111,14 +111,14 @@ const HomePage = () => {
                                         Genres
                                     </span>
                                 </button>
-                                <button
+                                {/* <button
                                     className="button1"
                                     onClick={() => setExtraSelected(true)}
                                 >
                                     <span className="button1-content">
                                         Extra
                                     </span>
-                                </button>
+                                </button> */}
                                 <button
                                     className="button1"
                                     onClick={() => {
