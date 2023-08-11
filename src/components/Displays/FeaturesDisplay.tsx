@@ -1,4 +1,3 @@
-import React from "react";
 import { AudioFeatures } from "../../interfaces/audioFeatures";
 
 const FeaturesDisplay = ({
