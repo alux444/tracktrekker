@@ -74,7 +74,7 @@ const SongDisplay = ({
                         <span>&times;</span>
                     </button>
                 )}
-                {features && (
+                {features && type === 1 && (
                     <FeaturesDisplay
                         features={features}
                         popularity={songInfo.popularity}

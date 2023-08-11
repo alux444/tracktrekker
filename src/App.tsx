@@ -78,18 +78,20 @@ function App() {
                                     value={{ genres, setGenres }}
                                 >
                                     <p className="title"></p>
-                                    <button
-                                        className="button1"
-                                        onClick={() =>
-                                            setViewSearch(!viewSearch)
-                                        }
-                                    >
-                                        <span className="button1-content">
-                                            {viewSearch
-                                                ? "Return"
-                                                : "View Search"}
-                                        </span>
-                                    </button>
+                                    {token && (
+                                        <button
+                                            className="button1"
+                                            onClick={() =>
+                                                setViewSearch(!viewSearch)
+                                            }
+                                        >
+                                            <span className="button1-content">
+                                                {viewSearch
+                                                    ? "Return"
+                                                    : "View Search"}
+                                            </span>
+                                        </button>
+                                    )}
                                     {viewSearch ? (
                                         <CurrentSearch />
                                     ) : (
