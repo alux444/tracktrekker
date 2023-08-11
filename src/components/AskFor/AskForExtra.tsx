@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ExtraInputPattern from "./ExtraInputPattern";
 
 interface AskForExtrasProps {
     submit: () => void;
@@ -101,41 +102,13 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
         <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
             <form className="flex flex-col gap-2">
                 <div className="flex gap-2">
-                    <input
-                        className="border-[1px]"
-                        type="number"
-                        placeholder="Min Acoustic"
+                    <ExtraInputPattern
+                        label="Acoustic"
                         value={form.minAcoustic}
-                        onChange={(e) =>
-                            handleChangeZeroToOne(
-                                "minAcoustic",
-                                parseInt(e.target.value) || undefined
-                            )
+                        changeFunction={(val) =>
+                            handleChangeZeroToOne("minAcoustic", val)
                         }
-                    />
-                    <input
-                        className="border-[1px]"
-                        type="number"
-                        placeholder="Max Acoustic"
-                        value={form.maxAcoustic}
-                        onChange={(e) =>
-                            handleChangeZeroToOne(
-                                "maxAcoustic",
-                                parseInt(e.target.value) || undefined
-                            )
-                        }
-                    />
-                    <input
-                        className="border-[1px]"
-                        type="number"
-                        placeholder="Target Acoustic"
-                        value={form.targAcoustic}
-                        onChange={(e) =>
-                            handleChangeZeroToOne(
-                                "targAcoustic",
-                                parseInt(e.target.value) || undefined
-                            )
-                        }
+                        type="Min"
                     />
                     <button
                         type="button"
