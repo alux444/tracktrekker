@@ -45,7 +45,6 @@ const ResultsPage = ({
 
     return (
         <div className="h-full flex flex-col items-center align-center w-full gap-2">
-            <h2>Results</h2>
             <button className="button1" onClick={goBack}>
                 <span className="button1-content">Back</span>
             </button>

@@ -42,7 +42,7 @@ const SearchForm = ({ type }: { type: string }) => {
     ));
 
     return (
-        <div className="flex flex-col p-2">
+        <div className="flex flex-col p-2 w-[90vw]">
             <form
                 className="flex flex-col gap-4 items-center"
                 onSubmit={searchQuery}
