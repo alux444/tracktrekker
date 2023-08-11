@@ -16,25 +16,25 @@ const ArtistDisplay = ({
         artist.images && artist.images.length >= 3 ? artist.images[2].url : "";
 
     return (
-        <div className="flex flex-col gap-2 items-center border-[1px] p-3">
+        <div className="flex flex-col gap-2 items-center border-[1px] p-2 w-[15vw] w-[30vvw]">
+            <h2>{artist.name}</h2>
             <a href={artist.external_urls.spotify}>
                 <img
-                    className="max-w-[15vw] "
+                    className="lg:w-[15vw] w-[25vw]"
                     src={imageSrc}
                     alt={artist.name}
                 />
             </a>
-            <div className="flex items-center gap-2 justify-between">
-                <h2>{artist.name}</h2>
+            <div className="flex items-center flex-wrap gap-2 justify-center">
                 {fromSearch && !selected && (
                     <button
-                        className="button1"
+                        className="buttonselect"
                         onClick={() => {
                             addArtist(artist);
                             setSelected(true);
                         }}
                     >
-                        <span className="button1-content">+</span>
+                        <span>+</span>
                     </button>
                 )}
                 {(!fromSearch || selected) && (

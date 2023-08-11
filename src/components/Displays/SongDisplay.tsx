@@ -28,28 +28,50 @@ const SongDisplay = ({
         fetchFeaturesForThisSong();
     }, []);
 
-    const artists = songInfo.artists.map((artist) => (
+    const artists = songInfo.artists.slice(0, 3).map((artist, index) => (
         <a key={artist.id} href={artist.external_urls.spotify}>
             <small>
                 <span>{artist.name}</span>
+                {index === 2 && songInfo.artists.length > 3 && (
+                    <span className="">
+                        {" "}
+                        ...+{songInfo.artists.length - 3} more
+                    </span>
+                )}
             </small>
         </a>
     ));
 
     return (
-        <div className="lg:flex justify-center border-[1px]">
-            <div className="flex justify-between items-center border-[1px] p-5 w-[90vw] lg:w-[30vw]">
+        <div
+            className={`lg:flex justify-center border-[${
+                type === 2 ? "0px" : "1px"
+            }] w-full rounded-[30px] to-white text-[rgba(0,0,0,0.8)]`}
+        >
+            <div className="flex justify-between items-center p-5 w-full lg:w-[30vw]">
                 <div className="flex p-1 gap-5 items-center">
-                    <img src={songInfo.album.images[2].url} />
+                    <img
+                        src={songInfo.album.images[2].url}
+                        className="rounded-[10px]"
+                    />
                     <div className="block">
                         <a href={songInfo.external_urls.spotify}>
-                            <h2 className="text-xl">
+                            <h2 className="text-xl flex gap-2 items-center">
+                                {songInfo.explicit && (
+                                    <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
+                                        E
+                                    </div>
+                                )}
                                 {songInfo.name.length < 30
                                     ? songInfo.name
                                     : songInfo.name.substring(0, 29) + "..."}
                             </h2>
                         </a>
-                        <div className="flex flex-col gap-1s">{artists}</div>
+                        <div>
+                            <div className="flex flex-col gap-1s">
+                                {artists}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="flex gap-2 items-center">
@@ -77,14 +99,15 @@ const SongDisplay = ({
                     )}
                 </div>
             </div>
-            <div className="border-2 w-[90vw] lg:w-[20vw] p-2">
-                {features && type === 1 && (
+
+            {features && (type === 1 || type === 3) && (
+                <div className="w-full lg:w-[20vw] p-2">
                     <FeaturesDisplay
                         features={features}
                         popularity={songInfo.popularity}
                     />
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 };

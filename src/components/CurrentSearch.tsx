@@ -28,9 +28,9 @@ const CurrentSearch = () => {
     ));
 
     return (
-        <div className="flex flex-col overflow-auto h-[60vh] w-[80vw] gap-2">
+        <div className="flex flex-col overflow-auto h-[60vh] w-[90vw] gap-2 p-3">
             {songs.length > 0 && (
-                <div className="flex flex-wrap w-full items-center justify-center gap-1">
+                <div className="flex flex-wrap w-full items-center justify-center gap-2 flex-col">
                     {allSongs}
                 </div>
             )}
