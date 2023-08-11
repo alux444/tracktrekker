@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GenreContext, TokenContext } from "../../App";
+import { GenreContext } from "../../App";
 import useSpotify from "../../utils/useSpotify";
 import { Select, SelectOption } from "../Multiselect/Select";
 
@@ -8,21 +8,18 @@ interface AskForGenresProps {
 }
 const AskForGenres: React.FC<AskForGenresProps> = ({ submit }) => {
     const [allGenres, setAllGenres] = useState<SelectOption[]>([]);
-    const { token } = useContext(TokenContext);
     const { genres, setGenres } = useContext(GenreContext);
 
     const { getGenres } = useSpotify();
 
     useEffect(() => {
         const setGenres = async () => {
-            if (token) {
-                const genres = await getGenres(token);
-                const filteredGenres = genres.map((genre: string) => ({
-                    value: genre,
-                    label: genre.replace(/-/g, ""),
-                }));
-                setAllGenres(filteredGenres);
-            }
+            const genres = await getGenres();
+            const filteredGenres = genres.map((genre: string) => ({
+                value: genre,
+                label: genre.replace(/-/g, ""),
+            }));
+            setAllGenres(filteredGenres);
         };
         setGenres();
     }, []);

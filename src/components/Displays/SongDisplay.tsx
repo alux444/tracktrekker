@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
+import useSpotify from "../../utils/useSpotify";
+import { AudioFeatures } from "../../interfaces/audioFeatures";
+import FeaturesDisplay from "./FeaturesDisplay";
 
 const SongDisplay = ({
     songInfo,
@@ -10,7 +13,20 @@ const SongDisplay = ({
     type: number;
 }) => {
     const [selected, setSelected] = useState(false);
+    const [features, setFeatures] = useState<AudioFeatures | undefined>();
     const { addSong, removeSong } = useManageQuery();
+
+    const { getFeatures } = useSpotify();
+
+    useEffect(() => {
+        const fetchFeaturesForThisSong = async () => {
+            const res: AudioFeatures | undefined = await getFeatures(
+                songInfo.id
+            );
+            setFeatures(res);
+        };
+        fetchFeaturesForThisSong();
+    }, []);
 
     const artists = songInfo.artists.map((artist) => (
         <a key={artist.id} href={artist.external_urls.spotify}>
@@ -35,7 +51,7 @@ const SongDisplay = ({
                     <div className="flex flex-col gap-1s">{artists}</div>
                 </div>
             </div>
-            <div>
+            <div className="flex gap-2 items-center">
                 {type === 1 && !selected && (
                     <button
                         className="button1"
@@ -57,6 +73,12 @@ const SongDisplay = ({
                     >
                         <span>&times;</span>
                     </button>
+                )}
+                {features && (
+                    <FeaturesDisplay
+                        features={features}
+                        popularity={songInfo.popularity}
+                    />
                 )}
             </div>
         </div>

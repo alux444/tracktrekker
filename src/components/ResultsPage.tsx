@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RecommendForm } from "../interfaces/recommendForm";
 import { SongInfo } from "../interfaces/songInfo";
 import useSpotify from "../utils/useSpotify";
-import { TokenContext } from "../App";
 import SongDisplay from "./Displays/SongDisplay";
 
 const ResultsPage = ({
@@ -12,7 +11,6 @@ const ResultsPage = ({
     query: RecommendForm;
     goBack: () => void;
 }) => {
-    const { token } = useContext(TokenContext);
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
@@ -22,24 +20,23 @@ const ResultsPage = ({
     }, [query]);
 
     const getSongs = async () => {
-        if (typeof token === "string") {
-            const res = await getRecommended(token, query);
-            if (res === 1) {
-                setMessage(
-                    "You need to select one artist, song or genre to search."
-                );
-                return;
-            }
+        const res = await getRecommended(query);
 
-            if (res === 2) {
-                setMessage(
-                    "Sorry... there were no matches for your search.Maybe your tracks/artists were too obscure, or your search was too complicated"
-                );
-            }
-
-            console.log(res);
-            setSongs(res.tracks);
+        if (res === 1) {
+            setMessage(
+                "You need to select one artist, song or genre to search."
+            );
+            return;
         }
+
+        if (res === 2) {
+            setMessage(
+                "Sorry... there were no matches for your search.Maybe your tracks/artists were too obscure, or your search was too complicated"
+            );
+        }
+
+        console.log(res);
+        setSongs(res.tracks);
     };
 
     const results = songs.map((song) => (

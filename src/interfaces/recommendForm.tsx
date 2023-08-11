@@ -23,18 +23,12 @@ export interface RecommendForm {
     minLoudness?: number;
     maxLoudness?: number;
     targLoudness?: number;
-    minMode?: number;
-    maxMode?: number;
-    targMode?: number;
     minPopularity?: number;
     maxPopularity?: number;
     targPopularity?: number;
     minSpeech?: number;
     maxSpeech?: number;
     targSpeech?: number;
-    minTimeSig?: number;
-    maxTimeSig?: number;
-    targTimeSig?: number;
     maxValence?: number;
     minValence?: number;
     targValence?: number;

@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import useSpotify from "../utils/useSpotify";
 import {
     ArtistSeedContext,
     GenreContext,
@@ -12,6 +11,7 @@ import AskForGenres from "./AskFor/AskForGenres";
 import AskForExtra from "./AskFor/AskForExtra";
 import { RecommendForm } from "../interfaces/recommendForm";
 import ResultsPage from "./ResultsPage";
+import getAccessToken from "../utils/getAccessToken";
 
 const HomePage = () => {
     const { token, setToken } = useContext(TokenContext);
@@ -42,8 +42,6 @@ const HomePage = () => {
         setCompletedQuery(true);
         console.log(form);
     };
-
-    const { getAccessToken } = useSpotify();
 
     const alternateSongSelect = () => {
         setSongSelected(!songSelected);
