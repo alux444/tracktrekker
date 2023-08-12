@@ -1,9 +1,8 @@
 import { createContext, useState } from "react";
-import HomePage from "./components/HomePage";
 import { SongInfo } from "./interfaces/songInfo";
 import { ArtistInfo } from "./interfaces/artistInfo";
 import { SelectOption } from "./components/Multiselect/Select";
-import CurrentSearch from "./components/CurrentSearch";
+import Views from "./components/Pages/Views";
 
 export const TokenContext = createContext<{
     token: string | null;
@@ -61,49 +60,26 @@ function App() {
     const [artists, setArtists] = useState<ArtistInfo[]>([]);
     const [genres, setGenres] = useState<SelectOption[]>([]);
 
-    const [viewSearch, setViewSearch] = useState<boolean>(false);
-
     return (
-        <div className="flex gap-2 flex-col justify-center align-center items-center h-screen w-screen">
-            <TokenContext.Provider value={{ token, setToken }}>
-                <SongSeedContext.Provider value={{ songSeeds, setSongSeeds }}>
-                    <ArtistSeedContext.Provider
-                        value={{ artistSeeds, setArtistSeeds }}
-                    >
-                        <SongsInfoContext.Provider value={{ songs, setSongs }}>
-                            <ArtistInfoContext.Provider
-                                value={{ artists, setArtists }}
+        <TokenContext.Provider value={{ token, setToken }}>
+            <SongSeedContext.Provider value={{ songSeeds, setSongSeeds }}>
+                <ArtistSeedContext.Provider
+                    value={{ artistSeeds, setArtistSeeds }}
+                >
+                    <SongsInfoContext.Provider value={{ songs, setSongs }}>
+                        <ArtistInfoContext.Provider
+                            value={{ artists, setArtists }}
+                        >
+                            <GenreContext.Provider
+                                value={{ genres, setGenres }}
                             >
-                                <GenreContext.Provider
-                                    value={{ genres, setGenres }}
-                                >
-                                    <p className="title"></p>
-                                    {token && (
-                                        <button
-                                            className="button1"
-                                            onClick={() =>
-                                                setViewSearch(!viewSearch)
-                                            }
-                                        >
-                                            <span className="button1-content">
-                                                {viewSearch
-                                                    ? "Return"
-                                                    : "View Search"}
-                                            </span>
-                                        </button>
-                                    )}
-                                    {viewSearch ? (
-                                        <CurrentSearch />
-                                    ) : (
-                                        <HomePage />
-                                    )}
-                                </GenreContext.Provider>
-                            </ArtistInfoContext.Provider>
-                        </SongsInfoContext.Provider>
-                    </ArtistSeedContext.Provider>
-                </SongSeedContext.Provider>
-            </TokenContext.Provider>
-        </div>
+                                <Views />
+                            </GenreContext.Provider>
+                        </ArtistInfoContext.Provider>
+                    </SongsInfoContext.Provider>
+                </ArtistSeedContext.Provider>
+            </SongSeedContext.Provider>
+        </TokenContext.Provider>
     );
 }
 

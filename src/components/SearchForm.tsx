@@ -1,14 +1,19 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, createContext, useState } from "react";
 import useSpotify from "../utils/useSpotify";
 import { ArtistInfo } from "../interfaces/artistInfo";
 import { SongInfo } from "../interfaces/songInfo";
 import ArtistDisplay from "./Displays/ArtistDisplay";
 import SongDisplay from "./Displays/SongDisplay";
 
+export const StatsContext = createContext<{ showStats: boolean }>({
+    showStats: false,
+});
+
 const SearchForm = ({ type }: { type: string }) => {
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
     const [artistReults, setArtistResults] = useState<ArtistInfo[]>([]);
+    const [showStats, setShowStats] = useState<boolean>(false);
 
     const { getSearch } = useSpotify();
 
@@ -38,7 +43,12 @@ const SearchForm = ({ type }: { type: string }) => {
     ));
 
     const artists = artistReults.map((artist) => (
-        <ArtistDisplay key={artist.id} artist={artist} fromSearch={true} />
+        <ArtistDisplay
+            key={artist.id}
+            artist={artist}
+            fromSearch={true}
+            type={1}
+        />
     ));
 
     return (
@@ -53,19 +63,35 @@ const SearchForm = ({ type }: { type: string }) => {
                     value={query}
                     onChange={handleQueryChange}
                 />
-                <button className="button1 w-[150pxs] mb-4" type="submit">
-                    <span className="button1-content">Search</span>
-                </button>
+                <div className="flex gap-2 justify-center">
+                    <button className="button1 w-[150pxs] mb-4" type="submit">
+                        <span className="button1-content">Search</span>
+                    </button>
+                    <button
+                        className="button1 w-[150pxs] mb-4"
+                        type="button"
+                        onClick={() => setShowStats(!showStats)}
+                    >
+                        <span className="button1-content">
+                            {showStats ? "Hide Stats" : "Show Stats"}
+                        </span>
+                    </button>
+                </div>
             </form>
 
-            {type === "track" && uniqueTracks.length > 0 && (
-                <div className="p-5 block h-[50vh] overflow-auto">{tracks}</div>
-            )}
-            {type !== "track" && artistReults.length > 0 && (
-                <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
-                    {artists}
-                </div>
-            )}
+            <StatsContext.Provider value={{ showStats }}>
+                {type === "track" && uniqueTracks.length > 0 && (
+                    <div className="p-5 flex flex-col h-[50vh] overflow-auto gap-3">
+                        {tracks}
+                    </div>
+                )}
+
+                {type !== "track" && artistReults.length > 0 && (
+                    <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
+                        {artists}
+                    </div>
+                )}
+            </StatsContext.Provider>
         </div>
     );
 };

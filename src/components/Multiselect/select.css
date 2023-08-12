@@ -84,13 +84,10 @@
 .option-badge:focus {
     background-color: transparent;
     border-color: red;
+    color: red;
 }
 
 .option-badge:hover > .remove-btn,
 .option-badge:focus > .remove-btn {
     color: red;
-}
-
-.option-badge:hover > .remove-btn {
-    color: #777;
 }
