@@ -23,7 +23,7 @@ const Footer = () => {
                     Portfolio
                 </a>
                 <a
-                    href="https://www.linkedin.com/in/alex-liang-7b25a6269/"
+                    href="https://www.linkedin.com/in/alexliang1/"
                     target="_blank"
                     rel="noreferrer"
                     style={{ margin: "10px" }}

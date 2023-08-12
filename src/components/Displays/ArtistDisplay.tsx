@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { ArtistInfo } from "../../interfaces/artistInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import FeatureLevel from "./FeatureLevel";
-import { StatsContext } from "../SearchForm";
+import { StatsContext } from "../Pages/HomePage";
 
 const ArtistDisplay = ({
     artist,

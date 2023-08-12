@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { SetStateAction, createContext, useContext, useState } from "react";
 import {
     ArtistSeedContext,
     GenreContext,
@@ -13,6 +13,14 @@ import { RecommendForm } from "../../interfaces/recommendForm";
 import ResultsPage from "../ResultsPage";
 import getAccessToken from "../../utils/getAccessToken";
 
+export const StatsContext = createContext<{
+    showStats: boolean;
+    setShowStats: React.Dispatch<SetStateAction<boolean>>;
+}>({
+    showStats: false,
+    setShowStats: () => {},
+});
+
 const HomePage = () => {
     const { token, setToken } = useContext(TokenContext);
     const [songSelected, setSongSelected] = useState<boolean>(false);
@@ -21,6 +29,7 @@ const HomePage = () => {
     const [extraSelected, setExtraSelected] = useState<boolean>(false);
     const [completedQuery, setCompletedQuery] = useState<boolean>(false);
     const [currentQuery, setCurrentQuery] = useState<RecommendForm>();
+    const [showStats, setShowStats] = useState<boolean>(false);
 
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
@@ -78,40 +87,41 @@ const HomePage = () => {
     }
 
     return (
-        <div className="w-[80%] h-[80vh]">
-            <div className="flex h-full">
-                <div className="w-full h-full flex items-center">
-                    {!songSelected &&
-                        !artistSelected &&
-                        !genreSelected &&
-                        !extraSelected &&
-                        !completedQuery && (
-                            <div className="flex flex-col justify-center align-center items-center w-full gap-2 h-full">
-                                <button
-                                    className="button1"
-                                    onClick={() => setSongSelected(true)}
-                                >
-                                    <span className="button1-content">
-                                        Songs
-                                    </span>
-                                </button>
-                                <button
-                                    className="button1"
-                                    onClick={() => setArtistSelected(true)}
-                                >
-                                    <span className="button1-content">
-                                        Artist
-                                    </span>
-                                </button>
-                                <button
-                                    className="button1"
-                                    onClick={() => setGenreSelected(true)}
-                                >
-                                    <span className="button1-content">
-                                        Genres
-                                    </span>
-                                </button>
-                                {/* <button
+        <StatsContext.Provider value={{ showStats, setShowStats }}>
+            <div className="w-[80%] h-[80vh] w-full">
+                <div className="flex h-full w-full">
+                    <div className="w-full h-full flex items-center">
+                        {!songSelected &&
+                            !artistSelected &&
+                            !genreSelected &&
+                            !extraSelected &&
+                            !completedQuery && (
+                                <div className="flex flex-col justify-center align-center items-center w-full gap-2 h-full">
+                                    <button
+                                        className="button1"
+                                        onClick={() => setSongSelected(true)}
+                                    >
+                                        <span className="button1-content">
+                                            Songs
+                                        </span>
+                                    </button>
+                                    <button
+                                        className="button1"
+                                        onClick={() => setArtistSelected(true)}
+                                    >
+                                        <span className="button1-content">
+                                            Artist
+                                        </span>
+                                    </button>
+                                    <button
+                                        className="button1"
+                                        onClick={() => setGenreSelected(true)}
+                                    >
+                                        <span className="button1-content">
+                                            Genres
+                                        </span>
+                                    </button>
+                                    {/* <button
                                     className="button1"
                                     onClick={() => setExtraSelected(true)}
                                 >
@@ -119,40 +129,41 @@ const HomePage = () => {
                                         Extra
                                     </span>
                                 </button> */}
-                                <button
-                                    className="button1"
-                                    onClick={() => {
-                                        setCompletedQuery(true);
-                                        generateForm();
-                                    }}
-                                >
-                                    <span className="button1-content">
-                                        Get results
-                                    </span>
-                                </button>
-                            </div>
+                                    <button
+                                        className="button1"
+                                        onClick={() => {
+                                            setCompletedQuery(true);
+                                            generateForm();
+                                        }}
+                                    >
+                                        <span className="button1-content">
+                                            Get results
+                                        </span>
+                                    </button>
+                                </div>
+                            )}
+                        {songSelected && (
+                            <AskForSongs submit={alternateSongSelect} />
                         )}
-                    {songSelected && (
-                        <AskForSongs submit={alternateSongSelect} />
-                    )}
-                    {artistSelected && (
-                        <AskForArtists submit={alternateArtistSelect} />
-                    )}
-                    {genreSelected && (
-                        <AskForGenres submit={alternateGenreSelected} />
-                    )}
-                    {extraSelected && (
-                        <AskForExtra submit={alternateExtraSelected} />
-                    )}
-                    {completedQuery && currentQuery !== undefined && (
-                        <ResultsPage
-                            query={currentQuery}
-                            goBack={() => setCompletedQuery(false)}
-                        />
-                    )}
+                        {artistSelected && (
+                            <AskForArtists submit={alternateArtistSelect} />
+                        )}
+                        {genreSelected && (
+                            <AskForGenres submit={alternateGenreSelected} />
+                        )}
+                        {extraSelected && (
+                            <AskForExtra submit={alternateExtraSelected} />
+                        )}
+                        {completedQuery && currentQuery !== undefined && (
+                            <ResultsPage
+                                query={currentQuery}
+                                goBack={() => setCompletedQuery(false)}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </StatsContext.Provider>
     );
 };
 
