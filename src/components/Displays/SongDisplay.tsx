@@ -50,7 +50,7 @@ const SongDisplay = ({
             <div
                 className={`flex justify-between items-center p-5 w-full lg:w-[30vw] border-[${
                     type === 2 ? "0px" : "1px"
-                }] rounded-[30px] `}
+                }] rounded-[30px] backdrop-blur-3xl`}
             >
                 <div className="flex p-1 gap-5 items-center">
                     <img

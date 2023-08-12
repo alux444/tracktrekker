@@ -4,14 +4,14 @@ import {
     GenreContext,
     SongSeedContext,
     TokenContext,
-} from "../App";
-import AskForSongs from "./AskFor/AskForSongs";
-import AskForArtists from "./AskFor/AskForArtists";
-import AskForGenres from "./AskFor/AskForGenres";
-import AskForExtra from "./AskFor/AskForExtra";
-import { RecommendForm } from "../interfaces/recommendForm";
-import ResultsPage from "./ResultsPage";
-import getAccessToken from "../utils/getAccessToken";
+} from "../../App";
+import AskForSongs from "../AskFor/AskForSongs";
+import AskForArtists from "../AskFor/AskForArtists";
+import AskForGenres from "../AskFor/AskForGenres";
+import AskForExtra from "../AskFor/AskForExtra";
+import { RecommendForm } from "../../interfaces/recommendForm";
+import ResultsPage from "../ResultsPage";
+import getAccessToken from "../../utils/getAccessToken";
 
 const HomePage = () => {
     const { token, setToken } = useContext(TokenContext);
