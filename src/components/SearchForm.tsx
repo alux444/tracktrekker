@@ -1,19 +1,17 @@
-import { ChangeEvent, FormEvent, createContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import useSpotify from "../utils/useSpotify";
 import { ArtistInfo } from "../interfaces/artistInfo";
 import { SongInfo } from "../interfaces/songInfo";
 import ArtistDisplay from "./Displays/ArtistDisplay";
 import SongDisplay from "./Displays/SongDisplay";
-
-export const StatsContext = createContext<{ showStats: boolean }>({
-    showStats: false,
-});
+import { StatsContext } from "./Pages/HomePage";
 
 const SearchForm = ({ type }: { type: string }) => {
+    const { showStats, setShowStats } = useContext(StatsContext);
+
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
     const [artistReults, setArtistResults] = useState<ArtistInfo[]>([]);
-    const [showStats, setShowStats] = useState<boolean>(false);
 
     const { getSearch } = useSpotify();
 
@@ -79,19 +77,17 @@ const SearchForm = ({ type }: { type: string }) => {
                 </div>
             </form>
 
-            <StatsContext.Provider value={{ showStats }}>
-                {type === "track" && uniqueTracks.length > 0 && (
-                    <div className="p-5 flex flex-col h-[50vh] overflow-auto gap-3">
-                        {tracks}
-                    </div>
-                )}
+            {type === "track" && uniqueTracks.length > 0 && (
+                <div className="p-5 flex flex-col h-[50vh] overflow-auto gap-3">
+                    {tracks}
+                </div>
+            )}
 
-                {type !== "track" && artistReults.length > 0 && (
-                    <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
-                        {artists}
-                    </div>
-                )}
-            </StatsContext.Provider>
+            {type !== "track" && artistReults.length > 0 && (
+                <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
+                    {artists}
+                </div>
+            )}
         </div>
     );
 };

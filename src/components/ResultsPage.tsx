@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RecommendForm } from "../interfaces/recommendForm";
 import { SongInfo } from "../interfaces/songInfo";
 import useSpotify from "../utils/useSpotify";
 import SongDisplay from "./Displays/SongDisplay";
+import { StatsContext } from "./Pages/HomePage";
 
 const ResultsPage = ({
     query,
@@ -11,6 +12,7 @@ const ResultsPage = ({
     query: RecommendForm;
     goBack: () => void;
 }) => {
+    const { showStats, setShowStats } = useContext(StatsContext);
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
@@ -48,11 +50,22 @@ const ResultsPage = ({
             <button className="button1" onClick={goBack}>
                 <span className="button1-content">Back</span>
             </button>
-            <button className="button1" onClick={getSongs}>
-                <span className="button1-content">Reroll</span>
-            </button>
+            <div className="flex gap-2">
+                <button className="button1" onClick={getSongs}>
+                    <span className="button1-content">Reroll</span>
+                </button>
+                <button
+                    className="button1 w-[150pxs] mb-4"
+                    type="button"
+                    onClick={() => setShowStats(!showStats)}
+                >
+                    <span className="button1-content">
+                        {showStats ? "Hide Stats" : "Show Stats"}
+                    </span>
+                </button>
+            </div>
             {songs.length > 0 ? (
-                <div className="p-5 flex  flex-col gap-2 h-[50vh] overflow-auto">
+                <div className="p-5 flex w-full flex-col gap-2 h-[50vh] overflow-auto">
                     {results}
                 </div>
             ) : (

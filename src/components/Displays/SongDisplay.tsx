@@ -4,7 +4,7 @@ import useManageQuery from "../../utils/useManageQuery";
 import useSpotify from "../../utils/useSpotify";
 import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
-import { StatsContext } from "../SearchForm";
+import { StatsContext } from "../Pages/HomePage";
 
 const SongDisplay = ({
     songInfo,
@@ -100,7 +100,7 @@ const SongDisplay = ({
                             <span>&times;</span>
                         </button>
                     )}
-                    {!showStats && type === 1 && (
+                    {!showStats && (type === 1 || type === 3) && (
                         <button
                             className="button1 w-[150pxs]"
                             type="button"
