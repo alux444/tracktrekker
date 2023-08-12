@@ -15,13 +15,17 @@ const CurrentSearch = () => {
     ));
 
     const allArtists = artists.map((artist) => (
-        <ArtistDisplay artist={artist} fromSearch={false} />
+        <ArtistDisplay artist={artist} fromSearch={false} type={2} />
     ));
 
     const allGenres = genres.map((genre) => (
         <div className="flex gap-2 items-center rounded-lg p-2 border-[1px]">
-            {genre.label}
-            <button onClick={() => removeGenre(genre)} className="buttoncancel">
+            {genre.label.charAt(0).toUpperCase()}
+            {genre.label.slice(1)}
+            <button
+                onClick={() => removeGenre(genre)}
+                className="hover:border-red-500 hover:text-red-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+            >
                 <span>&times;</span>
             </button>
         </div>

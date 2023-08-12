@@ -46,12 +46,12 @@ const SongDisplay = ({
     ));
 
     return (
-        <div
-            className={`lg:flex justify-center border-[${
-                type === 2 ? "0px" : "1px"
-            }] w-full rounded-[30px] to-white text-[rgba(0,0,0,0.8)]`}
-        >
-            <div className="flex justify-between items-center p-5 w-full lg:w-[30vw]">
+        <div className={`lg:flex justify-center w-full text-[rgba(0,0,0,0.8)]`}>
+            <div
+                className={`flex justify-between items-center p-5 w-full lg:w-[30vw] border-[${
+                    type === 2 ? "0px" : "1px"
+                }] rounded-[30px] `}
+            >
                 <div className="flex p-1 gap-5 items-center">
                     <img
                         src={songInfo.album.images[2].url}
@@ -59,7 +59,7 @@ const SongDisplay = ({
                     />
                     <div className="block">
                         <a href={songInfo.external_urls.spotify}>
-                            <h2 className="text-xl flex gap-2 items-center flex-wrap break-all">
+                            <h2 className="text-lg flex gap-2 items-center flex-wrap break-all">
                                 {songInfo.explicit && (
                                     <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
                                         E
@@ -100,7 +100,7 @@ const SongDisplay = ({
                             <span>&times;</span>
                         </button>
                     )}
-                    {!showStats && (
+                    {!showStats && type === 1 && (
                         <button
                             className="button1 w-[150pxs] mb-4"
                             type="button"

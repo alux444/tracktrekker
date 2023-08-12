@@ -43,7 +43,12 @@ const SearchForm = ({ type }: { type: string }) => {
     ));
 
     const artists = artistReults.map((artist) => (
-        <ArtistDisplay key={artist.id} artist={artist} fromSearch={true} />
+        <ArtistDisplay
+            key={artist.id}
+            artist={artist}
+            fromSearch={true}
+            type={1}
+        />
     ));
 
     return (
@@ -80,12 +85,13 @@ const SearchForm = ({ type }: { type: string }) => {
                         {tracks}
                     </div>
                 )}
+
+                {type !== "track" && artistReults.length > 0 && (
+                    <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
+                        {artists}
+                    </div>
+                )}
             </StatsContext.Provider>
-            {type !== "track" && artistReults.length > 0 && (
-                <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
-                    {artists}
-                </div>
-            )}
         </div>
     );
 };

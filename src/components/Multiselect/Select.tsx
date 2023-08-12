@@ -115,7 +115,7 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
                 <input
                     value={search}
                     onChange={handleSearchChange}
-                    className="border-2"
+                    className="border-[1px] border-slate-500"
                 />
             </div>
             <div
