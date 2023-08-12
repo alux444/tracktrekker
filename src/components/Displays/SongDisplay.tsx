@@ -46,13 +46,13 @@ const SongDisplay = ({
     ));
 
     return (
-        <div className={`lg:flex justify-center w-full text-[rgba(0,0,0,0.8)]`}>
+        <div className={`md:flex justify-center w-full text-[rgba(0,0,0,0.8)]`}>
             <div
-                className={`flex justify-between items-center p-5 w-full lg:w-[30vw] border-[${
+                className={`flex justify-between flex-col xs:flex-row items-center p-5 w-full lg:w-[40%] md:w-[70%] border-[${
                     type === 2 ? "0px" : "1px"
                 }] rounded-[30px] backdrop-blur-3xl`}
             >
-                <div className="flex p-1 gap-5 items-center">
+                <div className="flex p-1 gap-5 items-center flex-col xs:flex-row">
                     <img
                         src={songInfo.album.images[2].url}
                         className="rounded-[10px]"
@@ -77,7 +77,7 @@ const SongDisplay = ({
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-2 items-center">
+                <div className="flex xs:flex-col align-center  gap-2 items-center">
                     {type === 1 && !selected && (
                         <button
                             className="buttonselect"
@@ -102,7 +102,7 @@ const SongDisplay = ({
                     )}
                     {!showStats && type === 1 && (
                         <button
-                            className="button1 w-[150pxs] mb-4"
+                            className="button1 w-[150pxs]"
                             type="button"
                             onClick={() => setThisShowStats(!thisShowStats)}
                         >
@@ -117,7 +117,7 @@ const SongDisplay = ({
             {features &&
                 (type === 1 || type === 3) &&
                 (showStats || thisShowStats) && (
-                    <div className="w-full lg:w-[20vw] p-2">
+                    <div className="w-full lg:w-[20vw] md:w-[30vw] p-2">
                         <FeaturesDisplay
                             features={features}
                             popularity={songInfo.popularity}
