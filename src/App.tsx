@@ -64,7 +64,7 @@ function App() {
     const [viewSearch, setViewSearch] = useState<boolean>(false);
 
     return (
-        <div className="flex gap-2 flex-col justify-center align-center items-center h-screen w-screen">
+        <div className="flex gap-2 flex-col justify-center align-center items-center h-screen w-screen text-xs md:text-sm lg:text-md">
             <TokenContext.Provider value={{ token, setToken }}>
                 <SongSeedContext.Provider value={{ songSeeds, setSongSeeds }}>
                     <ArtistSeedContext.Provider

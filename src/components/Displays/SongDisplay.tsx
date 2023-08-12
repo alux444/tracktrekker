@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import useSpotify from "../../utils/useSpotify";
 import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
+import { StatsContext } from "../SearchForm";
 
 const SongDisplay = ({
     songInfo,
@@ -12,6 +13,8 @@ const SongDisplay = ({
     songInfo: SongInfo;
     type: number;
 }) => {
+    const { showStats } = useContext(StatsContext);
+    const [thisShowStats, setThisShowStats] = useState<boolean>(false);
     const [selected, setSelected] = useState(false);
     const [features, setFeatures] = useState<AudioFeatures | undefined>();
     const { addSong, removeSong } = useManageQuery();
@@ -56,7 +59,7 @@ const SongDisplay = ({
                     />
                     <div className="block">
                         <a href={songInfo.external_urls.spotify}>
-                            <h2 className="text-xl flex gap-2 items-center">
+                            <h2 className="text-xl flex gap-2 items-center flex-wrap break-all">
                                 {songInfo.explicit && (
                                     <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
                                         E
@@ -74,7 +77,7 @@ const SongDisplay = ({
                         </div>
                     </div>
                 </div>
-                <div className="flex gap-2 items-center">
+                <div className="flex flex-col gap-2 items-center">
                     {type === 1 && !selected && (
                         <button
                             className="buttonselect"
@@ -97,17 +100,30 @@ const SongDisplay = ({
                             <span>&times;</span>
                         </button>
                     )}
+                    {!showStats && (
+                        <button
+                            className="button1 w-[150pxs] mb-4"
+                            type="button"
+                            onClick={() => setThisShowStats(!thisShowStats)}
+                        >
+                            <span className="button1-content">
+                                {thisShowStats ? "Hide" : "Stats"}
+                            </span>
+                        </button>
+                    )}
                 </div>
             </div>
 
-            {features && (type === 1 || type === 3) && (
-                <div className="w-full lg:w-[20vw] p-2">
-                    <FeaturesDisplay
-                        features={features}
-                        popularity={songInfo.popularity}
-                    />
-                </div>
-            )}
+            {features &&
+                (type === 1 || type === 3) &&
+                (showStats || thisShowStats) && (
+                    <div className="w-full lg:w-[20vw] p-2">
+                        <FeaturesDisplay
+                            features={features}
+                            popularity={songInfo.popularity}
+                        />
+                    </div>
+                )}
         </div>
     );
 };
