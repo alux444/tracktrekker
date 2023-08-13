@@ -12,6 +12,7 @@ import AskForExtra from "../AskFor/AskForExtra";
 import { RecommendForm } from "../../interfaces/recommendForm";
 import ResultsPage from "../ResultsPage";
 import LandingPage from "./LandingPage";
+import PromptScreen from "./PromptScreen";
 
 export const StatsContext = createContext<{
     showStats: boolean;
@@ -74,59 +75,20 @@ const HomePage = () => {
 
     return (
         <StatsContext.Provider value={{ showStats, setShowStats }}>
-            <div className="w-[80%] h-[80vh] w-full">
+            <div className="w-[80%] h-[80vh] w-full p-4">
                 <div className="flex h-full w-full">
-                    <div className="w-full h-full flex items-center">
+                    <div className="w-[100vw] h-full flex justify-center items-center">
                         {!songSelected &&
                             !artistSelected &&
                             !genreSelected &&
                             !extraSelected &&
                             !completedQuery && (
-                                <div className="flex flex-col justify-center align-center items-center w-full gap-2 h-full">
-                                    <button
-                                        className="button1"
-                                        onClick={() => setSongSelected(true)}
-                                    >
-                                        <span className="button1-content">
-                                            Songs
-                                        </span>
-                                    </button>
-                                    <button
-                                        className="button1"
-                                        onClick={() => setArtistSelected(true)}
-                                    >
-                                        <span className="button1-content">
-                                            Artist
-                                        </span>
-                                    </button>
-                                    <button
-                                        className="button1"
-                                        onClick={() => setGenreSelected(true)}
-                                    >
-                                        <span className="button1-content">
-                                            Genres
-                                        </span>
-                                    </button>
-                                    {/* <button
-                                    className="button1"
-                                    onClick={() => setExtraSelected(true)}
-                                >
-                                    <span className="button1-content">
-                                        Extra
-                                    </span>
-                                </button> */}
-                                    <button
-                                        className="button1"
-                                        onClick={() => {
-                                            setCompletedQuery(true);
-                                            generateForm();
-                                        }}
-                                    >
-                                        <span className="button1-content">
-                                            Get results
-                                        </span>
-                                    </button>
-                                </div>
+                                <PromptScreen
+                                    setArtist={() => setArtistSelected(true)}
+                                    setGenre={() => setGenreSelected(true)}
+                                    setSong={() => setSongSelected(true)}
+                                    setSubmit={generateForm}
+                                />
                             )}
                         {songSelected && (
                             <AskForSongs submit={alternateSongSelect} />
