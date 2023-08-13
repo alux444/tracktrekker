@@ -68,7 +68,7 @@ const ResultsPage = ({
                 </button>
             </div>
             {songs.length > 0 ? (
-                <div className="p-5 flex w-full flex-col gap-2 h-[50vh] overflow-auto">
+                <div className="p-5 flex w-full flex-col gap-2 h-[40vh] overflow-auto">
                     {results}
                 </div>
             ) : (

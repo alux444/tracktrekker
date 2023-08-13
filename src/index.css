@@ -80,7 +80,7 @@
 .buttoncancel {
     background: transparent;
     position: relative;
-    padding: 0px 10px;
+    padding: 0px 5px;
     display: flex;
     align-items: center;
     font-size: 17px;
@@ -130,7 +130,7 @@
 .buttonselect {
     background: transparent;
     position: relative;
-    padding: 0px 10px;
+    padding: 0 5px;
     display: flex;
     align-items: center;
     font-size: 17px;
@@ -180,10 +180,10 @@
 .buttonprev {
     background: transparent;
     position: relative;
-    padding: 0px 10px;
+    padding: 0px 5px;
     display: flex;
     align-items: center;
-    font-size: 17px;
+    font-size: 13px;
     font-weight: 300;
     text-decoration: none;
     cursor: pointer;
