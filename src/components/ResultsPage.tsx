@@ -51,15 +51,18 @@ const ResultsPage = ({
                 <span className="button1-content">Back</span>
             </button>
             <div className="flex gap-2">
-                <button className="button1" onClick={getSongs}>
-                    <span className="button1-content">Reroll</span>
+                <button
+                    className="button2 border-purple-500 border-[1px]"
+                    onClick={getSongs}
+                >
+                    <span className="grad">Reroll</span>
                 </button>
                 <button
-                    className="button1 w-[150pxs] mb-4"
+                    className="button2 border-purple-500 border-[1px]"
                     type="button"
                     onClick={() => setShowStats(!showStats)}
                 >
-                    <span className="button1-content">
+                    <span className="grad">
                         {showStats ? "Hide Stats" : "Show Stats"}
                     </span>
                 </button>

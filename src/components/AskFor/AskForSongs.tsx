@@ -7,7 +7,7 @@ interface AskForSongsProps {
 const AskForSongs = ({ submit }: AskForSongsProps) => {
     return (
         <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
-            <h2>Select Songs</h2>
+            <h2 className="text-xl grad">Select Songs</h2>
             <SearchForm type="track" />
             <button className="button1" onClick={submit}>
                 <span className="button1-content">Submit</span>

@@ -60,7 +60,7 @@ const HomePage = () => {
 
     return (
         <StatsContext.Provider value={{ showStats, setShowStats }}>
-            <div className="w-[80%] h-[80vh] w-full p-4">
+            <div className="w-[80%] h-[80vh] w-full my-2">
                 <div className="flex h-full w-full">
                     <div className="w-[100vw] h-full flex justify-center items-center">
                         {promptPage === "home" && (

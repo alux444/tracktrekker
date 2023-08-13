@@ -7,8 +7,8 @@ interface AskForArtistsProps {
 
 const AskForArtists: React.FC<AskForArtistsProps> = ({ submit }) => {
     return (
-        <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
-            <h2>Select Artists</h2>
+        <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5 h-[50vh] ">
+            <h2 className="text-xl grad">Select Artists</h2>
             <SearchForm type="artist" />
             <div className="flex gap-2">
                 <button className="button1" onClick={submit}>
