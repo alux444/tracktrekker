@@ -11,7 +11,7 @@ import AskForGenres from "../AskFor/AskForGenres";
 import AskForExtra from "../AskFor/AskForExtra";
 import { RecommendForm } from "../../interfaces/recommendForm";
 import ResultsPage from "../ResultsPage";
-import getAccessToken from "../../utils/getAccessToken";
+import LandingPage from "./LandingPage";
 
 export const StatsContext = createContext<{
     showStats: boolean;
@@ -22,7 +22,7 @@ export const StatsContext = createContext<{
 });
 
 const HomePage = () => {
-    const { token, setToken } = useContext(TokenContext);
+    const { token } = useContext(TokenContext);
     const [songSelected, setSongSelected] = useState<boolean>(false);
     const [artistSelected, setArtistSelected] = useState<boolean>(false);
     const [genreSelected, setGenreSelected] = useState<boolean>(false);
@@ -68,22 +68,8 @@ const HomePage = () => {
         setExtraSelected(!extraSelected);
     };
 
-    const setAccessToken = async () => {
-        const token: string | null = await getAccessToken();
-        if (token !== null) {
-            console.log(token);
-            setToken(token);
-        } else {
-            console.log("error getting token");
-        }
-    };
-
     if (token === null) {
-        return (
-            <button className="button1" onClick={setAccessToken}>
-                <span className="button1-content">Get Started</span>
-            </button>
-        );
+        return <LandingPage />;
     }
 
     return (
