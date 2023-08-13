@@ -11,7 +11,9 @@ import AskForGenres from "../AskFor/AskForGenres";
 import AskForExtra from "../AskFor/AskForExtra";
 import { RecommendForm } from "../../interfaces/recommendForm";
 import ResultsPage from "../ResultsPage";
-import getAccessToken from "../../utils/getAccessToken";
+import LandingPage from "./LandingPage";
+import PromptScreen from "./PromptScreen";
+import { PromptPageContext } from "./Views";
 
 export const StatsContext = createContext<{
     showStats: boolean;
@@ -22,12 +24,8 @@ export const StatsContext = createContext<{
 });
 
 const HomePage = () => {
-    const { token, setToken } = useContext(TokenContext);
-    const [songSelected, setSongSelected] = useState<boolean>(false);
-    const [artistSelected, setArtistSelected] = useState<boolean>(false);
-    const [genreSelected, setGenreSelected] = useState<boolean>(false);
-    const [extraSelected, setExtraSelected] = useState<boolean>(false);
-    const [completedQuery, setCompletedQuery] = useState<boolean>(false);
+    const { token } = useContext(TokenContext);
+    const { promptPage, setPromptPage } = useContext(PromptPageContext);
     const [currentQuery, setCurrentQuery] = useState<RecommendForm>();
     const [showStats, setShowStats] = useState<boolean>(false);
 
@@ -48,118 +46,50 @@ const HomePage = () => {
         };
 
         setCurrentQuery(form);
-        setCompletedQuery(true);
+        setPromptPage("results");
         console.log(form);
     };
 
-    const alternateSongSelect = () => {
-        setSongSelected(!songSelected);
-    };
-
-    const alternateArtistSelect = () => {
-        setArtistSelected(!artistSelected);
-    };
-
-    const alternateGenreSelected = () => {
-        setGenreSelected(!genreSelected);
-    };
-
-    const alternateExtraSelected = () => {
-        setExtraSelected(!extraSelected);
-    };
-
-    const setAccessToken = async () => {
-        const token: string | null = await getAccessToken();
-        if (token !== null) {
-            console.log(token);
-            setToken(token);
-        } else {
-            console.log("error getting token");
-        }
+    const returnToHome = () => {
+        setPromptPage("home");
     };
 
     if (token === null) {
-        return (
-            <button className="button1" onClick={setAccessToken}>
-                <span className="button1-content">Get Started</span>
-            </button>
-        );
+        return <LandingPage />;
     }
 
     return (
         <StatsContext.Provider value={{ showStats, setShowStats }}>
-            <div className="w-[80%] h-[80vh] w-full">
+            <div className="w-[80%] h-[80vh] w-full p-4">
                 <div className="flex h-full w-full">
-                    <div className="w-full h-full flex items-center">
-                        {!songSelected &&
-                            !artistSelected &&
-                            !genreSelected &&
-                            !extraSelected &&
-                            !completedQuery && (
-                                <div className="flex flex-col justify-center align-center items-center w-full gap-2 h-full">
-                                    <button
-                                        className="button1"
-                                        onClick={() => setSongSelected(true)}
-                                    >
-                                        <span className="button1-content">
-                                            Songs
-                                        </span>
-                                    </button>
-                                    <button
-                                        className="button1"
-                                        onClick={() => setArtistSelected(true)}
-                                    >
-                                        <span className="button1-content">
-                                            Artist
-                                        </span>
-                                    </button>
-                                    <button
-                                        className="button1"
-                                        onClick={() => setGenreSelected(true)}
-                                    >
-                                        <span className="button1-content">
-                                            Genres
-                                        </span>
-                                    </button>
-                                    {/* <button
-                                    className="button1"
-                                    onClick={() => setExtraSelected(true)}
-                                >
-                                    <span className="button1-content">
-                                        Extra
-                                    </span>
-                                </button> */}
-                                    <button
-                                        className="button1"
-                                        onClick={() => {
-                                            setCompletedQuery(true);
-                                            generateForm();
-                                        }}
-                                    >
-                                        <span className="button1-content">
-                                            Get results
-                                        </span>
-                                    </button>
-                                </div>
-                            )}
-                        {songSelected && (
-                            <AskForSongs submit={alternateSongSelect} />
-                        )}
-                        {artistSelected && (
-                            <AskForArtists submit={alternateArtistSelect} />
-                        )}
-                        {genreSelected && (
-                            <AskForGenres submit={alternateGenreSelected} />
-                        )}
-                        {extraSelected && (
-                            <AskForExtra submit={alternateExtraSelected} />
-                        )}
-                        {completedQuery && currentQuery !== undefined && (
-                            <ResultsPage
-                                query={currentQuery}
-                                goBack={() => setCompletedQuery(false)}
+                    <div className="w-[100vw] h-full flex justify-center items-center">
+                        {promptPage === "home" && (
+                            <PromptScreen
+                                setArtist={() => setPromptPage("artists")}
+                                setGenre={() => setPromptPage("genres")}
+                                setSong={() => setPromptPage("songs")}
+                                setSubmit={generateForm}
                             />
                         )}
+                        {promptPage === "songs" && (
+                            <AskForSongs submit={returnToHome} />
+                        )}
+                        {promptPage === "artists" && (
+                            <AskForArtists submit={returnToHome} />
+                        )}
+                        {promptPage === "genres" && (
+                            <AskForGenres submit={returnToHome} />
+                        )}
+                        {promptPage === "extras" && (
+                            <AskForExtra submit={returnToHome} />
+                        )}
+                        {promptPage === "results" &&
+                            currentQuery !== undefined && (
+                                <ResultsPage
+                                    query={currentQuery}
+                                    goBack={returnToHome}
+                                />
+                            )}
                     </div>
                 </div>
             </div>

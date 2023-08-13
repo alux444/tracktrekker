@@ -1,5 +1,5 @@
-import React from "react";
-import { page } from "./Views";
+import React, { useContext } from "react";
+import { PromptPageContext, page } from "./Views";
 
 type NavBarProps = {
     currentPage: page;
@@ -14,26 +14,33 @@ const NavBar: React.FC<NavBarProps> = ({
     toAbout,
     toSearch,
 }) => {
+    const { setPromptPage } = useContext(PromptPageContext);
     return (
-        <div className="flex gap-8 flex-wrap justify-cente mt-3">
-            <button
-                className={`${currentPage === "home" && "underline"}`}
-                onClick={toHome}
-            >
-                Home
-            </button>
-            <button
-                className={`${currentPage === "viewSearch" && "underline"}`}
-                onClick={toSearch}
-            >
-                Current Search
-            </button>
-            <button
-                className={`${currentPage === "about" && "underline"}`}
-                onClick={toAbout}
-            >
-                About
-            </button>
+        <div className="flex flex-col gap-1 justify-center items-center text-center mt-3">
+            <h2 className="grad text-3xl">TrackTrekker</h2>
+            <div className="flex gap-8 flex-wrap justify-center">
+                <button
+                    className={`${currentPage === "home" && "underline"}`}
+                    onClick={() => {
+                        toHome();
+                        setPromptPage("home");
+                    }}
+                >
+                    Home
+                </button>
+                <button
+                    className={`${currentPage === "viewSearch" && "underline"}`}
+                    onClick={toSearch}
+                >
+                    Current Search
+                </button>
+                <button
+                    className={`${currentPage === "about" && "underline"}`}
+                    onClick={toAbout}
+                >
+                    About
+                </button>
+            </div>
         </div>
     );
 };
