@@ -5,6 +5,7 @@ import useSpotify from "../../utils/useSpotify";
 import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
 import { StatsContext } from "../Pages/HomePage";
+import { AudioContext } from "../Pages/Views";
 
 const SongDisplay = ({
     songInfo,
@@ -14,6 +15,14 @@ const SongDisplay = ({
     type: number;
 }) => {
     const { showStats } = useContext(StatsContext);
+    const {
+        audio,
+        setAudio,
+        audioIsPlaying,
+        setAudioIsPlaying,
+        currentPlayingId,
+        setCurrentPlayingId,
+    } = useContext(AudioContext);
     const [thisShowStats, setThisShowStats] = useState<boolean>(false);
     const [selected, setSelected] = useState(false);
     const [features, setFeatures] = useState<AudioFeatures | undefined>();
@@ -30,6 +39,33 @@ const SongDisplay = ({
         };
         fetchFeaturesForThisSong();
     }, []);
+
+    const playPreview = () => {
+        if (songInfo.preview_url) {
+            const thisAudio = new Audio(songInfo.preview_url);
+
+            if (audio && audio.src === thisAudio.src) {
+                if (audioIsPlaying) {
+                    audio.pause();
+                    setAudioIsPlaying(false);
+                    setCurrentPlayingId(null);
+                } else {
+                    audio.play();
+                    setAudioIsPlaying(true);
+                    setCurrentPlayingId(songInfo.id);
+                }
+            } else {
+                if (audio) {
+                    audio.pause();
+                    setCurrentPlayingId(null);
+                }
+                thisAudio.play();
+                setAudioIsPlaying(true);
+                setAudio(thisAudio);
+                setCurrentPlayingId(songInfo.id);
+            }
+        }
+    };
 
     const artists = songInfo.artists.slice(0, 3).map((artist, index) => (
         <a key={artist.id} href={artist.external_urls.spotify}>
@@ -77,7 +113,7 @@ const SongDisplay = ({
                         </div>
                     </div>
                 </div>
-                <div className="flex xs:flex-col align-center  gap-2 items-center">
+                <div className="flex xs:flex-col align-center flex-wrap gap-2 items-center justify-center xs:justify-end xs:items-end">
                     {type === 1 && !selected && (
                         <button
                             className="buttonselect"
@@ -100,15 +136,26 @@ const SongDisplay = ({
                             <span>&times;</span>
                         </button>
                     )}
+                    {songInfo.preview_url && (type === 1 || type === 3) && (
+                        <button
+                            className="buttonprev"
+                            type="button"
+                            onClick={playPreview}
+                        >
+                            <span>
+                                {currentPlayingId === songInfo.id
+                                    ? "Pause"
+                                    : "Preview"}
+                            </span>
+                        </button>
+                    )}
                     {!showStats && (type === 1 || type === 3) && (
                         <button
-                            className="button1 w-[150pxs]"
+                            className="buttonprev"
                             type="button"
                             onClick={() => setThisShowStats(!thisShowStats)}
                         >
-                            <span className="button1-content">
-                                {thisShowStats ? "Hide" : "Stats"}
-                            </span>
+                            <span>{thisShowStats ? "Hide" : "Stats"}</span>
                         </button>
                     )}
                 </div>
