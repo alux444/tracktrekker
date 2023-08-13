@@ -23,7 +23,7 @@ const LandingPage = () => {
                     <h2 className="grad text-3xl ">Find</h2>
                     <h2 className="grad text-3xl">Something</h2>
                     <h2 className="grad text-3xl">New</h2>
-                    <p className="grad">Created with SpotifyAPI</p>
+                    <p className="grad">Created with Spotify WebAPI</p>
                 </div>
                 <button className="button1" onClick={setAccessToken}>
                     <span className="button1-content">Get Started</span>

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { PromptPageContext, page } from "./Views";
+import { TokenContext } from "../../App";
 
 type NavBarProps = {
     currentPage: page;
@@ -15,30 +16,37 @@ const NavBar: React.FC<NavBarProps> = ({
     toSearch,
 }) => {
     const { setPromptPage } = useContext(PromptPageContext);
+    const { token } = useContext(TokenContext);
     return (
-        <div className="flex gap-8 flex-wrap justify-center mt-3">
+        <div className="flex gap-8 flex-wrap justify-center mt-3 items-center">
             <h2 className="grad text-3xl">TrackTrekker</h2>
-            <button
-                className={`${currentPage === "home" && "underline"}`}
-                onClick={() => {
-                    toHome();
-                    setPromptPage("home");
-                }}
-            >
-                Home
-            </button>
-            <button
-                className={`${currentPage === "viewSearch" && "underline"}`}
-                onClick={toSearch}
-            >
-                Current Search
-            </button>
-            <button
-                className={`${currentPage === "about" && "underline"}`}
-                onClick={toAbout}
-            >
-                About
-            </button>
+            <div className="flex flex-col gap-[2px]">
+                <button
+                    className={`${currentPage === "home" && "grad"}`}
+                    onClick={() => {
+                        toHome();
+                        setPromptPage("home");
+                    }}
+                >
+                    Home
+                </button>
+                <button
+                    className={`${currentPage === "about" && "underline grad"}`}
+                    onClick={toAbout}
+                >
+                    About
+                </button>
+                {token !== null && (
+                    <button
+                        className={`${
+                            currentPage === "viewSearch" && "underline grad"
+                        }`}
+                        onClick={toSearch}
+                    >
+                        Current Search
+                    </button>
+                )}
+            </div>
         </div>
     );
 };
