@@ -113,7 +113,7 @@ const SongDisplay = ({
                         </div>
                     </div>
                 </div>
-                <div className="flex xs:flex-col align-center  gap-2 items-center">
+                <div className="flex xs:flex-col align-center flex-wrap gap-2 items-center justify-center xs:justify-end xs:items-end">
                     {type === 1 && !selected && (
                         <button
                             className="buttonselect"
@@ -136,28 +136,26 @@ const SongDisplay = ({
                             <span>&times;</span>
                         </button>
                     )}
-                    {!showStats && (type === 1 || type === 3) && (
-                        <button
-                            className="button1 w-[150pxs]"
-                            type="button"
-                            onClick={() => setThisShowStats(!thisShowStats)}
-                        >
-                            <span className="button1-content">
-                                {thisShowStats ? "Hide" : "Stats"}
-                            </span>
-                        </button>
-                    )}
                     {songInfo.preview_url && (type === 1 || type === 3) && (
                         <button
-                            className="button1 w-[150pxs]"
+                            className="buttonprev"
                             type="button"
                             onClick={playPreview}
                         >
-                            <span className="button1-content">
+                            <span>
                                 {currentPlayingId === songInfo.id
                                     ? "Pause"
                                     : "Preview"}
                             </span>
+                        </button>
+                    )}
+                    {!showStats && (type === 1 || type === 3) && (
+                        <button
+                            className="buttonprev"
+                            type="button"
+                            onClick={() => setThisShowStats(!thisShowStats)}
+                        >
+                            <span>{thisShowStats ? "Hide" : "Stats"}</span>
                         </button>
                     )}
                 </div>
