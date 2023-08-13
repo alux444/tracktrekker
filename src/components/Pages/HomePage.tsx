@@ -13,6 +13,7 @@ import { RecommendForm } from "../../interfaces/recommendForm";
 import ResultsPage from "../ResultsPage";
 import LandingPage from "./LandingPage";
 import PromptScreen from "./PromptScreen";
+import { PromptPageContext } from "./Views";
 
 export const StatsContext = createContext<{
     showStats: boolean;
@@ -24,11 +25,7 @@ export const StatsContext = createContext<{
 
 const HomePage = () => {
     const { token } = useContext(TokenContext);
-    const [songSelected, setSongSelected] = useState<boolean>(false);
-    const [artistSelected, setArtistSelected] = useState<boolean>(false);
-    const [genreSelected, setGenreSelected] = useState<boolean>(false);
-    const [extraSelected, setExtraSelected] = useState<boolean>(false);
-    const [completedQuery, setCompletedQuery] = useState<boolean>(false);
+    const { promptPage, setPromptPage } = useContext(PromptPageContext);
     const [currentQuery, setCurrentQuery] = useState<RecommendForm>();
     const [showStats, setShowStats] = useState<boolean>(false);
 
@@ -49,24 +46,12 @@ const HomePage = () => {
         };
 
         setCurrentQuery(form);
-        setCompletedQuery(true);
+        setPromptPage("results");
         console.log(form);
     };
 
-    const alternateSongSelect = () => {
-        setSongSelected(!songSelected);
-    };
-
-    const alternateArtistSelect = () => {
-        setArtistSelected(!artistSelected);
-    };
-
-    const alternateGenreSelected = () => {
-        setGenreSelected(!genreSelected);
-    };
-
-    const alternateExtraSelected = () => {
-        setExtraSelected(!extraSelected);
+    const returnToHome = () => {
+        setPromptPage("home");
     };
 
     if (token === null) {
@@ -78,36 +63,33 @@ const HomePage = () => {
             <div className="w-[80%] h-[80vh] w-full p-4">
                 <div className="flex h-full w-full">
                     <div className="w-[100vw] h-full flex justify-center items-center">
-                        {!songSelected &&
-                            !artistSelected &&
-                            !genreSelected &&
-                            !extraSelected &&
-                            !completedQuery && (
-                                <PromptScreen
-                                    setArtist={() => setArtistSelected(true)}
-                                    setGenre={() => setGenreSelected(true)}
-                                    setSong={() => setSongSelected(true)}
-                                    setSubmit={generateForm}
-                                />
-                            )}
-                        {songSelected && (
-                            <AskForSongs submit={alternateSongSelect} />
-                        )}
-                        {artistSelected && (
-                            <AskForArtists submit={alternateArtistSelect} />
-                        )}
-                        {genreSelected && (
-                            <AskForGenres submit={alternateGenreSelected} />
-                        )}
-                        {extraSelected && (
-                            <AskForExtra submit={alternateExtraSelected} />
-                        )}
-                        {completedQuery && currentQuery !== undefined && (
-                            <ResultsPage
-                                query={currentQuery}
-                                goBack={() => setCompletedQuery(false)}
+                        {promptPage === "home" && (
+                            <PromptScreen
+                                setArtist={() => setPromptPage("artists")}
+                                setGenre={() => setPromptPage("genres")}
+                                setSong={() => setPromptPage("songs")}
+                                setSubmit={generateForm}
                             />
                         )}
+                        {promptPage === "songs" && (
+                            <AskForSongs submit={returnToHome} />
+                        )}
+                        {promptPage === "artists" && (
+                            <AskForArtists submit={returnToHome} />
+                        )}
+                        {promptPage === "genres" && (
+                            <AskForGenres submit={returnToHome} />
+                        )}
+                        {promptPage === "extras" && (
+                            <AskForExtra submit={returnToHome} />
+                        )}
+                        {promptPage === "results" &&
+                            currentQuery !== undefined && (
+                                <ResultsPage
+                                    query={currentQuery}
+                                    goBack={returnToHome}
+                                />
+                            )}
                     </div>
                 </div>
             </div>
