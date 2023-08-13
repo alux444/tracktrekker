@@ -30,7 +30,7 @@ const LandingPage = () => {
                 </button>
             </div>
             <div>
-                <img src={hero} className="h-[50vh]" />
+                <img src={hero} className="h-[35vh] lg:h-[50vh]" />
             </div>
         </div>
     );

@@ -15,34 +15,35 @@ const PromptScreen: React.FC<PromptProps> = ({
 }) => {
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
-            <div className="flex flex-col flex-wrap text-center p-4">
-                <h2 className="grad text-xl">
-                    Select at least one song, artist or genre.
-                </h2>
-                <h2 className="grad text-lg">
-                    Then, click results to get song recommendations!
-                </h2>
-            </div>
-            <div className="flex gap-2 flex-wrap justify-center">
-                <button
-                    className="button2 border-purple-500 border-[1px]"
-                    onClick={setSong}
-                >
-                    <span className="button2-content grad">Songs</span>
-                </button>
-                <button
-                    className="button2 border-purple-500 border-[1px] "
-                    onClick={setArtist}
-                >
-                    <span className="button2-content grad">Artists</span>
-                </button>
-                <button
-                    className="button2 border-purple-500 border-[1px]"
-                    onClick={setGenre}
-                >
-                    <span className="button2-content grad">Genres</span>
-                </button>
-                {/* <button
+            <div>
+                <div className="flex flex-col flex-wrap text-center p-3">
+                    <h2 className="grad text-lg">
+                        Select at least one song, artist or genre.
+                    </h2>
+                    <h2 className="grad text-md">
+                        Then, click results to get song recommendations!
+                    </h2>
+                </div>
+                <div className="flex gap-2 flex-wrap justify-center">
+                    <button
+                        className="button2 border-purple-500 border-[1px]"
+                        onClick={setSong}
+                    >
+                        <span className="button2-content grad">Songs</span>
+                    </button>
+                    <button
+                        className="button2 border-purple-500 border-[1px] "
+                        onClick={setArtist}
+                    >
+                        <span className="button2-content grad">Artists</span>
+                    </button>
+                    <button
+                        className="button2 border-purple-500 border-[1px]"
+                        onClick={setGenre}
+                    >
+                        <span className="button2-content grad">Genres</span>
+                    </button>
+                    {/* <button
     className="button1"
     onClick={() => setExtraSelected(true)}
 >
@@ -50,6 +51,7 @@ const PromptScreen: React.FC<PromptProps> = ({
         Extra
     </span>
 </button> */}
+                </div>
             </div>
             <button className="button1" onClick={setSubmit}>
                 <span className="button1-content">Get results</span>

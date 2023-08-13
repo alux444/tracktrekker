@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
 import CurrentSearchPage from "./CurrentSearchPage";
@@ -43,6 +43,12 @@ const Views = () => {
     const [currentPlayingId, setCurrentPlayingId] = useState<string | null>(
         null
     );
+
+    useEffect(() => {
+        if (audio !== null) {
+            audio.play();
+        }
+    }, [audio]);
 
     const toHome = () => {
         setCurrentPage("home");
