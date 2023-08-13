@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { RecommendForm } from "../interfaces/recommendForm";
 import { SongInfo } from "../interfaces/songInfo";
 import useSpotify from "../utils/useSpotify";
@@ -16,6 +16,15 @@ const ResultsPage = ({
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
+
+    const topRef = useRef(null);
+
+    function scrollToTop(): void {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
 
     useEffect(() => {
         getSongs();
@@ -46,8 +55,8 @@ const ResultsPage = ({
     ));
 
     return (
-        <div className="h-full flex flex-col items-center align-center w-full gap-2">
-            <button className="button1" onClick={goBack}>
+        <div className="h-full flex flex-col items-center align-center gap-2">
+            <button className="button1" onClick={goBack} ref={topRef}>
                 <span className="button1-content">Back</span>
             </button>
             <div className="flex gap-2">
@@ -68,8 +77,17 @@ const ResultsPage = ({
                 </button>
             </div>
             {songs.length > 0 ? (
-                <div className="p-5 flex w-full flex-col gap-2 h-[40vh] overflow-auto">
-                    {results}
+                <div className="flex flex-col justify-center w-[100vw] items-center">
+                    <div className="p-5 flex w-full flex-col gap-2">
+                        {results}
+                    </div>
+                    <button
+                        className="button1"
+                        onClick={scrollToTop}
+                        ref={topRef}
+                    >
+                        <span className="button1-content">Top</span>
+                    </button>
                 </div>
             ) : (
                 <div>

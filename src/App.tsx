@@ -73,7 +73,9 @@ function App() {
                             <GenreContext.Provider
                                 value={{ genres, setGenres }}
                             >
-                                <Views />
+                                <div className="flex justify-center align-center items-center min-h-screen w-screen overflow-auto">
+                                    <Views />
+                                </div>
                             </GenreContext.Provider>
                         </ArtistInfoContext.Provider>
                     </SongsInfoContext.Provider>

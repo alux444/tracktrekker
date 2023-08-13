@@ -18,7 +18,7 @@ const NavBar: React.FC<NavBarProps> = ({
     const { setPromptPage } = useContext(PromptPageContext);
     const { token } = useContext(TokenContext);
     return (
-        <div className="flex gap-8 flex-wrap justify-center mt-3 items-center">
+        <div className="flex gap-8 flex-wrap justify-center mt-7 items-center">
             <h2 className="grad text-3xl">TrackTrekker</h2>
             <div className="flex flex-col gap-[2px]">
                 <button

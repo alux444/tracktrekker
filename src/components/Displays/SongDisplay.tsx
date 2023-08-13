@@ -84,7 +84,7 @@ const SongDisplay = ({
     return (
         <div className={`md:flex justify-center w-full text-[rgba(0,0,0,0.8)]`}>
             <div
-                className={`flex justify-between flex-col xs:flex-row items-center p-5 w-full lg:w-[40%] md:w-[70%] border-[${
+                className={`flex justify-between flex-col xs:flex-row items-center p-3 w-full lg:w-[50%] md:w-[70%] border-[${
                     type === 2 ? "0px" : "1px"
                 }] rounded-[30px] backdrop-blur-3xl`}
             >
@@ -113,7 +113,7 @@ const SongDisplay = ({
                         </div>
                     </div>
                 </div>
-                <div className="flex xs:flex-col align-center flex-wrap gap-2 items-center justify-center xs:justify-end xs:items-end">
+                <div className="flex xs:flex-col xl:flex-row align-center flex-wrap gap-2 items-center justify-center xs:justify-end xs:items-end">
                     {type === 1 && !selected && (
                         <button
                             className="buttonselect"
@@ -143,9 +143,7 @@ const SongDisplay = ({
                             onClick={playPreview}
                         >
                             <span>
-                                {currentPlayingId === songInfo.id
-                                    ? "Pause"
-                                    : "Preview"}
+                                {currentPlayingId === songInfo.id ? "⏸" : "▶️"}
                             </span>
                         </button>
                     )}

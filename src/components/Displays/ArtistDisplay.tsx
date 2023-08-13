@@ -56,7 +56,7 @@ const ArtistDisplay = ({
                 )}
                 {!showStats && type === 1 && (
                     <button
-                        className="button1 w-[150pxs]"
+                        className="buttonprev"
                         type="button"
                         onClick={() => setThisShowStats(!thisShowStats)}
                     >
