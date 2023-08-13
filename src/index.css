@@ -233,3 +233,28 @@
     background-clip: text;
     color: transparent;
 }
+
+.input {
+    width: 280px;
+    height: 40px;
+    line-height: 28px;
+    padding: 1rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: 0.3s ease;
+}
+
+.input::placeholder {
+    color: #9e9ea7;
+}
+
+.input:focus,
+input:hover {
+    outline: none;
+    border-color: rgba(147, 76, 234, 0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(200, 76, 234, 0.1);
+}

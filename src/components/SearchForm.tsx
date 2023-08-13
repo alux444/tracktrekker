@@ -52,25 +52,33 @@ const SearchForm = ({ type }: { type: string }) => {
     return (
         <div className="flex flex-col p-2 w-[90vw]">
             <form
-                className="flex flex-col gap-4 items-center"
+                className="flex flex-col gap-2 items-center"
                 onSubmit={searchQuery}
             >
                 <input
-                    className="border-2 w-[280px]"
+                    placeholder={
+                        type === "track"
+                            ? "Search for Song"
+                            : "Search for Artist"
+                    }
+                    className="input w-[280px]"
                     type="text"
                     value={query}
                     onChange={handleQueryChange}
-                />
-                <div className="flex gap-2 justify-center">
-                    <button className="button1 w-[150pxs] mb-4" type="submit">
-                        <span className="button1-content">Search</span>
+                ></input>
+                <div className="flex gap-2 justify-center mb-2">
+                    <button
+                        className="button2 border-purple-500 border-[1px]"
+                        type="submit"
+                    >
+                        <span className="grad">Search</span>
                     </button>
                     <button
-                        className="button1 w-[150pxs] mb-4"
+                        className="button2 border-purple-500 border-[1px]"
                         type="button"
                         onClick={() => setShowStats(!showStats)}
                     >
-                        <span className="button1-content">
+                        <span className="grad">
                             {showStats ? "Hide Stats" : "Show Stats"}
                         </span>
                     </button>
@@ -78,13 +86,13 @@ const SearchForm = ({ type }: { type: string }) => {
             </form>
 
             {type === "track" && uniqueTracks.length > 0 && (
-                <div className="p-5 flex flex-col h-[50vh] overflow-auto gap-3">
+                <div className="p-5 flex flex-col h-[45vh] overflow-auto gap-3">
                     {tracks}
                 </div>
             )}
 
             {type !== "track" && artistReults.length > 0 && (
-                <div className="flex flex-wrap gap-3 justify-center h-[50vh] overflow-auto">
+                <div className="flex flex-wrap gap-3 h-[45vh] justify-center overflow-auto">
                     {artists}
                 </div>
             )}
