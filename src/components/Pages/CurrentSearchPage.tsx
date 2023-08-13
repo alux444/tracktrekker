@@ -3,10 +3,8 @@ import { ArtistInfoContext, GenreContext, SongsInfoContext } from "../../App";
 import SongDisplay from "../Displays/SongDisplay";
 import ArtistDisplay from "../Displays/ArtistDisplay";
 import useManageQuery from "../../utils/useManageQuery";
-import { PromptPageContext } from "./Views";
 
 const CurrentSearchPage = () => {
-    const { setCurrentPage } = useContext(PromptPageContext);
     const { songs } = useContext(SongsInfoContext);
     const { artists } = useContext(ArtistInfoContext);
     const { genres } = useContext(GenreContext);
