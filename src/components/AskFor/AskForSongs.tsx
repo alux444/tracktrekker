@@ -19,11 +19,18 @@ const AskForSongs = ({ submit }: AskForSongsProps) => {
             <h2 className="text-lg grad">Select Songs</h2>
             <SearchForm type="track" />
             <div className="flex gap-2">
-                <button className="button1" onClick={submit}>
-                    <span className="button1-content">Submit</span>
+                <button
+                    className="button2 border-purple-500 border-[1px] "
+                    onClick={scrollToTop}
+                    ref={topRef}
+                >
+                    <span className="grad">Top</span>
                 </button>
-                <button className="button1" onClick={scrollToTop} ref={topRef}>
-                    <span className="button1-content">Top</span>
+                <button
+                    className="button2 border-purple-500 border-[1px] "
+                    onClick={submit}
+                >
+                    <span className="grad">Hide</span>
                 </button>
             </div>
         </div>

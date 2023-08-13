@@ -34,8 +34,11 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit }) => {
                 onChange={(option) => setGenres(option)}
             />
             <div className="flex gap-2 mt-3">
-                <button className="button1" onClick={submit}>
-                    <span className="button1-content">Submit</span>
+                <button
+                    className="button2 border-purple-500 border-[1px] "
+                    onClick={submit}
+                >
+                    <span className="grad">Hide</span>
                 </button>
             </div>
         </div>

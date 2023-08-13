@@ -60,17 +60,17 @@ const HomePage = () => {
 
     return (
         <StatsContext.Provider value={{ showStats, setShowStats }}>
-            <div className="w-[80%] w-full my-8">
+            <div className="w-[80%] w-full mt-8">
                 <div className="flex w-full">
-                    <div className="w-[100vw] flex justify-center items-center">
-                        {promptPage === "home" && (
+                    <div className="w-[100vw] flex flex-col justify-center items-center">
+                        {
                             <PromptScreen
                                 setArtist={() => setPromptPage("artists")}
                                 setGenre={() => setPromptPage("genres")}
                                 setSong={() => setPromptPage("songs")}
                                 setSubmit={generateForm}
                             />
-                        )}
+                        }
                         {promptPage === "songs" && (
                             <AskForSongs submit={returnToHome} />
                         )}

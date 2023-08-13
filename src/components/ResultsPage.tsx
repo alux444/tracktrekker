@@ -55,11 +55,15 @@ const ResultsPage = ({
     ));
 
     return (
-        <div className="h-full flex flex-col items-center align-center gap-2">
-            <button className="button1" onClick={goBack} ref={topRef}>
-                <span className="button1-content">Back</span>
-            </button>
+        <div className="h-full flex flex-col items-center align-center gap-2 mt-3">
             <div className="flex gap-2">
+                <button
+                    className="button2 border-purple-500 border-[1px]"
+                    onClick={goBack}
+                    ref={topRef}
+                >
+                    <span className="grad">Hide</span>
+                </button>
                 <button
                     className="button2 border-purple-500 border-[1px]"
                     onClick={getSongs}

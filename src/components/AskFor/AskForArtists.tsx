@@ -22,11 +22,18 @@ const AskForArtists: React.FC<AskForArtistsProps> = ({ submit }) => {
             <h2 className="text-lg grad">Select Artists</h2>
             <SearchForm type="artist" />
             <div className="flex gap-2">
-                <button className="button1" onClick={submit}>
-                    <span className="button1-content">Submit</span>
+                <button
+                    className="button2 border-purple-500 border-[1px] "
+                    onClick={scrollToTop}
+                    ref={topRef}
+                >
+                    <span className="grad">Top</span>
                 </button>
-                <button className="button1" onClick={scrollToTop} ref={topRef}>
-                    <span className="button1-content">Top</span>
+                <button
+                    className="button2 border-purple-500 border-[1px] "
+                    onClick={submit}
+                >
+                    <span className="grad">Hide</span>
                 </button>
             </div>
         </div>

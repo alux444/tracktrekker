@@ -26,6 +26,12 @@ const SearchForm = ({ type }: { type: string }) => {
         setQuery(e.target.value);
     };
 
+    const resetSearch = () => {
+        setQuery("");
+        setTrackResults([]);
+        setArtistResults([]);
+    };
+
     const uniqueTracks = trackResults
         ? trackResults.filter(
               (song, index, self) =>
@@ -81,6 +87,13 @@ const SearchForm = ({ type }: { type: string }) => {
                         <span className="grad">
                             {showStats ? "Hide Stats" : "Show Stats"}
                         </span>
+                    </button>
+                    <button
+                        className="button2 border-purple-500 border-[1px]"
+                        type="button"
+                        onClick={resetSearch}
+                    >
+                        <span className="grad">Reset</span>
                     </button>
                 </div>
             </form>
