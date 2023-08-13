@@ -6,6 +6,12 @@ import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
 import { StatsContext } from "../Pages/HomePage";
 import { AudioContext } from "../Pages/Views";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const SongDisplay = ({
     songInfo,
@@ -122,7 +128,9 @@ const SongDisplay = ({
                                 setSelected(true);
                             }}
                         >
-                            <span>+</span>
+                            <span>
+                                <AddIcon />
+                            </span>
                         </button>
                     )}{" "}
                     {(type === 2 || selected) && (
@@ -133,7 +141,9 @@ const SongDisplay = ({
                                 setSelected(false);
                             }}
                         >
-                            <span>&times;</span>
+                            <span>
+                                <ClearIcon />
+                            </span>
                         </button>
                     )}
                     {songInfo.preview_url && (type === 1 || type === 3) && (
@@ -143,7 +153,11 @@ const SongDisplay = ({
                             onClick={playPreview}
                         >
                             <span>
-                                {currentPlayingId === songInfo.id ? "⏸" : "▶️"}
+                                {currentPlayingId === songInfo.id ? (
+                                    <PauseIcon />
+                                ) : (
+                                    <PlayArrowIcon />
+                                )}
                             </span>
                         </button>
                     )}
@@ -153,7 +167,13 @@ const SongDisplay = ({
                             type="button"
                             onClick={() => setThisShowStats(!thisShowStats)}
                         >
-                            <span>{thisShowStats ? "Hide" : "Stats"}</span>
+                            <span>
+                                {thisShowStats ? (
+                                    <VisibilityOffIcon />
+                                ) : (
+                                    <BarChartIcon />
+                                )}
+                            </span>
                         </button>
                     )}
                 </div>

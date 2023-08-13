@@ -68,7 +68,7 @@ const Views = () => {
                     setCurrentPlayingId,
                 }}
             >
-                <div className="flex gap-2 flex-col justify-center align-center items-center h-fit w-screen text-xs md:text-sm lg:text-md">
+                <div className="flex gap-2 flex-col justify-between border-2 min-h-screen items-center h-fit w-screen text-xs md:text-sm lg:text-md">
                     <NavBar
                         currentPage={currentPage}
                         toHome={toHome}

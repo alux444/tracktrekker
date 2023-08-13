@@ -30,7 +30,7 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const options = optionsRaw.filter((option) =>
-        option.label.includes(search)
+        option.label.includes(search.toLowerCase())
     );
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {

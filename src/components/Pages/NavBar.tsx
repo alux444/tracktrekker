@@ -18,11 +18,14 @@ const NavBar: React.FC<NavBarProps> = ({
     const { setPromptPage } = useContext(PromptPageContext);
     const { token } = useContext(TokenContext);
     return (
-        <div className="flex gap-8 flex-wrap justify-center mt-7 items-center">
+        <div className="flex gap-8 flex-wrap justify-center mt-7 mb-4 items-center">
             <h2 className="grad text-3xl">TrackTrekker</h2>
-            <div className="flex flex-col gap-[2px]">
+            <div className="flex flex-col gap-[3px]">
                 <button
-                    className={`${currentPage === "home" && "grad"}`}
+                    className={`${
+                        currentPage === "home" &&
+                        "grad border-purple-500 border-[1px] p-1 rounded-[10px]"
+                    }`}
                     onClick={() => {
                         toHome();
                         setPromptPage("home");
@@ -31,7 +34,10 @@ const NavBar: React.FC<NavBarProps> = ({
                     Home
                 </button>
                 <button
-                    className={`${currentPage === "about" && "underline grad"}`}
+                    className={`${
+                        currentPage === "about" &&
+                        "grad border-purple-500 border-[1px] p-1 rounded-[10px]"
+                    }`}
                     onClick={toAbout}
                 >
                     About
@@ -39,7 +45,8 @@ const NavBar: React.FC<NavBarProps> = ({
                 {token !== null && (
                     <button
                         className={`${
-                            currentPage === "viewSearch" && "underline grad"
+                            currentPage === "viewSearch" &&
+                            "grad border-purple-500 border-[1px] p-1 rounded-[10px]"
                         }`}
                         onClick={toSearch}
                     >

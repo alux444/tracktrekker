@@ -3,6 +3,10 @@ import { ArtistInfo } from "../../interfaces/artistInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import FeatureLevel from "./FeatureLevel";
 import { StatsContext } from "../Pages/HomePage";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const ArtistDisplay = ({
     artist,
@@ -40,7 +44,9 @@ const ArtistDisplay = ({
                             setSelected(true);
                         }}
                     >
-                        <span>+</span>
+                        <span>
+                            <AddIcon />
+                        </span>
                     </button>
                 )}
                 {(!fromSearch || selected) && (
@@ -51,7 +57,9 @@ const ArtistDisplay = ({
                             setSelected(false);
                         }}
                     >
-                        <span>&times;</span>
+                        <span>
+                            <ClearIcon />
+                        </span>
                     </button>
                 )}
                 {!showStats && type === 1 && (
@@ -61,7 +69,11 @@ const ArtistDisplay = ({
                         onClick={() => setThisShowStats(!thisShowStats)}
                     >
                         <span className="button1-content">
-                            {thisShowStats ? "Hide" : "Stats"}
+                            {thisShowStats ? (
+                                <VisibilityOffIcon />
+                            ) : (
+                                <BarChartIcon />
+                            )}
                         </span>
                     </button>
                 )}

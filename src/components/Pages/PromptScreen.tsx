@@ -14,8 +14,8 @@ const PromptScreen: React.FC<PromptProps> = ({
     setSubmit,
 }) => {
     return (
-        <div className="flex flex-wrap flex-col justify-center align-center items-center lg:gap-10 gap-5 w-full">
-            <div className="flex flex-col flex-wrap text-center">
+        <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
+            <div className="flex flex-col flex-wrap text-center p-4">
                 <h2 className="grad text-xl">
                     Select at least one song, artist or genre.
                 </h2>
