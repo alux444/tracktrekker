@@ -60,7 +60,7 @@ const HomePage = () => {
 
     return (
         <StatsContext.Provider value={{ showStats, setShowStats }}>
-            <div className="w-[80%] w-full mt-8">
+            <div className="w-full mt-8">
                 <div className="flex w-full">
                     <div className="w-[100vw] flex flex-col justify-center items-center">
                         {
@@ -68,6 +68,7 @@ const HomePage = () => {
                                 setArtist={() => setPromptPage("artists")}
                                 setGenre={() => setPromptPage("genres")}
                                 setSong={() => setPromptPage("songs")}
+                                setExtra={() => setPromptPage("extras")}
                                 setSubmit={generateForm}
                             />
                         }

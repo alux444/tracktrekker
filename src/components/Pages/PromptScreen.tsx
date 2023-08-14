@@ -5,6 +5,7 @@ type PromptProps = {
     setArtist: () => void;
     setGenre: () => void;
     setSubmit: () => void;
+    setExtra: () => void;
 };
 
 const PromptScreen: React.FC<PromptProps> = ({
@@ -12,6 +13,7 @@ const PromptScreen: React.FC<PromptProps> = ({
     setArtist,
     setGenre,
     setSubmit,
+    setExtra,
 }) => {
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
@@ -43,14 +45,12 @@ const PromptScreen: React.FC<PromptProps> = ({
                     >
                         <span className="button2-content grad">Genres</span>
                     </button>
-                    {/* <button
-    className="button1"
-    onClick={() => setExtraSelected(true)}
->
-    <span className="button1-content">
-        Extra
-    </span>
-</button> */}
+                    <button
+                        className="button2 border-purple-500 border-[1px]"
+                        onClick={setExtra}
+                    >
+                        <span className="grad">Extra</span>
+                    </button>
                 </div>
             </div>
             <button className="button1" onClick={setSubmit}>
