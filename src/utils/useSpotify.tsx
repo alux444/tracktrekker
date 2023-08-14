@@ -2,6 +2,7 @@ import axios from "axios";
 import { RecommendForm } from "../interfaces/recommendForm";
 import { useContext } from "react";
 import { TokenContext } from "../App";
+import { ExtraInfo } from "../interfaces/extrasInfo";
 const useSpotify = () => {
     const { token } = useContext(TokenContext);
 
@@ -40,6 +41,19 @@ const useSpotify = () => {
     };
 
     const getRecommended = async (songForm: RecommendForm) => {
+        const extraParams: { [key: string]: number } = {};
+
+        for (const key in songForm.extras) {
+            if (key in songForm.extras) {
+                const value = songForm.extras[key as keyof ExtraInfo];
+                if (value) {
+                    extraParams[`min_${key}`] = value.min;
+                    extraParams[`max_${key}`] = value.max;
+                    extraParams[`target_${key}`] = value.target;
+                }
+            }
+        }
+
         const url = "https://api.spotify.com/v1/recommendations";
 
         const headers = {
@@ -59,12 +73,14 @@ const useSpotify = () => {
                 return 1;
             }
 
-            const query = {
-                seed_tracks: arrayToString(songForm.seed_tracks),
-                seed_artists: arrayToString(songForm.seed_artists),
-                seed_genres: arrayToString(songForm.seed_genres),
-                // You can add other parameters here as needed
-            };
+            const query = Object.assign(
+                {
+                    seed_tracks: arrayToString(songForm.seed_tracks),
+                    seed_artists: arrayToString(songForm.seed_artists),
+                    seed_genres: arrayToString(songForm.seed_genres),
+                },
+                extraParams
+            );
             console.log(query);
 
             const response = await axios.get(url, {

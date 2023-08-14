@@ -1,6 +1,6 @@
 const Footer = () => {
     return (
-        <div className="p-[10px] mb-3">
+        <div className="p-[10px] p-3">
             <hr></hr>
             <div className="flex justify-center">
                 <small>© 2023 alux444</small>

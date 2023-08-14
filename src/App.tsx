@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { SongInfo } from "./interfaces/songInfo";
 import { ArtistInfo } from "./interfaces/artistInfo";
+import { ExtraInfo } from "./interfaces/extrasInfo";
 import { SelectOption } from "./components/Multiselect/Select";
 import Views from "./components/Pages/Views";
 
@@ -52,6 +53,14 @@ export const GenreContext = createContext<{
     setGenres: () => {},
 });
 
+export const ExtrasContext = createContext<{
+    extras: ExtraInfo;
+    setExtras: React.Dispatch<React.SetStateAction<ExtraInfo>>;
+}>({
+    extras: {},
+    setExtras: () => {},
+});
+
 function App() {
     const [token, setToken] = useState<string | null>(null);
     const [songSeeds, setSongSeeds] = useState<string[]>([]);
@@ -59,6 +68,7 @@ function App() {
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [artists, setArtists] = useState<ArtistInfo[]>([]);
     const [genres, setGenres] = useState<SelectOption[]>([]);
+    const [extras, setExtras] = useState<ExtraInfo>({});
 
     return (
         <TokenContext.Provider value={{ token, setToken }}>
@@ -73,9 +83,13 @@ function App() {
                             <GenreContext.Provider
                                 value={{ genres, setGenres }}
                             >
-                                <div className="flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
-                                    <Views />
-                                </div>
+                                <ExtrasContext.Provider
+                                    value={{ extras, setExtras }}
+                                >
+                                    <div className="flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
+                                        <Views />
+                                    </div>
+                                </ExtrasContext.Provider>
                             </GenreContext.Provider>
                         </ArtistInfoContext.Provider>
                     </SongsInfoContext.Provider>

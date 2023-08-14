@@ -1,30 +1,31 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 interface CriteriaInputProps {
-    label: string;
     value: number | undefined;
-    changeFunction: (value: number | undefined) => void;
+    changeFunction: (e: ChangeEvent<HTMLInputElement>) => void;
     type: "Min" | "Max" | "Target";
+    max: number;
 }
 
 const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
-    label,
     value,
     changeFunction,
     type,
+    max,
 }) => {
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const inputValue = parseInt(e.target.value);
-        changeFunction(inputValue || undefined);
-    };
     return (
-        <div>
+        <div className="border-[1px] p-1 rounded-[10px] flex flex-col justify-center text-center">
+            <p>
+                {type} {value}
+            </p>
             <input
                 className="border-[1px]"
-                type="number"
-                placeholder={`${type} ${label}`}
-                value={value || ""}
-                onChange={handleChange}
+                min={0}
+                max={max}
+                step={max / 100}
+                type="range"
+                value={value}
+                onChange={changeFunction}
             />
         </div>
     );

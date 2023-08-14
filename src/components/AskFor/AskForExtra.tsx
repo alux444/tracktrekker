@@ -1,39 +1,9 @@
-import React, { useState } from "react";
-import ExtraInputPattern from "./ExtraInputPattern";
+import React from "react";
+import ExtraCriteriaTriple from "./ExtraCriteriaTriple";
 
 interface AskForExtrasProps {
     submit: () => void;
 }
-
-type ExtraCriteria = {
-    minAcoustic?: number;
-    maxAcoustic?: number;
-    targAcoustic?: number;
-    minDance?: number;
-    maxDance?: number;
-    targDance?: number;
-    minEnergy?: number;
-    maxEnergy?: number;
-    targEnergy?: number;
-    minInstrum?: number;
-    maxInstrum?: number;
-    targInstrum?: number;
-    minLively?: number;
-    maxLively?: number;
-    targLively?: number;
-    minLoudness?: number;
-    maxLoudness?: number;
-    targLoudness?: number;
-    minPopularity?: number;
-    maxPopularity?: number;
-    targPopularity?: number;
-    minSpeech?: number;
-    maxSpeech?: number;
-    targSpeech?: number;
-    maxValence?: number;
-    minValence?: number;
-    targValence?: number;
-};
 
 const descriptions = {
     acousticness:
@@ -57,80 +27,57 @@ const descriptions = {
 };
 
 const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
-    const [form, setForm] = useState<ExtraCriteria>({});
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [currentDescription, setCurrentDescription] = useState("");
-
-    const handleChangeZeroToOne = (
-        criteria: keyof ExtraCriteria,
-        value: number | undefined
-    ) => {
-        setForm((prevForm) => ({
-            ...prevForm,
-            [criteria]: value,
-        }));
-    };
-
-    const handleDialogOpen = (description: string) => {
-        setCurrentDescription(description);
-        setDialogOpen(true);
-    };
-
-    const handleDialogClose = () => {
-        setDialogOpen(false);
-    };
-
     return (
         <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
-            <form className="flex flex-col gap-2">
-                <div className="flex gap-2">
-                    <ExtraInputPattern
-                        label="Acoustic"
-                        value={form.minAcoustic}
-                        changeFunction={(val) =>
-                            handleChangeZeroToOne("minAcoustic", val)
-                        }
-                        type="Min"
-                    />
-                    <ExtraInputPattern
-                        label="Acoustic"
-                        value={form.maxAcoustic}
-                        changeFunction={(val) =>
-                            handleChangeZeroToOne("maxAcoustic", val)
-                        }
-                        type="Max"
-                    />
-                    <ExtraInputPattern
-                        label="Acoustic"
-                        value={form.targAcoustic}
-                        changeFunction={(val) =>
-                            handleChangeZeroToOne("targAcoustic", val)
-                        }
-                        type="Target"
-                    />
-                    <button
-                        type="button"
-                        onClick={() =>
-                            handleDialogOpen(descriptions.acousticness)
-                        }
-                    >
-                        ?
-                    </button>
-                </div>
-            </form>
-            <button className="button1" onClick={submit}>
-                <span className="button1-content">Submit</span>
-            </button>
-            <dialog
-                className="border-[1px] p-2"
-                open={dialogOpen}
-                onClose={handleDialogClose}
+            <h2 className="text-lg grad">Extra Criteria (Optional)</h2>
+            <button
+                className="button2 border-[1px] border-purple-500"
+                onClick={submit}
             >
-                <div className="dialog-content flex gap-2 items-center align-center justify-center">
-                    <p>{currentDescription}</p>
-                    <button onClick={handleDialogClose}>&times;</button>
-                </div>
-            </dialog>
+                <span className="grad">Hide</span>
+            </button>
+            <div className="flex flex-col gap-2">
+                <ExtraCriteriaTriple
+                    criteriaName="popularity"
+                    maxValue={100}
+                    dialog={descriptions.popularity}
+                />
+                <ExtraCriteriaTriple
+                    criteriaName="acousticness"
+                    maxValue={1}
+                    dialog={descriptions.acousticness}
+                />
+                <ExtraCriteriaTriple
+                    criteriaName="danceability"
+                    maxValue={1}
+                    dialog={descriptions.danceability}
+                />
+                <ExtraCriteriaTriple
+                    criteriaName="energy"
+                    maxValue={1}
+                    dialog={descriptions.energy}
+                />
+                <ExtraCriteriaTriple
+                    criteriaName="instrumentalness"
+                    maxValue={1}
+                    dialog={descriptions.instrumentalness}
+                />
+                <ExtraCriteriaTriple
+                    criteriaName="liveliness"
+                    maxValue={1}
+                    dialog={descriptions.liveness}
+                />
+                <ExtraCriteriaTriple
+                    criteriaName="speechiness"
+                    maxValue={1}
+                    dialog={descriptions.speechiness}
+                />
+                <ExtraCriteriaTriple
+                    criteriaName="valence"
+                    maxValue={1}
+                    dialog={descriptions.valence}
+                />
+            </div>
         </div>
     );
 };

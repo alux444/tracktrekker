@@ -1,6 +1,7 @@
 import { SetStateAction, createContext, useContext, useState } from "react";
 import {
     ArtistSeedContext,
+    ExtrasContext,
     GenreContext,
     SongSeedContext,
     TokenContext,
@@ -32,6 +33,7 @@ const HomePage = () => {
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
+    const { extras } = useContext(ExtrasContext);
 
     const generateForm = () => {
         const genreValues: string[] = [];
@@ -43,6 +45,7 @@ const HomePage = () => {
             seed_tracks: songSeeds,
             seed_artists: artistSeeds,
             seed_genres: genreValues,
+            extras: extras,
         };
 
         setCurrentQuery(form);
@@ -60,7 +63,7 @@ const HomePage = () => {
 
     return (
         <StatsContext.Provider value={{ showStats, setShowStats }}>
-            <div className="w-[80%] w-full mt-8">
+            <div className="w-full mt-8">
                 <div className="flex w-full">
                     <div className="w-[100vw] flex flex-col justify-center items-center">
                         {
@@ -68,6 +71,7 @@ const HomePage = () => {
                                 setArtist={() => setPromptPage("artists")}
                                 setGenre={() => setPromptPage("genres")}
                                 setSong={() => setPromptPage("songs")}
+                                setExtra={() => setPromptPage("extras")}
                                 setSubmit={generateForm}
                             />
                         }

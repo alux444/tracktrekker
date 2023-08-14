@@ -17,7 +17,7 @@ const LandingPage = () => {
     };
 
     return (
-        <div className="p-5 w-[80vw] gap-5 items-center flex flex-col md:flex-row justify-center">
+        <div className="p-3 w-[80vw] gap-5 items-center flex flex-col md:flex-row justify-center">
             <div className="flex md:flex-col gap-3 items-end md:items-center">
                 <div className="flex flex-col">
                     <h2 className="grad text-3xl ">Find</h2>
