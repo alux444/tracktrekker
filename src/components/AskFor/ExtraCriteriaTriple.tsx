@@ -51,8 +51,12 @@ const ExtraCriteriaTriple = ({
     }, [min, max, targ]);
 
     useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (dialogOpen && !event.target.closest(".dialog-content")) {
+        const handleOutsideClick = (event: MouseEvent) => {
+            if (
+                dialogOpen &&
+                event.target instanceof Element &&
+                !event.target.closest(".dialog-content")
+            ) {
                 handleDialogClose();
             }
         };
