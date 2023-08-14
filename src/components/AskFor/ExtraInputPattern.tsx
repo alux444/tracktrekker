@@ -5,6 +5,8 @@ interface CriteriaInputProps {
     changeFunction: (e: ChangeEvent<HTMLInputElement>) => void;
     type: "Min" | "Max" | "Target";
     max: number;
+    enable: () => void;
+    disable: () => void;
 }
 
 const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
@@ -12,12 +14,32 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
     changeFunction,
     type,
     max,
+    enable,
+    disable,
 }) => {
+    if (type === "Target" && value === undefined) {
+        return (
+            <button
+                className="button2 border-purple-500 border-[1px]"
+                onClick={enable}
+            >
+                <span className="grad">Enable Target</span>
+            </button>
+        );
+    }
+
     return (
-        <div className="border-[1px] p-1 rounded-[10px] flex flex-col justify-center text-center">
-            <p>
-                {type} {value}
-            </p>
+        <div className="border-[1px] p-1 rounded-[10px] flex flex-col items-center justify-center text-center">
+            <div className="flex gap-1 items-center p-1">
+                <p>
+                    {type} {value}
+                </p>
+                {type === "Target" && (
+                    <button onClick={disable} className="buttoncancel">
+                        &times;
+                    </button>
+                )}
+            </div>
             <input
                 className="border-[1px]"
                 min={0}

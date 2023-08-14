@@ -90,7 +90,7 @@ const SongDisplay = ({
     return (
         <div className={`md:flex justify-center w-full text-[rgba(0,0,0,0.8)]`}>
             <div
-                className={`flex justify-between flex-col xs:flex-row items-center p-3 w-full lg:w-[50%] md:w-[70%] border-[${
+                className={`hover flex justify-between flex-col xs:flex-row items-center p-3 w-full lg:w-[50%] md:w-[70%] border-[${
                     type === 2 ? "0px" : "1px"
                 }] rounded-[30px] backdrop-blur-3xl`}
             >

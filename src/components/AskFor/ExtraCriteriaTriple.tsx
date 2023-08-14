@@ -4,6 +4,8 @@ import { ClearOutlined } from "@mui/icons-material";
 import { ExtrasContext } from "../../App";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
 
+type MinMaxTargConfig = [number, number, number | undefined];
+
 const ExtraCriteriaTriple = ({
     criteriaName,
     maxValue,
@@ -18,9 +20,13 @@ const ExtraCriteriaTriple = ({
 
     const criteria = extras?.[criteriaName];
 
-    const initialMinMaxTarg: number[] = criteria
-        ? [criteria.min, criteria.max, criteria.target]
-        : [0, maxValue, maxValue / 2];
+    const initialMinMaxTarg: MinMaxTargConfig = criteria
+        ? [
+              criteria.min,
+              criteria.max,
+              criteria.target ? criteria.target : undefined,
+          ]
+        : [0, maxValue, undefined];
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [currentDescription, setCurrentDescription] = useState("");
@@ -28,7 +34,7 @@ const ExtraCriteriaTriple = ({
 
     const [min, setMin] = useState<number>(initialMinMaxTarg[0]);
     const [max, setMax] = useState<number>(initialMinMaxTarg[1]);
-    const [targ, setTarg] = useState<number>(initialMinMaxTarg[2]);
+    const [targ, setTarg] = useState<number | undefined>(initialMinMaxTarg[2]);
 
     const updateForm = () => {
         const updatedExtras: ExtraInfo = { ...extras };
@@ -93,6 +99,14 @@ const ExtraCriteriaTriple = ({
         setTarg(parseFloat(e.target.value));
     };
 
+    const enableTarget = () => {
+        setTarg(max / 2);
+    };
+
+    const disableTarget = () => {
+        setTarg(undefined);
+    };
+
     const resetSelection = () => {
         setShowSelection(true);
         const updatedExtras: ExtraInfo = { ...extras };
@@ -147,18 +161,24 @@ const ExtraCriteriaTriple = ({
                             changeFunction={handleChangeMin}
                             type="Min"
                             max={maxValue}
+                            enable={enableTarget}
+                            disable={disableTarget}
                         />
                         <ExtraInputPattern
                             value={max}
                             changeFunction={handleChangeMax}
                             type="Max"
                             max={maxValue}
+                            enable={enableTarget}
+                            disable={disableTarget}
                         />
                         <ExtraInputPattern
                             value={targ}
                             changeFunction={handleChangeTarg}
                             type="Target"
                             max={maxValue}
+                            enable={enableTarget}
+                            disable={disableTarget}
                         />
                         <div className="flex md:flex-col gap-2 md:gap-1 items-center">
                             <button

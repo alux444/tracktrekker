@@ -26,7 +26,7 @@ const ArtistDisplay = ({
         artist.images && artist.images.length >= 3 ? artist.images[0].url : "";
 
     return (
-        <div className="flex flex-col gap-2 items-center border-[1px] p-2 xl:w-[15vw] lg:w-[20vw] sm:w-[30vw] w-[40vw] justify-between rounded-[30px]">
+        <div className="hover flex flex-col gap-2 items-center border-[1px] p-2 xl:w-[15vw] lg:w-[20vw] sm:w-[30vw] w-[40vw] justify-between rounded-[30px]">
             <h2>{artist.name}</h2>
             <a href={artist.external_urls.spotify}>
                 <img

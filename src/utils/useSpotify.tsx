@@ -49,10 +49,14 @@ const useSpotify = () => {
                 if (value) {
                     extraParams[`min_${key}`] = value.min;
                     extraParams[`max_${key}`] = value.max;
-                    extraParams[`target_${key}`] = value.target;
+                    if (typeof value.target === "number") {
+                        extraParams[`target_${key}`] = value.target;
+                    }
                 }
             }
         }
+
+        console.log(extraParams);
 
         const url = "https://api.spotify.com/v1/recommendations";
 
