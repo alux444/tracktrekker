@@ -12,11 +12,22 @@ STYLES
     - change style of hide button to differentiate
 
 FEATURES
+    - pause tracks on switching rooms, search, etc
+    - spacebar also pauses
+    - add to search from results, so in reroll will have song added to search
+    - manage audio of previewing 
     - add managing extra criteria from currentsearch
     - add spotify login for users
     - view top tracks, artists, be able to add them to search
     - create a playlist of suggestions
 
+14 Aug
+COMPLETED fixed audio issues when rerouting and using spacebar to pause/play
+COMPLETED made target select optional 
+COMPLETED add extra selection criteria 
 
-COMPLETED add extra selection criteria 14 Aug
-COMPLETED moved searches to home page 13 Aug
+13 Aug
+COMPLETED moved searches to home page
+
+10 Aug
+COMPLETED initial version 0.1 - (songs, artists, genres) 
