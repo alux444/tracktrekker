@@ -40,11 +40,9 @@ const ResultsPage = ({
             return;
         }
 
-        if (res === 2) {
-            setMessage(
-                "Sorry... there were no matches for your search.Maybe your tracks/artists were too obscure, or your search was too complicated"
-            );
-        }
+        setMessage(
+            "Sorry... there were no matches for your search. Maybe your tracks/artists were too obscure, or your search was too complicated"
+        );
 
         console.log(res);
         setSongs(res.tracks);
@@ -94,7 +92,7 @@ const ResultsPage = ({
                     </button>
                 </div>
             ) : (
-                <div>
+                <div className="flex text-center p-3">
                     <p>{message}</p>
                 </div>
             )}
