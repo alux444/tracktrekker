@@ -32,14 +32,18 @@ const CurrentSearchPage = () => {
     ));
 
     return (
-        <div className="flex flex-col overflow-auto h-[60vh] w-[90vw] gap-2 p-3">
+        <div className="flex flex-col max-w-[90vw]  gap-2 p-3 border-[1px] rounded-[30px] z-300">
             {songs.length === 0 &&
-                genres.length === 0 &&
-                artists.length === 0 && (
-                    <div className="justify-center align-center items-center flex h-full">
-                        <p>Your search is empty.</p>
-                    </div>
-                )}
+            genres.length === 0 &&
+            artists.length === 0 ? (
+                <div className="justify-center align-center items-center flex h-full">
+                    <p>Your search is empty.</p>
+                </div>
+            ) : (
+                <div className="justify-center align-center items-center flex h-full">
+                    <p className="grad text-lg">Current Search</p>
+                </div>
+            )}
             {songs.length > 0 && (
                 <div className="flex flex-wrap w-full items-center justify-center gap-2 flex-col">
                     {allSongs}

@@ -1,6 +1,4 @@
 STYLES
-    - show current search on current page
-
     improve visuals of:
         - navbar
         - landing page
@@ -8,19 +6,18 @@ STYLES
         - footer 
 
     - reposition selected songs to top of list
-    - navigating to home through clicking logo
-    - change style of hide button to differentiate
 
 FEATURES
-    - warning message for when a search length = 0
-    - add to search from results, so in reroll will have song added to search
-    - manage audio of previewing 
     - add managing extra criteria from currentsearch
+    - manage audio of previewing 
     - add spotify login for users
     - view top tracks, artists, be able to add them to search
     - create a playlist of suggestions
 
 14 Aug
+COMPLETED change style of hide button to differentiate
+COMPLETED navigating to home through clicking logo
+COMPLETED show current search on current page
 COMPLETED fixed audio issues when rerouting and using spacebar to pause/play
 COMPLETED made target select optional 
 COMPLETED add extra selection criteria 

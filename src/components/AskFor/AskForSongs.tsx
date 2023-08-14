@@ -15,24 +15,16 @@ const AskForSongs = ({ submit }: AskForSongsProps) => {
         });
     }
     return (
-        <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
+        <div
+            className="flex flex-col gap-2 justify-center items-center align-center w-full p-5"
+            ref={topRef}
+        >
             <h2 className="text-lg grad">Select Songs</h2>
-            <SearchForm type="track" />
-            <div className="flex gap-2">
-                <button
-                    className="button2 border-purple-500 border-[1px] "
-                    onClick={scrollToTop}
-                    ref={topRef}
-                >
-                    <span className="grad">Top</span>
-                </button>
-                <button
-                    className="button2 border-purple-500 border-[1px] "
-                    onClick={submit}
-                >
-                    <span className="grad">Hide</span>
-                </button>
-            </div>
+            <SearchForm
+                type="track"
+                scrollToTop={scrollToTop}
+                submit={submit}
+            />
         </div>
     );
 };

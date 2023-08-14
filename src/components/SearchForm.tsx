@@ -7,7 +7,15 @@ import SongDisplay from "./Displays/SongDisplay";
 import { StatsContext } from "./Pages/HomePage";
 import { AudioContext } from "./Pages/Views";
 
-const SearchForm = ({ type }: { type: string }) => {
+const SearchForm = ({
+    type,
+    scrollToTop,
+    submit,
+}: {
+    type: string;
+    scrollToTop: () => void;
+    submit: () => void;
+}) => {
     const { showStats, setShowStats } = useContext(StatsContext);
     const { audio, setAudio } = useContext(AudioContext);
 
@@ -65,7 +73,7 @@ const SearchForm = ({ type }: { type: string }) => {
     ));
 
     return (
-        <div className="flex flex-col p-2 w-[90vw]">
+        <div className="flex flex-col p-2 w-[90vw] items-center gap-1">
             <form
                 className="flex flex-col gap-2 items-center"
                 onSubmit={searchQuery}
@@ -98,22 +106,36 @@ const SearchForm = ({ type }: { type: string }) => {
                         </span>
                     </button>
                     <button
-                        className="button2 border-purple-500 border-[1px]"
+                        className="button3 border-purple-500 border-[1px]"
                         type="button"
                         onClick={resetSearch}
                     >
-                        <span className="grad">Reset</span>
+                        <span>Reset</span>
                     </button>
                 </div>
             </form>
 
             {type === "track" && uniqueTracks.length > 0 && (
-                <div className="p-5 flex flex-col gap-3">{tracks}</div>
+                <div className="p-5 flex flex-col gap-3 w-full">{tracks}</div>
             )}
 
             {type !== "track" && artistReults.length > 0 && (
-                <div className="flex flex-wrap gap-3 justify-center overflow-auto">
+                <div className="flex flex-wrap gap-3 w-full justify-center overflow-auto">
                     {artists}
+                </div>
+            )}
+
+            {artistReults.length > 0 && trackResults.length > 0 && (
+                <div className="flex gap-2">
+                    <button
+                        className="button2 border-purple-500 border-[1px] "
+                        onClick={scrollToTop}
+                    >
+                        <span className="grad">Top</span>
+                    </button>
+                    <button className="button3" onClick={submit}>
+                        <span>Hide</span>
+                    </button>
                 </div>
             )}
         </div>

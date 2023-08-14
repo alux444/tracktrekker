@@ -29,12 +29,19 @@ const descriptions = {
 const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
     return (
         <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
-            <h2 className="text-lg grad">Extra Criteria (Optional)</h2>
-            <button
-                className="button2 border-[1px] border-purple-500"
-                onClick={submit}
-            >
-                <span className="grad">Hide</span>
+            <div className="flex flex-col text-center text-wrap justify-center">
+                <h2 className="text-lg grad">Extra Criteria (Optional)</h2>
+                <small>
+                    All search results will be FILTERED to be within your min to
+                    max range.
+                </small>
+                <small>
+                    With target, results will be SORTED based on CLOSEST to your
+                    given target.
+                </small>
+            </div>
+            <button className="button3 mb-2" onClick={submit}>
+                <span>Hide</span>
             </button>
             <div className="flex flex-col gap-2">
                 <ExtraCriteriaTriple

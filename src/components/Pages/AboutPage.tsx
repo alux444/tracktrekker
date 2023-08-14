@@ -15,6 +15,9 @@ const AboutPage = () => {
             </p>
             <br />
             <p>v0.1 (Aug 2023)</p>
+            <small>- Largescale style overhauls</small>
+            <small>- Added extra criteria search</small>
+            <small>- Added preview audios</small>
             <small>- Added search by song, artist and genre.</small>
         </div>
     );
