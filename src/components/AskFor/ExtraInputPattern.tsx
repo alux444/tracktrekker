@@ -24,7 +24,7 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
                 max={max}
                 step={max / 100}
                 type="range"
-                value={value || ""}
+                value={value}
                 onChange={changeFunction}
             />
         </div>
