@@ -16,13 +16,19 @@ const ExtraCriteriaTriple = ({
     const { extras, setExtras } = useContext(ExtrasContext);
     const initial: boolean = criteriaName in extras;
 
+    const criteria = extras?.[criteriaName];
+
+    const initialMinMaxTarg: number[] = criteria
+        ? [criteria.min, criteria.max, criteria.target]
+        : [0, maxValue, maxValue / 2];
+
     const [dialogOpen, setDialogOpen] = useState(false);
     const [currentDescription, setCurrentDescription] = useState("");
     const [showSelection, setShowSelection] = useState<boolean>(initial);
 
-    const [min, setMin] = useState<number>(0);
-    const [max, setMax] = useState<number>(maxValue);
-    const [targ, setTarg] = useState<number>(maxValue / 2);
+    const [min, setMin] = useState<number>(initialMinMaxTarg[0]);
+    const [max, setMax] = useState<number>(initialMinMaxTarg[1]);
+    const [targ, setTarg] = useState<number>(initialMinMaxTarg[2]);
 
     const updateForm = () => {
         const updatedExtras: ExtraInfo = { ...extras };
