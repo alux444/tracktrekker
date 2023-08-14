@@ -1,11 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
-import CurrentSearchPage from "./CurrentSearchPage";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
-export type page = "home" | "viewSearch" | "about";
+export type page = "home" | "about";
 export type PromptPage =
     | "home"
     | "songs"
@@ -91,10 +90,6 @@ const Views = () => {
         setCurrentPage("about");
     };
 
-    const toSearch = () => {
-        setCurrentPage("viewSearch");
-    };
-
     return (
         <PromptPageContext.Provider value={{ promptPage, setPromptPage }}>
             <AudioContext.Provider
@@ -112,11 +107,9 @@ const Views = () => {
                         currentPage={currentPage}
                         toHome={toHome}
                         toAbout={toAbout}
-                        toSearch={toSearch}
                     />
                     {currentPage === "home" && <HomePage />}
                     {currentPage === "about" && <AboutPage />}
-                    {currentPage === "viewSearch" && <CurrentSearchPage />}
                     <Footer />
                 </div>
             </AudioContext.Provider>

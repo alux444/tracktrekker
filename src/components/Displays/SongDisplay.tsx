@@ -74,7 +74,12 @@ const SongDisplay = ({
     };
 
     const artists = songInfo.artists.slice(0, 3).map((artist, index) => (
-        <a key={artist.id} href={artist.external_urls.spotify}>
+        <a
+            key={artist.id}
+            href={artist.external_urls.spotify}
+            target="_blank"
+            rel="noreferrer"
+        >
             <small>
                 <span>{artist.name}</span>
                 {index === 2 && songInfo.artists.length > 3 && (
@@ -100,7 +105,11 @@ const SongDisplay = ({
                         className="rounded-[10px]"
                     />
                     <div className="block">
-                        <a href={songInfo.external_urls.spotify}>
+                        <a
+                            href={songInfo.external_urls.spotify}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
                             <h2 className="text-lg flex gap-2 items-center flex-wrap break-all">
                                 {songInfo.explicit && (
                                     <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">

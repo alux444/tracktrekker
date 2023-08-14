@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ArtistSeedContext, GenreContext, SongSeedContext } from "../../App";
+import CurrentSearchPage from "./CurrentSearchPage";
 
 type PromptProps = {
     setSong: () => void;
@@ -20,6 +21,8 @@ const PromptScreen: React.FC<PromptProps> = ({
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
 
+    const [expandSearch, setExpandSearch] = useState<boolean>(false);
+
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
@@ -31,8 +34,11 @@ const PromptScreen: React.FC<PromptProps> = ({
                         Then, click results to get song recommendations!
                     </h2>
                 </div>
-                <div className="flex flex-col justify-center text-center">
-                    <button className="button1">
+                <div className="flex flex-col justify-center text-center items-center">
+                    <button
+                        className="button1 w-fit"
+                        onClick={() => setExpandSearch(!expandSearch)}
+                    >
                         <div className="button1-content">
                             <h2>Current Search</h2>
                             <p>
@@ -43,6 +49,13 @@ const PromptScreen: React.FC<PromptProps> = ({
                         </div>
                     </button>
                 </div>
+                {expandSearch && (
+                    <div className="overlay">
+                        <div className="overlay-content">
+                            <CurrentSearchPage />
+                        </div>
+                    </div>
+                )}
                 <div className="flex gap-2 flex-wrap justify-center">
                     <button className="button3" onClick={setSong}>
                         <span>Songs</span>
