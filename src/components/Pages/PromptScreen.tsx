@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ArtistSeedContext, GenreContext, SongSeedContext } from "../../App";
 
 type PromptProps = {
     setSong: () => void;
@@ -15,6 +16,10 @@ const PromptScreen: React.FC<PromptProps> = ({
     setSubmit,
     setExtra,
 }) => {
+    const { songSeeds } = useContext(SongSeedContext);
+    const { artistSeeds } = useContext(ArtistSeedContext);
+    const { genres } = useContext(GenreContext);
+
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div>
@@ -27,34 +32,36 @@ const PromptScreen: React.FC<PromptProps> = ({
                     </h2>
                 </div>
                 <div className="flex gap-2 flex-wrap justify-center">
-                    <button
-                        className="button2 border-purple-500 border-[1px]"
-                        onClick={setSong}
-                    >
-                        <span className="button2-content grad">Songs</span>
+                    <button className="button3" onClick={setSong}>
+                        <span>Songs</span>
                     </button>
-                    <button
-                        className="button2 border-purple-500 border-[1px] "
-                        onClick={setArtist}
-                    >
-                        <span className="button2-content grad">Artists</span>
+                    <button className="button3" onClick={setArtist}>
+                        <span>Artists</span>
                     </button>
-                    <button
-                        className="button2 border-purple-500 border-[1px]"
-                        onClick={setGenre}
-                    >
-                        <span className="button2-content grad">Genres</span>
+                    <button className="button3" onClick={setGenre}>
+                        <span>Genres</span>
                     </button>
-                    <button
-                        className="button2 border-purple-500 border-[1px]"
-                        onClick={setExtra}
-                    >
-                        <span className="grad">Extra</span>
+                    <button className="button3" onClick={setExtra}>
+                        <span>Extra</span>
                     </button>
                 </div>
             </div>
-            <button className="button1" onClick={setSubmit}>
-                <span className="button1-content">Get results</span>
+            <button
+                className="button1"
+                onClick={setSubmit}
+                disabled={
+                    genres.length === 0 &&
+                    songSeeds.length === 0 &&
+                    artistSeeds.length === 0
+                }
+            >
+                <span className="button1-content">
+                    {genres.length === 0 &&
+                    songSeeds.length === 0 &&
+                    artistSeeds.length === 0
+                        ? "Select Song/Artist/Genre for results"
+                        : "Get results"}
+                </span>
             </button>
         </div>
     );

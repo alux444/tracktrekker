@@ -19,7 +19,15 @@ const NavBar: React.FC<NavBarProps> = ({
     const { token } = useContext(TokenContext);
     return (
         <div className="flex gap-8 flex-wrap justify-center p-3 items-center">
-            <h2 className="grad text-3xl">TrackTrekker</h2>
+            <button
+                onClick={() => {
+                    toHome();
+                    setPromptPage("home");
+                }}
+                className="grad text-3xl"
+            >
+                TrackTrekker
+            </button>
             <div className="flex flex-col gap-[3px]">
                 <button
                     className={`${
