@@ -1,23 +1,47 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import ExtraInputPattern from "./ExtraInputPattern";
 import { ClearOutlined } from "@mui/icons-material";
+import { ExtrasContext } from "../../App";
+import { ExtraInfo } from "../../interfaces/extrasInfo";
 
 const ExtraCriteriaTriple = ({
     criteriaName,
     maxValue,
     dialog,
 }: {
-    criteriaName: string;
+    criteriaName: keyof ExtraInfo;
     maxValue: number;
     dialog: string;
 }) => {
+    const { extras, setExtras } = useContext(ExtrasContext);
+
     const [dialogOpen, setDialogOpen] = useState(false);
     const [currentDescription, setCurrentDescription] = useState("");
     const [showSelection, setShowSelection] = useState<boolean>(false);
 
-    const [min, setMin] = useState<number | undefined>(0);
-    const [max, setMax] = useState<number | undefined>(maxValue);
-    const [targ, setTarg] = useState<number | undefined>(maxValue / 2);
+    const [min, setMin] = useState<number>(0);
+    const [max, setMax] = useState<number>(maxValue);
+    const [targ, setTarg] = useState<number>(maxValue / 2);
+
+    const updateForm = () => {
+        const updatedExtras: ExtraInfo = { ...extras };
+
+        if (!showSelection) {
+            return;
+        }
+
+        updatedExtras[criteriaName] = {
+            min: min,
+            max: max,
+            target: targ,
+        };
+
+        setExtras(updatedExtras);
+    };
+
+    useEffect(() => {
+        updateForm();
+    }, [min, max, targ]);
 
     const handleDialogOpen = (description: string) => {
         setCurrentDescription(description);
@@ -42,16 +66,21 @@ const ExtraCriteriaTriple = ({
 
     const resetSelection = () => {
         setShowSelection(true);
-        setMin(0);
-        setMax(maxValue);
-        setTarg(maxValue / 2);
+        const updatedExtras: ExtraInfo = { ...extras };
+        updatedExtras[criteriaName] = {
+            min: min,
+            max: max,
+            target: targ,
+        };
+
+        setExtras(updatedExtras);
     };
 
     const clearSelection = () => {
-        setMin(undefined);
-        setMax(undefined);
-        setTarg(undefined);
         setShowSelection(false);
+        const updatedExtras = { ...extras };
+        delete updatedExtras[criteriaName];
+        setExtras(updatedExtras);
     };
 
     return (
@@ -67,7 +96,8 @@ const ExtraCriteriaTriple = ({
                     <button
                         type="button"
                         className="button2 border-[1px] border-purple-500"
-                        onClick={() => handleDialogOpen(dialog)}
+                        // onClick={() => handleDialogOpen(dialog)}
+                        onClick={() => console.log(extras)}
                     >
                         <span className="grad">?</span>
                     </button>

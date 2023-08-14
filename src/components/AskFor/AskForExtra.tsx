@@ -1,36 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import ExtraCriteriaTriple from "./ExtraCriteriaTriple";
 
 interface AskForExtrasProps {
     submit: () => void;
 }
-
-type ExtraCriteria = {
-    minAcoustic?: number;
-    maxAcoustic?: number;
-    targAcoustic?: number;
-    minDance?: number;
-    maxDance?: number;
-    targDance?: number;
-    minEnergy?: number;
-    maxEnergy?: number;
-    targEnergy?: number;
-    minInstrum?: number;
-    maxInstrum?: number;
-    targInstrum?: number;
-    minLively?: number;
-    maxLively?: number;
-    targLively?: number;
-    minPopularity?: number;
-    maxPopularity?: number;
-    targPopularity?: number;
-    minSpeech?: number;
-    maxSpeech?: number;
-    targSpeech?: number;
-    maxValence?: number;
-    minValence?: number;
-    targValence?: number;
-};
 
 const descriptions = {
     acousticness:
@@ -54,8 +27,6 @@ const descriptions = {
 };
 
 const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
-    const [form, setForm] = useState<ExtraCriteria>({});
-
     return (
         <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
             <h2 className="text-lg grad">Extra Criteria (Optional)</h2>
@@ -67,42 +38,42 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
             </button>
             <div className="flex flex-col gap-2">
                 <ExtraCriteriaTriple
-                    criteriaName="Popularity"
+                    criteriaName="popularity"
                     maxValue={100}
                     dialog={descriptions.popularity}
                 />
                 <ExtraCriteriaTriple
-                    criteriaName="Acoustic"
+                    criteriaName="acousticness"
                     maxValue={1}
                     dialog={descriptions.acousticness}
                 />
                 <ExtraCriteriaTriple
-                    criteriaName="Danceability"
+                    criteriaName="danceability"
                     maxValue={1}
                     dialog={descriptions.danceability}
                 />
                 <ExtraCriteriaTriple
-                    criteriaName="Energy"
+                    criteriaName="energy"
                     maxValue={1}
                     dialog={descriptions.energy}
                 />
                 <ExtraCriteriaTriple
-                    criteriaName="Instrumentalness"
+                    criteriaName="instrumentalness"
                     maxValue={1}
                     dialog={descriptions.instrumentalness}
                 />
                 <ExtraCriteriaTriple
-                    criteriaName="Liveliness"
+                    criteriaName="liveliness"
                     maxValue={1}
                     dialog={descriptions.liveness}
                 />
                 <ExtraCriteriaTriple
-                    criteriaName="Speechiness"
+                    criteriaName="speechiness"
                     maxValue={1}
                     dialog={descriptions.speechiness}
                 />
                 <ExtraCriteriaTriple
-                    criteriaName="Valence"
+                    criteriaName="valence"
                     maxValue={1}
                     dialog={descriptions.valence}
                 />
