@@ -18,7 +18,7 @@ const FeatureLevel = ({ inputVal, gap }: { inputVal: number; gap: number }) => {
             val -= gap;
             return (
                 <div
-                    key={color} // Added a unique key for each div
+                    key={color + Math.random()}
                     className={`inline-block w-[5px] h-[5px]`}
                     style={{ backgroundColor: val > 0 ? color : "transparent" }}
                 ></div>
