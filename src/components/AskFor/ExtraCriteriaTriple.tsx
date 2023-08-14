@@ -50,6 +50,28 @@ const ExtraCriteriaTriple = ({
         updateForm();
     }, [min, max, targ]);
 
+    useEffect(() => {
+        const handleOutsideClick = (event: MouseEvent) => {
+            if (
+                dialogOpen &&
+                event.target instanceof Element &&
+                !event.target.closest(".dialog-content")
+            ) {
+                handleDialogClose();
+            }
+        };
+
+        if (dialogOpen) {
+            document.addEventListener("mousedown", handleOutsideClick);
+        } else {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        };
+    }, [dialogOpen]);
+
     const handleDialogOpen = (description: string) => {
         setCurrentDescription(description);
         setDialogOpen(true);
@@ -98,7 +120,10 @@ const ExtraCriteriaTriple = ({
                         onClick={resetSelection}
                         className="button2 border-purple-500 border-[1px]"
                     >
-                        <span className="grad">{criteriaName}</span>
+                        <span className="grad">
+                            {criteriaName.charAt(0).toUpperCase()}
+                            {criteriaName.slice(1)}
+                        </span>
                     </button>
                     <button
                         type="button"
@@ -111,8 +136,12 @@ const ExtraCriteriaTriple = ({
             )}
             {showSelection && (
                 <div className="flex flex-col justify-center items-center align-center">
-                    <p className="grad">{criteriaName}</p>
-                    <div className="flex gap-1 items-center">
+                    <p className="grad">
+                        {" "}
+                        {criteriaName.charAt(0).toUpperCase()}
+                        {criteriaName.slice(1)}
+                    </p>
+                    <div className="flex flex-col md:flex-row gap-1 items-center">
                         <ExtraInputPattern
                             value={min}
                             changeFunction={handleChangeMin}
@@ -131,31 +160,32 @@ const ExtraCriteriaTriple = ({
                             type="Target"
                             max={maxValue}
                         />
-                        <button
-                            onClick={clearSelection}
-                            className="buttoncancel h-min"
-                        >
-                            <ClearOutlined />
-                        </button>
-                        <button
-                            type="button"
-                            className="button2 border-[1px] border-purple-500"
-                            onClick={() => handleDialogOpen(dialog)}
-                        >
-                            ?
-                        </button>
+                        <div className="flex md:flex-col gap-2 md:gap-1 items-center">
+                            <button
+                                onClick={clearSelection}
+                                className="buttoncancel h-min"
+                            >
+                                <ClearOutlined />
+                            </button>
+                            <button
+                                type="button"
+                                className="button2 border-[1px] border-purple-500"
+                                onClick={() => handleDialogOpen(dialog)}
+                            >
+                                <span className="grad">?</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
 
             <dialog
-                className="border-[1px] p-2"
+                className="border-[1px] border-purple-500 rounded-[20px] p-2"
                 open={dialogOpen}
                 onClose={handleDialogClose}
             >
-                <div className="dialog-content flex gap-2 items-center align-center justify-center">
+                <div className="dialog-content flex gap-2 text-center items-center align-center justify-center max-w-[80vw]">
                     <p>{currentDescription}</p>
-                    <button onClick={handleDialogClose}>&times;</button>
                 </div>
             </dialog>
         </div>
