@@ -112,7 +112,7 @@ const ExtraCriteriaTriple = ({
             {showSelection && (
                 <div className="flex flex-col justify-center items-center align-center">
                     <p className="grad">{criteriaName}</p>
-                    <div className="flex gap-1 items-center">
+                    <div className="flex flex-col md:flex-row gap-1 items-center">
                         <ExtraInputPattern
                             value={min}
                             changeFunction={handleChangeMin}
@@ -131,19 +131,21 @@ const ExtraCriteriaTriple = ({
                             type="Target"
                             max={maxValue}
                         />
-                        <button
-                            onClick={clearSelection}
-                            className="buttoncancel h-min"
-                        >
-                            <ClearOutlined />
-                        </button>
-                        <button
-                            type="button"
-                            className="button2 border-[1px] border-purple-500"
-                            onClick={() => handleDialogOpen(dialog)}
-                        >
-                            ?
-                        </button>
+                        <div className="flex md:flex-col gap-2 md:gap-0 items-center">
+                            <button
+                                onClick={clearSelection}
+                                className="buttoncancel h-min"
+                            >
+                                <ClearOutlined />
+                            </button>
+                            <button
+                                type="button"
+                                className="button2 border-[1px] border-purple-500"
+                                onClick={() => handleDialogOpen(dialog)}
+                            >
+                                <span className="grad">?</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

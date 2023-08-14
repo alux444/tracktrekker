@@ -1,5 +1,15 @@
 5 - improve ui
-5 - add extra selection criteria
-5 - add spotify login for users
+    - navbar
+    - landing page
+    - about page
+    - footer 
 
-bug - display screen on phone automatically is over screen height.
+5 - add spotify login for users
+    - view top tracks, artists, be able to add them to search
+    - create a playlist of suggestions
+
+4 - add managing extra criteria from currentsearch
+
+style - reposition selected songs to top of list
+
+COMPLETED add extra selection criteria 14 Aug
