@@ -12,8 +12,7 @@ STYLES
     - change style of hide button to differentiate
 
 FEATURES
-    - pause tracks on switching rooms, search, etc
-    - spacebar also pauses
+    - warning message for when a search length = 0
     - add to search from results, so in reroll will have song added to search
     - manage audio of previewing 
     - add managing extra criteria from currentsearch
