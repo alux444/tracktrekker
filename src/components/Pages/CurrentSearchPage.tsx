@@ -1,14 +1,30 @@
 import { useContext } from "react";
-import { ArtistInfoContext, GenreContext, SongsInfoContext } from "../../App";
+import {
+    ArtistInfoContext,
+    ArtistSeedContext,
+    GenreContext,
+    SongSeedContext,
+    SongsInfoContext,
+} from "../../App";
 import SongDisplay from "../Displays/SongDisplay";
 import ArtistDisplay from "../Displays/ArtistDisplay";
 import useManageQuery from "../../utils/useManageQuery";
 
 const CurrentSearchPage = () => {
-    const { songs } = useContext(SongsInfoContext);
-    const { artists } = useContext(ArtistInfoContext);
-    const { genres } = useContext(GenreContext);
+    const { songs, setSongs } = useContext(SongsInfoContext);
+    const { setSongSeeds } = useContext(SongSeedContext);
+    const { artists, setArtists } = useContext(ArtistInfoContext);
+    const { setArtistSeeds } = useContext(ArtistSeedContext);
+    const { genres, setGenres } = useContext(GenreContext);
     const { removeGenre } = useManageQuery();
+
+    const clearSearch = () => {
+        setSongSeeds([]);
+        setSongs([]);
+        setArtistSeeds([]);
+        setArtists([]);
+        setGenres([]);
+    };
 
     const allSongs = songs.map((song) => (
         <SongDisplay songInfo={song} type={2} />
@@ -32,7 +48,7 @@ const CurrentSearchPage = () => {
     ));
 
     return (
-        <div className="flex flex-col max-w-[90vw]  gap-2 p-3 border-[1px] rounded-[30px] z-300">
+        <div className="flex flex-col w-[90vw]  gap-2 p-3 rounded-[30px] z-300">
             {songs.length === 0 &&
             genres.length === 0 &&
             artists.length === 0 ? (
@@ -40,8 +56,11 @@ const CurrentSearchPage = () => {
                     <p>Your search is empty.</p>
                 </div>
             ) : (
-                <div className="justify-center align-center items-center flex h-full">
+                <div className="justify-center align-center items-center flex h-full gap-2">
                     <p className="grad text-lg">Current Search</p>
+                    <button onClick={clearSearch} className="button3">
+                        Clear Search
+                    </button>
                 </div>
             )}
             {songs.length > 0 && (

@@ -12,6 +12,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
+import { SongsInfoContext } from "../../App";
 
 const SongDisplay = ({
     songInfo,
@@ -29,12 +30,24 @@ const SongDisplay = ({
         currentPlayingId,
         setCurrentPlayingId,
     } = useContext(AudioContext);
+    const { songs } = useContext(SongsInfoContext);
+
     const [thisShowStats, setThisShowStats] = useState<boolean>(false);
     const [selected, setSelected] = useState(false);
     const [features, setFeatures] = useState<AudioFeatures | undefined>();
     const { addSong, removeSong } = useManageQuery();
 
     const { getFeatures } = useSpotify();
+
+    useEffect(() => {
+        const checkSongStatus = () => {
+            const isSongSelected = songs.some(
+                (song) => song.id === songInfo.id
+            );
+            setSelected(isSongSelected);
+        };
+        checkSongStatus();
+    }, [songs]);
 
     useEffect(() => {
         const fetchFeaturesForThisSong = async () => {
@@ -95,9 +108,8 @@ const SongDisplay = ({
     return (
         <div className={`md:flex justify-center w-full text-[rgba(0,0,0,0.8)]`}>
             <div
-                className={`hover flex justify-between flex-col xs:flex-row items-center p-3 w-full lg:w-[50%] md:w-[70%] border-[${
-                    type === 2 ? "0px" : "1px"
-                }] rounded-[30px] backdrop-blur-3xl`}
+                className={`hover flex justify-between flex-col xs:flex-row items-center p-3 w-full lg:w-[50%] md:w-[70%] border-[1px]
+                 rounded-[30px] backdrop-blur-3xl`}
             >
                 <div className="flex p-1 gap-5 items-center flex-col xs:flex-row">
                     <img
@@ -129,12 +141,11 @@ const SongDisplay = ({
                     </div>
                 </div>
                 <div className="flex xs:flex-col xl:flex-row align-center flex-wrap gap-2 items-center justify-center xs:justify-end xs:items-end">
-                    {type === 1 && !selected && (
+                    {(type === 1 || type === 3) && !selected && (
                         <button
                             className="buttonselect"
                             onClick={() => {
                                 addSong(songInfo);
-                                setSelected(true);
                             }}
                         >
                             <span>
@@ -142,12 +153,11 @@ const SongDisplay = ({
                             </span>
                         </button>
                     )}{" "}
-                    {(type === 2 || selected) && (
+                    {selected && (
                         <button
                             className="buttoncancel"
                             onClick={() => {
                                 removeSong(songInfo);
-                                setSelected(false);
                             }}
                         >
                             <span>

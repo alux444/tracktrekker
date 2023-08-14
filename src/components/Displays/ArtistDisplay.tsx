@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ArtistInfo } from "../../interfaces/artistInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import FeatureLevel from "./FeatureLevel";
@@ -7,6 +7,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
+import { ArtistInfoContext } from "../../App";
 
 const ArtistDisplay = ({
     artist,
@@ -17,10 +18,21 @@ const ArtistDisplay = ({
     fromSearch: boolean;
     type: number;
 }) => {
+    const { artists } = useContext(ArtistInfoContext);
     const { showStats } = useContext(StatsContext);
     const [thisShowStats, setThisShowStats] = useState<boolean>(false);
     const [selected, setSelected] = useState(false);
     const { addArtist, removeArtist } = useManageQuery();
+
+    useEffect(() => {
+        const checkSongStatus = () => {
+            const isArtistSelected = artists.some(
+                (thisArtist) => thisArtist.id === artist.id
+            );
+            setSelected(isArtistSelected);
+        };
+        checkSongStatus();
+    }, [artists]);
 
     const imageSrc =
         artist.images && artist.images.length >= 3 ? artist.images[0].url : "";
@@ -55,7 +67,6 @@ const ArtistDisplay = ({
                         className="buttonselect"
                         onClick={() => {
                             addArtist(artist);
-                            setSelected(true);
                         }}
                     >
                         <span>
@@ -68,7 +79,6 @@ const ArtistDisplay = ({
                         className="buttoncancel"
                         onClick={() => {
                             removeArtist(artist);
-                            setSelected(false);
                         }}
                     >
                         <span>
