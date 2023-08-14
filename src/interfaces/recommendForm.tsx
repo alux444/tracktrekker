@@ -1,35 +1,8 @@
+import { ExtraInfo } from "./extrasInfo";
+
 export interface RecommendForm {
     seed_artists: string[];
     seed_genres: string[];
     seed_tracks: string[];
-    minAcoustic?: number;
-    maxAcoustic?: number;
-    targAcoustic?: number;
-    minDance?: number;
-    maxDance?: number;
-    targDance?: number;
-    minDuration?: number;
-    maxDuration?: number;
-    targDuration?: number;
-    minEnergy?: number;
-    maxEnergy?: number;
-    targEnergy?: number;
-    minInstrum?: number;
-    maxInstrum?: number;
-    targInstrum?: number;
-    minLively?: number;
-    maxLively?: number;
-    targLively?: number;
-    minLoudness?: number;
-    maxLoudness?: number;
-    targLoudness?: number;
-    minPopularity?: number;
-    maxPopularity?: number;
-    targPopularity?: number;
-    minSpeech?: number;
-    maxSpeech?: number;
-    targSpeech?: number;
-    maxValence?: number;
-    minValence?: number;
-    targValence?: number;
+    extras: ExtraInfo;
 }

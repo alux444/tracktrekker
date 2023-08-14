@@ -14,10 +14,11 @@ const ExtraCriteriaTriple = ({
     dialog: string;
 }) => {
     const { extras, setExtras } = useContext(ExtrasContext);
+    const initial: boolean = criteriaName in extras;
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [currentDescription, setCurrentDescription] = useState("");
-    const [showSelection, setShowSelection] = useState<boolean>(false);
+    const [showSelection, setShowSelection] = useState<boolean>(initial);
 
     const [min, setMin] = useState<number>(0);
     const [max, setMax] = useState<number>(maxValue);
@@ -96,8 +97,7 @@ const ExtraCriteriaTriple = ({
                     <button
                         type="button"
                         className="button2 border-[1px] border-purple-500"
-                        // onClick={() => handleDialogOpen(dialog)}
-                        onClick={() => console.log(extras)}
+                        onClick={() => handleDialogOpen(dialog)}
                     >
                         <span className="grad">?</span>
                     </button>

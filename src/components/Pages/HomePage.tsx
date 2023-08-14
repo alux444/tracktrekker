@@ -1,6 +1,7 @@
 import { SetStateAction, createContext, useContext, useState } from "react";
 import {
     ArtistSeedContext,
+    ExtrasContext,
     GenreContext,
     SongSeedContext,
     TokenContext,
@@ -32,6 +33,7 @@ const HomePage = () => {
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
+    const { extras } = useContext(ExtrasContext);
 
     const generateForm = () => {
         const genreValues: string[] = [];
@@ -43,6 +45,7 @@ const HomePage = () => {
             seed_tracks: songSeeds,
             seed_artists: artistSeeds,
             seed_genres: genreValues,
+            extras: extras,
         };
 
         setCurrentQuery(form);
