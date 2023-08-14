@@ -45,10 +45,43 @@ const Views = () => {
     );
 
     useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.keyCode === 32) {
+                if (audioIsPlaying) {
+                    audio?.pause();
+                } else {
+                    audio?.play();
+                }
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
+    useEffect(() => {
         if (audio !== null) {
             audio.play();
         }
     }, [audio]);
+
+    useEffect(() => {
+        if (currentPage !== "home") {
+            if (audio !== null) {
+                audio.pause();
+            }
+        }
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (audio !== null) {
+            audio.pause();
+            setAudio(null);
+        }
+    }, [promptPage]);
 
     const toHome = () => {
         setCurrentPage("home");

@@ -1,19 +1,28 @@
-import { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import useSpotify from "../utils/useSpotify";
 import { ArtistInfo } from "../interfaces/artistInfo";
 import { SongInfo } from "../interfaces/songInfo";
 import ArtistDisplay from "./Displays/ArtistDisplay";
 import SongDisplay from "./Displays/SongDisplay";
 import { StatsContext } from "./Pages/HomePage";
+import { AudioContext } from "./Pages/Views";
 
 const SearchForm = ({ type }: { type: string }) => {
     const { showStats, setShowStats } = useContext(StatsContext);
+    const { audio, setAudio } = useContext(AudioContext);
 
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
     const [artistReults, setArtistResults] = useState<ArtistInfo[]>([]);
 
     const { getSearch } = useSpotify();
+
+    useEffect(() => {
+        if (audio !== null) {
+            audio.pause();
+            setAudio(null);
+        }
+    }, [trackResults, artistReults]);
 
     const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
