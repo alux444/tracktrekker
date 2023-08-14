@@ -47,7 +47,7 @@ const SongDisplay = ({
             setSelected(isSongSelected);
         };
         checkSongStatus();
-    }, [songs]);
+    }, [songs, songInfo]);
 
     useEffect(() => {
         const fetchFeaturesForThisSong = async () => {

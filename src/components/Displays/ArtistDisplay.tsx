@@ -32,7 +32,7 @@ const ArtistDisplay = ({
             setSelected(isArtistSelected);
         };
         checkSongStatus();
-    }, [artists]);
+    }, [artists, artist]);
 
     const imageSrc =
         artist.images && artist.images.length >= 3 ? artist.images[0].url : "";
