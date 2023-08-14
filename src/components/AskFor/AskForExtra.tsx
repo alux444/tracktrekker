@@ -63,7 +63,7 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
                     dialog={descriptions.instrumentalness}
                 />
                 <ExtraCriteriaTriple
-                    criteriaName="liveliness"
+                    criteriaName="liveness"
                     maxValue={1}
                     dialog={descriptions.liveness}
                 />

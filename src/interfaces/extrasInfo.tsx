@@ -23,7 +23,7 @@ export type ExtraInfo = {
         target: number;
     };
 
-    liveliness?: {
+    liveness?: {
         min: number;
         max: number;
         target: number;

@@ -18,8 +18,9 @@ const FeaturesDisplay = ({
             <div className="flex flex-col align-center">
                 <small>{duration}</small>
                 <small>{features.tempo.toFixed(0)} BPM</small>
-                <div className="flex justify-between">
-                    <small>Loudness: {features.loudness.toFixed(0)} dB</small>
+                <div className="flex justify-between items-center">
+                    <small>Energy: {features.energy.toFixed(2)}</small>
+                    <FeatureLevel inputVal={features.energy} gap={0.1} />
                 </div>
                 <div className="flex justify-between items-center">
                     <div className="flex justify-between">

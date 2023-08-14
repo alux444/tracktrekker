@@ -1,0 +1,5 @@
+5 - improve ui
+5 - add extra selection criteria
+5 - add spotify login for users
+
+bug - display screen on phone automatically is over screen height.
