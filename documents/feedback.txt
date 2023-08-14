@@ -12,8 +12,6 @@ STYLES
     - change style of hide button to differentiate
 
 FEATURES
-    - warning message for when a search length = 0
-    - add to search from results, so in reroll will have song added to search
     - manage audio of previewing 
     - add managing extra criteria from currentsearch
     - add spotify login for users

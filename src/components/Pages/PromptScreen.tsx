@@ -22,7 +22,7 @@ const PromptScreen: React.FC<PromptProps> = ({
 
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
-            <div>
+            <div className="flex flex-col gap-1">
                 <div className="flex flex-col flex-wrap text-center p-3">
                     <h2 className="grad text-lg">
                         Select at least one song, artist or genre.
@@ -30,6 +30,18 @@ const PromptScreen: React.FC<PromptProps> = ({
                     <h2 className="grad text-md">
                         Then, click results to get song recommendations!
                     </h2>
+                </div>
+                <div className="flex flex-col justify-center text-center">
+                    <button className="button1">
+                        <div className="button1-content">
+                            <h2>Current Search</h2>
+                            <p>
+                                {songSeeds.length} song(s) |{" "}
+                                {artistSeeds.length} artist(s) | {genres.length}{" "}
+                                genre(s)
+                            </p>
+                        </div>
+                    </button>
                 </div>
                 <div className="flex gap-2 flex-wrap justify-center">
                     <button className="button3" onClick={setSong}>

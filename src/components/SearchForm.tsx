@@ -116,11 +116,11 @@ const SearchForm = ({
             </form>
 
             {type === "track" && uniqueTracks.length > 0 && (
-                <div className="p-5 flex flex-col gap-3">{tracks}</div>
+                <div className="p-5 flex flex-col gap-3 w-full">{tracks}</div>
             )}
 
             {type !== "track" && artistReults.length > 0 && (
-                <div className="flex flex-wrap gap-3 justify-center overflow-auto">
+                <div className="flex flex-wrap gap-3 w-full justify-center overflow-auto">
                     {artists}
                 </div>
             )}
