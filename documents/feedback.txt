@@ -1,15 +1,22 @@
-5 - improve ui
-    - navbar
-    - landing page
-    - about page
-    - footer 
+STYLES
+    - show current search on current page
 
-5 - add spotify login for users
+    improve visuals of:
+        - navbar
+        - landing page
+        - about page
+        - footer 
+
+    - reposition selected songs to top of list
+    - navigating to home through clicking logo
+    - change style of hide button to differentiate
+
+FEATURES
+    - add managing extra criteria from currentsearch
+    - add spotify login for users
     - view top tracks, artists, be able to add them to search
     - create a playlist of suggestions
 
-4 - add managing extra criteria from currentsearch
-
-style - reposition selected songs to top of list
 
 COMPLETED add extra selection criteria 14 Aug
+COMPLETED moved searches to home page 13 Aug

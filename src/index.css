@@ -283,3 +283,11 @@ input[type="range"]::-webkit-slider-thumb {
     background: #fcf9ff;
     cursor: pointer;
 }
+
+.hover {
+    transition: border-color 0.3s ease-in-out; /* Apply a smooth transition to border color */
+}
+
+.hover:hover {
+    border-color: hsl(263, 92%, 57%); /* Change border color on hover */
+}
