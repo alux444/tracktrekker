@@ -29,7 +29,6 @@ const CurrentSearchPage = () => {
         setArtistSeeds([]);
         setArtists([]);
         setGenres([]);
-        setExtras({});
     };
 
     const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);
@@ -89,6 +88,18 @@ const CurrentSearchPage = () => {
             {genres.length > 0 && (
                 <div className="flex flex-wrap w-full items-center justify-center gap-1">
                     {allGenres}
+                </div>
+            )}
+            {Object.keys(extras).length === 0 ? (
+                <div className="justify-center align-center items-center flex h-full">
+                    <p>No extra filters enabled.</p>
+                </div>
+            ) : (
+                <div className="justify-center align-center items-center flex h-full gap-2">
+                    <p className="grad text-lg">Current Extra Filters</p>
+                    <button onClick={() => setExtras({})} className="button3">
+                        Clear Extras
+                    </button>
                 </div>
             )}
             {allExtras}
