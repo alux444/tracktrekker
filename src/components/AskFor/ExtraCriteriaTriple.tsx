@@ -4,7 +4,7 @@ import { ClearOutlined } from "@mui/icons-material";
 import { ExtrasContext } from "../../App";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
 
-type MinMaxTargConfig = [number, number, number | undefined];
+type MinMaxTargConfig = [number, number, number];
 
 const ExtraCriteriaTriple = ({
     criteriaName,
@@ -31,17 +31,13 @@ const ExtraCriteriaTriple = ({
     const [showSelection, setShowSelection] = useState<boolean>(initial);
     const [min, setMin] = useState<number>(initialMinMaxTarg[0]);
     const [max, setMax] = useState<number>(initialMinMaxTarg[1]);
-    const [targ, setTarg] = useState<number | undefined>(initialMinMaxTarg[2]);
+    const [targ, setTarg] = useState<number>(initialMinMaxTarg[2]);
 
     useEffect(() => {
         const initial = criteriaName in extras;
         const criteria = extras?.[criteriaName];
         const initialMinMaxTarg: MinMaxTargConfig = criteria
-            ? [
-                  criteria.min,
-                  criteria.max,
-                  criteria.target === -1 ? undefined : criteria.target,
-              ]
+            ? [criteria.min, criteria.max, criteria.target]
             : [0, maxValue, -1];
         setShowSelection(initial);
         setMin(initialMinMaxTarg[0]);
