@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import SearchForm from "../SearchForm";
+import SearchForm from "../Misc/SearchForm";
+import VolumeSlider from "../Misc/VolumeSlider";
 
 interface AskForSongsProps {
     submit: () => void;
@@ -20,6 +21,7 @@ const AskForSongs = ({ submit }: AskForSongsProps) => {
             ref={topRef}
         >
             <h2 className="text-lg grad">Select Songs</h2>
+            <VolumeSlider />
             <SearchForm
                 type="track"
                 scrollToTop={scrollToTop}

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import SearchForm from "../SearchForm";
+import SearchForm from "../Misc/SearchForm";
 
 interface AskForArtistsProps {
     submit: () => void;

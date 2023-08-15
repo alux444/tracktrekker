@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import useSpotify from "../utils/useSpotify";
-import { ArtistInfo } from "../interfaces/artistInfo";
-import { SongInfo } from "../interfaces/songInfo";
-import ArtistDisplay from "./Displays/ArtistDisplay";
-import SongDisplay from "./Displays/SongDisplay";
-import { StatsContext } from "./Pages/HomePage";
-import { AudioContext } from "./Pages/Views";
+import useSpotify from "../../utils/useSpotify";
+import { ArtistInfo } from "../../interfaces/artistInfo";
+import { SongInfo } from "../../interfaces/songInfo";
+import ArtistDisplay from "../Displays/ArtistDisplay";
+import SongDisplay from "../Displays/SongDisplay";
+import { StatsContext } from "../Pages/HomePage";
+import { AudioContext } from "../Pages/Views";
 
 const SearchForm = ({
     type,

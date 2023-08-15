@@ -6,7 +6,7 @@ import {
     SongSeedContext,
 } from "../../App";
 import CurrentSearchPage from "./CurrentSearchPage";
-import { AudioContext, PromptPageContext } from "./Views";
+import { PromptPageContext } from "./Views";
 
 type PromptProps = {
     setSong: () => void;
@@ -29,34 +29,13 @@ const PromptScreen: React.FC<PromptProps> = ({
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
     const { extras } = useContext(ExtrasContext);
-    const { volume, setVolume } = useContext(AudioContext);
 
     const [expandSearch, setExpandSearch] = useState<boolean>(false);
-
-    const handleVolumeChange = (event) => {
-        const newVolume = parseFloat(event.target.value);
-        setVolume(newVolume);
-    };
 
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col justify-center text-center items-center">
-                    <div className="border-[1px] p-1 rounded-[10px] flex flex-col items-center justify-center text-center">
-                        <div className="flex gap-1 items-center p-1">
-                            <p>Volume: {volume}</p>
-                        </div>
-                        <input
-                            className="border-[1px]"
-                            min={0}
-                            max={1}
-                            step={0.05}
-                            type="range"
-                            value={volume}
-                            onChange={handleVolumeChange}
-                        />
-                    </div>
-
                     <button
                         className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
                         onClick={() => setExpandSearch(!expandSearch)}
