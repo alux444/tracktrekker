@@ -11,7 +11,7 @@ import AskForArtists from "../AskFor/AskForArtists";
 import AskForGenres from "../AskFor/AskForGenres";
 import AskForExtra from "../AskFor/AskForExtra";
 import { RecommendForm } from "../../interfaces/recommendForm";
-import ResultsPage from "../ResultsPage";
+import ResultsPage from "./ResultsPage";
 import LandingPage from "./LandingPage";
 import PromptScreen from "./PromptScreen";
 import { PromptPageContext } from "./Views";

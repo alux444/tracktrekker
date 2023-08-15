@@ -1,9 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { RecommendForm } from "../interfaces/recommendForm";
-import { SongInfo } from "../interfaces/songInfo";
-import useSpotify from "../utils/useSpotify";
-import SongDisplay from "./Displays/SongDisplay";
-import { StatsContext } from "./Pages/HomePage";
+import { RecommendForm } from "../../interfaces/recommendForm";
+import { SongInfo } from "../../interfaces/songInfo";
+import useSpotify from "../../utils/useSpotify";
+import SongDisplay from "../Displays/SongDisplay";
+import { StatsContext } from "./HomePage";
+import VolumeSlider from "../Misc/VolumeSlider";
 
 const ResultsPage = ({
     query,
@@ -55,6 +56,7 @@ const ResultsPage = ({
     return (
         <div className="h-full flex flex-col items-center align-center gap-2 mt-12">
             <h2 className="grad text-xl">Search Results</h2>
+            <VolumeSlider />
             <p className="grad">
                 Searching for {query.seed_tracks.length}{" "}
                 {query.seed_tracks.length === 1 ? "song" : "songs"},{" "}

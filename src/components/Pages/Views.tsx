@@ -34,7 +34,7 @@ export const AudioContext = createContext<{
     setAudioIsPlaying: () => {},
     currentPlayingId: null,
     setCurrentPlayingId: () => {},
-    volume: 0.6,
+    volume: 0.3,
     setVolume: () => {},
 });
 
@@ -46,7 +46,7 @@ const Views = () => {
     const [currentPlayingId, setCurrentPlayingId] = useState<string | null>(
         null
     );
-    const [volume, setVolume] = useState<number>(0.6);
+    const [volume, setVolume] = useState<number>(0.3);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
