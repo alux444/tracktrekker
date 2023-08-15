@@ -36,15 +36,20 @@ const PromptScreen: React.FC<PromptProps> = ({
                 </div>
                 <div className="flex flex-col justify-center text-center items-center">
                     <button
-                        className="button1 w-fit"
+                        className="button1 w-fit mb-2"
                         onClick={() => setExpandSearch(!expandSearch)}
                     >
                         <div className="button1-content">
                             <h2>Current Search</h2>
                             <p>
-                                {songSeeds.length} song(s) |{" "}
-                                {artistSeeds.length} artist(s) | {genres.length}{" "}
-                                genre(s)
+                                {songSeeds.length}{" "}
+                                {songSeeds.length === 1 ? "song" : "songs"} |{" "}
+                                {artistSeeds.length}{" "}
+                                {artistSeeds.length === 1
+                                    ? "artist"
+                                    : "artists"}{" "}
+                                | {genres.length}{" "}
+                                {genres.length === 1 ? "genre" : "genres"}
                             </p>
                         </div>
                     </button>

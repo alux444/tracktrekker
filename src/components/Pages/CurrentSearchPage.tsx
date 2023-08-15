@@ -6,9 +6,9 @@ import {
     SongSeedContext,
     SongsInfoContext,
 } from "../../App";
-import SongDisplay from "../Displays/SongDisplay";
 import ArtistDisplay from "../Displays/ArtistDisplay";
 import useManageQuery from "../../utils/useManageQuery";
+import SmallSongDisplay from "../Displays/SmallSongDisplay";
 
 const CurrentSearchPage = () => {
     const { songs, setSongs } = useContext(SongsInfoContext);
@@ -26,9 +26,7 @@ const CurrentSearchPage = () => {
         setGenres([]);
     };
 
-    const allSongs = songs.map((song) => (
-        <SongDisplay songInfo={song} type={2} />
-    ));
+    const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);
 
     const allArtists = artists.map((artist) => (
         <ArtistDisplay artist={artist} fromSearch={false} type={2} />
