@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ArtistSeedContext, GenreContext, SongSeedContext } from "../../App";
 import CurrentSearchPage from "./CurrentSearchPage";
+import { PromptPageContext } from "./Views";
 
 type PromptProps = {
     setSong: () => void;
@@ -17,6 +18,8 @@ const PromptScreen: React.FC<PromptProps> = ({
     setSubmit,
     setExtra,
 }) => {
+    const { promptPage } = useContext(PromptPageContext);
+
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
@@ -71,28 +74,16 @@ const PromptScreen: React.FC<PromptProps> = ({
             {genres.length === 0 &&
             songSeeds.length === 0 &&
             artistSeeds.length === 0 ? (
-                <div className="flex flex-col flex-wrap text-center p-1">
-                    <h2 className="grad text-lg">
-                        Select at least one song, artist or genre.
-                    </h2>
-                </div>
+                promptPage === "home" && (
+                    <div className="flex flex-col flex-wrap text-center p-1">
+                        <h2 className="grad text-lg">
+                            Select at least one song, artist or genre.
+                        </h2>
+                    </div>
+                )
             ) : (
-                <button
-                    className="button1"
-                    onClick={setSubmit}
-                    disabled={
-                        genres.length === 0 &&
-                        songSeeds.length === 0 &&
-                        artistSeeds.length === 0
-                    }
-                >
-                    <span className="button1-content">
-                        {genres.length === 0 &&
-                        songSeeds.length === 0 &&
-                        artistSeeds.length === 0
-                            ? "Select Song/Artist/Genre for results"
-                            : "Get results"}
-                    </span>
+                <button className="button1" onClick={setSubmit}>
+                    <span className="button1-content">Get results</span>
                 </button>
             )}
         </div>
