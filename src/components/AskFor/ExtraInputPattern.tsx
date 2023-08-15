@@ -17,7 +17,7 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
     enable,
     disable,
 }) => {
-    if (type === "Target" && value === undefined) {
+    if (type === "Target" && value === -1) {
         return (
             <button
                 className="button2 border-purple-500 border-[1px]"
@@ -31,10 +31,12 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
     return (
         <div className="border-[1px] p-1 rounded-[10px] flex flex-col items-center justify-center text-center">
             <div className="flex gap-1 items-center p-1">
-                <p>
-                    {type} {value}
+                <p className={`${value === undefined && "text-red-500"}`}>
+                    {value === undefined
+                        ? "Target Disabled"
+                        : type + ":" + value}
                 </p>
-                {type === "Target" && (
+                {type === "Target" && value !== undefined && (
                     <button onClick={disable} className="buttoncancel">
                         &times;
                     </button>

@@ -22,12 +22,8 @@ const ExtraCriteriaTriple = ({
     const criteria = extras?.[criteriaName];
 
     const initialMinMaxTarg: MinMaxTargConfig = criteria
-        ? [
-              criteria.min,
-              criteria.max,
-              criteria.target ? criteria.target : undefined,
-          ]
-        : [0, maxValue, undefined];
+        ? [criteria.min, criteria.max, criteria.target ? criteria.target : -1]
+        : [0, maxValue, -1];
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [currentDescription, setCurrentDescription] = useState("");
@@ -44,9 +40,9 @@ const ExtraCriteriaTriple = ({
             ? [
                   criteria.min,
                   criteria.max,
-                  criteria.target ? criteria.target : undefined,
+                  criteria.target === -1 ? undefined : criteria.target,
               ]
-            : [0, maxValue, undefined];
+            : [0, maxValue, -1];
         setShowSelection(initial);
         setMin(initialMinMaxTarg[0]);
         setMax(initialMinMaxTarg[1]);
@@ -121,7 +117,7 @@ const ExtraCriteriaTriple = ({
     };
 
     const disableTarget = () => {
-        setTarg(undefined);
+        setTarg(-1);
     };
 
     const resetSelection = () => {
