@@ -41,7 +41,7 @@ const ArtistDisplay = ({
         <div
             className={`hover flex flex-col gap-2 items-center border-[1px] p-2 text-center ${
                 fromSearch
-                    ? "xl:w-[15vw] lg:w-[20vw] sm:w-[30vw] w-[40vw]"
+                    ? "xl:w-[15vw] lg:w-[20vw] sm:w-[27vw] w-[40vw]"
                     : "xl:w-[11vw] lg:w-[13vw] sm:w-[20vw] w-[30vw]"
             } justify-between rounded-[30px]`}
         >
@@ -57,11 +57,7 @@ const ArtistDisplay = ({
                 </h2>
                 {!fromSearch && selected && (
                     <button
-                        className={`${
-                            fromSearch
-                                ? "buttoncancel"
-                                : "hover:border-red-500 hover:text-red-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
-                        }`}
+                        className="hover:border-red-500 hover:text-red-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
                         onClick={() => {
                             removeArtist(artist);
                         }}
@@ -75,15 +71,29 @@ const ArtistDisplay = ({
                 target="_blank"
                 rel="noreferrer"
             >
-                <img
-                    className={`${
-                        fromSearch
-                            ? "lg:w-[15vw] w-[25vw]"
-                            : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
-                    } rounded-[20px]`}
-                    src={imageSrc}
-                    alt={artist.name}
-                />
+                {imageSrc !== "" ? (
+                    <img
+                        className={`${
+                            fromSearch
+                                ? "lg:w-[15vw] w-[25vw]"
+                                : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
+                        } rounded-[20px]
+                    `}
+                        src={imageSrc}
+                        alt={artist.name}
+                    />
+                ) : (
+                    <div
+                        className={`${
+                            fromSearch
+                                ? "lg:w-[15vw] w-[25vw]"
+                                : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
+                        } rounded-[20px] flex justify-center items-center text-center
+                `}
+                    >
+                        <p>No image avaliable :(</p>
+                    </div>
+                )}
             </a>
             <div className="flex items-center flex-wrap gap-2 justify-center align-center">
                 {fromSearch && !selected && (
@@ -94,7 +104,7 @@ const ArtistDisplay = ({
                         }}
                     >
                         <span>
-                            <AddIcon />
+                            <AddIcon style={{ fontSize: "1rem" }} />
                         </span>
                     </button>
                 )}
@@ -105,7 +115,9 @@ const ArtistDisplay = ({
                             removeArtist(artist);
                         }}
                     >
-                        <ClearIcon />
+                        <span>
+                            <ClearIcon style={{ fontSize: "1rem" }} />
+                        </span>
                     </button>
                 )}
                 {!showStats && type === 1 && (
@@ -116,9 +128,11 @@ const ArtistDisplay = ({
                     >
                         <span className="button1-content">
                             {thisShowStats ? (
-                                <VisibilityOffIcon />
+                                <VisibilityOffIcon
+                                    style={{ fontSize: "1rem" }}
+                                />
                             ) : (
-                                <BarChartIcon />
+                                <BarChartIcon style={{ fontSize: "1rem" }} />
                             )}
                         </span>
                     </button>

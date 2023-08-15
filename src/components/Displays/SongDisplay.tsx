@@ -86,43 +86,42 @@ const SongDisplay = ({
         }
     };
 
-    const artists = songInfo.artists.slice(0, 3).map((artist, index) => (
-        <a
-            key={artist.id}
-            href={artist.external_urls.spotify}
-            target="_blank"
-            rel="noreferrer"
-        >
-            <small>
-                <span>{artist.name}</span>
-                {index === 2 && songInfo.artists.length > 3 && (
-                    <span className="">
-                        {" "}
-                        ...+{songInfo.artists.length - 3} more
-                    </span>
-                )}
-            </small>
-        </a>
-    ));
+    let artists = songInfo.artists
+        .slice(0, 3)
+        .map((artist) => {
+            if (artist.name.length > 20) {
+                return artist.name.slice(0, 16) + "...";
+            } else {
+                return artist.name;
+            }
+        })
+        .join(", ");
+    if (songInfo.artists.length > 3) {
+        artists += ` ...+${songInfo.artists.length - 3}`;
+    }
 
     return (
-        <div className={`md:flex justify-center w-full text-[rgba(0,0,0,0.8)]`}>
+        <div
+            className={`md:flex justify-center w-full items-center text-[rgba(0,0,0,0.8)]`}
+        >
             <div
-                className={`hover flex justify-between flex-col xs:flex-row items-center p-3 w-full lg:w-[50%] md:w-[70%] border-[1px]
+                className={`hover flex justify-between flex xs:flex-row items-center p-2 w-full lg:w-[50%] md:w-[70%] w-full border-[1px]
                  rounded-[30px] backdrop-blur-3xl`}
             >
-                <div className="flex p-1 gap-5 items-center flex-col xs:flex-row">
-                    <img
-                        src={songInfo.album.images[2].url}
-                        className="rounded-[10px]"
-                    />
-                    <div className="block">
+                <div className="flex p-1 gap-5 xs:flex-row items-center">
+                    <div className="flex-shrink-0">
+                        <img
+                            src={songInfo.album.images[2].url}
+                            className="float-left rounded-[10px] max-w-[64px] max-h-[64px]"
+                        />
+                    </div>
+                    <div className="flex flex-col">
                         <a
                             href={songInfo.external_urls.spotify}
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <h2 className="text-lg flex gap-2 items-center flex-wrap break-all">
+                            <h2 className="text-md flex gap-2 items-center flex-wrap break-all">
                                 {songInfo.explicit && (
                                     <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
                                         E
@@ -134,13 +133,11 @@ const SongDisplay = ({
                             </h2>
                         </a>
                         <div>
-                            <div className="flex flex-col gap-1s">
-                                {artists}
-                            </div>
+                            <small>{artists}</small>
                         </div>
                     </div>
                 </div>
-                <div className="flex xs:flex-col xl:flex-row align-center flex-wrap gap-2 items-center justify-center xs:justify-end xs:items-end">
+                <div className="flex flex-col xs:flex-row align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end">
                     {(type === 1 || type === 3) && !selected && (
                         <button
                             className="buttonselect"
@@ -149,7 +146,7 @@ const SongDisplay = ({
                             }}
                         >
                             <span>
-                                <AddIcon />
+                                <AddIcon style={{ fontSize: "1rem" }} />
                             </span>
                         </button>
                     )}{" "}
@@ -161,7 +158,7 @@ const SongDisplay = ({
                             }}
                         >
                             <span>
-                                <ClearIcon />
+                                <ClearIcon style={{ fontSize: "1rem" }} />
                             </span>
                         </button>
                     )}
@@ -173,9 +170,11 @@ const SongDisplay = ({
                         >
                             <span>
                                 {currentPlayingId === songInfo.id ? (
-                                    <PauseIcon />
+                                    <PauseIcon style={{ fontSize: "1rem" }} />
                                 ) : (
-                                    <PlayArrowIcon />
+                                    <PlayArrowIcon
+                                        style={{ fontSize: "1rem" }}
+                                    />
                                 )}
                             </span>
                         </button>
@@ -188,9 +187,13 @@ const SongDisplay = ({
                         >
                             <span>
                                 {thisShowStats ? (
-                                    <VisibilityOffIcon />
+                                    <VisibilityOffIcon
+                                        style={{ fontSize: "1rem" }}
+                                    />
                                 ) : (
-                                    <BarChartIcon />
+                                    <BarChartIcon
+                                        style={{ fontSize: "1rem" }}
+                                    />
                                 )}
                             </span>
                         </button>
