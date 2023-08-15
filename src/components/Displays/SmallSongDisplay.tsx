@@ -5,7 +5,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     const { removeSong } = useManageQuery();
 
     return (
-        <div className="w-fit flex gap-1 border-[1px] p-2 rounded-[15px] justify-center items-center">
+        <div className="w-fit flex gap-1 border-[1px] p-2 rounded-[15px] justify-center items-center hover">
             <img src={song.album.images[0].url} className="h-[2rem]" />
             <div className="flex flex-col">
                 <a

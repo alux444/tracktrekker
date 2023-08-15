@@ -33,7 +33,7 @@ const CurrentSearchPage = () => {
     ));
 
     const allGenres = genres.map((genre) => (
-        <div className="flex gap-2 items-center rounded-lg p-2 border-[1px]">
+        <div className="flex gap-2 items-center rounded-lg p-2 border-[1px] hover">
             {genre.label.charAt(0).toUpperCase()}
             {genre.label.slice(1)}
             <button
@@ -46,7 +46,8 @@ const CurrentSearchPage = () => {
     ));
 
     return (
-        <div className="flex flex-col w-[90vw]  gap-2 p-3 rounded-[30px] z-300">
+        <div className="flex flex-col w-[90vw]  gap-2 p-3 rounded-[30px] z-300 justify-center items-center">
+            <div className="h-[1px] bg-purple-600 w-[50%]" />
             {songs.length === 0 &&
             genres.length === 0 &&
             artists.length === 0 ? (
@@ -76,6 +77,7 @@ const CurrentSearchPage = () => {
                     {allGenres}
                 </div>
             )}
+            <div className="h-[1px] bg-purple-600 w-[50%]" />
         </div>
     );
 };
