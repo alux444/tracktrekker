@@ -25,13 +25,13 @@ const ArtistDisplay = ({
     const { addArtist, removeArtist } = useManageQuery();
 
     useEffect(() => {
-        const checkSongStatus = () => {
+        const checkArtistStatus = () => {
             const isArtistSelected = artists.some(
                 (thisArtist) => thisArtist.id === artist.id
             );
             setSelected(isArtistSelected);
         };
-        checkSongStatus();
+        checkArtistStatus();
     }, [artists, artist]);
 
     const imageSrc =
@@ -45,7 +45,31 @@ const ArtistDisplay = ({
                     : "xl:w-[11vw] lg:w-[13vw] sm:w-[20vw] w-[30vw]"
             } justify-between rounded-[30px]`}
         >
-            <h2>{artist.name}</h2>
+            <div className="flex gap-1">
+                <h2>
+                    {fromSearch
+                        ? artist.name.length > 25
+                            ? artist.name.slice(0, 22) + "..."
+                            : artist.name
+                        : artist.name.length > 13
+                        ? artist.name.slice(0, 10) + "..."
+                        : artist.name}
+                </h2>
+                {!fromSearch && selected && (
+                    <button
+                        className={`${
+                            fromSearch
+                                ? "buttoncancel"
+                                : "hover:border-red-500 hover:text-red-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+                        }`}
+                        onClick={() => {
+                            removeArtist(artist);
+                        }}
+                    >
+                        <span>&times;</span>
+                    </button>
+                )}
+            </div>
             <a
                 href={artist.external_urls.spotify}
                 target="_blank"
@@ -55,7 +79,7 @@ const ArtistDisplay = ({
                     className={`${
                         fromSearch
                             ? "lg:w-[15vw] w-[25vw]"
-                            : "lg:w-[8vw] w-[15vw]"
+                            : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
                     } rounded-[20px]`}
                     src={imageSrc}
                     alt={artist.name}
@@ -74,16 +98,14 @@ const ArtistDisplay = ({
                         </span>
                     </button>
                 )}
-                {(!fromSearch || selected) && (
+                {selected && fromSearch && (
                     <button
                         className="buttoncancel"
                         onClick={() => {
                             removeArtist(artist);
                         }}
                     >
-                        <span>
-                            <ClearIcon />
-                        </span>
+                        <ClearIcon />
                     </button>
                 )}
                 {!showStats && type === 1 && (

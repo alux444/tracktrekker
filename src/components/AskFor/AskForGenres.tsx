@@ -25,7 +25,7 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit }) => {
     }, []);
 
     return (
-        <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
+        <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5 mb-10">
             <h2 className="text-lg grad">Select Genres</h2>
             <Select
                 multiple
@@ -35,10 +35,10 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit }) => {
             />
             <div className="flex gap-2 mt-3">
                 <button
-                    className="button2 border-purple-500 border-[1px] "
+                    className="button3 border-purple-500 border-[1px] "
                     onClick={submit}
                 >
-                    <span className="grad">Hide</span>
+                    <span className="">Hide</span>
                 </button>
             </div>
         </div>

@@ -23,7 +23,7 @@ type SelectProps = {
 } & (SingleSelectProps | MultipleSelectProps);
 
 export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
-    const [open, setOpen] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(true);
     const [highlighted, setHighlighted] = useState<number>(0);
     const [search, setSearch] = useState<string>("");
 
@@ -111,11 +111,11 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
     return (
         <>
             <div className="flex flex-col items-center">
-                <label>Filter:</label>
                 <input
                     value={search}
                     onChange={handleSearchChange}
-                    className="border-[1px] border-slate-500"
+                    className="border-[1px] border-slate-300 p-1 rounded-[7px]"
+                    placeholder="Filter Genres"
                 />
             </div>
             <div

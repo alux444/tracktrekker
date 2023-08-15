@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 .button1 {
     position: relative;
     overflow: hidden;
@@ -327,4 +331,9 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     opacity: 0;
     transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.hfit {
+    height: fit-content;
+    padding: 0.2rem 1.1rem;
 }

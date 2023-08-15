@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ArtistSeedContext, GenreContext, SongSeedContext } from "../../App";
 import CurrentSearchPage from "./CurrentSearchPage";
+import { PromptPageContext } from "./Views";
 
 type PromptProps = {
     setSong: () => void;
@@ -17,6 +18,8 @@ const PromptScreen: React.FC<PromptProps> = ({
     setSubmit,
     setExtra,
 }) => {
+    const { promptPage } = useContext(PromptPageContext);
+
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
@@ -26,25 +29,22 @@ const PromptScreen: React.FC<PromptProps> = ({
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
-                <div className="flex flex-col flex-wrap text-center p-3">
-                    <h2 className="grad text-lg">
-                        Select at least one song, artist or genre.
-                    </h2>
-                    <h2 className="grad text-md">
-                        Then, click results to get song recommendations!
-                    </h2>
-                </div>
                 <div className="flex flex-col justify-center text-center items-center">
                     <button
-                        className="button1 w-fit"
+                        className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
                         onClick={() => setExpandSearch(!expandSearch)}
                     >
-                        <div className="button1-content">
+                        <div className="grad">
                             <h2>Current Search</h2>
                             <p>
-                                {songSeeds.length} song(s) |{" "}
-                                {artistSeeds.length} artist(s) | {genres.length}{" "}
-                                genre(s)
+                                {songSeeds.length}{" "}
+                                {songSeeds.length === 1 ? "song" : "songs"} |{" "}
+                                {artistSeeds.length}{" "}
+                                {artistSeeds.length === 1
+                                    ? "artist"
+                                    : "artists"}{" "}
+                                | {genres.length}{" "}
+                                {genres.length === 1 ? "genre" : "genres"}
                             </p>
                         </div>
                     </button>
@@ -71,23 +71,21 @@ const PromptScreen: React.FC<PromptProps> = ({
                     </button>
                 </div>
             </div>
-            <button
-                className="button1"
-                onClick={setSubmit}
-                disabled={
-                    genres.length === 0 &&
-                    songSeeds.length === 0 &&
-                    artistSeeds.length === 0
-                }
-            >
-                <span className="button1-content">
-                    {genres.length === 0 &&
-                    songSeeds.length === 0 &&
-                    artistSeeds.length === 0
-                        ? "Select Song/Artist/Genre for results"
-                        : "Get results"}
-                </span>
-            </button>
+            {genres.length === 0 &&
+            songSeeds.length === 0 &&
+            artistSeeds.length === 0 ? (
+                promptPage === "home" && (
+                    <div className="flex flex-col flex-wrap text-center p-1">
+                        <h2 className="grad text-lg">
+                            Select at least one song, artist or genre.
+                        </h2>
+                    </div>
+                )
+            ) : (
+                <button className="button1" onClick={setSubmit}>
+                    <span className="button1-content">Get results</span>
+                </button>
+            )}
         </div>
     );
 };
