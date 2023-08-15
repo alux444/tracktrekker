@@ -26,10 +26,6 @@ const ResultsPage = ({
         });
     }
 
-    useEffect(() => {
-        getSongs();
-    }, [query]);
-
     const getSongs = async () => {
         const res = await getRecommended(query);
 
@@ -48,12 +44,25 @@ const ResultsPage = ({
         setSongs(res.tracks);
     };
 
+    useEffect(() => {
+        getSongs();
+    }, [query]);
+
     const results = songs.map((song) => (
         <SongDisplay songInfo={song} type={3} />
     ));
 
     return (
-        <div className="h-full flex flex-col items-center align-center gap-2 mt-3">
+        <div className="h-full flex flex-col items-center align-center gap-2 mt-12">
+            <h2 className="grad text-xl">Search Results</h2>
+            <p className="grad">
+                Searching for {query.seed_tracks.length}{" "}
+                {query.seed_tracks.length === 1 ? "song" : "songs"},{" "}
+                {query.seed_artists.length}{" "}
+                {query.seed_artists.length === 1 ? "artist" : "artists"},{" "}
+                {query.seed_genres.length}{" "}
+                {query.seed_genres.length === 1 ? "genre" : "genres"}
+            </p>
             <div className="flex gap-2">
                 <button
                     className="button2 border-purple-500 border-[1px]"
@@ -80,11 +89,11 @@ const ResultsPage = ({
                         {results}
                     </div>
                     <button
-                        className="button1"
+                        className="button2 border-purple-500 border-[1px]"
                         onClick={scrollToTop}
                         ref={topRef}
                     >
-                        <span className="button1-content">Top</span>
+                        <span className="grad">Top</span>
                     </button>
                 </div>
             ) : (
