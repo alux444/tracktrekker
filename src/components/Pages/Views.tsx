@@ -25,6 +25,8 @@ export const AudioContext = createContext<{
     setAudioIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
     currentPlayingId: string | null;
     setCurrentPlayingId: React.Dispatch<React.SetStateAction<string | null>>;
+    volume: number;
+    setVolume: React.Dispatch<React.SetStateAction<number>>;
 }>({
     audio: null,
     setAudio: () => {},
@@ -32,6 +34,8 @@ export const AudioContext = createContext<{
     setAudioIsPlaying: () => {},
     currentPlayingId: null,
     setCurrentPlayingId: () => {},
+    volume: 0.6,
+    setVolume: () => {},
 });
 
 const Views = () => {
@@ -42,6 +46,7 @@ const Views = () => {
     const [currentPlayingId, setCurrentPlayingId] = useState<string | null>(
         null
     );
+    const [volume, setVolume] = useState<number>(0.6);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -66,6 +71,16 @@ const Views = () => {
             audio.play();
         }
     }, [audio]);
+
+    useEffect(() => {
+        const handleVolumeChange = () => {
+            if (audio) {
+                audio.volume = volume;
+            }
+        };
+
+        handleVolumeChange();
+    }, [audio, volume]);
 
     useEffect(() => {
         if (currentPage !== "home") {
@@ -100,6 +115,8 @@ const Views = () => {
                     setAudioIsPlaying,
                     currentPlayingId,
                     setCurrentPlayingId,
+                    volume,
+                    setVolume,
                 }}
             >
                 <div className="flex gap-2 flex-col justify-between border-2 min-h-screen items-center h-fit w-screen text-xs md:text-sm lg:text-md">

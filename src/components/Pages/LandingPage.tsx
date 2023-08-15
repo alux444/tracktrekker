@@ -1,16 +1,19 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { TokenContext } from "../../App";
 import getAccessToken from "../../utils/getAccessToken";
 import hero from "../../imgs/hero.jpg";
 
 const LandingPage = () => {
     const { setToken } = useContext(TokenContext);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const setAccessToken = async () => {
+        setLoading(true);
         const token: string | null = await getAccessToken();
         if (token !== null) {
             console.log(token);
             setToken(token);
+            setLoading(false);
         } else {
             console.log("error getting token");
         }
@@ -25,8 +28,14 @@ const LandingPage = () => {
                     <h2 className="grad text-3xl">New</h2>
                     <p className="grad">Created with Spotify WebAPI</p>
                 </div>
-                <button className="button1" onClick={setAccessToken}>
-                    <span className="button1-content">Get Started</span>
+                <button
+                    className="button1"
+                    disabled={loading}
+                    onClick={setAccessToken}
+                >
+                    <span className="button1-content">
+                        {loading ? "Loading..." : "Get Started"}
+                    </span>
                 </button>
             </div>
             <div>

@@ -16,6 +16,7 @@ const ExtraCriteriaTriple = ({
     dialog: string;
 }) => {
     const { extras, setExtras } = useContext(ExtrasContext);
+
     const initial: boolean = criteriaName in extras;
 
     const criteria = extras?.[criteriaName];
@@ -30,11 +31,27 @@ const ExtraCriteriaTriple = ({
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [currentDescription, setCurrentDescription] = useState("");
-    const [showSelection, setShowSelection] = useState<boolean>(initial);
 
+    const [showSelection, setShowSelection] = useState<boolean>(initial);
     const [min, setMin] = useState<number>(initialMinMaxTarg[0]);
     const [max, setMax] = useState<number>(initialMinMaxTarg[1]);
     const [targ, setTarg] = useState<number | undefined>(initialMinMaxTarg[2]);
+
+    useEffect(() => {
+        const initial = criteriaName in extras;
+        const criteria = extras?.[criteriaName];
+        const initialMinMaxTarg: MinMaxTargConfig = criteria
+            ? [
+                  criteria.min,
+                  criteria.max,
+                  criteria.target ? criteria.target : undefined,
+              ]
+            : [0, maxValue, undefined];
+        setShowSelection(initial);
+        setMin(initialMinMaxTarg[0]);
+        setMax(initialMinMaxTarg[1]);
+        setTarg(initialMinMaxTarg[2]);
+    }, [extras]);
 
     const updateForm = () => {
         const updatedExtras: ExtraInfo = { ...extras };
