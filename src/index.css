@@ -101,7 +101,7 @@ body {
 }
 
 .buttoncancel span {
-    margin: 10px;
+    margin: 2px;
 }
 
 .buttoncancel::before {
@@ -151,7 +151,7 @@ body {
 }
 
 .buttonselect span {
-    margin: 10px;
+    margin: 2px;
 }
 
 .buttonselect::before {
@@ -201,7 +201,7 @@ body {
 }
 
 .buttonprev span {
-    margin: 10px;
+    margin: 2px;
 }
 
 .buttonprev::before {
