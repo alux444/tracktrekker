@@ -26,20 +26,12 @@ const PromptScreen: React.FC<PromptProps> = ({
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
-                <div className="flex flex-col flex-wrap text-center p-3">
-                    <h2 className="grad text-lg">
-                        Select at least one song, artist or genre.
-                    </h2>
-                    <h2 className="grad text-md">
-                        Then, click results to get song recommendations!
-                    </h2>
-                </div>
                 <div className="flex flex-col justify-center text-center items-center">
                     <button
-                        className="button1 w-fit mb-2"
+                        className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
                         onClick={() => setExpandSearch(!expandSearch)}
                     >
-                        <div className="button1-content">
+                        <div className="grad">
                             <h2>Current Search</h2>
                             <p>
                                 {songSeeds.length}{" "}
@@ -76,23 +68,33 @@ const PromptScreen: React.FC<PromptProps> = ({
                     </button>
                 </div>
             </div>
-            <button
-                className="button1"
-                onClick={setSubmit}
-                disabled={
-                    genres.length === 0 &&
-                    songSeeds.length === 0 &&
-                    artistSeeds.length === 0
-                }
-            >
-                <span className="button1-content">
-                    {genres.length === 0 &&
-                    songSeeds.length === 0 &&
-                    artistSeeds.length === 0
-                        ? "Select Song/Artist/Genre for results"
-                        : "Get results"}
-                </span>
-            </button>
+            {genres.length === 0 &&
+            songSeeds.length === 0 &&
+            artistSeeds.length === 0 ? (
+                <div className="flex flex-col flex-wrap text-center p-1">
+                    <h2 className="grad text-lg">
+                        Select at least one song, artist or genre.
+                    </h2>
+                </div>
+            ) : (
+                <button
+                    className="button1"
+                    onClick={setSubmit}
+                    disabled={
+                        genres.length === 0 &&
+                        songSeeds.length === 0 &&
+                        artistSeeds.length === 0
+                    }
+                >
+                    <span className="button1-content">
+                        {genres.length === 0 &&
+                        songSeeds.length === 0 &&
+                        artistSeeds.length === 0
+                            ? "Select Song/Artist/Genre for results"
+                            : "Get results"}
+                    </span>
+                </button>
+            )}
         </div>
     );
 };

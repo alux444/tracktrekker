@@ -25,7 +25,7 @@ const AskForGenres: React.FC<AskForGenresProps> = ({ submit }) => {
     }, []);
 
     return (
-        <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
+        <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5 mb-10">
             <h2 className="text-lg grad">Select Genres</h2>
             <Select
                 multiple
