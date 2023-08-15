@@ -2,48 +2,48 @@ export type ExtraInfo = {
     acousticness?: {
         min: number;
         max: number;
-        target: number | undefined;
+        target: number;
     };
 
     danceability?: {
         min: number;
         max: number;
-        target: number | undefined;
+        target: number;
     };
 
     energy?: {
         min: number;
         max: number;
-        target: number | undefined;
+        target: number;
     };
 
     instrumentalness?: {
         min: number;
         max: number;
-        target: number | undefined;
+        target: number;
     };
 
     liveness?: {
         min: number;
         max: number;
-        target: number | undefined;
+        target: number;
     };
 
     popularity?: {
         min: number;
         max: number;
-        target: number | undefined;
+        target: number;
     };
 
     speechiness?: {
         min: number;
         max: number;
-        target: number | undefined;
+        target: number;
     };
 
     valence?: {
         min: number;
         max: number;
-        target: number | undefined;
+        target: number;
     };
 };

@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 
 interface CriteriaInputProps {
-    value: number | undefined;
+    value: number;
     changeFunction: (e: ChangeEvent<HTMLInputElement>) => void;
     type: "Min" | "Max" | "Target";
     max: number;
@@ -31,12 +31,10 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
     return (
         <div className="border-[1px] p-1 rounded-[10px] flex flex-col items-center justify-center text-center">
             <div className="flex gap-1 items-center p-1">
-                <p className={`${value === undefined && "text-red-500"}`}>
-                    {value === undefined
-                        ? "Target Disabled"
-                        : type + ":" + value}
+                <p>
+                    {type} - {value}
                 </p>
-                {type === "Target" && value !== undefined && (
+                {type === "Target" && (
                     <button onClick={disable} className="buttoncancel">
                         &times;
                     </button>

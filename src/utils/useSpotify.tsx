@@ -49,7 +49,7 @@ const useSpotify = () => {
                 if (value) {
                     extraParams[`min_${key}`] = value.min;
                     extraParams[`max_${key}`] = value.max;
-                    if (typeof value.target === "number") {
+                    if (value.target !== -1) {
                         extraParams[`target_${key}`] = value.target;
                     }
                 }
@@ -91,7 +91,6 @@ const useSpotify = () => {
                 headers,
                 params: query,
             });
-            console.log(response.data);
             return response.data;
             // You can access the artist data from the response here:
         } catch (error) {
@@ -116,7 +115,6 @@ const useSpotify = () => {
                     limit: 20,
                 },
             });
-            console.log(response.data);
             return response.data;
             // You can access the artist data from the response here:
         } catch (error) {
