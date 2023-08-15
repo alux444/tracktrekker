@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
-import { ArtistSeedContext, GenreContext, SongSeedContext } from "../../App";
+import {
+    ArtistSeedContext,
+    ExtrasContext,
+    GenreContext,
+    SongSeedContext,
+} from "../../App";
 import CurrentSearchPage from "./CurrentSearchPage";
 import { PromptPageContext } from "./Views";
 
@@ -23,6 +28,7 @@ const PromptScreen: React.FC<PromptProps> = ({
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
+    const { extras } = useContext(ExtrasContext);
 
     const [expandSearch, setExpandSearch] = useState<boolean>(false);
 
@@ -46,6 +52,7 @@ const PromptScreen: React.FC<PromptProps> = ({
                                 | {genres.length}{" "}
                                 {genres.length === 1 ? "genre" : "genres"}
                             </p>
+                            <p>{Object.keys(extras).length} extra criteria</p>
                         </div>
                     </button>
                 </div>

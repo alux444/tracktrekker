@@ -2,6 +2,7 @@ import { useContext } from "react";
 import {
     ArtistInfoContext,
     ArtistSeedContext,
+    ExtrasContext,
     GenreContext,
     SongSeedContext,
     SongsInfoContext,
@@ -9,6 +10,9 @@ import {
 import ArtistDisplay from "../Displays/ArtistDisplay";
 import useManageQuery from "../../utils/useManageQuery";
 import SmallSongDisplay from "../Displays/SmallSongDisplay";
+import { descriptions } from "../../utils/descriptions";
+import ExtraCriteriaTriple from "../AskFor/ExtraCriteriaTriple";
+import { ExtraInfo } from "../../interfaces/extrasInfo";
 
 const CurrentSearchPage = () => {
     const { songs, setSongs } = useContext(SongsInfoContext);
@@ -16,6 +20,7 @@ const CurrentSearchPage = () => {
     const { artists, setArtists } = useContext(ArtistInfoContext);
     const { setArtistSeeds } = useContext(ArtistSeedContext);
     const { genres, setGenres } = useContext(GenreContext);
+    const { extras, setExtras } = useContext(ExtrasContext);
     const { removeGenre } = useManageQuery();
 
     const clearSearch = () => {
@@ -24,6 +29,7 @@ const CurrentSearchPage = () => {
         setArtistSeeds([]);
         setArtists([]);
         setGenres([]);
+        setExtras({});
     };
 
     const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);
@@ -43,6 +49,14 @@ const CurrentSearchPage = () => {
                 <span>&times;</span>
             </button>
         </div>
+    ));
+
+    const allExtras = Object.keys(extras).map((extraName: string) => (
+        <ExtraCriteriaTriple
+            criteriaName={extraName as keyof ExtraInfo}
+            maxValue={extraName === "popularity" ? 100 : 1}
+            dialog={descriptions[extraName]}
+        />
     ));
 
     return (
@@ -77,6 +91,7 @@ const CurrentSearchPage = () => {
                     {allGenres}
                 </div>
             )}
+            {allExtras}
             <div className="h-[1px] bg-purple-600 w-[50%]" />
         </div>
     );
