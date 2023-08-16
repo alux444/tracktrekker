@@ -8,11 +8,15 @@ STYLES
     - reposition selected songs to top of list
 
 FEATURES
-    - add managing extra criteria from currentsearch
-    - manage audio of previewing 
-    - add spotify login for users
-    - view top tracks, artists, be able to add them to search
+    - show top songs on an artist instead of stats
+    - move authentication to serverside
     - create a playlist of suggestions
+
+16 Aug
+COMPLETED view top tracks, artists, be able to add them to search
+COMPLETED add spotify login for users
+COMPLETED add managing extra criteria from currentsearch
+COMPLETED manage audio of previewing 
 
 14 Aug
 COMPLETED change style of hide button to differentiate

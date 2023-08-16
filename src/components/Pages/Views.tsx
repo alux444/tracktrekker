@@ -8,6 +8,7 @@ import TutorialPage from "./TutorialPage";
 export type page = "home" | "about" | "tutorial";
 export type PromptPage =
     | "home"
+    | "user"
     | "songs"
     | "artists"
     | "genres"

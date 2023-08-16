@@ -15,6 +15,7 @@ import ResultsPage from "./ResultsPage";
 import LandingPage from "./LandingPage";
 import PromptScreen from "./PromptScreen";
 import { PromptPageContext } from "./Views";
+import UserTopItemsPage from "./UserTopItemsPage";
 
 export const StatsContext = createContext<{
     showStats: boolean;
@@ -68,6 +69,7 @@ const HomePage = () => {
                     <div className="w-[100vw] flex flex-col justify-center items-center">
                         {
                             <PromptScreen
+                                setUser={() => setPromptPage("user")}
                                 setArtist={() => setPromptPage("artists")}
                                 setGenre={() => setPromptPage("genres")}
                                 setSong={() => setPromptPage("songs")}
@@ -75,6 +77,7 @@ const HomePage = () => {
                                 setSubmit={generateForm}
                             />
                         }
+                        {promptPage === "user" && <UserTopItemsPage />}
                         {promptPage === "songs" && (
                             <AskForSongs submit={returnToHome} />
                         )}

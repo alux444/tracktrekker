@@ -8,7 +8,7 @@ import ArtistDisplay from "../Displays/ArtistDisplay";
 
 const UserTopItemsPage = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [showSongs, setShowSongs] = useState<boolean>(false);
+    const [showSongs, setShowSongs] = useState<boolean>(true);
     const [currentTerm, setCurrentTerm] = useState<
         "short_term" | "medium_term" | "long_term"
     >("short_term");
@@ -58,6 +58,13 @@ const UserTopItemsPage = () => {
             type={1}
         />
     ));
+    const handleTermChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedTerm = event.target.value as
+            | "short_term"
+            | "medium_term"
+            | "long_term";
+        setCurrentTerm(selectedTerm);
+    };
 
     const time =
         currentTerm === "short_term"
@@ -67,15 +74,27 @@ const UserTopItemsPage = () => {
             : "All Time";
 
     return (
-        <div className="flex gap-2 items-center justify-center flex-col w-[90vw]">
-            <div className="flex gap-1">
+        <div className="flex gap-2 items-center justify-center flex-col w-[90vw] p-3">
+            <div className="flex gap-1 items-center">
                 <button
                     className="button3 w-fit"
                     onClick={() => setShowSongs(!showSongs)}
                 >
                     <span>{showSongs ? "Show Artists" : "Show Songs"}</span>
                 </button>
+                <div>
+                    <select
+                        className="border-[2px] p-1 border-purple-400 rounded-[8px]"
+                        value={currentTerm}
+                        onChange={handleTermChange}
+                    >
+                        <option value="short_term">Past 4 weeks</option>
+                        <option value="medium_term">Past 6 months</option>
+                        <option value="long_term">All time</option>
+                    </select>
+                </div>
             </div>
+            {error && <p className="grad">Error fetching data :(</p>}
             {showSongs ? (
                 <div className="flex flex-col text-center w-full gap-1">
                     <p className="grad">Your Top Songs ({time})</p>
