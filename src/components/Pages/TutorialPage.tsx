@@ -17,9 +17,9 @@ const TutorialPage = () => {
                 avaliable
             </p>
             <small>
-                Note: Sometimes your search will result in less than 20 results,
-                so rerolling won't do anything. Simplifying your search will
-                increase the amount of results.
+                Note: Sometimes your search will be too complicated, or you have
+                too many obscure songs/artists. You'll just have to simplify
+                your search.
             </small>
             <br />
             <p>
@@ -35,17 +35,15 @@ const TutorialPage = () => {
                 All results will be filtered within your maximum and minimum
                 range.
             </p>
+            <br />
             <p>
                 The target will define how your results are sorted. Results will
                 be sorted by the closest values to your given target(s).
             </p>
+            <br />
             <p>
                 For example, having a target with popularity 0 would result in
                 the results being sorted from ascending popularity.
-            </p>
-            <p>
-                This also means rerolling with a target likely doesn't result in
-                much change.
             </p>
         </div>
     );
