@@ -72,6 +72,7 @@ const useSpotify = () => {
                     seed_tracks: arrayToString(songForm.seed_tracks),
                     seed_artists: arrayToString(songForm.seed_artists),
                     seed_genres: arrayToString(songForm.seed_genres),
+                    limit: 48,
                 },
                 extraParams
             );
@@ -103,7 +104,7 @@ const useSpotify = () => {
                 params: {
                     q: query,
                     type: "track,artist",
-                    limit: 20,
+                    limit: 80,
                 },
             });
             return response.data;
@@ -130,7 +131,7 @@ const useSpotify = () => {
                 headers,
                 params: {
                     time_range: term,
-                    limit: 20,
+                    limit: 50,
                 },
             });
             console.log(response);

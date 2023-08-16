@@ -70,8 +70,8 @@ const SearchForm = ({
           )
         : [];
 
-    const displaysPerPage = 8;
-    const indexOfLastItem = currentPage * 8;
+    const displaysPerPage = type === "tracks" ? 8 : 20;
+    const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
     const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
     const currentArtists = artistReults.slice(
@@ -164,7 +164,7 @@ const SearchForm = ({
                                 ? uniqueTracks.length
                                 : artistReults.length
                         }
-                        displaysPerPage={8}
+                        displaysPerPage={displaysPerPage}
                         paginate={changePage}
                         currentPage={currentPage}
                     />
