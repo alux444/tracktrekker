@@ -61,6 +61,11 @@ export const ExtrasContext = createContext<{
     setExtras: () => {},
 });
 
+export const DevContext = createContext<{
+    devMode: boolean;
+    setDevMode: React.Dispatch<React.SetStateAction<boolean>>;
+}>({ devMode: false, setDevMode: () => {} });
+
 function App() {
     const [token, setToken] = useState<string | null>(null);
     const [songSeeds, setSongSeeds] = useState<string[]>([]);
@@ -69,6 +74,7 @@ function App() {
     const [artists, setArtists] = useState<ArtistInfo[]>([]);
     const [genres, setGenres] = useState<SelectOption[]>([]);
     const [extras, setExtras] = useState<ExtraInfo>({});
+    const [devMode, setDevMode] = useState<boolean>(false);
 
     return (
         <TokenContext.Provider value={{ token, setToken }}>
@@ -86,9 +92,13 @@ function App() {
                                 <ExtrasContext.Provider
                                     value={{ extras, setExtras }}
                                 >
-                                    <div className="flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
-                                        <Views />
-                                    </div>
+                                    <DevContext.Provider
+                                        value={{ devMode, setDevMode }}
+                                    >
+                                        <div className="flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
+                                            <Views />
+                                        </div>
+                                    </DevContext.Provider>
                                 </ExtrasContext.Provider>
                             </GenreContext.Provider>
                         </ArtistInfoContext.Provider>

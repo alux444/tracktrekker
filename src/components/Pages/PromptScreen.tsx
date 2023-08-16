@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import {
     ArtistSeedContext,
+    DevContext,
     ExtrasContext,
     GenreContext,
     SongSeedContext,
@@ -9,6 +10,7 @@ import CurrentSearchPage from "./CurrentSearchPage";
 import { PromptPageContext } from "./Views";
 
 const PromptScreen = ({ submit }: { submit: () => void }) => {
+    const { devMode } = useContext(DevContext);
     const { promptPage, setPromptPage } = useContext(PromptPageContext);
 
     const { songSeeds } = useContext(SongSeedContext);
@@ -30,11 +32,13 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-1 justify-center text-center items-center">
-                    <button className="button3" onClick={switchCustomMode}>
-                        {promptPage === "user"
-                            ? "To Custom Search"
-                            : "To My Top Artists/Songs"}
-                    </button>
+                    {devMode && (
+                        <button className="button3" onClick={switchCustomMode}>
+                            {promptPage === "user"
+                                ? "To Custom Search"
+                                : "To My Top Artists/Songs"}
+                        </button>
+                    )}
                     <button
                         className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
                         onClick={() => setExpandSearch(!expandSearch)}

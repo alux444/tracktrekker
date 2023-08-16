@@ -1,17 +1,24 @@
 import { useContext, useState } from "react";
-import { TokenContext } from "../../App";
+import { DevContext, TokenContext } from "../../App";
 import hero from "../../imgs/hero.jpg";
 import useUser from "../../utils/useUser";
+import getAccessToken from "../../utils/noAuthAccessToken";
 
 const LandingPage = () => {
     const { setToken } = useContext(TokenContext);
     const [loading, setLoading] = useState<boolean>(false);
+    const { devMode, setDevMode } = useContext(DevContext);
 
     const { promptUserLogin } = useUser();
 
     const setAccessToken = async () => {
         setLoading(true);
-        const token: string | null = await promptUserLogin();
+        let token: string | null;
+        if (devMode) {
+            token = await promptUserLogin();
+        } else {
+            token = await getAccessToken();
+        }
         if (token !== null) {
             console.log(token);
             setToken(token);
@@ -42,6 +49,11 @@ const LandingPage = () => {
             </div>
             <div>
                 <img src={hero} className="h-[35vh] lg:h-[50vh]" />
+                <button onClick={() => setDevMode(!devMode)}>
+                    <span className="grad">
+                        {devMode ? "Developer Mode" : "TrackTrekker"}
+                    </span>
+                </button>
             </div>
         </div>
     );
