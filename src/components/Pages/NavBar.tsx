@@ -5,9 +5,15 @@ type NavBarProps = {
     currentPage: page;
     toHome: () => void;
     toAbout: () => void;
+    toTutorial: () => void;
 };
 
-const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
+const NavBar: React.FC<NavBarProps> = ({
+    currentPage,
+    toHome,
+    toAbout,
+    toTutorial,
+}) => {
     const { setPromptPage } = useContext(PromptPageContext);
     return (
         <div className="flex gap-8 flex-wrap justify-center p-3 items-center">
@@ -22,25 +28,38 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
             </button>
             <div className="flex flex-col gap-[3px]">
                 <button
-                    className={`${
-                        currentPage === "home" &&
-                        "grad border-purple-500 border-[1px] p-1 rounded-[10px]"
-                    }`}
                     onClick={() => {
                         toHome();
                         setPromptPage("home");
                     }}
                 >
-                    Home
+                    {" "}
+                    <span
+                        className={`${
+                            currentPage === "home" && "grad underline"
+                        }`}
+                    >
+                        Home
+                    </span>
                 </button>
-                <button
-                    className={`${
-                        currentPage === "about" &&
-                        "grad border-purple-500 border-[1px] p-1 rounded-[10px]"
-                    }`}
-                    onClick={toAbout}
-                >
-                    About
+                <button onClick={toTutorial}>
+                    <span
+                        className={`${
+                            currentPage === "tutorial" && "grad underline"
+                        }`}
+                    >
+                        Tutorial
+                    </span>
+                </button>
+                <button onClick={toAbout}>
+                    {" "}
+                    <span
+                        className={`${
+                            currentPage === "about" && "grad underline"
+                        }`}
+                    >
+                        About
+                    </span>
                 </button>
             </div>
         </div>

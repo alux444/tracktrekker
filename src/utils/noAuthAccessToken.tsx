@@ -13,6 +13,8 @@ const getAccessToken = async () => {
         grant_type: "client_credentials",
         client_id: clientId,
         client_secret: clientSecret,
+        redirect_uri: "https://alux444.github.io/tracktrekker/",
+        scope: "user-top-read",
     }).toString();
 
     try {

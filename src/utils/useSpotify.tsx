@@ -67,19 +67,12 @@ const useSpotify = () => {
                 return array.join(",");
             };
 
-            if (
-                songForm.seed_tracks.length === 0 &&
-                songForm.seed_artists.length === 0 &&
-                songForm.seed_genres.length === 0
-            ) {
-                return [];
-            }
-
             const query = Object.assign(
                 {
                     seed_tracks: arrayToString(songForm.seed_tracks),
                     seed_artists: arrayToString(songForm.seed_artists),
                     seed_genres: arrayToString(songForm.seed_genres),
+                    limit: 48,
                 },
                 extraParams
             );
@@ -111,9 +104,10 @@ const useSpotify = () => {
                 params: {
                     q: query,
                     type: "track,artist",
-                    limit: 20,
+                    limit: 32,
                 },
             });
+            console.log(response.data);
             return response.data;
             // You can access the artist data from the response here:
         } catch (error) {
@@ -122,7 +116,40 @@ const useSpotify = () => {
         }
     };
 
-    return { getGenres, getRecommended, getSearch, getFeatures };
+    const getTopItems = async (
+        term: "short_term" | "medium_term" | "long_term",
+        type: "track" | "artist"
+    ) => {
+        const endpoint = type === "track" ? "tracks" : "artists";
+        const url = `https://api.spotify.com/v1/me/top/${endpoint}`;
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        try {
+            const response = await axios.get(url, {
+                headers,
+                params: {
+                    time_range: term,
+                    limit: 48,
+                },
+            });
+            console.log(response);
+            return response.data.items;
+        } catch (error) {
+            console.error("Error:", error);
+            return null;
+        }
+    };
+
+    return {
+        getGenres,
+        getRecommended,
+        getSearch,
+        getFeatures,
+        getTopItems,
+    };
 };
 
 export default useSpotify;

@@ -3,10 +3,12 @@ import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import TutorialPage from "./TutorialPage";
 
-export type page = "home" | "about";
+export type page = "home" | "about" | "tutorial";
 export type PromptPage =
     | "home"
+    | "user"
     | "songs"
     | "artists"
     | "genres"
@@ -40,7 +42,7 @@ export const AudioContext = createContext<{
 
 const Views = () => {
     const [currentPage, setCurrentPage] = useState<page>("home");
-    const [promptPage, setPromptPage] = useState<PromptPage>("home");
+    const [promptPage, setPromptPage] = useState<PromptPage>("user");
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const [audioIsPlaying, setAudioIsPlaying] = useState<boolean>(false);
     const [currentPlayingId, setCurrentPlayingId] = useState<string | null>(
@@ -105,6 +107,10 @@ const Views = () => {
         setCurrentPage("about");
     };
 
+    const toTutorial = () => {
+        setCurrentPage("tutorial");
+    };
+
     return (
         <PromptPageContext.Provider value={{ promptPage, setPromptPage }}>
             <AudioContext.Provider
@@ -124,9 +130,11 @@ const Views = () => {
                         currentPage={currentPage}
                         toHome={toHome}
                         toAbout={toAbout}
+                        toTutorial={toTutorial}
                     />
                     {currentPage === "home" && <HomePage />}
                     {currentPage === "about" && <AboutPage />}
+                    {currentPage === "tutorial" && <TutorialPage />}
                     <Footer />
                 </div>
             </AudioContext.Provider>

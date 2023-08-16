@@ -5,6 +5,7 @@ import useSpotify from "../../utils/useSpotify";
 import SongDisplay from "../Displays/SongDisplay";
 import { StatsContext } from "./HomePage";
 import VolumeSlider from "../Misc/VolumeSlider";
+import Pagination from "../Misc/Pagination";
 
 const ResultsPage = ({
     query,
@@ -17,6 +18,7 @@ const ResultsPage = ({
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     const topRef = useRef(null);
 
@@ -29,13 +31,6 @@ const ResultsPage = ({
 
     const getSongs = async () => {
         const res = await getRecommended(query);
-
-        if (res === 1) {
-            setMessage(
-                "You need to select one artist, song or genre to search."
-            );
-            return;
-        }
 
         if (res === 2) {
             setMessage(
@@ -51,7 +46,20 @@ const ResultsPage = ({
         getSongs();
     }, [query]);
 
-    const results = songs.map((song) => (
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [query, songs]);
+
+    const changePage = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const displaysPerPage = 8;
+    const indexOfLastItem = currentPage * displaysPerPage;
+    const indexOfFirstItem = indexOfLastItem - displaysPerPage;
+    const currentTracks = songs.slice(indexOfFirstItem, indexOfLastItem);
+
+    const results = currentTracks.map((song) => (
         <SongDisplay songInfo={song} type={3} />
     ));
 
@@ -99,6 +107,12 @@ const ResultsPage = ({
                     >
                         <span className="grad">Top</span>
                     </button>
+                    <Pagination
+                        totalDisplay={songs.length}
+                        displaysPerPage={displaysPerPage}
+                        paginate={changePage}
+                        currentPage={currentPage}
+                    />
                 </div>
             ) : (
                 <div className="flex text-center p-3">
