@@ -25,13 +25,12 @@ const Pagination = ({
                 {pageNumbers.map((number) => (
                     <li key={number}>
                         <button
-                            className="altbutton"
+                            className={`button2 border-[1px] ${
+                                number === currentPage
+                                    ? "border-purple-500"
+                                    : "border-slate-400"
+                            }`}
                             onClick={() => paginate(number)}
-                            style={{
-                                borderWidth:
-                                    currentPage === number ? "3px" : "",
-                                width: "60px",
-                            }}
                         >
                             {number}
                         </button>
