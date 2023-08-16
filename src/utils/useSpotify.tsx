@@ -67,14 +67,6 @@ const useSpotify = () => {
                 return array.join(",");
             };
 
-            if (
-                songForm.seed_tracks.length === 0 &&
-                songForm.seed_artists.length === 0 &&
-                songForm.seed_genres.length === 0
-            ) {
-                return [];
-            }
-
             const query = Object.assign(
                 {
                     seed_tracks: arrayToString(songForm.seed_tracks),
@@ -122,7 +114,41 @@ const useSpotify = () => {
         }
     };
 
-    return { getGenres, getRecommended, getSearch, getFeatures };
+    const getTopItems = async (
+        term: "short_term" | "medium_term" | "long_term",
+        type: "track" | "artist"
+    ) => {
+        const url = "https://api.spotify.com/v1/me/top/";
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        try {
+            const response = await axios.get(url, {
+                headers,
+                params: {
+                    time_range: term,
+                    type: type,
+                    limit: 20,
+                },
+            });
+            console.log(response);
+            return response.data;
+            // You can access the artist data from the response here:
+        } catch (error) {
+            console.error("Error:", error);
+            return null;
+        }
+    };
+
+    return {
+        getGenres,
+        getRecommended,
+        getSearch,
+        getFeatures,
+        getTopItems,
+    };
 };
 
 export default useSpotify;

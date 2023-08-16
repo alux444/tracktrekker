@@ -3,8 +3,9 @@ import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import TutorialPage from "./TutorialPage";
 
-export type page = "home" | "about";
+export type page = "home" | "about" | "tutorial" | "login";
 export type PromptPage =
     | "home"
     | "songs"
@@ -105,6 +106,10 @@ const Views = () => {
         setCurrentPage("about");
     };
 
+    const toTutorial = () => {
+        setCurrentPage("tutorial");
+    };
+
     return (
         <PromptPageContext.Provider value={{ promptPage, setPromptPage }}>
             <AudioContext.Provider
@@ -124,9 +129,11 @@ const Views = () => {
                         currentPage={currentPage}
                         toHome={toHome}
                         toAbout={toAbout}
+                        toTutorial={toTutorial}
                     />
                     {currentPage === "home" && <HomePage />}
                     {currentPage === "about" && <AboutPage />}
+                    {currentPage === "tutorial" && <TutorialPage />}
                     <Footer />
                 </div>
             </AudioContext.Provider>

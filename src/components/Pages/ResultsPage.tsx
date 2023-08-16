@@ -30,13 +30,6 @@ const ResultsPage = ({
     const getSongs = async () => {
         const res = await getRecommended(query);
 
-        if (res === 1) {
-            setMessage(
-                "You need to select one artist, song or genre to search."
-            );
-            return;
-        }
-
         if (res === 2) {
             setMessage(
                 "Sorry... there were no matches for your search. Maybe your tracks/artists were too obscure, or your search was too complicated"
