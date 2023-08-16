@@ -132,7 +132,7 @@ const useSpotify = () => {
                 headers,
                 params: {
                     time_range: term,
-                    limit: 50,
+                    limit: 48,
                 },
             });
             console.log(response);
