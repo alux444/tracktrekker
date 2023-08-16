@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import TutorialPage from "./TutorialPage";
 
-export type page = "home" | "about" | "tutorial" | "login";
+export type page = "home" | "about" | "tutorial";
 export type PromptPage =
     | "home"
     | "songs"

@@ -136,7 +136,7 @@ const useSpotify = () => {
                 },
             });
             console.log(response);
-            return response.data;
+            return response.data.items;
         } catch (error) {
             console.error("Error:", error);
             return null;

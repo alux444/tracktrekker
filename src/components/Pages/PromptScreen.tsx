@@ -24,7 +24,7 @@ const PromptScreen: React.FC<PromptProps> = ({
     setSubmit,
     setExtra,
 }) => {
-    const { promptPage } = useContext(PromptPageContext);
+    const { promptPage, setPromptPage } = useContext(PromptPageContext);
 
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
@@ -34,14 +34,20 @@ const PromptScreen: React.FC<PromptProps> = ({
     const [expandSearch, setExpandSearch] = useState<boolean>(false);
     const [customMode, setCustomMode] = useState<boolean>(false);
 
+    const switchCustomMode = () => {
+        if (customMode) {
+            setCustomMode(false);
+            setPromptPage("home");
+        } else {
+            setCustomMode(true);
+        }
+    };
+
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-1 justify-center text-center items-center">
-                    <button
-                        className="button3"
-                        onClick={() => setCustomMode(!customMode)}
-                    >
+                    <button className="button3" onClick={switchCustomMode}>
                         {!customMode
                             ? "To Custom Search"
                             : "To My Top Artists/Songs"}
