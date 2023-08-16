@@ -56,8 +56,6 @@ const useSpotify = () => {
             }
         }
 
-        console.log(extraParams);
-
         const url = "https://api.spotify.com/v1/recommendations";
 
         const headers = {
@@ -74,7 +72,7 @@ const useSpotify = () => {
                 songForm.seed_artists.length === 0 &&
                 songForm.seed_genres.length === 0
             ) {
-                return 1;
+                return [];
             }
 
             const query = Object.assign(
@@ -85,12 +83,13 @@ const useSpotify = () => {
                 },
                 extraParams
             );
-            console.log(query);
+            console.log("query" + query);
 
             const response = await axios.get(url, {
                 headers,
                 params: query,
             });
+            console.log(response.data);
             return response.data;
             // You can access the artist data from the response here:
         } catch (error) {

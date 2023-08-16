@@ -54,7 +54,9 @@ const SongDisplay = ({
             const res: AudioFeatures | undefined = await getFeatures(
                 songInfo.id
             );
-            setFeatures(res);
+            if (res !== undefined) {
+                setFeatures(res);
+            }
         };
         fetchFeaturesForThisSong();
     }, []);
@@ -209,6 +211,15 @@ const SongDisplay = ({
                             features={features}
                             popularity={songInfo.popularity}
                         />
+                    </div>
+                )}
+            {!features &&
+                (type === 1 || type === 3) &&
+                (showStats || thisShowStats) && (
+                    <div className="w-full lg:w-[20vw] md:w-[30vw] p-2">
+                        <p className="grad">
+                            No Stats Avalaible for this song.
+                        </p>
                     </div>
                 )}
         </div>
