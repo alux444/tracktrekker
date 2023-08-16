@@ -1,15 +1,17 @@
 import { useContext, useState } from "react";
 import { TokenContext } from "../../App";
-import getAccessToken from "../../utils/getAccessToken";
 import hero from "../../imgs/hero.jpg";
+import useUser from "../../utils/useUser";
 
 const LandingPage = () => {
     const { setToken } = useContext(TokenContext);
     const [loading, setLoading] = useState<boolean>(false);
 
+    const { promptUserLogin } = useUser();
+
     const setAccessToken = async () => {
         setLoading(true);
-        const token: string | null = await getAccessToken();
+        const token: string | null = await promptUserLogin();
         if (token !== null) {
             console.log(token);
             setToken(token);

@@ -7,7 +7,7 @@ import {
 } from "../../App";
 import CurrentSearchPage from "./CurrentSearchPage";
 import { PromptPageContext } from "./Views";
-import LoginPage from "./LoginPage";
+import UserTopItemsPage from "./UserTopItemsPage";
 
 type PromptProps = {
     setSong: () => void;
@@ -38,8 +38,13 @@ const PromptScreen: React.FC<PromptProps> = ({
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-1 justify-center text-center items-center">
-                    <button onClick={() => setCustomMode(!customMode)}>
-                        {!customMode ? "Custom Search" : "My Top Artists/Songs"}
+                    <button
+                        className="button3"
+                        onClick={() => setCustomMode(!customMode)}
+                    >
+                        {!customMode
+                            ? "To Custom Search"
+                            : "To My Top Artists/Songs"}
                     </button>
                     <button
                         className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
@@ -100,7 +105,7 @@ const PromptScreen: React.FC<PromptProps> = ({
                     <span className="button1-content">Get results</span>
                 </button>
             )}
-            {!customMode && <LoginPage />}
+            {!customMode && <UserTopItemsPage />}
         </div>
     );
 };

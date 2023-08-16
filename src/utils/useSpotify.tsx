@@ -118,7 +118,8 @@ const useSpotify = () => {
         term: "short_term" | "medium_term" | "long_term",
         type: "track" | "artist"
     ) => {
-        const url = "https://api.spotify.com/v1/me/top/";
+        const endpoint = type === "track" ? "tracks" : "artists";
+        const url = `https://api.spotify.com/v1/me/top/${endpoint}`;
 
         const headers = {
             Authorization: `Bearer ${token}`,
@@ -129,13 +130,11 @@ const useSpotify = () => {
                 headers,
                 params: {
                     time_range: term,
-                    type: type,
                     limit: 20,
                 },
             });
             console.log(response);
             return response.data;
-            // You can access the artist data from the response here:
         } catch (error) {
             console.error("Error:", error);
             return null;
