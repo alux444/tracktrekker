@@ -104,9 +104,10 @@ const useSpotify = () => {
                 params: {
                     q: query,
                     type: "track,artist",
-                    limit: 80,
+                    limit: 32,
                 },
             });
+            console.log(response.data);
             return response.data;
             // You can access the artist data from the response here:
         } catch (error) {

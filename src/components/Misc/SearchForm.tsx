@@ -13,7 +13,7 @@ const SearchForm = ({
     scrollToTop,
     submit,
 }: {
-    type: string;
+    type: "track" | "artist";
     scrollToTop: () => void;
     submit: () => void;
 }) => {
@@ -23,8 +23,8 @@ const SearchForm = ({
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
     const [artistReults, setArtistResults] = useState<ArtistInfo[]>([]);
-
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [error, setError] = useState<boolean>(false);
 
     const { getSearch } = useSpotify();
 
@@ -45,7 +45,20 @@ const SearchForm = ({
 
     const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(false);
         const res = await getSearch(query);
+        if (res === null) {
+            setError(true);
+            return;
+        }
+
+        if (
+            (type === "track" && res.tracks.items.length === 0) ||
+            (type === "artist" && res.artists.items.length === 0)
+        ) {
+            setError(true);
+        }
+
         setTrackResults(res.tracks.items);
         setArtistResults(res.artists.items);
     };
@@ -70,7 +83,7 @@ const SearchForm = ({
           )
         : [];
 
-    const displaysPerPage = type === "tracks" ? 8 : 20;
+    const displaysPerPage = type === "track" ? 8 : 20;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
     const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
@@ -134,7 +147,7 @@ const SearchForm = ({
                     </button>
                 </div>
             </form>
-
+            {error && <p className="grad">Your search had no results :(</p>}
             {type === "track" && uniqueTracks.length > 0 && (
                 <div className="p-5 flex flex-col gap-3 w-full">{tracks}</div>
             )}
