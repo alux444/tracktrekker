@@ -13,8 +13,10 @@ FEATURES
     - create a playlist of suggestions
 
 16 Aug
+Developer mode only:
 COMPLETED view top tracks, artists, be able to add them to search
 COMPLETED add spotify login for users
+
 COMPLETED add managing extra criteria from currentsearch
 COMPLETED manage audio of previewing 
 

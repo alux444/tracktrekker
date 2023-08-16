@@ -1,7 +1,7 @@
 const AboutPage = () => {
     return (
         <div className="flex justify-center text-center flex-wrap flex-col p-4">
-            <h2>About TrackTrekker</h2>
+            <h2 className="text-lg grad">About TrackTrekker</h2>
             <br />
             <hr></hr>
             <br />
@@ -14,11 +14,29 @@ const AboutPage = () => {
                 API.
             </p>
             <br />
+            <p>
+                Any bugs, possible features or general nitpicks you can contact
+                me via:
+            </p>
+            <p>email: aluux999@gmail.com</p>
+            <p>discord: mousetaco</p>
+            <br />
             <p>v0.1 (Aug 2023)</p>
             <small>- Largescale style overhauls</small>
             <small>- Added extra criteria search</small>
             <small>- Added preview audios</small>
             <small>- Added search by song, artist and genre.</small>
+            <br />
+            <p>
+                I can't add authentication from your Spotify account without
+                making a formal application to Spotify.
+            </p>
+            <br />
+            <p>
+                If you genuinely want to use the features from that (viewing top
+                tracks/artists), contact me and I'll give your Spotify account
+                access.
+            </p>
         </div>
     );
 };
