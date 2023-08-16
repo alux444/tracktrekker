@@ -6,7 +6,7 @@ const useUser = () => {
     const redirectToSpotifyLogin = async () => {
         const clientId = import.meta.env.VITE_ID;
         const redirectUri = encodeURIComponent(
-            "http://localhost:5173/tracktrekker/"
+            "https://alux444.github.io/tracktrekker/"
         );
         const scopes = encodeURIComponent("user-top-read");
         const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scopes}&show_dialog=true`;

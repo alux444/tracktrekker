@@ -42,7 +42,7 @@ export const AudioContext = createContext<{
 
 const Views = () => {
     const [currentPage, setCurrentPage] = useState<page>("home");
-    const [promptPage, setPromptPage] = useState<PromptPage>("home");
+    const [promptPage, setPromptPage] = useState<PromptPage>("user");
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const [audioIsPlaying, setAudioIsPlaying] = useState<boolean>(false);
     const [currentPlayingId, setCurrentPlayingId] = useState<string | null>(

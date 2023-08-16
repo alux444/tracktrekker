@@ -8,23 +8,7 @@ import {
 import CurrentSearchPage from "./CurrentSearchPage";
 import { PromptPageContext } from "./Views";
 
-type PromptProps = {
-    setUser: () => void;
-    setSong: () => void;
-    setArtist: () => void;
-    setGenre: () => void;
-    setSubmit: () => void;
-    setExtra: () => void;
-};
-
-const PromptScreen: React.FC<PromptProps> = ({
-    setUser,
-    setSong,
-    setArtist,
-    setGenre,
-    setSubmit,
-    setExtra,
-}) => {
+const PromptScreen = ({ submit }: { submit: () => void }) => {
     const { promptPage, setPromptPage } = useContext(PromptPageContext);
 
     const { songSeeds } = useContext(SongSeedContext);
@@ -33,15 +17,12 @@ const PromptScreen: React.FC<PromptProps> = ({
     const { extras } = useContext(ExtrasContext);
 
     const [expandSearch, setExpandSearch] = useState<boolean>(false);
-    const [customMode, setCustomMode] = useState<boolean>(false);
 
     const switchCustomMode = () => {
-        if (customMode) {
-            setUser();
-            setCustomMode(false);
+        if (promptPage !== "user") {
+            setPromptPage("user");
         } else {
             setPromptPage("home");
-            setCustomMode(true);
         }
     };
 
@@ -83,16 +64,28 @@ const PromptScreen: React.FC<PromptProps> = ({
                 )}
                 {promptPage !== "user" && (
                     <div className="flex gap-2 flex-wrap justify-center">
-                        <button className="button3" onClick={setSong}>
+                        <button
+                            className="button3"
+                            onClick={() => setPromptPage("songs")}
+                        >
                             <span>Songs</span>
                         </button>
-                        <button className="button3" onClick={setArtist}>
+                        <button
+                            className="button3"
+                            onClick={() => setPromptPage("artists")}
+                        >
                             <span>Artists</span>
                         </button>
-                        <button className="button3" onClick={setGenre}>
+                        <button
+                            className="button3"
+                            onClick={() => setPromptPage("genres")}
+                        >
                             <span>Genres</span>
                         </button>
-                        <button className="button3" onClick={setExtra}>
+                        <button
+                            className="button3"
+                            onClick={() => setPromptPage("extras")}
+                        >
                             <span>Extra</span>
                         </button>
                     </div>
@@ -101,7 +94,7 @@ const PromptScreen: React.FC<PromptProps> = ({
             {genres.length === 0 &&
             songSeeds.length === 0 &&
             artistSeeds.length === 0 ? (
-                promptPage === "home" && (
+                (promptPage === "home" || promptPage === "user") && (
                     <div className="flex flex-col flex-wrap text-center p-1">
                         <h2 className="grad text-lg">
                             Select at least one song, artist or genre.
@@ -109,7 +102,7 @@ const PromptScreen: React.FC<PromptProps> = ({
                     </div>
                 )
             ) : (
-                <button className="button1" onClick={setSubmit}>
+                <button className="button1" onClick={submit}>
                     <span className="button1-content">Get results</span>
                 </button>
             )}
