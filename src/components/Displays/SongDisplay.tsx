@@ -102,7 +102,9 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
         >
             <div
                 className={`hover flex justify-between flex xs:flex-row items-center p-2 w-full lg:w-[50%] md:w-[70%] w-full border-[1px]
-                 rounded-[10px] backdrop-blur-3xl`}
+                 rounded-[10px] backdrop-blur-3xl ${
+                     selected && "border-purple-400 border-[2px]"
+                 }`}
             >
                 <div className="flex p-1 gap-5 xs:flex-row items-center">
                     <div className="flex-shrink-0 flex flex-col gap-1">

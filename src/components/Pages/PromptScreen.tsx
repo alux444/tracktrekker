@@ -8,6 +8,7 @@ import {
 } from "../../App";
 import CurrentSearchPage from "./CurrentSearchPage";
 import { PromptPageContext } from "./Views";
+import TutorialModal from "../Tutorial/TutorialModal";
 
 const PromptScreen = ({ submit }: { submit: () => void }) => {
     const { devMode } = useContext(DevContext);
@@ -19,6 +20,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
     const { extras } = useContext(ExtrasContext);
 
     const [expandSearch, setExpandSearch] = useState<boolean>(false);
+    const [expandTutorial, setExpandTutorial] = useState<boolean>(false);
 
     const switchCustomMode = () => {
         if (promptPage !== "user") {
@@ -28,10 +30,30 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
         }
     };
 
+    const closeTutorial = () => {
+        setExpandTutorial(false);
+    };
+
+    const closeSearch = () => {
+        setExpandSearch(false);
+    };
+
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-1 justify-center text-center items-center">
+                    <button
+                        className="button2 border-[1px] border-purple-700 my-2"
+                        onClick={() => {
+                            setExpandTutorial(true);
+                            console.log("ran");
+                        }}
+                    >
+                        <span className="grad">How to use TrackTrekker</span>
+                    </button>
+                    {expandTutorial && (
+                        <TutorialModal onClose={closeTutorial} />
+                    )}
                     {devMode && (
                         <button className="button3" onClick={switchCustomMode}>
                             {promptPage === "user"
@@ -39,33 +61,70 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                 : "To My Top Artists/Songs"}
                         </button>
                     )}
-                    <button
-                        className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
-                        onClick={() => setExpandSearch(!expandSearch)}
-                    >
-                        <div className="grad">
-                            <h2>Current Search</h2>
-                            <p>
-                                {songSeeds.length}{" "}
-                                {songSeeds.length === 1 ? "song" : "songs"} |{" "}
-                                {artistSeeds.length}{" "}
-                                {artistSeeds.length === 1
-                                    ? "artist"
-                                    : "artists"}{" "}
-                                | {genres.length}{" "}
-                                {genres.length === 1 ? "genre" : "genres"}
-                            </p>
-                            <p>{Object.keys(extras).length} extra criteria</p>
-                        </div>
-                    </button>
+                    {(songSeeds.length > 0 ||
+                        artistSeeds.length > 0 ||
+                        genres.length > 0 ||
+                        Object.keys(extras).length > 0) && (
+                        <button
+                            className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
+                            onClick={() => setExpandSearch(!expandSearch)}
+                        >
+                            <div className="grad">
+                                <h2>Current Search</h2>
+                                {songSeeds.length === 0 &&
+                                artistSeeds.length === 0 &&
+                                genres.length === 0 &&
+                                Object.keys(extras).length === 0 ? (
+                                    <p>Empty</p>
+                                ) : (
+                                    <>
+                                        {songSeeds.length > 0 && (
+                                            <p>
+                                                {songSeeds.length}{" "}
+                                                {songSeeds.length === 1
+                                                    ? "song"
+                                                    : "songs"}
+                                            </p>
+                                        )}
+                                        {artistSeeds.length > 0 && (
+                                            <p>
+                                                {artistSeeds.length}{" "}
+                                                {artistSeeds.length === 1
+                                                    ? "artist"
+                                                    : "artists"}{" "}
+                                            </p>
+                                        )}{" "}
+                                        {genres.length > 0 && (
+                                            <p>
+                                                {genres.length}{" "}
+                                                {genres.length === 1
+                                                    ? "genre"
+                                                    : "genres"}
+                                            </p>
+                                        )}
+                                        {Object.keys(extras).length > 0 && (
+                                            <p>
+                                                {Object.keys(extras).length}{" "}
+                                                extra criteria
+                                            </p>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </button>
+                    )}
                 </div>
-                {expandSearch && (
-                    <div className="overlay">
-                        <div className="overlay-content">
-                            <CurrentSearchPage />
+                {(songSeeds.length > 0 ||
+                    artistSeeds.length > 0 ||
+                    genres.length > 0 ||
+                    Object.keys(extras).length > 0) &&
+                    expandSearch && (
+                        <div className="overlay">
+                            <div className="overlay-content">
+                                <CurrentSearchPage onClose={closeSearch} />
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
                 {promptPage !== "user" && (
                     <div className="flex gap-2 flex-wrap justify-center">
                         <button
