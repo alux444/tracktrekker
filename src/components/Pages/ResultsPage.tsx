@@ -60,7 +60,7 @@ const ResultsPage = ({
     const currentTracks = songs.slice(indexOfFirstItem, indexOfLastItem);
 
     const results = currentTracks.map((song) => (
-        <SongDisplay songInfo={song} type={3} />
+        <SongDisplay songInfo={song} />
     ));
 
     return (

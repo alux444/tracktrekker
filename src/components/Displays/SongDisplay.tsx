@@ -14,13 +14,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import { SongsInfoContext } from "../../App";
 
-const SongDisplay = ({
-    songInfo,
-    type,
-}: {
-    songInfo: SongInfo;
-    type: number;
-}) => {
+const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
     const { showStats } = useContext(StatsContext);
     const {
         audio,
@@ -140,7 +134,7 @@ const SongDisplay = ({
                     </div>
                 </div>
                 <div className="flex flex-col xs:flex-row align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end">
-                    {(type === 1 || type === 3) && !selected && (
+                    {!selected && (
                         <button
                             className="buttonselect"
                             onClick={() => {
@@ -164,7 +158,7 @@ const SongDisplay = ({
                             </span>
                         </button>
                     )}
-                    {songInfo.preview_url && (type === 1 || type === 3) && (
+                    {songInfo.preview_url && (
                         <button
                             className="buttonprev"
                             type="button"
@@ -181,7 +175,7 @@ const SongDisplay = ({
                             </span>
                         </button>
                     )}
-                    {!showStats && (type === 1 || type === 3) && (
+                    {!showStats && (
                         <button
                             className="buttonprev"
                             type="button"
@@ -203,25 +197,19 @@ const SongDisplay = ({
                 </div>
             </div>
 
-            {features &&
-                (type === 1 || type === 3) &&
-                (showStats || thisShowStats) && (
-                    <div className="w-full md:w-[70%] lg:w-[50%] p-2">
-                        <FeaturesDisplay
-                            features={features}
-                            popularity={songInfo.popularity}
-                        />
-                    </div>
-                )}
-            {!features &&
-                (type === 1 || type === 3) &&
-                (showStats || thisShowStats) && (
-                    <div className="w-full md:w-[70%] lg:w-[50%]  p-2">
-                        <p className="grad">
-                            No Stats Avalaible for this song.
-                        </p>
-                    </div>
-                )}
+            {features && (showStats || thisShowStats) && (
+                <div className="w-full md:w-[70%] lg:w-[50%] p-2">
+                    <FeaturesDisplay
+                        features={features}
+                        popularity={songInfo.popularity}
+                    />
+                </div>
+            )}
+            {!features && (showStats || thisShowStats) && (
+                <div className="w-full md:w-[70%] lg:w-[50%]  p-2">
+                    <p className="grad">No Stats Avalaible for this song.</p>
+                </div>
+            )}
         </div>
     );
 };
