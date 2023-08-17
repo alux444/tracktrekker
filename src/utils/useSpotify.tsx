@@ -143,12 +143,30 @@ const useSpotify = () => {
         }
     };
 
+    const getArtistTracks = async (id: string) => {
+        const url = `https://api.spotify.com/v1/artists/${id}/top-tracks?market=NZ`;
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        try {
+            const response = await axios.get(url, { headers });
+            console.log(response.data);
+            return response.data.tracks;
+        } catch (error) {
+            console.error("Error:", error);
+            return null;
+        }
+    };
+
     return {
         getGenres,
         getRecommended,
         getSearch,
         getFeatures,
         getTopItems,
+        getArtistTracks,
     };
 };
 

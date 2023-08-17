@@ -14,7 +14,7 @@ const FeaturesDisplay = ({
     const duration: string = `${minutes}:${seconds}`;
 
     return (
-        <div className="flex md:flex-col justify-between w-full p-1">
+        <div className="flex justify-between w-full p-1">
             <div className="flex flex-col align-center">
                 <small>{duration}</small>
                 <small>{features.tempo.toFixed(0)} BPM</small>

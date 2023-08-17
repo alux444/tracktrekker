@@ -60,7 +60,7 @@ const SearchForm = ({
         }
 
         setTrackResults(res.tracks.items);
-        setArtistResults(res.artists.items);
+        setArtistResults(res.artists.items.slice(0, 30));
     };
 
     const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +83,7 @@ const SearchForm = ({
           )
         : [];
 
-    const displaysPerPage = type === "track" ? 8 : 20;
+    const displaysPerPage = type === "track" ? 8 : 10;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
     const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
@@ -135,7 +135,12 @@ const SearchForm = ({
                         onClick={() => setShowStats(!showStats)}
                     >
                         <span className="grad">
-                            {showStats ? "Hide Stats" : "Show Stats"}
+                            {type === "track" && showStats && "Hide Stats"}
+                            {type === "track" && !showStats && "Show Stats"}
+                            {type === "artist" && showStats && "Hide Top Songs"}
+                            {type === "artist" &&
+                                !showStats &&
+                                "Show Top Songs"}
                         </span>
                     </button>
                     <button
