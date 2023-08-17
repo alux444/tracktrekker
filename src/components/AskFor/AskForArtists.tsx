@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import SearchForm from "../Misc/SearchForm";
+import VolumeSlider from "../Misc/VolumeSlider";
 
 interface AskForArtistsProps {
     submit: () => void;
@@ -20,6 +21,7 @@ const AskForArtists: React.FC<AskForArtistsProps> = ({ submit }) => {
             ref={topRef}
         >
             <h2 className="text-lg grad">Select Artists</h2>
+            <VolumeSlider />
             <SearchForm
                 type="artist"
                 scrollToTop={scrollToTop}

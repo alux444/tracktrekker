@@ -83,7 +83,7 @@ const SearchForm = ({
           )
         : [];
 
-    const displaysPerPage = type === "track" ? 8 : 10;
+    const displaysPerPage = type === "track" ? 8 : 6;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
     const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
@@ -129,20 +129,18 @@ const SearchForm = ({
                     >
                         <span className="grad">Search</span>
                     </button>
-                    <button
-                        className="button2 border-purple-500 border-[1px]"
-                        type="button"
-                        onClick={() => setShowStats(!showStats)}
-                    >
-                        <span className="grad">
-                            {type === "track" && showStats && "Hide Stats"}
-                            {type === "track" && !showStats && "Show Stats"}
-                            {type === "artist" && showStats && "Hide Top Songs"}
-                            {type === "artist" &&
-                                !showStats &&
-                                "Show Top Songs"}
-                        </span>
-                    </button>
+                    {type === "track" && (
+                        <button
+                            className="button2 border-purple-500 border-[1px]"
+                            type="button"
+                            onClick={() => setShowStats(!showStats)}
+                        >
+                            <span className="grad">
+                                {type === "track" && showStats && "Hide Stats"}
+                                {type === "track" && !showStats && "Show Stats"}
+                            </span>
+                        </button>
+                    )}
                     <button
                         className="button3 border-purple-500 border-[1px]"
                         type="button"
