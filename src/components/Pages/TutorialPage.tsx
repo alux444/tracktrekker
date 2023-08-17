@@ -2,6 +2,9 @@ const TutorialPage = () => {
     return (
         <div className="flex justify-center text-center flex-wrap flex-col p-4">
             <h2 className="text-lg grad">How to use TrackTrekker</h2>
+            <br />
+            <hr></hr>
+            <br />
             <p>Select at least one song, artist or genre for your search.</p>
             <small>
                 Note: Not all songs will be avaliable, nor will all songs have

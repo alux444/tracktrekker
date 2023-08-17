@@ -93,7 +93,7 @@ const SearchForm = ({
     );
 
     const tracks = currentTracks.map((song) => (
-        <SongDisplay key={song.external_ids.isrc} songInfo={song} type={1} />
+        <SongDisplay key={song.external_ids.isrc} songInfo={song} />
     ));
 
     const artists = currentArtists.map((artist) => (
@@ -101,7 +101,7 @@ const SearchForm = ({
             key={artist.id}
             artist={artist}
             fromSearch={true}
-            type={1}
+            type={"search"}
         />
     ));
 
