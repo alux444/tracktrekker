@@ -52,12 +52,7 @@ const UserTopItemsPage = () => {
     ));
 
     const artists = currentArtists.map((artist) => (
-        <ArtistDisplay
-            key={artist.id}
-            artist={artist}
-            fromSearch={true}
-            type={"search"}
-        />
+        <ArtistDisplay key={artist.id} artist={artist} type={"search"} />
     ));
     const handleTermChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedTerm = event.target.value as

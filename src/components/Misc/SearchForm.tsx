@@ -97,12 +97,7 @@ const SearchForm = ({
     ));
 
     const artists = currentArtists.map((artist) => (
-        <ArtistDisplay
-            key={artist.id}
-            artist={artist}
-            fromSearch={true}
-            type={"search"}
-        />
+        <ArtistDisplay key={artist.id} artist={artist} type={"search"} />
     ));
 
     return (
