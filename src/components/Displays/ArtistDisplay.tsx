@@ -12,11 +12,9 @@ type Types = "search" | "currentsearch";
 
 const ArtistDisplay = ({
     artist,
-    fromSearch,
     type,
 }: {
     artist: ArtistInfo;
-    fromSearch: boolean;
     type: Types;
 }) => {
     const { artists } = useContext(ArtistInfoContext);
@@ -60,10 +58,12 @@ const ArtistDisplay = ({
                 <div className="flex flex-col gap-1 text-center items-center">
                     <div className="flex flex-wrap gap-1">
                         <h2
-                            className={`${fromSearch && "lg:w-[12vw] w-[20vw]"}
+                            className={`${
+                                type === "search" && "lg:w-[12vw] w-[20vw]"
+                            }
                     `}
                         >
-                            {fromSearch
+                            {type === "search"
                                 ? artist.name.length > 25
                                     ? artist.name.slice(0, 22) + "..."
                                     : artist.name
@@ -71,7 +71,7 @@ const ArtistDisplay = ({
                                 ? artist.name.slice(0, 10) + "..."
                                 : artist.name}
                         </h2>
-                        {!fromSearch && selected && (
+                        {type === "currentsearch" && selected && (
                             <button
                                 className="hover:border-red-500 hover:text-red-500 border-[1px] px-[5px] h-fit rounded-lg ease-in-out transition-all"
                                 onClick={() => {
@@ -90,10 +90,10 @@ const ArtistDisplay = ({
                         {imageSrc !== "" ? (
                             <img
                                 className={`${
-                                    fromSearch
+                                    type === "search"
                                         ? "lg:w-[12vw] w-[20vw]"
-                                        : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
-                                } rounded-[20px]
+                                        : "lg:max-w-[8vw] max-w-[15vw] max-h-[16vh] lg:max-h-[14vh]"
+                                } rounded-[10px]
                     `}
                                 src={imageSrc}
                                 alt={artist.name}
@@ -101,7 +101,7 @@ const ArtistDisplay = ({
                         ) : (
                             <div
                                 className={`${
-                                    fromSearch
+                                    type === "search"
                                         ? "lg:w-[15vw] w-[25vw]"
                                         : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
                                 } rounded-[20px] flex justify-center items-center text-center
@@ -112,7 +112,7 @@ const ArtistDisplay = ({
                         )}
                     </a>
                     <div className="flex items-center flex-wrap gap-2 justify-center align-center">
-                        {fromSearch && !selected && (
+                        {type === "search" && !selected && (
                             <button
                                 className="buttonselect"
                                 onClick={() => {
@@ -124,7 +124,7 @@ const ArtistDisplay = ({
                                 </span>
                             </button>
                         )}
-                        {selected && fromSearch && (
+                        {selected && type === "search" && (
                             <button
                                 className="buttoncancel"
                                 onClick={() => {

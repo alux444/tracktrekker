@@ -34,11 +34,7 @@ const CurrentSearchPage = () => {
     const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);
 
     const allArtists = artists.map((artist) => (
-        <ArtistDisplay
-            artist={artist}
-            fromSearch={false}
-            type={"currentsearch"}
-        />
+        <ArtistDisplay artist={artist} type={"currentsearch"} />
     ));
 
     const allGenres = genres.map((genre) => (
