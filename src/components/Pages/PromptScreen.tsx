@@ -39,33 +39,70 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                 : "To My Top Artists/Songs"}
                         </button>
                     )}
-                    <button
-                        className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
-                        onClick={() => setExpandSearch(!expandSearch)}
-                    >
-                        <div className="grad">
-                            <h2>Current Search</h2>
-                            <p>
-                                {songSeeds.length}{" "}
-                                {songSeeds.length === 1 ? "song" : "songs"} |{" "}
-                                {artistSeeds.length}{" "}
-                                {artistSeeds.length === 1
-                                    ? "artist"
-                                    : "artists"}{" "}
-                                | {genres.length}{" "}
-                                {genres.length === 1 ? "genre" : "genres"}
-                            </p>
-                            <p>{Object.keys(extras).length} extra criteria</p>
-                        </div>
-                    </button>
+                    {(songSeeds.length > 0 ||
+                        artistSeeds.length > 0 ||
+                        genres.length > 0 ||
+                        Object.keys(extras).length > 0) && (
+                        <button
+                            className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
+                            onClick={() => setExpandSearch(!expandSearch)}
+                        >
+                            <div className="grad">
+                                <h2>Current Search</h2>
+                                {songSeeds.length === 0 &&
+                                artistSeeds.length === 0 &&
+                                genres.length === 0 &&
+                                Object.keys(extras).length === 0 ? (
+                                    <p>Empty</p>
+                                ) : (
+                                    <>
+                                        {songSeeds.length > 0 && (
+                                            <p>
+                                                {songSeeds.length}{" "}
+                                                {songSeeds.length === 1
+                                                    ? "song"
+                                                    : "songs"}
+                                            </p>
+                                        )}
+                                        {artistSeeds.length > 0 && (
+                                            <p>
+                                                {artistSeeds.length}{" "}
+                                                {artistSeeds.length === 1
+                                                    ? "artist"
+                                                    : "artists"}{" "}
+                                            </p>
+                                        )}{" "}
+                                        {genres.length > 0 && (
+                                            <p>
+                                                {genres.length}{" "}
+                                                {genres.length === 1
+                                                    ? "genre"
+                                                    : "genres"}
+                                            </p>
+                                        )}
+                                        {Object.keys(extras).length > 0 && (
+                                            <p>
+                                                {Object.keys(extras).length}{" "}
+                                                extra criteria
+                                            </p>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </button>
+                    )}
                 </div>
-                {expandSearch && (
-                    <div className="overlay">
-                        <div className="overlay-content">
-                            <CurrentSearchPage />
+                {(songSeeds.length > 0 ||
+                    artistSeeds.length > 0 ||
+                    genres.length > 0 ||
+                    Object.keys(extras).length > 0) &&
+                    expandSearch && (
+                        <div className="overlay">
+                            <div className="overlay-content">
+                                <CurrentSearchPage />
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
                 {promptPage !== "user" && (
                     <div className="flex gap-2 flex-wrap justify-center">
                         <button
