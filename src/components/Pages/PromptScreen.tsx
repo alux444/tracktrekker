@@ -8,6 +8,7 @@ import {
 } from "../../App";
 import CurrentSearchPage from "./CurrentSearchPage";
 import { PromptPageContext } from "./Views";
+import TutorialModal from "../Misc/TutorialModal";
 
 const PromptScreen = ({ submit }: { submit: () => void }) => {
     const { devMode } = useContext(DevContext);
@@ -19,6 +20,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
     const { extras } = useContext(ExtrasContext);
 
     const [expandSearch, setExpandSearch] = useState<boolean>(false);
+    const [expandTutorial, setExpandTutorial] = useState<boolean>(false);
 
     const switchCustomMode = () => {
         if (promptPage !== "user") {
@@ -28,10 +30,30 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
         }
     };
 
+    const closeTutorial = () => {
+        setExpandTutorial(false);
+    };
+
+    const closeSearch = () => {
+        setExpandSearch(false);
+    };
+
     return (
         <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-1 justify-center text-center items-center">
+                    <button
+                        className="button2 border-[1px] border-purple-700 my-2"
+                        onClick={() => {
+                            setExpandTutorial(true);
+                            console.log("ran");
+                        }}
+                    >
+                        <span className="grad">How to use TrackTrekker</span>
+                    </button>
+                    {expandTutorial && (
+                        <TutorialModal onClose={closeTutorial} />
+                    )}
                     {devMode && (
                         <button className="button3" onClick={switchCustomMode}>
                             {promptPage === "user"
@@ -99,7 +121,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                     expandSearch && (
                         <div className="overlay">
                             <div className="overlay-content">
-                                <CurrentSearchPage />
+                                <CurrentSearchPage onClose={closeSearch} />
                             </div>
                         </div>
                     )}
