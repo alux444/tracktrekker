@@ -56,7 +56,7 @@ const UserTopItemsPage = () => {
             key={artist.id}
             artist={artist}
             fromSearch={true}
-            type={1}
+            type={"search"}
         />
     ));
     const handleTermChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

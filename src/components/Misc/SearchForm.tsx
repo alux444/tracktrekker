@@ -101,7 +101,7 @@ const SearchForm = ({
             key={artist.id}
             artist={artist}
             fromSearch={true}
-            type={1}
+            type={"search"}
         />
     ));
 

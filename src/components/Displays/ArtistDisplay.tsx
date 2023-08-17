@@ -8,6 +8,8 @@ import useSpotify from "../../utils/useSpotify";
 import { SongInfo } from "../../interfaces/songInfo";
 import SmallSongDisplay from "./SmallSongDisplay";
 
+type Types = "search" | "currentsearch";
+
 const ArtistDisplay = ({
     artist,
     fromSearch,
@@ -15,7 +17,7 @@ const ArtistDisplay = ({
 }: {
     artist: ArtistInfo;
     fromSearch: boolean;
-    type: number;
+    type: Types;
 }) => {
     const { artists } = useContext(ArtistInfoContext);
     const [selected, setSelected] = useState<boolean>(false);
@@ -52,101 +54,93 @@ const ArtistDisplay = ({
 
     return (
         <div className="w-fit flex items-center justify-center">
-            <div className="w-full flex justify-center items-center align-center">
-                <div
-                    className={`hover flex justify-between gap-2 items-center border-[1px] p-2 w-fit rounded-[20px]`}
-                >
-                    <div className="flex flex-col gap-1 text-center items-center">
-                        <div className="flex flex-wrap gap-1">
-                            <h2
-                                className={`${
-                                    fromSearch && "lg:w-[12vw] w-[20vw]"
-                                }
+            <div
+                className={`hover flex justify-between gap-2 items-center border-[1px] p-2 w-fit rounded-[20px]`}
+            >
+                <div className="flex flex-col gap-1 text-center items-center">
+                    <div className="flex flex-wrap gap-1">
+                        <h2
+                            className={`${fromSearch && "lg:w-[12vw] w-[20vw]"}
                     `}
-                            >
-                                {fromSearch
-                                    ? artist.name.length > 25
-                                        ? artist.name.slice(0, 22) + "..."
-                                        : artist.name
-                                    : artist.name.length > 13
-                                    ? artist.name.slice(0, 10) + "..."
-                                    : artist.name}
-                            </h2>
-                            {!fromSearch && selected && (
-                                <button
-                                    className="hover:border-red-500 hover:text-red-500 border-[1px] px-[5px] h-fit rounded-lg ease-in-out transition-all"
-                                    onClick={() => {
-                                        removeArtist(artist);
-                                    }}
-                                >
-                                    <span>&times;</span>
-                                </button>
-                            )}
-                        </div>
-                        <a
-                            href={artist.external_urls.spotify}
-                            target="_blank"
-                            rel="noreferrer"
                         >
-                            {imageSrc !== "" ? (
-                                <img
-                                    className={`${
-                                        fromSearch
-                                            ? "lg:w-[12vw] w-[20vw]"
-                                            : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
-                                    } rounded-[20px]
-                    `}
-                                    src={imageSrc}
-                                    alt={artist.name}
-                                />
-                            ) : (
-                                <div
-                                    className={`${
-                                        fromSearch
-                                            ? "lg:w-[15vw] w-[25vw]"
-                                            : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
-                                    } rounded-[20px] flex justify-center items-center text-center
-                `}
-                                >
-                                    <p>No image avaliable :(</p>
-                                </div>
-                            )}
-                        </a>
-                        <div className="flex items-center flex-wrap gap-2 justify-center align-center">
-                            {fromSearch && !selected && (
-                                <button
-                                    className="buttonselect"
-                                    onClick={() => {
-                                        addArtist(artist);
-                                    }}
-                                >
-                                    <span>
-                                        <AddIcon style={{ fontSize: "1rem" }} />
-                                    </span>
-                                </button>
-                            )}
-                            {selected && fromSearch && (
-                                <button
-                                    className="buttoncancel"
-                                    onClick={() => {
-                                        removeArtist(artist);
-                                    }}
-                                >
-                                    <span>
-                                        <ClearIcon
-                                            style={{ fontSize: "1rem" }}
-                                        />
-                                    </span>
-                                </button>
-                            )}
-                        </div>
+                            {fromSearch
+                                ? artist.name.length > 25
+                                    ? artist.name.slice(0, 22) + "..."
+                                    : artist.name
+                                : artist.name.length > 13
+                                ? artist.name.slice(0, 10) + "..."
+                                : artist.name}
+                        </h2>
+                        {!fromSearch && selected && (
+                            <button
+                                className="hover:border-red-500 hover:text-red-500 border-[1px] px-[5px] h-fit rounded-lg ease-in-out transition-all"
+                                onClick={() => {
+                                    removeArtist(artist);
+                                }}
+                            >
+                                <span>&times;</span>
+                            </button>
+                        )}
                     </div>
-                    {type === 1 && (
-                        <div className="flex flex-col w-fit gap-1">
-                            {allSongs}
-                        </div>
-                    )}
+                    <a
+                        href={artist.external_urls.spotify}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        {imageSrc !== "" ? (
+                            <img
+                                className={`${
+                                    fromSearch
+                                        ? "lg:w-[12vw] w-[20vw]"
+                                        : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
+                                } rounded-[20px]
+                    `}
+                                src={imageSrc}
+                                alt={artist.name}
+                            />
+                        ) : (
+                            <div
+                                className={`${
+                                    fromSearch
+                                        ? "lg:w-[15vw] w-[25vw]"
+                                        : "lg:max-w-[8vw] max-w-[15vw] h-[10vh]"
+                                } rounded-[20px] flex justify-center items-center text-center
+                `}
+                            >
+                                <p>No image avaliable :(</p>
+                            </div>
+                        )}
+                    </a>
+                    <div className="flex items-center flex-wrap gap-2 justify-center align-center">
+                        {fromSearch && !selected && (
+                            <button
+                                className="buttonselect"
+                                onClick={() => {
+                                    addArtist(artist);
+                                }}
+                            >
+                                <span>
+                                    <AddIcon style={{ fontSize: "1rem" }} />
+                                </span>
+                            </button>
+                        )}
+                        {selected && fromSearch && (
+                            <button
+                                className="buttoncancel"
+                                onClick={() => {
+                                    removeArtist(artist);
+                                }}
+                            >
+                                <span>
+                                    <ClearIcon style={{ fontSize: "1rem" }} />
+                                </span>
+                            </button>
+                        )}
+                    </div>
                 </div>
+                {type === "search" && (
+                    <div className="flex flex-col w-fit gap-1">{allSongs}</div>
+                )}
             </div>
         </div>
     );
