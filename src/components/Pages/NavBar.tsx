@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import logo from "../../imgs/logoGreen.png";
 import { PromptPageContext, page } from "./Views";
 
 type NavBarProps = {
@@ -24,6 +25,7 @@ const NavBar: React.FC<NavBarProps> = ({
                 }}
                 className="grad text-3xl"
             >
+                <img src={logo} className="h-[1.5rem]" />
                 TrackTrekker
             </button>
             <div className="flex flex-col gap-[3px]">

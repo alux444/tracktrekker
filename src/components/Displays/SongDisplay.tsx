@@ -104,17 +104,17 @@ const SongDisplay = ({
 
     return (
         <div
-            className={`md:flex justify-center w-full items-center text-[rgba(0,0,0,0.8)]`}
+            className={`md:flex flex-col justify-center w-full items-center text-[rgba(0,0,0,0.8)]`}
         >
             <div
                 className={`hover flex justify-between flex xs:flex-row items-center p-2 w-full lg:w-[50%] md:w-[70%] w-full border-[1px]
-                 rounded-[30px] backdrop-blur-3xl`}
+                 rounded-[10px] backdrop-blur-3xl`}
             >
                 <div className="flex p-1 gap-5 xs:flex-row items-center">
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 flex flex-col gap-1">
                         <img
-                            src={songInfo.album.images[2].url}
-                            className="float-left rounded-[10px] max-w-[64px] max-h-[64px]"
+                            src={songInfo.album.images[1].url}
+                            className="float-left max-w-[64px] max-h-[64px]"
                         />
                     </div>
                     <div className="flex flex-col">
@@ -206,7 +206,7 @@ const SongDisplay = ({
             {features &&
                 (type === 1 || type === 3) &&
                 (showStats || thisShowStats) && (
-                    <div className="w-full lg:w-[20vw] md:w-[30vw] p-2">
+                    <div className="w-full md:w-[70%] lg:w-[50%] p-2">
                         <FeaturesDisplay
                             features={features}
                             popularity={songInfo.popularity}
@@ -216,7 +216,7 @@ const SongDisplay = ({
             {!features &&
                 (type === 1 || type === 3) &&
                 (showStats || thisShowStats) && (
-                    <div className="w-full lg:w-[20vw] md:w-[30vw] p-2">
+                    <div className="w-full md:w-[70%] lg:w-[50%]  p-2">
                         <p className="grad">
                             No Stats Avalaible for this song.
                         </p>
