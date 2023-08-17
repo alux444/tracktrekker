@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import useOutsideClick from "../../utils/useOutsideClose";
 import TutPageOne from "./TutPageOne";
+import TutPageTwo from "./TutPageTwo";
+import TutPageThree from "./TutPageThree";
 
 const TutorialModal = ({ onClose }: { onClose: () => void }) => {
     const modalRef = useRef(null);
@@ -19,7 +21,9 @@ const TutorialModal = ({ onClose }: { onClose: () => void }) => {
     };
 
     const incrementPage = () => {
-        setPage(page + 1);
+        if (page < 3) {
+            setPage(page + 1);
+        }
     };
 
     return (
@@ -29,15 +33,19 @@ const TutorialModal = ({ onClose }: { onClose: () => void }) => {
                 className="bg-white flex flex-col p-4 rounded-lg shadow-md flex justify-center items-center align-center"
             >
                 {page === 1 && <TutPageOne />}
+                {page === 2 && <TutPageTwo />}
+                {page === 3 && <TutPageThree />}
                 <div className="flex gap-5 w-full justify-center items-center">
                     {page !== 1 && (
                         <button className="button3" onClick={decrementPage}>
-                            <span>Prev</span>
+                            <span>&lt;</span>
                         </button>
                     )}
-                    <button className="button3" onClick={incrementPage}>
-                        <span>Next</span>
-                    </button>
+                    {page !== 3 && (
+                        <button className="button3" onClick={incrementPage}>
+                            <span>&gt;</span>
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

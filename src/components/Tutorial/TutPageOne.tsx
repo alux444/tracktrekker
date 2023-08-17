@@ -2,7 +2,7 @@ import firstImage from "../../imgs/tutone1.png";
 
 const TutPageOne = () => {
     return (
-        <div className="flex flex-col p-2">
+        <div className="flex flex-col p-2 max-w-[90vw]">
             <h2 className="text-lg grad">Welcome to TrackTrekker!</h2>
             <p>
                 TrackTrekker is an app for finding music based on your search.
