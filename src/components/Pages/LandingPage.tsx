@@ -48,7 +48,10 @@ const LandingPage = () => {
                 </button>
             </div>
             <div>
-                <img src={hero} className="h-[35vh] lg:h-[50vh]" />
+                <img
+                    src={hero}
+                    className="max-h-[35vh] max-w-[90vw] lg:max-h-[55vh] lg:max-w-[40vw]"
+                />
                 <button onClick={() => setDevMode(!devMode)}>
                     <span className="grad">
                         {devMode ? "Developer Mode" : "TrackTrekker"}

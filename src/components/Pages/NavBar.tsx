@@ -6,15 +6,9 @@ type NavBarProps = {
     currentPage: page;
     toHome: () => void;
     toAbout: () => void;
-    toTutorial: () => void;
 };
 
-const NavBar: React.FC<NavBarProps> = ({
-    currentPage,
-    toHome,
-    toAbout,
-    toTutorial,
-}) => {
+const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
     const { setPromptPage } = useContext(PromptPageContext);
     return (
         <div className="flex gap-8 flex-wrap justify-center p-3 items-center">
@@ -42,15 +36,6 @@ const NavBar: React.FC<NavBarProps> = ({
                         }`}
                     >
                         Home
-                    </span>
-                </button>
-                <button onClick={toTutorial}>
-                    <span
-                        className={`${
-                            currentPage === "tutorial" && "grad underline"
-                        }`}
-                    >
-                        Tutorial
                     </span>
                 </button>
                 <button onClick={toAbout}>

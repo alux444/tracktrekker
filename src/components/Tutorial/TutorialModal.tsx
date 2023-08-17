@@ -30,7 +30,7 @@ const TutorialModal = ({ onClose }: { onClose: () => void }) => {
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div
                 ref={modalRef}
-                className="bg-white flex flex-col p-4 rounded-lg shadow-md flex justify-center items-center align-center"
+                className="bg-white flex flex-col p-2 rounded-lg shadow-md flex justify-center items-center align-center max-w-[90vw]"
             >
                 {page === 1 && <TutPageOne />}
                 {page === 2 && <TutPageTwo />}

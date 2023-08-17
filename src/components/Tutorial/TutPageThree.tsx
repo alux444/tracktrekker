@@ -3,10 +3,10 @@ import secondImage from "../../imgs/tutthree2.png";
 
 const TutPageThree = () => {
     return (
-        <div className="flex flex-col p-2 max-w-[90vw] items-center">
+        <div className="flex flex-col p-2 max-w-[90vw] items-center max-h-[90vh] overflow-auto">
             <h2 className="text-lg grad">Getting Results</h2>
             <p>Click the "Get Results" button to get your recommended songs.</p>
-            <img src={firstImage} />
+            <img src={firstImage} className="border-[1px] my-2" />
             <p>Your results will appear at the bottom of the screen.</p>
             <img
                 src={secondImage}

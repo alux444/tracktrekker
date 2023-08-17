@@ -21,17 +21,23 @@ const AboutPage = () => {
             <p>email: aluux999@gmail.com</p>
             <p>discord: mousetaco</p>
             <br />
-            <p>v0.1 (Aug 2023)</p>
+            <p>v0.2 (Aug 2023)</p>
+            <small>- Added developer mode</small>
+            <small>- Added tutorial for webapp</small>
             <small>- Largescale style overhauls</small>
             <small>- Added extra criteria search</small>
             <small>- Added preview audios</small>
             <small>- Added search by song, artist and genre.</small>
             <br />
             <p>
-                I can't add authentication from your Spotify account without
-                making a formal application to Spotify.
+                Why don't all songs have previews / stats? - They're not
+                avalaible from Spotify.
             </p>
             <br />
+            <p>
+                I need to apply to Spotify for expanded quota before I can allow
+                random users to sign in with their Spotify.
+            </p>
             <p>
                 If you genuinely want to use the features from that (viewing top
                 tracks/artists), contact me and I'll give your Spotify account
