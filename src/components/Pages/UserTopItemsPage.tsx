@@ -5,6 +5,7 @@ import { SongInfo } from "../../interfaces/songInfo";
 import Pagination from "../Misc/Pagination";
 import SongDisplay from "../Displays/SongDisplay";
 import ArtistDisplay from "../Displays/ArtistDisplay";
+import VolumeSlider from "../Misc/VolumeSlider";
 
 const UserTopItemsPage = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -94,6 +95,7 @@ const UserTopItemsPage = () => {
                     </select>
                 </div>
             </div>
+            {showSongs && <VolumeSlider />}
             {error && <p className="grad">Error fetching data :(</p>}
             {showSongs ? (
                 <div className="flex flex-col text-center w-full gap-1">
