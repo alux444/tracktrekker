@@ -41,7 +41,7 @@ const UserTopItemsPage = () => {
         setCurrentPage(page);
     };
 
-    const displaysPerPage = showSongs ? 8 : 20;
+    const displaysPerPage = showSongs ? 8 : 8;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
     const currentTracks = topSongs.slice(indexOfFirstItem, indexOfLastItem);
@@ -95,7 +95,7 @@ const UserTopItemsPage = () => {
                     </select>
                 </div>
             </div>
-            {showSongs && <VolumeSlider />}
+            <VolumeSlider />
             {error && <p className="grad">Error fetching data :(</p>}
             {showSongs ? (
                 <div className="flex flex-col text-center w-full gap-1">
@@ -107,7 +107,7 @@ const UserTopItemsPage = () => {
             ) : (
                 <div className="flex flex-col text-center w-full gap-1">
                     <p className="grad">Your Top Artists ({time})</p>
-                    <div className="flex flex-wrap gap-3 w-full text-center justify-center items-center">
+                    <div className="flex flex-wrap gap-3 w-full text-center justify-center items-center text-start">
                         {artists}
                     </div>
                 </div>

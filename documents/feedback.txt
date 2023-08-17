@@ -8,9 +8,11 @@ STYLES
     - reposition selected songs to top of list
 
 FEATURES
-    - show top songs on an artist instead of stats
     - move authentication to serverside
-    - create a playlist of suggestions
+
+17 Aug
+COMPLETED show previews of songs on small song icons
+COMPLETED show top songs on an artist instead of stats
 
 16 Aug
 Developer mode only:

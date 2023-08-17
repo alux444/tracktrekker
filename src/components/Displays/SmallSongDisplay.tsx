@@ -2,12 +2,23 @@ import { useContext, useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import { SongsInfoContext } from "../../App";
+import { AudioContext } from "../Pages/Views";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
 
 const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     const [selected, setSelected] = useState(false);
 
     const { songs } = useContext(SongsInfoContext);
     const { addSong, removeSong } = useManageQuery();
+    const {
+        audio,
+        setAudio,
+        audioIsPlaying,
+        setAudioIsPlaying,
+        currentPlayingId,
+        setCurrentPlayingId,
+    } = useContext(AudioContext);
 
     useEffect(() => {
         const checkSongStatus = () => {
@@ -18,6 +29,33 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
         };
         checkSongStatus();
     }, [songs, song]);
+
+    const playPreview = () => {
+        if (song.preview_url) {
+            const thisAudio = new Audio(song.preview_url);
+
+            if (audio && audio.src === thisAudio.src) {
+                if (audioIsPlaying) {
+                    audio.pause();
+                    setAudioIsPlaying(false);
+                    setCurrentPlayingId(null);
+                } else {
+                    audio.play();
+                    setAudioIsPlaying(true);
+                    setCurrentPlayingId(song.id);
+                }
+            } else {
+                if (audio) {
+                    audio.pause();
+                    setCurrentPlayingId(null);
+                }
+                thisAudio.play();
+                setAudioIsPlaying(true);
+                setAudio(thisAudio);
+                setCurrentPlayingId(song.id);
+            }
+        }
+    };
 
     return (
         <div className="w-fit flex gap-1 border-[1px] p-2 rounded-[10px] justify-center items-center hover">
@@ -43,6 +81,20 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 </small>
             </div>
 
+            {song.preview_url && (
+                <button
+                    className="border-blue-500 hover:text-blue-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+                    onClick={playPreview}
+                >
+                    <span>
+                        {currentPlayingId === song.id ? (
+                            <PauseIcon style={{ fontSize: "0.5rem" }} />
+                        ) : (
+                            <PlayArrowIcon style={{ fontSize: "0.5rem" }} />
+                        )}
+                    </span>
+                </button>
+            )}
             {!selected ? (
                 <button
                     className="border-green-500 hover:text-green-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
