@@ -8,7 +8,7 @@ import {
 } from "../../App";
 import CurrentSearchPage from "./CurrentSearchPage";
 import { PromptPageContext } from "./Views";
-import TutorialModal from "../Misc/TutorialModal";
+import TutorialModal from "../Tutorial/TutorialModal";
 
 const PromptScreen = ({ submit }: { submit: () => void }) => {
     const { devMode } = useContext(DevContext);
