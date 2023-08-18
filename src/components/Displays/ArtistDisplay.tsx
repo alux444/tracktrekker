@@ -138,8 +138,11 @@ const ArtistDisplay = ({
                         )}
                     </div>
                 </div>
+
                 {type === "search" && (
-                    <div className="flex flex-col w-fit gap-1">{allSongs}</div>
+                    <div className="flex flex-col w-[50vw] sm:w-[40vw] lg:w-[25vw] xl:w-[20vw] md:w-[35vw] gap-1">
+                        {allSongs}
+                    </div>
                 )}
             </div>
         </div>
