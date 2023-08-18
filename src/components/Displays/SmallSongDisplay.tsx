@@ -67,7 +67,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <p className="truncate">
+                        <p className="sm:truncate">
                             {song.name.length > 20
                                 ? song.name.slice(0, 18) + "..."
                                 : song.name}
@@ -83,7 +83,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 </div>
             </div>
 
-            <div className="buttons flex gap-1">
+            <div className="buttons flex gap-1 flex-col md:flex-row">
                 {song.preview_url && (
                     <button
                         className="border-blue-500 hover:text-blue-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
