@@ -39,7 +39,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
     };
 
     return (
-        <div className="flex flex-wrap flex-col justify-center align-center items-center gap-5 w-full">
+        <div className="flex flex-wrap flex-col justify-center align-center items-center gap-2 w-full">
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-1 justify-center text-center items-center">
                     <button
@@ -114,7 +114,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                     )}
                                 </div>
                                 <button
-                                    className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
+                                    className="button2 hfit border-purple-600 border-[1px] w-fit mb-1"
                                     onClick={() =>
                                         setExpandSearch(!expandSearch)
                                     }
@@ -145,7 +145,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                         </div>
                     )}
                 {promptPage !== "user" && (
-                    <div className="flex gap-2 flex-wrap justify-center">
+                    <div className="flex gap-2 flex-wrap justify-center p-1">
                         <button
                             className="button3"
                             onClick={() => setPromptPage("songs")}
