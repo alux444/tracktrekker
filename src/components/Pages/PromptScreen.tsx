@@ -51,6 +51,16 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                     >
                         <span className="grad">How to use TrackTrekker</span>
                     </button>
+                    {genres.length === 0 &&
+                        songSeeds.length === 0 &&
+                        artistSeeds.length === 0 &&
+                        (promptPage === "home" || promptPage === "user") && (
+                            <div className="flex flex-col flex-wrap text-center p-1">
+                                <h2 className="grad text-lg">
+                                    Select at least one song, artist or genre.
+                                </h2>
+                            </div>
+                        )}
                     {expandTutorial && (
                         <TutorialModal onClose={closeTutorial} />
                     )}
@@ -65,53 +75,62 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                         artistSeeds.length > 0 ||
                         genres.length > 0 ||
                         Object.keys(extras).length > 0) && (
-                        <button
-                            className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
-                            onClick={() => setExpandSearch(!expandSearch)}
-                        >
-                            <div className="grad">
-                                <h2>Current Search</h2>
-                                {songSeeds.length === 0 &&
-                                artistSeeds.length === 0 &&
-                                genres.length === 0 &&
-                                Object.keys(extras).length === 0 ? (
-                                    <p>Empty</p>
-                                ) : (
-                                    <>
-                                        {songSeeds.length > 0 && (
-                                            <p>
-                                                {songSeeds.length}{" "}
-                                                {songSeeds.length === 1
-                                                    ? "song"
-                                                    : "songs"}
-                                            </p>
-                                        )}
-                                        {artistSeeds.length > 0 && (
-                                            <p>
-                                                {artistSeeds.length}{" "}
-                                                {artistSeeds.length === 1
-                                                    ? "artist"
-                                                    : "artists"}{" "}
-                                            </p>
-                                        )}{" "}
-                                        {genres.length > 0 && (
-                                            <p>
-                                                {genres.length}{" "}
-                                                {genres.length === 1
-                                                    ? "genre"
-                                                    : "genres"}
-                                            </p>
-                                        )}
-                                        {Object.keys(extras).length > 0 && (
-                                            <p>
-                                                {Object.keys(extras).length}{" "}
-                                                extra criteria
-                                            </p>
-                                        )}
-                                    </>
-                                )}
+                        <div>
+                            <hr />
+                            <div className="items-center align-center flex flex-col">
+                                <h2 className="grad">Your Search</h2>
+                                <div className="flex gap-1 justify-center items-center">
+                                    {songSeeds.length > 0 && (
+                                        <p>
+                                            {songSeeds.length}{" "}
+                                            {songSeeds.length === 1
+                                                ? "song"
+                                                : "songs"}
+                                        </p>
+                                    )}
+                                    {artistSeeds.length > 0 && (
+                                        <p>
+                                            {artistSeeds.length}{" "}
+                                            {artistSeeds.length === 1
+                                                ? "artist"
+                                                : "artists"}{" "}
+                                        </p>
+                                    )}
+                                    {genres.length > 0 && (
+                                        <p>
+                                            {genres.length}{" "}
+                                            {genres.length === 1
+                                                ? "genre"
+                                                : "genres"}
+                                        </p>
+                                    )}
+                                    {Object.keys(extras).length > 0 && (
+                                        <p>
+                                            {Object.keys(extras).length}{" "}
+                                            {Object.keys(extras).length === 1
+                                                ? "filter"
+                                                : "filters"}
+                                        </p>
+                                    )}
+                                </div>
+                                <button
+                                    className="button2 hfit border-purple-600 border-[1px] w-fit mb-2"
+                                    onClick={() =>
+                                        setExpandSearch(!expandSearch)
+                                    }
+                                >
+                                    <div className="grad">
+                                        <h2>Expand Search</h2>
+                                        {songSeeds.length === 0 &&
+                                            artistSeeds.length === 0 &&
+                                            genres.length === 0 &&
+                                            Object.keys(extras).length ===
+                                                0 && <p>Empty</p>}
+                                    </div>
+                                </button>
                             </div>
-                        </button>
+                            <hr />
+                        </div>
                     )}
                 </div>
                 {(songSeeds.length > 0 ||
@@ -154,21 +173,13 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                     </div>
                 )}
             </div>
-            {genres.length === 0 &&
-            songSeeds.length === 0 &&
-            artistSeeds.length === 0 ? (
-                (promptPage === "home" || promptPage === "user") && (
-                    <div className="flex flex-col flex-wrap text-center p-1">
-                        <h2 className="grad text-lg">
-                            Select at least one song, artist or genre.
-                        </h2>
-                    </div>
-                )
-            ) : (
-                <button className="button1" onClick={submit}>
-                    <span className="button1-content">Get results</span>
-                </button>
-            )}
+            {genres.length !== 0 &&
+                songSeeds.length !== 0 &&
+                artistSeeds.length !== 0 && (
+                    <button className="button1" onClick={submit}>
+                        <span className="button1-content">Get results</span>
+                    </button>
+                )}
         </div>
     );
 };

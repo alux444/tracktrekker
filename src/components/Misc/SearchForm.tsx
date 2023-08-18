@@ -101,7 +101,7 @@ const SearchForm = ({
     ));
 
     return (
-        <div className="flex flex-col p-2 w-[90vw] items-center gap-1">
+        <div className="flex flex-col p-2 w-[95vw] items-center gap-1">
             <form
                 className="flex flex-col gap-2 items-center"
                 onSubmit={searchQuery}
@@ -151,7 +151,7 @@ const SearchForm = ({
             )}
 
             {type !== "track" && artistReults.length > 0 && (
-                <div className="flex flex-wrap gap-3 w-full justify-center overflow-auto">
+                <div className="flex flex-wrap gap-2 w-full justify-center ">
                     {artists}
                 </div>
             )}

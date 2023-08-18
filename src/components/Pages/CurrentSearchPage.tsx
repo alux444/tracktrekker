@@ -14,10 +14,12 @@ import { descriptions } from "../../utils/descriptions";
 import ExtraCriteriaTriple from "../AskFor/ExtraCriteriaTriple";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
 import useOutsideClick from "../../utils/useOutsideClose";
+import { PromptPageContext } from "./Views";
 
 const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
     const modalRef = useRef(null);
 
+    const { setPromptPage } = useContext(PromptPageContext);
     const { songs, setSongs } = useContext(SongsInfoContext);
     const { setSongSeeds } = useContext(SongSeedContext);
     const { artists, setArtists } = useContext(ArtistInfoContext);
@@ -34,6 +36,7 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
         setArtistSeeds([]);
         setArtists([]);
         setGenres([]);
+        setPromptPage("home");
     };
 
     const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);
@@ -67,7 +70,7 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div
                 ref={modalRef}
-                className="flex flex-col w-fit max-w-[90vw] min-w-[50vw] max-h-[90vh] overflow-auto  gap-2 p-5 rounded-[10px] z-300 items-center bg-slate-100"
+                className="flex flex-col w-fit max-w-[90vw] min-w-fit max-h-[90vh] overflow-auto  gap-2 p-5 rounded-[10px] z-300 items-center bg-slate-100"
             >
                 {songs.length === 0 &&
                 genres.length === 0 &&
