@@ -14,10 +14,12 @@ import { descriptions } from "../../utils/descriptions";
 import ExtraCriteriaTriple from "../AskFor/ExtraCriteriaTriple";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
 import useOutsideClick from "../../utils/useOutsideClose";
+import { PromptPageContext } from "./Views";
 
 const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
     const modalRef = useRef(null);
 
+    const { setPromptPage } = useContext(PromptPageContext);
     const { songs, setSongs } = useContext(SongsInfoContext);
     const { setSongSeeds } = useContext(SongSeedContext);
     const { artists, setArtists } = useContext(ArtistInfoContext);
@@ -34,6 +36,7 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
         setArtistSeeds([]);
         setArtists([]);
         setGenres([]);
+        setPromptPage("home");
     };
 
     const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);
