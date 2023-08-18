@@ -67,7 +67,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <p>
+                        <p className="truncate">
                             {song.name.length > 20
                                 ? song.name.slice(0, 18) + "..."
                                 : song.name}

@@ -10,7 +10,7 @@ const Footer = () => {
                     <img className="h-[1rem]" src={logo} />
                 </a>
             </div>
-            <p>
+            <p className="grad">
                 <a
                     href="https://github.com/alux444"
                     target="_blank"

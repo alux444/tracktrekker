@@ -11,14 +11,14 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ submit }) => {
         <div className="flex flex-col gap-2 justify-center items-center align-center w-full p-5">
             <div className="flex flex-col text-center text-wrap justify-center">
                 <h2 className="text-lg grad">Extra Criteria (Optional)</h2>
-                <small>
+                <p>
                     All search results will be FILTERED to be within your min to
                     max range.
-                </small>
-                <small>
+                </p>
+                <p>
                     With target, results will be SORTED based on CLOSEST to your
                     given target.
-                </small>
+                </p>
             </div>
             <button className="button3 mb-2" onClick={submit}>
                 <span>Hide</span>
