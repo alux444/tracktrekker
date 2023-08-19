@@ -54,10 +54,20 @@ const ResultsPage = ({
         setCurrentPage(page);
     };
 
+    const uniqueTracks = songs
+        ? songs.filter(
+              (song, index, self) =>
+                  index ===
+                  self.findIndex(
+                      (s) => s.external_ids.isrc === song.external_ids.isrc
+                  )
+          )
+        : [];
+
     const displaysPerPage = 8;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
-    const currentTracks = songs.slice(indexOfFirstItem, indexOfLastItem);
+    const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
 
     const results = currentTracks.map((song) => (
         <SongDisplay songInfo={song} />
