@@ -10,6 +10,9 @@ STYLES
 FEATURES
     - move authentication to serverside
 
+20 Aug
+COMPLETED added basic testing to workflow
+
 17 Aug
 COMPLETED show previews of songs on small song icons
 COMPLETED show top songs on an artist instead of stats
