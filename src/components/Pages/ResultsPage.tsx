@@ -106,7 +106,10 @@ const ResultsPage = ({
                 </button>
             </div>
             {songs.length > 0 ? (
-                <div className="flex flex-col justify-center w-[100vw] items-center">
+                <div
+                    className="flex flex-col justify-center w-[100vw] items-center"
+                    id="recommendResults"
+                >
                     <div className="p-5 flex w-full flex-col gap-2">
                         {results}
                     </div>

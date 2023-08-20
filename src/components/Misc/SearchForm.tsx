@@ -103,10 +103,12 @@ const SearchForm = ({
     return (
         <div className="flex flex-col p-2 w-[95vw] items-center gap-1">
             <form
+                id="searchForm"
                 className="flex flex-col gap-2 items-center"
                 onSubmit={searchQuery}
             >
                 <input
+                    id={type === "track" ? "songSearchBar" : "artistSearchBar"}
                     placeholder={
                         type === "track"
                             ? "Search for Song"
@@ -157,7 +159,10 @@ const SearchForm = ({
             )}
 
             {(artistReults.length > 0 || trackResults.length > 0) && (
-                <div className="flex flex-col gap-1 justify-center items-center">
+                <div
+                    id="searchResults"
+                    className="flex flex-col gap-1 justify-center items-center"
+                >
                     <div className="flex gap-2">
                         <button
                             className="button2 border-purple-500 border-[1px] "

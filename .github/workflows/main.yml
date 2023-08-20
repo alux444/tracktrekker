@@ -46,6 +46,15 @@ jobs:
               run: npx tailwindcss -i ./src/index.css -o ./dist/output.css
             - name: Build
               run: npm run build
+            - name: Run Cypress tests
+              uses: cypress-io/github-action@v5
+              with:
+                  build: npm run build
+                  start: npm start
+                  browser: chrome
+              env:
+                  VITE_ID: ${{ secrets.VITE_ID }}
+                  VITE_SECRET: ${{ secrets.VITE_SECRET }}
             - name: Setup Pages
               uses: actions/configure-pages@v3
             - name: Upload artifact

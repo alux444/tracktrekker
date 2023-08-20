@@ -176,7 +176,11 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
             {(genres.length !== 0 ||
                 songSeeds.length !== 0 ||
                 artistSeeds.length !== 0) && (
-                <button className="button1" onClick={submit}>
+                <button
+                    id="getResultsButton"
+                    className="button1"
+                    onClick={submit}
+                >
                     <span className="button1-content">Get results</span>
                 </button>
             )}
