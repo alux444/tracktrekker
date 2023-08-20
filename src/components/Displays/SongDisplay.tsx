@@ -98,6 +98,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
 
     return (
         <div
+            id="songDisplay"
             className={`md:flex flex-col justify-center w-full items-center text-[rgba(0,0,0,0.8)]`}
         >
             <div
@@ -138,6 +139,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                 <div className="flex flex-col xs:flex-row align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end">
                     {!selected && (
                         <button
+                            id="songAddButton"
                             className="buttonselect"
                             onClick={() => {
                                 addSong(songInfo);
@@ -150,6 +152,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                     )}{" "}
                     {selected && (
                         <button
+                            id="songDeleteButton"
                             className="buttoncancel"
                             onClick={() => {
                                 removeSong(songInfo);
