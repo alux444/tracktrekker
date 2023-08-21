@@ -119,6 +119,7 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
                 />
             </div>
             <div
+                id="genresMultiselect"
                 ref={containerRef}
                 onClick={() => setOpen(true)}
                 onBlur={() => setOpen(false)}
@@ -129,7 +130,7 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
                     {multiple
                         ? value.map((v) => (
                               <button
-                                  className="option-badge"
+                                  className="deleteOptionButton option-badge"
                                   key={v.value}
                                   onClick={(e) => {
                                       e.stopPropagation();
@@ -162,7 +163,7 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
                                 setOpen(false);
                             }}
                             key={option.value}
-                            className={`option ${
+                            className={`selectOptionButton option ${
                                 isSelected(option) ? "selected" : ""
                             } ${index === highlighted ? "highlighted" : ""}`}
                         >
