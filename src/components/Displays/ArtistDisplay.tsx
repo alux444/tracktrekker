@@ -51,7 +51,7 @@ const ArtistDisplay = ({
     const allSongs = topSongs.map((song) => <SmallSongDisplay song={song} />);
 
     return (
-        <div className="w-fit flex items-center justify-center">
+        <div className="artistDisplay w-fit flex items-center justify-center">
             <div
                 className={`hover flex justify-between gap-2 items-center border-[1px] p-2 w-fit rounded-[20px]`}
             >
@@ -114,6 +114,7 @@ const ArtistDisplay = ({
                     <div className="flex items-center flex-wrap gap-2 justify-center align-center">
                         {type === "search" && !selected && (
                             <button
+                                id="artistAddButton"
                                 className="buttonselect"
                                 onClick={() => {
                                     addArtist(artist);
@@ -126,6 +127,7 @@ const ArtistDisplay = ({
                         )}
                         {selected && type === "search" && (
                             <button
+                                id="artistRemoveButton"
                                 className="buttoncancel"
                                 onClick={() => {
                                     removeArtist(artist);

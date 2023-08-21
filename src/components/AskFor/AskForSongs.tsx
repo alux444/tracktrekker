@@ -19,6 +19,7 @@ const AskForSongs = ({ submit }: AskForSongsProps) => {
         <div
             className="flex flex-col gap-2 justify-center items-center align-center w-full p-5"
             ref={topRef}
+            id="askForSongs"
         >
             <h2 className="text-lg grad">Select Songs</h2>
             <VolumeSlider />
