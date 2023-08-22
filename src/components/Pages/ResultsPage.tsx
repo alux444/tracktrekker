@@ -6,6 +6,7 @@ import SongDisplay from "../Displays/SongDisplay";
 import { StatsContext } from "./HomePage";
 import VolumeSlider from "../Misc/VolumeSlider";
 import Pagination from "../Misc/Pagination";
+import { AudioContext } from "./Views";
 
 const ResultsPage = ({
     query,
@@ -14,6 +15,7 @@ const ResultsPage = ({
     query: RecommendForm;
     goBack: () => void;
 }) => {
+    const { audio } = useContext(AudioContext);
     const { showStats, setShowStats } = useContext(StatsContext);
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
@@ -50,6 +52,12 @@ const ResultsPage = ({
     useEffect(() => {
         setCurrentPage(1);
     }, [query, songs]);
+
+    useEffect(() => {
+        if (audio !== null) {
+            audio.pause();
+        }
+    }, [currentPage, songs]);
 
     const changePage = (page: number) => {
         setCurrentPage(page);
