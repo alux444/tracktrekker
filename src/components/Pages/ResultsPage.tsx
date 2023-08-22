@@ -36,6 +36,7 @@ const ResultsPage = ({
             setMessage(
                 "Sorry... there were no matches for your search. Maybe your tracks/artists were too obscure, or your search was too complicated"
             );
+            setSongs([]);
             return;
         }
 

@@ -83,7 +83,11 @@ const useSpotify = () => {
                 params: query,
             });
             console.log(response.data);
-            return response.data;
+            if (response.data.tracks) {
+                return response.data;
+            } else {
+                return 2;
+            }
             // You can access the artist data from the response here:
         } catch (error) {
             console.error("Error:", error);
