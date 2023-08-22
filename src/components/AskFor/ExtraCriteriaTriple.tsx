@@ -63,7 +63,7 @@ const ExtraCriteriaTriple = ({
 
     useEffect(() => {
         updateForm();
-    }, [min, max, targ]);
+    }, [min, max, targ, showSelection]);
 
     useEffect(() => {
         const handleOutsideClick = (event: MouseEvent) => {
