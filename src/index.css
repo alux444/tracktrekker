@@ -337,3 +337,22 @@ input[type="range"]::-webkit-slider-thumb {
     height: fit-content;
     padding: 0.2rem 1.1rem;
 }
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes scrolling {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+}

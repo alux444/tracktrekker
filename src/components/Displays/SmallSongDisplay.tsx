@@ -5,6 +5,8 @@ import { SongsInfoContext } from "../../App";
 import { AudioContext } from "../Pages/Views";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     const [selected, setSelected] = useState(false);
@@ -58,22 +60,23 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     };
 
     return (
-        <div className="w-full flex gap-1 border-[1px] p-2 rounded-[10px] justify-between items-center hover">
-            <div className="flex gap-1">
-                <img src={song.album.images[1].url} className="h-[2rem]" />
-                <div className="flex flex-col">
+        <div className="w-full flex gap-1 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-[rgba(255,255,255,0.5)]">
+            <div className="flex gap-1 w-[90%]">
+                <img src={song.album.images[1].url} className="w-[4rem]" />
+                <div className="flex flex-col w-[80%] align-center">
                     <a
+                        className="w-full"
                         href={song.external_urls.spotify}
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <p className="sm:truncate">
-                            {song.name.length > 20
-                                ? song.name.slice(0, 18) + "..."
-                                : song.name}
-                        </p>
+                        <div className="flex gap-2 w-full overflow-hidden">
+                            <span className="truncate max-w-full">
+                                {song.name}
+                            </span>
+                        </div>
                     </a>
-                    <small>
+                    <small className="text-slate-400 ">
                         {song.artists.length > 1
                             ? song.artists[0].name +
                               " +" +
@@ -83,36 +86,37 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 </div>
             </div>
 
-            <div className="buttons flex gap-1 flex-col md:flex-row">
+            <div className="w-[10%] buttons flex gap-1 flex-col justify-end items-end">
                 {song.preview_url && (
-                    <button
-                        className="border-blue-500 hover:text-blue-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
-                        onClick={playPreview}
-                    >
+                    <button className="buttonprev" onClick={playPreview}>
                         <span>
                             {currentPlayingId === song.id ? (
-                                <PauseIcon style={{ fontSize: "0.5rem" }} />
+                                <PauseIcon style={{ fontSize: "1rem" }} />
                             ) : (
-                                <PlayArrowIcon style={{ fontSize: "0.5rem" }} />
+                                <PlayArrowIcon style={{ fontSize: "1rem" }} />
                             )}
                         </span>
                     </button>
                 )}
                 {!selected ? (
                     <button
-                        className="border-green-500 hover:text-green-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+                        className="buttonselect"
                         onClick={() => {
                             addSong(song);
                         }}
                     >
-                        <span>+</span>
+                        <span>
+                            <AddIcon style={{ fontSize: "1rem" }} />
+                        </span>
                     </button>
                 ) : (
                     <button
                         onClick={() => removeSong(song)}
-                        className="border-red-500 hover:text-red-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+                        className="buttoncancel"
                     >
-                        <span>&times;</span>
+                        <span>
+                            <ClearIcon style={{ fontSize: "1rem" }} />
+                        </span>
                     </button>
                 )}
             </div>

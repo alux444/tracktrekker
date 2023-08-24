@@ -598,6 +598,18 @@ video {
   z-index: 50;
 }
 
+.z-30 {
+  z-index: 30;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
 .float-left {
   float: left;
 }
@@ -663,10 +675,6 @@ video {
   height: 1rem;
 }
 
-.h-\[2rem\] {
-  height: 2rem;
-}
-
 .h-\[5px\] {
   height: 5px;
 }
@@ -705,6 +713,10 @@ video {
   min-height: 100vh;
 }
 
+.w-\[10\%\] {
+  width: 10%;
+}
+
 .w-\[100vw\] {
   width: 100vw;
 }
@@ -721,6 +733,10 @@ video {
   width: 280px;
 }
 
+.w-\[4rem\] {
+  width: 4rem;
+}
+
 .w-\[50\%\] {
   width: 50%;
 }
@@ -733,8 +749,20 @@ video {
   width: 5px;
 }
 
+.w-\[75\%\] {
+  width: 75%;
+}
+
+.w-\[80\%\] {
+  width: 80%;
+}
+
 .w-\[80vw\] {
   width: 80vw;
+}
+
+.w-\[90\%\] {
+  width: 90%;
 }
 
 .w-\[90vw\] {
@@ -758,11 +786,6 @@ video {
   width: 100vw;
 }
 
-.min-w-fit {
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-}
-
 .max-w-\[15vw\] {
   max-width: 15vw;
 }
@@ -783,6 +806,10 @@ video {
   max-width: 90vw;
 }
 
+.max-w-full {
+  max-width: 100%;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -795,8 +822,16 @@ video {
   flex-wrap: wrap;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -835,8 +870,14 @@ video {
   overflow: auto;
 }
 
-.break-all {
-  word-break: break-all;
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .rounded-\[10px\] {
@@ -876,9 +917,9 @@ video {
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
 }
 
-.border-green-500 {
+.border-error {
   --tw-border-opacity: 1;
-  border-color: rgb(34 197 94 / var(--tw-border-opacity));
+  border-color: rgb(237 24 17 / var(--tw-border-opacity));
 }
 
 .border-purple-400 {
@@ -901,9 +942,9 @@ video {
   border-color: rgb(126 34 206 / var(--tw-border-opacity));
 }
 
-.border-red-500 {
+.border-select {
   --tw-border-opacity: 1;
-  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+  border-color: rgb(50 168 70 / var(--tw-border-opacity));
 }
 
 .border-slate-300 {
@@ -939,6 +980,22 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-\[rgba\(0\2c 0\2c 0\2c 0\.1\)\] {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.bg-\[rgba\(255\2c 255\2c 255\2c 0\.1\)\] {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.bg-\[rgba\(255\2c 255\2c 255\2c 0\.3\)\] {
+  background-color: rgba(255,255,255,0.3);
+}
+
+.bg-\[rgba\(255\2c 255\2c 255\2c 0\.5\)\] {
+  background-color: rgba(255,255,255,0.5);
 }
 
 .bg-opacity-50 {
@@ -1019,6 +1076,11 @@ video {
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -1398,6 +1460,32 @@ input[type="range"]::-webkit-slider-thumb {
   padding: 0.2rem 1.1rem;
 }
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scrolling {
+  0%,
+    100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-100%);
+  }
+}
+
+.hover\:border-error:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(237 24 17 / var(--tw-border-opacity));
+}
+
 .hover\:border-red-500:hover {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
@@ -1408,14 +1496,19 @@ input[type="range"]::-webkit-slider-thumb {
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
-.hover\:text-green-500:hover {
+.hover\:text-error:hover {
   --tw-text-opacity: 1;
-  color: rgb(34 197 94 / var(--tw-text-opacity));
+  color: rgb(237 24 17 / var(--tw-text-opacity));
 }
 
 .hover\:text-red-500:hover {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.hover\:text-select:hover {
+  --tw-text-opacity: 1;
+  color: rgb(50 168 70 / var(--tw-text-opacity));
 }
 
 @media (min-width: 500px) {
@@ -1437,10 +1530,8 @@ input[type="range"]::-webkit-slider-thumb {
     width: 40vw;
   }
 
-  .sm\:truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .sm\:flex-row {
+    flex-direction: row;
   }
 }
 
@@ -1498,6 +1589,10 @@ input[type="range"]::-webkit-slider-thumb {
 
   .lg\:w-\[25vw\] {
     width: 25vw;
+  }
+
+  .lg\:w-\[40vw\] {
+    width: 40vw;
   }
 
   .lg\:w-\[50\%\] {

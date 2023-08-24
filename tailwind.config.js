@@ -2,6 +2,12 @@
 export default {
     content: ["./src/**/*.{html,js,tsx}"],
     theme: {
+        extend: {
+            colors: {
+                error: "#ed1811",
+                select: "#32a846",
+            },
+        },
         screens: {
             xs: "500px",
 

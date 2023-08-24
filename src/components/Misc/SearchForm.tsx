@@ -4,7 +4,6 @@ import { ArtistInfo } from "../../interfaces/artistInfo";
 import { SongInfo } from "../../interfaces/songInfo";
 import ArtistDisplay from "../Displays/ArtistDisplay";
 import SongDisplay from "../Displays/SongDisplay";
-import { StatsContext } from "../Pages/HomePage";
 import { AudioContext } from "../Pages/Views";
 import Pagination from "./Pagination";
 
@@ -17,7 +16,6 @@ const SearchForm = ({
     scrollToTop: () => void;
     submit: () => void;
 }) => {
-    const { showStats, setShowStats } = useContext(StatsContext);
     const { audio, setAudio } = useContext(AudioContext);
 
     const [query, setQuery] = useState<string>("");
@@ -126,18 +124,6 @@ const SearchForm = ({
                     >
                         <span className="grad">Search</span>
                     </button>
-                    {type === "track" && (
-                        <button
-                            className="button2 border-purple-500 border-[1px]"
-                            type="button"
-                            onClick={() => setShowStats(!showStats)}
-                        >
-                            <span className="grad">
-                                {type === "track" && showStats && "Hide Stats"}
-                                {type === "track" && !showStats && "Show Stats"}
-                            </span>
-                        </button>
-                    )}
                     <button
                         className="button3 border-purple-500 border-[1px]"
                         type="button"
