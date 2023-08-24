@@ -101,21 +101,21 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
                         {allGenres}
                     </div>
                 )}
-                <div className="h-[1px] bg-purple-600 w-[50%]" />
-                {Object.keys(extras).length === 0 ? (
-                    <div className="justify-center align-center items-center flex h-full">
-                        <p>No extra filters enabled.</p>
-                    </div>
-                ) : (
-                    <div className="justify-center align-center items-center flex h-full gap-2">
-                        <p className="grad text-lg">Current Extra Filters</p>
-                        <button
-                            onClick={() => setExtras({})}
-                            className="button3"
-                        >
-                            Clear Extras
-                        </button>
-                    </div>
+                {Object.keys(extras).length > 0 && (
+                    <>
+                        <div className="h-[1px] bg-purple-600 w-[50%]" />
+                        <div className="justify-center align-center items-center flex h-full gap-2">
+                            <p className="grad text-lg">
+                                Current Extra Filters
+                            </p>
+                            <button
+                                onClick={() => setExtras({})}
+                                className="button3"
+                            >
+                                Clear Extras
+                            </button>
+                        </div>
+                    </>
                 )}
                 {allExtras}
             </div>

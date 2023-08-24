@@ -208,8 +208,8 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
             {features && (showStats || thisShowStats) && (
                 <FeaturesDisplay
                     features={features}
-                    popularity={songInfo.popularity}
                     onClose={() => setThisShowStats(false)}
+                    songInfo={songInfo}
                 />
             )}
         </div>

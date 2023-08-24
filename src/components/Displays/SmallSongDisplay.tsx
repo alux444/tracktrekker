@@ -60,7 +60,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     };
 
     return (
-        <div className="w-full flex gap-1 border-[1px] p-2 rounded-[10px] justify-between items-center hover">
+        <div className="w-full flex gap-1 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-[rgba(255,255,255,0.5)]">
             <div className="flex gap-1 w-[90%]">
                 <img src={song.album.images[1].url} className="w-[4rem]" />
                 <div className="flex flex-col w-[80%] align-center">
