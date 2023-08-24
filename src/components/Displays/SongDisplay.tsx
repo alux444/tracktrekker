@@ -53,7 +53,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
             }
         };
         fetchFeaturesForThisSong();
-    }, []);
+    }, [songInfo]);
 
     const playPreview = () => {
         if (songInfo.preview_url) {
@@ -82,60 +82,64 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
         }
     };
 
-    let artists = songInfo.artists
-        .slice(0, 3)
-        .map((artist) => {
-            if (artist.name.length > 20) {
-                return artist.name.slice(0, 16) + "...";
-            } else {
-                return artist.name;
-            }
-        })
-        .join(", ");
-    if (songInfo.artists.length > 3) {
-        artists += ` ...+${songInfo.artists.length - 3}`;
-    }
+    const artists = songInfo.artists.map((artist) => artist.name).join(", ");
+
+    const totalSeconds = Math.floor(songInfo.duration_ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = (totalSeconds % 60).toString().padStart(2, "0");
+    const duration: string = `${minutes}:${seconds}`;
 
     return (
         <div
-            className={`songDisplay md:flex flex-col justify-center w-full items-center text-[rgba(0,0,0,0.8)]`}
+            className={`songDisplay md:flex flex-col justify-center w-full items-center text-[rgba(0,0,0,0.8)] h-fit`}
         >
             <div
-                className={`hover flex justify-between flex xs:flex-row items-center p-2 w-full lg:w-[50%] md:w-[70%] w-full border-[1px]
+                className={`hover h-full flex justify-between flex xs:flex-row items-center p-2 w-full lg:w-[50%] md:w-[70%] w-full border-[1px]
                  rounded-[10px] backdrop-blur-3xl ${
                      selected && "border-purple-400 border-[2px]"
                  }`}
             >
-                <div className="flex p-1 gap-5 xs:flex-row items-center">
+                <div className="h-full flex p-1 gap-5 xs:flex-row items-center w-[90%]">
                     <div className="flex-shrink-0 flex flex-col gap-1">
                         <img
                             src={songInfo.album.images[1].url}
                             className="float-left max-w-[64px] max-h-[64px]"
                         />
                     </div>
-                    <div className="flex flex-col">
-                        <a
-                            href={songInfo.external_urls.spotify}
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <h2 className="text-md flex gap-2 items-center flex-wrap break-all">
-                                {songInfo.explicit && (
-                                    <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
-                                        E
-                                    </div>
-                                )}
-                                {songInfo.name.length < 30
-                                    ? songInfo.name
-                                    : songInfo.name.substring(0, 29) + "..."}
-                            </h2>
-                        </a>
-                        <div>
-                            <small>{artists}</small>
+                    <div className="flex justify-between gap-3 flex-col h-full w-[75%]">
+                        <div className="flex flex-col w-full">
+                            <a
+                                href={songInfo.external_urls.spotify}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <h2 className="text-md flex gap-2 w-full overflow-hidden">
+                                    {songInfo.explicit && (
+                                        <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
+                                            E
+                                        </div>
+                                    )}
+                                    <span className="text-ellipsis overflow-hidden max-w-full whitespace-nowrap">
+                                        {songInfo.name}
+                                    </span>
+                                </h2>
+                            </a>
+                            <div className="text-xs text-slate-400 flex gap-2 w-full overflow-hidden">
+                                <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-full">
+                                    {artists}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="text-slate-400">
+                            {duration && <span>{duration}</span>}{" "}
+                            {features?.tempo && (
+                                <span> · {features.tempo.toFixed(0)} BPM</span>
+                            )}
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col xs:flex-row align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end">
+                <div className="w-[10%] flex flex-col sm:flex-row align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end">
                     {!selected && (
                         <button
                             id="songAddButton"

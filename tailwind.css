@@ -705,6 +705,10 @@ video {
   min-height: 100vh;
 }
 
+.w-\[10\%\] {
+  width: 10%;
+}
+
 .w-\[100vw\] {
   width: 100vw;
 }
@@ -733,8 +737,16 @@ video {
   width: 5px;
 }
 
+.w-\[75\%\] {
+  width: 75%;
+}
+
 .w-\[80vw\] {
   width: 80vw;
+}
+
+.w-\[90\%\] {
+  width: 90%;
 }
 
 .w-\[90vw\] {
@@ -783,8 +795,16 @@ video {
   max-width: 90vw;
 }
 
+.max-w-full {
+  max-width: 100%;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+
+.transform-gpu {
+  transform: translate3d(var(--tw-translate-x), var(--tw-translate-y), 0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .flex-col {
@@ -835,8 +855,20 @@ video {
   overflow: auto;
 }
 
-.break-all {
-  word-break: break-all;
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .rounded-\[10px\] {
@@ -1021,6 +1053,11 @@ video {
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
+.text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -1045,6 +1082,16 @@ video {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
 }
 
 .ease-in-out {
@@ -1398,6 +1445,27 @@ input[type="range"]::-webkit-slider-thumb {
   padding: 0.2rem 1.1rem;
 }
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scrolling {
+  0%,
+    100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-100%);
+  }
+}
+
 .hover\:border-red-500:hover {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
@@ -1435,6 +1503,10 @@ input[type="range"]::-webkit-slider-thumb {
 @media (min-width: 640px) {
   .sm\:w-\[40vw\] {
     width: 40vw;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
   }
 
   .sm\:truncate {

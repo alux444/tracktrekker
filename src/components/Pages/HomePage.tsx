@@ -29,7 +29,6 @@ const HomePage = () => {
     const { token } = useContext(TokenContext);
     const { promptPage, setPromptPage } = useContext(PromptPageContext);
     const [currentQuery, setCurrentQuery] = useState<RecommendForm>();
-    const [showStats, setShowStats] = useState<boolean>(false);
 
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
@@ -63,35 +62,32 @@ const HomePage = () => {
     }
 
     return (
-        <StatsContext.Provider value={{ showStats, setShowStats }}>
-            <div className="w-full mt-8">
-                <div className="flex w-full">
-                    <div className="w-[100vw] flex flex-col justify-center items-center">
-                        {<PromptScreen submit={generateForm} />}
-                        {promptPage === "user" && <UserTopItemsPage />}
-                        {promptPage === "songs" && (
-                            <AskForSongs submit={returnToHome} />
-                        )}
-                        {promptPage === "artists" && (
-                            <AskForArtists submit={returnToHome} />
-                        )}
-                        {promptPage === "genres" && (
-                            <AskForGenres submit={returnToHome} />
-                        )}
-                        {promptPage === "extras" && (
-                            <AskForExtra submit={returnToHome} />
-                        )}
-                        {promptPage === "results" &&
-                            currentQuery !== undefined && (
-                                <ResultsPage
-                                    query={currentQuery}
-                                    goBack={returnToHome}
-                                />
-                            )}
-                    </div>
+        <div className="w-full mt-8">
+            <div className="flex w-full">
+                <div className="w-[100vw] flex flex-col justify-center items-center">
+                    {<PromptScreen submit={generateForm} />}
+                    {promptPage === "user" && <UserTopItemsPage />}
+                    {promptPage === "songs" && (
+                        <AskForSongs submit={returnToHome} />
+                    )}
+                    {promptPage === "artists" && (
+                        <AskForArtists submit={returnToHome} />
+                    )}
+                    {promptPage === "genres" && (
+                        <AskForGenres submit={returnToHome} />
+                    )}
+                    {promptPage === "extras" && (
+                        <AskForExtra submit={returnToHome} />
+                    )}
+                    {promptPage === "results" && currentQuery !== undefined && (
+                        <ResultsPage
+                            query={currentQuery}
+                            goBack={returnToHome}
+                        />
+                    )}
                 </div>
             </div>
-        </StatsContext.Provider>
+        </div>
     );
 };
 
