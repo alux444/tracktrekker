@@ -59,21 +59,22 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
 
     return (
         <div className="w-full flex gap-1 border-[1px] p-2 rounded-[10px] justify-between items-center hover">
-            <div className="flex gap-1">
-                <img src={song.album.images[1].url} className="h-[2rem]" />
-                <div className="flex flex-col">
+            <div className="flex gap-1 w-[90%]">
+                <img src={song.album.images[1].url} className="w-[4rem]" />
+                <div className="flex flex-col w-[80%] align-center">
                     <a
+                        className="w-full"
                         href={song.external_urls.spotify}
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <p className="sm:truncate">
-                            {song.name.length > 20
-                                ? song.name.slice(0, 18) + "..."
-                                : song.name}
-                        </p>
+                        <div className="flex gap-2 w-full overflow-hidden">
+                            <span className="truncate max-w-full">
+                                {song.name}
+                            </span>
+                        </div>
                     </a>
-                    <small>
+                    <small className="text-slate-400 ">
                         {song.artists.length > 1
                             ? song.artists[0].name +
                               " +" +
@@ -83,10 +84,10 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 </div>
             </div>
 
-            <div className="buttons flex gap-1 flex-col md:flex-row">
+            <div className="w-[10%] buttons flex gap-1 flex-col md:flex-row justify-end items-end">
                 {song.preview_url && (
                     <button
-                        className="border-blue-500 hover:text-blue-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+                        className="border-blue-500 hover:text-blue-500 border-[1px] w-fit px-[5px] rounded-lg ease-in-out transition-all"
                         onClick={playPreview}
                     >
                         <span>
@@ -100,7 +101,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 )}
                 {!selected ? (
                     <button
-                        className="border-green-500 hover:text-green-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+                        className="border-green-500 hover:text-green-500 border-[1px] w-fit px-[5px] rounded-lg ease-in-out transition-all"
                         onClick={() => {
                             addSong(song);
                         }}
@@ -110,7 +111,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 ) : (
                     <button
                         onClick={() => removeSong(song)}
-                        className="border-red-500 hover:text-red-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+                        className="border-red-500 hover:text-red-500 border-[1px] w-fit px-[5px] rounded-lg ease-in-out transition-all"
                     >
                         <span>&times;</span>
                     </button>

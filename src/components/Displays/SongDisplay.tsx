@@ -119,13 +119,13 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                                             E
                                         </div>
                                     )}
-                                    <span className="text-ellipsis overflow-hidden max-w-full whitespace-nowrap">
+                                    <span className="truncate max-w-full">
                                         {songInfo.name}
                                     </span>
                                 </h2>
                             </a>
                             <div className="text-xs text-slate-400 flex gap-2 w-full overflow-hidden">
-                                <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-full">
+                                <span className="truncate max-w-full">
                                     {artists}
                                 </span>
                             </div>
