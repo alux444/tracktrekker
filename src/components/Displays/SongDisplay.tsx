@@ -106,7 +106,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                             className="float-left max-w-[64px] max-h-[64px]"
                         />
                     </div>
-                    <div className="flex justify-between gap-3 flex-col h-full w-[75%]">
+                    <div className="flex justify-between gap-3 flex-col h-full w-[65%]">
                         <div className="flex flex-col w-full">
                             <a
                                 href={songInfo.external_urls.spotify}
