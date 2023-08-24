@@ -51,7 +51,7 @@ const ArtistDisplay = ({
     const allSongs = topSongs.map((song) => <SmallSongDisplay song={song} />);
 
     return (
-        <div className="artistDisplay w-fit flex items-center justify-center">
+        <div className="artistDisplay w-full lg:w-fit flex items-center justify-center">
             <div
                 className={`hover flex justify-between gap-2 items-center border-[1px] p-2 w-fit rounded-[20px]`}
             >
