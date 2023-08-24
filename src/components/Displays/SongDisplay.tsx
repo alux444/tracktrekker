@@ -139,7 +139,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                         </div>
                     </div>
                 </div>
-                <div className="w-[10%] flex flex-col sm:flex-row align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end">
+                <div className="w-[10%] flex flex-col align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end">
                     {!selected && (
                         <button
                             id="songAddButton"

@@ -5,6 +5,8 @@ import { SongsInfoContext } from "../../App";
 import { AudioContext } from "../Pages/Views";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
+import AddIcon from "@mui/icons-material/Add";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     const [selected, setSelected] = useState(false);
@@ -84,36 +86,37 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 </div>
             </div>
 
-            <div className="w-[10%] buttons flex gap-1 flex-col md:flex-row justify-end items-end">
+            <div className="w-[10%] buttons flex gap-1 flex-col justify-end items-end">
                 {song.preview_url && (
-                    <button
-                        className="border-blue-500 hover:text-blue-500 border-[1px] w-fit px-[5px] rounded-lg ease-in-out transition-all"
-                        onClick={playPreview}
-                    >
+                    <button className="buttonprev" onClick={playPreview}>
                         <span>
                             {currentPlayingId === song.id ? (
-                                <PauseIcon style={{ fontSize: "0.5rem" }} />
+                                <PauseIcon style={{ fontSize: "1rem" }} />
                             ) : (
-                                <PlayArrowIcon style={{ fontSize: "0.5rem" }} />
+                                <PlayArrowIcon style={{ fontSize: "1rem" }} />
                             )}
                         </span>
                     </button>
                 )}
                 {!selected ? (
                     <button
-                        className="border-green-500 hover:text-green-500 border-[1px] w-fit px-[5px] rounded-lg ease-in-out transition-all"
+                        className="buttonselect"
                         onClick={() => {
                             addSong(song);
                         }}
                     >
-                        <span>+</span>
+                        <span>
+                            <AddIcon style={{ fontSize: "1rem" }} />
+                        </span>
                     </button>
                 ) : (
                     <button
                         onClick={() => removeSong(song)}
-                        className="border-red-500 hover:text-red-500 border-[1px] w-fit px-[5px] rounded-lg ease-in-out transition-all"
+                        className="buttoncancel"
                     >
-                        <span>&times;</span>
+                        <span>
+                            <ClearIcon style={{ fontSize: "1rem" }} />
+                        </span>
                     </button>
                 )}
             </div>

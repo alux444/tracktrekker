@@ -51,7 +51,7 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
             {genre.label.slice(1)}
             <button
                 onClick={() => removeGenre(genre)}
-                className="hover:border-red-500 hover:text-red-500 border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
+                className="hover:border-error hover:text-error border-[1px] px-[5px] rounded-lg ease-in-out transition-all"
             >
                 <span>&times;</span>
             </button>
@@ -67,10 +67,10 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
     ));
 
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
             <div
                 ref={modalRef}
-                className="flex flex-col w-[95vw] lg:w-[40vw] max-h-[90vh] overflow-auto  gap-2 p-5 rounded-[10px] z-300 items-center bg-slate-100"
+                className="flex flex-col w-[95vw] lg:w-[40vw] max-h-[90vh] overflow-auto  gap-2 p-5 rounded-[10px] z-10 items-center bg-slate-100"
             >
                 {songs.length === 0 &&
                 genres.length === 0 &&
