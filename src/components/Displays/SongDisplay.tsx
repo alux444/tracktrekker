@@ -206,17 +206,11 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
             </div>
 
             {features && (showStats || thisShowStats) && (
-                <div className="w-full md:w-[70%] lg:w-[50%] p-2">
-                    <FeaturesDisplay
-                        features={features}
-                        popularity={songInfo.popularity}
-                    />
-                </div>
-            )}
-            {!features && (showStats || thisShowStats) && (
-                <div className="w-full md:w-[70%] lg:w-[50%]  p-2">
-                    <p className="grad">No Stats Avalaible for this song.</p>
-                </div>
+                <FeaturesDisplay
+                    features={features}
+                    popularity={songInfo.popularity}
+                    onClose={() => setThisShowStats(false)}
+                />
             )}
         </div>
     );
