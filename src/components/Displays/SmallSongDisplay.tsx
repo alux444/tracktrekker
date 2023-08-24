@@ -61,8 +61,8 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
 
     return (
         <div className="w-full flex gap-1 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-[rgba(255,255,255,0.5)]">
-            <div className="flex gap-1 w-[90%]">
-                <img src={song.album.images[1].url} className="w-[4rem]" />
+            <div className="flex gap-1 w-[80%]">
+                <img src={song.album.images[1].url} className="w-[3rem]" />
                 <div className="flex flex-col w-[80%] align-center">
                     <a
                         className="w-full"
@@ -86,7 +86,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 </div>
             </div>
 
-            <div className="w-[10%] buttons flex gap-1 flex-col justify-end items-end">
+            <div className="w-[20%] buttons flex gap-1 flex-col justify-end items-end">
                 {song.preview_url && (
                     <button className="buttonprev" onClick={playPreview}>
                         <span>

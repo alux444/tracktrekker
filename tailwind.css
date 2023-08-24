@@ -786,6 +786,30 @@ video {
   width: 100vw;
 }
 
+.w-\[3rem\] {
+  width: 3rem;
+}
+
+.w-\[13\%\] {
+  width: 13%;
+}
+
+.w-\[87\%\] {
+  width: 87%;
+}
+
+.w-\[15\%\] {
+  width: 15%;
+}
+
+.w-\[85\%\] {
+  width: 85%;
+}
+
+.w-\[20\%\] {
+  width: 20%;
+}
+
 .max-w-\[15vw\] {
   max-width: 15vw;
 }
