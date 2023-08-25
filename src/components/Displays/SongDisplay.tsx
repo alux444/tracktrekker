@@ -101,30 +101,30 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
             >
                 <div className="namesAndImage flex gap-1 w-[80%] h-full items-center">
                     <div className="imageDiv flex flex-col gap-1 w-fit">
-                        <img
-                            src={songInfo.album.images[1].url}
-                            className="float-left max-w-[64px] max-h-[64px]"
-                        />
+                        <a
+                            href={songInfo.external_urls.spotify}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <img
+                                src={songInfo.album.images[1].url}
+                                className="float-left max-w-[64px] max-h-[64px]"
+                            />
+                        </a>
                     </div>
 
-                    <div className="namesDiv flex justify-between gap-3 p-1 flex-col h-full flex-grow max-w-[60%] sm:max-w-[66%] lg:max-w-[80%]">
+                    <div className="namesDiv flex justify-between gap-3 p-1 flex-col h-full flex-grow max-w-[70%] sm:max-w-[70%] lg:max-w-[80%]">
                         <div className="flex flex-col w-full">
-                            <a
-                                href={songInfo.external_urls.spotify}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <h2 className="text-md flex gap-2 w-full overflow-hidden min-w-0 mb-1">
-                                    {songInfo.explicit && (
-                                        <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
-                                            E
-                                        </div>
-                                    )}
-                                    <span className="truncate max-w-full">
-                                        {songInfo.name}
-                                    </span>
-                                </h2>
-                            </a>
+                            <h2 className="text-md flex gap-2 w-full overflow-hidden min-w-0 mb-1">
+                                {songInfo.explicit && (
+                                    <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
+                                        E
+                                    </div>
+                                )}
+                                <span className="truncate max-w-full">
+                                    {songInfo.name}
+                                </span>
+                            </h2>
                             <div className="text-xs text-slate-400 flex gap-2 flex-wrap w-full overflow-hidden">
                                 <span className="truncate max-w-full">
                                     {artists}
@@ -151,7 +151,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                             }}
                         >
                             <span>
-                                <AddIcon style={{ fontSize: "1rem" }} />
+                                <AddIcon style={{ fontSize: "0.9rem" }} />
                             </span>
                         </button>
                     )}{" "}
@@ -164,7 +164,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                             }}
                         >
                             <span>
-                                <ClearIcon style={{ fontSize: "1rem" }} />
+                                <ClearIcon style={{ fontSize: "0.9rem" }} />
                             </span>
                         </button>
                     )}
@@ -176,10 +176,10 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                         >
                             <span>
                                 {currentPlayingId === songInfo.id ? (
-                                    <PauseIcon style={{ fontSize: "1rem" }} />
+                                    <PauseIcon style={{ fontSize: "0.9rem" }} />
                                 ) : (
                                     <PlayArrowIcon
-                                        style={{ fontSize: "1rem" }}
+                                        style={{ fontSize: "0.9rem" }}
                                     />
                                 )}
                             </span>

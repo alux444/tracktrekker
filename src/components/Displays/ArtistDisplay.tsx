@@ -91,7 +91,7 @@ const ArtistDisplay = ({
                             <img
                                 className={`${
                                     type === "search"
-                                        ? "lg:w-[12vw] w-[20vw]"
+                                        ? "lg:w-[12vw] w-[30vw]"
                                         : "lg:max-w-[8vw] max-w-[15vw] max-h-[16vh] lg:max-h-[14vh]"
                                 } rounded-[10px]
                     `}

@@ -62,23 +62,20 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     return (
         <div className="w-full flex gap-1 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-[rgba(255,255,255,0.5)]">
             <div className="flex gap-1 w-[80%]">
-                <img
-                    src={song.album.images[1].url}
-                    className="w-[2rem] lg:w-[3rem]"
-                />
+                <a
+                    href={song.external_urls.spotify}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img
+                        src={song.album.images[1].url}
+                        className="w-[2.2rem] lg:w-[3rem]"
+                    />
+                </a>
                 <div className="flex flex-col w-[80%] align-center">
-                    <a
-                        className="w-full"
-                        href={song.external_urls.spotify}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <div className="flex gap-2 w-full overflow-hidden">
-                            <span className="truncate max-w-full">
-                                {song.name}
-                            </span>
-                        </div>
-                    </a>
+                    <div className="flex gap-2 w-full overflow-hidden">
+                        <span className="truncate max-w-full">{song.name}</span>
+                    </div>
                     <small className="text-slate-400 ">
                         {song.artists.length > 1
                             ? song.artists[0].name +
