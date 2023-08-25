@@ -1442,11 +1442,11 @@ input[type="range"]::-webkit-slider-thumb {
   }
 }
 
-@media screen and (max-width: 600px) {
-  * {
-    font-size: x-small;
-  }
-}
+/* @media screen and (max-width: 600px) {
+    * {
+        font-size: small;
+    }
+} */
 
 .hover\:border-error:hover {
   --tw-border-opacity: 1;

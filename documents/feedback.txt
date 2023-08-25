@@ -10,6 +10,9 @@ STYLES
 FEATURES
     - move authentication to serverside
 
+IN progress
+- Restyling design
+
 20 Aug
 COMPLETED added basic testing to workflow
 
