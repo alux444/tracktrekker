@@ -86,7 +86,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 </div>
             </div>
 
-            <div className="w-[20%] buttons flex gap-1 flex-col justify-end items-end">
+            <div className="w-[20%] buttons flex gap-1 flex-col md:flex-row justify-end items-end">
                 {song.preview_url && (
                     <button className="buttonprev" onClick={playPreview}>
                         <span>

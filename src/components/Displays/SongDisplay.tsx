@@ -82,7 +82,10 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
         }
     };
 
-    const artists = songInfo.artists.map((artist) => artist.name).join(", ");
+    const artists = songInfo.artists
+        .slice(0, 3)
+        .map((artist) => artist.name)
+        .join(", ");
 
     const totalSeconds = Math.floor(songInfo.duration_ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
@@ -96,7 +99,8 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
             <div
                 className={`hover h-full flex justify-between flex xs:flex-row items-center p-2 w-full border-[1px]
                  rounded-[10px] backdrop-blur-3xl ${
-                     selected && "border-purple-400 border-[2px]"
+                     selected &&
+                     "border-purple-400 border-[2px] bg-[rgba(186,138,207,0.05)]"
                  }`}
             >
                 <div className="namesAndImage flex gap-1 w-[80%] h-full items-center">
@@ -116,18 +120,17 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                     <div className="namesDiv flex justify-between gap-3 p-1 flex-col h-full flex-grow max-w-[70%] sm:max-w-[70%] lg:max-w-[80%]">
                         <div className="flex flex-col w-full">
                             <h2 className="text-md flex gap-2 w-full overflow-hidden min-w-0 mb-1">
-                                {songInfo.explicit && (
-                                    <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
-                                        E
-                                    </div>
-                                )}
                                 <span className="truncate max-w-full">
                                     {songInfo.name}
                                 </span>
                             </h2>
                             <div className="text-xs text-slate-400 flex gap-2 flex-wrap w-full overflow-hidden">
                                 <span className="truncate max-w-full">
-                                    {artists}
+                                    {songInfo.artists.length > 3
+                                        ? artists +
+                                          " +" +
+                                          (songInfo.artists.length - 3)
+                                        : artists}
                                 </span>
                             </div>
                         </div>
@@ -141,66 +144,83 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                     </div>
                 </div>
 
-                <div className="buttonsArea flex flex-col align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end w-fit">
+                <div className="buttonsArea flex flex-col align-center flex-wrap gap-1 justify-end items-end w-[15%] xs:w-[20%]">
                     {!selected && (
                         <button
                             id="songAddButton"
-                            className="buttonselect"
+                            className="buttonselect xs:w-full"
                             onClick={() => {
                                 addSong(songInfo);
                             }}
                         >
-                            <span>
+                            <span className="flex items-center">
                                 <AddIcon style={{ fontSize: "0.9rem" }} />
+                                <span className="hidden xs:flex">ADD</span>
                             </span>
                         </button>
                     )}{" "}
                     {selected && (
                         <button
                             id="songRemoveButton"
-                            className="buttoncancel"
+                            className="buttoncancel xs:w-full"
                             onClick={() => {
                                 removeSong(songInfo);
                             }}
                         >
-                            <span>
+                            <span className="flex items-center">
                                 <ClearIcon style={{ fontSize: "0.9rem" }} />
+                                <span className="hidden xs:flex">REMOVE</span>
                             </span>
                         </button>
                     )}
                     {songInfo.preview_url && (
                         <button
-                            className="buttonprev"
+                            className="buttonprev xs:w-full"
                             type="button"
                             onClick={playPreview}
                         >
                             <span>
                                 {currentPlayingId === songInfo.id ? (
-                                    <PauseIcon style={{ fontSize: "0.9rem" }} />
+                                    <div className="flex items-center">
+                                        <PauseIcon
+                                            style={{ fontSize: "0.9rem" }}
+                                        />
+                                        <span className="hidden xs:flex">
+                                            PAUSE
+                                        </span>
+                                    </div>
                                 ) : (
-                                    <PlayArrowIcon
-                                        style={{ fontSize: "0.9rem" }}
-                                    />
+                                    <div className="flex items-center">
+                                        <PlayArrowIcon
+                                            style={{ fontSize: "0.9rem" }}
+                                        />
+                                        <span className="hidden xs:flex">
+                                            PLAY
+                                        </span>
+                                    </div>
                                 )}
                             </span>
                         </button>
                     )}
                     {!showStats && (
                         <button
-                            className="buttonprev"
+                            className="buttonprev xs:w-full"
                             type="button"
                             onClick={() => setThisShowStats(!thisShowStats)}
                         >
-                            <span>
+                            <span className="flex items-center">
                                 {thisShowStats ? (
-                                    <VisibilityOffIcon
-                                        style={{ fontSize: "1rem" }}
-                                    />
+                                    <span>
+                                        <VisibilityOffIcon
+                                            style={{ fontSize: "1rem" }}
+                                        />
+                                    </span>
                                 ) : (
                                     <BarChartIcon
                                         style={{ fontSize: "1rem" }}
                                     />
                                 )}
+                                <span className="hidden xs:flex">STATS</span>
                             </span>
                         </button>
                     )}
