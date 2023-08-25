@@ -112,12 +112,12 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                         >
                             <img
                                 src={songInfo.album.images[1].url}
-                                className="float-left max-w-[64px] max-h-[64px]"
+                                className="float-left md:max-w-[80px] md:max-h-[80px] max-h-[70px] max-w-[70px]"
                             />
                         </a>
                     </div>
 
-                    <div className="namesDiv flex justify-between gap-3 p-1 flex-col h-full flex-grow max-w-[70%] sm:max-w-[70%] lg:max-w-[80%]">
+                    <div className="namesDiv flex justify-between gap-1 p-1 flex-col h-full flex-grow max-w-[70%] sm:max-w-[70%] lg:max-w-[80%]">
                         <div className="flex flex-col w-full">
                             <h2 className="text-md flex gap-2 w-full overflow-hidden min-w-0 mb-1">
                                 <span className="truncate max-w-full">
@@ -148,12 +148,12 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                     {!selected && (
                         <button
                             id="songAddButton"
-                            className="buttonselect xs:w-full"
+                            className="buttonselect w-full"
                             onClick={() => {
                                 addSong(songInfo);
                             }}
                         >
-                            <span className="flex items-center">
+                            <span className="flex justify-center xs:justify-start items-center w-full">
                                 <AddIcon style={{ fontSize: "0.9rem" }} />
                                 <span className="hidden xs:flex">ADD</span>
                             </span>
@@ -162,12 +162,12 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                     {selected && (
                         <button
                             id="songRemoveButton"
-                            className="buttoncancel xs:w-full"
+                            className="buttoncancel w-full"
                             onClick={() => {
                                 removeSong(songInfo);
                             }}
                         >
-                            <span className="flex items-center">
+                            <span className="flex justify-center xs:justify-start w-full">
                                 <ClearIcon style={{ fontSize: "0.9rem" }} />
                                 <span className="hidden xs:flex">REMOVE</span>
                             </span>
@@ -175,13 +175,13 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                     )}
                     {songInfo.preview_url && (
                         <button
-                            className="buttonprev xs:w-full"
+                            className="buttonprev w-full"
                             type="button"
                             onClick={playPreview}
                         >
-                            <span>
+                            <span className="w-full">
                                 {currentPlayingId === songInfo.id ? (
-                                    <div className="flex items-center">
+                                    <div className="flex justify-center xs:justify-start items-center w-full">
                                         <PauseIcon
                                             style={{ fontSize: "0.9rem" }}
                                         />
@@ -190,7 +190,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                                         </span>
                                     </div>
                                 ) : (
-                                    <div className="flex items-center">
+                                    <div className="flex justify-center xs:justify-start items-center w-full">
                                         <PlayArrowIcon
                                             style={{ fontSize: "0.9rem" }}
                                         />
@@ -204,11 +204,11 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                     )}
                     {!showStats && (
                         <button
-                            className="buttonprev xs:w-full"
+                            className="buttonprev w-full"
                             type="button"
                             onClick={() => setThisShowStats(!thisShowStats)}
                         >
-                            <span className="flex items-center">
+                            <span className="flex justify-center xs:justify-start items-center w-full">
                                 {thisShowStats ? (
                                     <span>
                                         <VisibilityOffIcon
