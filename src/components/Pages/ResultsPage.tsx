@@ -3,7 +3,6 @@ import { RecommendForm } from "../../interfaces/recommendForm";
 import { SongInfo } from "../../interfaces/songInfo";
 import useSpotify from "../../utils/useSpotify";
 import SongDisplay from "../Displays/SongDisplay";
-import { StatsContext } from "./HomePage";
 import VolumeSlider from "../Misc/VolumeSlider";
 import Pagination from "../Misc/Pagination";
 import { AudioContext } from "./Views";
@@ -16,7 +15,6 @@ const ResultsPage = ({
     goBack: () => void;
 }) => {
     const { audio } = useContext(AudioContext);
-    const { showStats, setShowStats } = useContext(StatsContext);
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
@@ -101,15 +99,6 @@ const ResultsPage = ({
                 >
                     <span className="grad">Reroll</span>
                 </button>
-                <button
-                    className="button2 border-purple-500 border-[1px]"
-                    type="button"
-                    onClick={() => setShowStats(!showStats)}
-                >
-                    <span className="grad">
-                        {showStats ? "Hide Stats" : "Show Stats"}
-                    </span>
-                </button>
                 <button className="button3" onClick={goBack} ref={topRef}>
                     <span>Hide</span>
                 </button>
@@ -119,7 +108,7 @@ const ResultsPage = ({
                     className="flex flex-col justify-center w-[100vw] items-center"
                     id="recommendResults"
                 >
-                    <div className="p-5 flex w-full flex-col gap-2">
+                    <div className="p-5 flex w-full flex-col gap-2 w-screen md:w-[70vw] lg:w-[50vw] xl:w-[40vw]">
                         {results}
                     </div>
                     <button

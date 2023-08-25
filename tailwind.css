@@ -1442,11 +1442,11 @@ input[type="range"]::-webkit-slider-thumb {
   }
 }
 
-@media screen and (max-width: 600px) {
-  * {
-    font-size: x-small;
-  }
-}
+/* @media screen and (max-width: 600px) {
+    * {
+        font-size: small;
+    }
+} */
 
 .hover\:border-error:hover {
   --tw-border-opacity: 1;
@@ -1574,6 +1574,10 @@ input[type="range"]::-webkit-slider-thumb {
 
   .lg\:max-w-\[8vw\] {
     max-width: 8vw;
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
   }
 }
 
