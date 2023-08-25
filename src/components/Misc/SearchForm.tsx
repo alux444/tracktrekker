@@ -99,7 +99,7 @@ const SearchForm = ({
     ));
 
     return (
-        <div className="flex flex-col p-2 w-[95vw] items-center gap-1">
+        <div className="flex flex-col p-2 w-screen items-center gap-1">
             <form
                 id="searchForm"
                 className="flex flex-col gap-2 items-center"
@@ -135,11 +135,13 @@ const SearchForm = ({
             </form>
             {error && <p className="grad">Your search had no results :(</p>}
             {type === "track" && uniqueTracks.length > 0 && (
-                <div className="p-5 flex flex-col gap-3 w-full">{tracks}</div>
+                <div className="p-3 flex flex-col gap-3 w-screen md:w-[70vw] lg:w-[50vw] xl:w-[40vw]">
+                    {tracks}
+                </div>
             )}
 
             {type !== "track" && artistReults.length > 0 && (
-                <div className="flex flex-wrap gap-2 w-full justify-center ">
+                <div className="flex flex-wrap gap-2 w-screen justify-center ">
                     {artists}
                 </div>
             )}
