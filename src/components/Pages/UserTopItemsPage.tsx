@@ -70,7 +70,7 @@ const UserTopItemsPage = () => {
             : "All Time";
 
     return (
-        <div className="flex gap-2 items-center justify-center flex-col w-[90vw] p-3">
+        <div className="flex gap-2 items-center justify-center flex-col w-screen p-3">
             <div className="flex gap-1 items-center">
                 <button
                     className="button3 w-fit"
@@ -93,9 +93,9 @@ const UserTopItemsPage = () => {
             <VolumeSlider />
             {error && <p className="grad">Error fetching data :(</p>}
             {showSongs ? (
-                <div className="flex flex-col text-center w-full gap-1">
+                <div className="flex flex-col text-center w-full gap-1 items-center">
                     <p className="grad">Your Top Songs ({time})</p>
-                    <div className="p-5 flex flex-col gap-3 w-full text-start">
+                    <div className="p-5 flex flex-col gap-3 text-start w-screen md:w-[70vw] lg:w-[50vw] xl:w-[40vw]">
                         {tracks}
                     </div>
                 </div>

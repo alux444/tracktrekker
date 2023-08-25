@@ -6,6 +6,7 @@ export default {
             colors: {
                 error: "#ed1811",
                 select: "#32a846",
+                white: "#f5f5f5",
             },
         },
         screens: {

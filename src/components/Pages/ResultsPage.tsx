@@ -108,7 +108,7 @@ const ResultsPage = ({
                     className="flex flex-col justify-center w-[100vw] items-center"
                     id="recommendResults"
                 >
-                    <div className="p-5 flex w-full flex-col gap-2 w-screen md:w-[70vw] lg:w-[50vw] xl:w-[40vw]">
+                    <div className="p-5 flex w-full flex-col gap-2 w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
                         {results}
                     </div>
                     <button

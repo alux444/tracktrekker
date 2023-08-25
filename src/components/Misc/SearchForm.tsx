@@ -135,7 +135,7 @@ const SearchForm = ({
             </form>
             {error && <p className="grad">Your search had no results :(</p>}
             {type === "track" && uniqueTracks.length > 0 && (
-                <div className="p-3 flex flex-col gap-3 w-screen md:w-[70vw] lg:w-[50vw] xl:w-[40vw]">
+                <div className="p-3 flex flex-col gap-3 w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
                     {tracks}
                 </div>
             )}
