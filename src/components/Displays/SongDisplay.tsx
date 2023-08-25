@@ -91,29 +91,30 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
 
     return (
         <div
-            className={`songDisplay md:flex flex-col justify-center w-full items-center text-[rgba(0,0,0,0.8)] h-fit`}
+            className={`songDisplay md:flex flex-col flex-wrap justify-center w-full items-center text-[rgba(0,0,0,0.8)] h-fit`}
         >
             <div
-                className={`hover h-full flex justify-between flex xs:flex-row items-center p-2 w-full lg:w-[50%] md:w-[70%] w-full border-[1px]
+                className={`hover h-full flex justify-between flex xs:flex-row items-center p-2 w-full border-[1px]
                  rounded-[10px] backdrop-blur-3xl ${
                      selected && "border-purple-400 border-[2px]"
                  }`}
             >
-                <div className="h-full flex p-1 gap-5 xs:flex-row items-center w-[90%]">
-                    <div className="flex-shrink-0 flex flex-col gap-1">
+                <div className="namesAndImage flex gap-1 w-[80%] h-full  ">
+                    <div className="imageDiv flex flex-col gap-1 w-fit">
                         <img
                             src={songInfo.album.images[1].url}
                             className="float-left max-w-[64px] max-h-[64px]"
                         />
                     </div>
-                    <div className="flex justify-between gap-3 flex-col h-full w-[65%]">
+
+                    <div className="namesDiv flex justify-between gap-3 p-1 flex-col h-full flex-grow max-w-[60%] sm:max-w-[66%] lg:max-w-[80%]">
                         <div className="flex flex-col w-full">
                             <a
                                 href={songInfo.external_urls.spotify}
                                 target="_blank"
                                 rel="noreferrer"
                             >
-                                <h2 className="text-md flex gap-2 w-full overflow-hidden">
+                                <h2 className="text-md flex gap-2 w-full overflow-hidden min-w-0 mb-1">
                                     {songInfo.explicit && (
                                         <div className="border-[1px] rounded-lg text-gray-400 px-[7px]">
                                             E
@@ -124,7 +125,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                                     </span>
                                 </h2>
                             </a>
-                            <div className="text-xs text-slate-400 flex gap-2 w-full overflow-hidden">
+                            <div className="text-xs text-slate-400 flex gap-2 flex-wrap w-full overflow-hidden">
                                 <span className="truncate max-w-full">
                                     {artists}
                                 </span>
@@ -139,7 +140,8 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                         </div>
                     </div>
                 </div>
-                <div className="w-[10%] flex flex-col align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end">
+
+                <div className="buttonsArea flex flex-col align-center flex-wrap gap-1 items-center justify-center xs:justify-end xs:items-end w-fit">
                     {!selected && (
                         <button
                             id="songAddButton"

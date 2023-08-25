@@ -356,3 +356,9 @@ input[type="range"]::-webkit-slider-thumb {
         transform: translateX(-100%);
     }
 }
+
+@media screen and (max-width: 600px) {
+    * {
+        font-size: x-small;
+    }
+}

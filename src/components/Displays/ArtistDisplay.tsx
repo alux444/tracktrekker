@@ -51,9 +51,9 @@ const ArtistDisplay = ({
     const allSongs = topSongs.map((song) => <SmallSongDisplay song={song} />);
 
     return (
-        <div className="artistDisplay w-full lg:w-fit flex items-center justify-center">
+        <div className="artistDisplay w-fit flex items-center justify-center">
             <div
-                className={`hover flex justify-between gap-2 items-center border-[1px] p-2 w-fit rounded-[20px]`}
+                className={`hover flex flex-col md:flex-row justify-between gap-2 items-center border-[1px] p-2 w-fit rounded-[20px]`}
             >
                 <div className="flex flex-col gap-1 text-center items-center">
                     <div className="flex flex-wrap gap-1">
@@ -142,7 +142,7 @@ const ArtistDisplay = ({
                 </div>
 
                 {type === "search" && (
-                    <div className="flex flex-col w-[50vw] sm:w-[40vw] lg:w-[25vw] xl:w-[20vw] md:w-[35vw] gap-1">
+                    <div className="flex flex-col w-[90vw] sm:w-[40vw] lg:w-[25vw] xl:w-[20vw] md:w-[35vw] gap-1">
                         {allSongs}
                     </div>
                 )}
