@@ -1575,6 +1575,10 @@ input[type="range"]::-webkit-slider-thumb {
   .lg\:max-w-\[8vw\] {
     max-width: 8vw;
   }
+
+  .lg\:flex-row {
+    flex-direction: row;
+  }
 }
 
 @media (min-width: 1280px) {

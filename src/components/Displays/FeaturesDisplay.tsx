@@ -3,7 +3,7 @@ import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeatureLevel from "./FeatureLevel";
 import useOutsideClick from "../../utils/useOutsideClose";
 import { SongInfo } from "../../interfaces/songInfo";
-import SmallSongDisplay from "./SmallSongDisplay";
+import SongDisplay from "./SongDisplay";
 
 const FeaturesDisplay = ({
     features,
@@ -17,24 +17,17 @@ const FeaturesDisplay = ({
     const modalRef = useRef(null);
     useOutsideClick(modalRef, onClose);
 
-    const totalSeconds = Math.floor(features.duration_ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = (totalSeconds % 60).toString().padStart(2, "0");
-    const duration: string = `${minutes}:${seconds}`;
-
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
             <div
                 ref={modalRef}
                 className="bg-white flex flex-col p-2 rounded-lg shadow-md flex justify-center items-center align-center max-w-[90vw] z-10"
             >
-                <div className="flex flex-col gap-1 items-center">
-                    <SmallSongDisplay song={songInfo} />
+                <div className="flex flex-col gap-1 items-center w-full">
+                    <SongDisplay songInfo={songInfo} />
                 </div>
-                <div className="flex justify-between w-full p-1">
+                <div className="flex flex-col lg:flex-row justify-between w-full p-1">
                     <div className="flex flex-col align-center">
-                        <small>{duration}</small>
-                        <small>{features.tempo.toFixed(0)} BPM</small>
                         <div className="flex justify-between items-center">
                             <small>Energy: {features.energy.toFixed(2)}</small>
                             <FeatureLevel
@@ -60,8 +53,6 @@ const FeaturesDisplay = ({
                                 gap={0.1}
                             />
                         </div>
-                    </div>
-                    <div>
                         <div className="flex justify-between items-center">
                             <small>
                                 Danceability: {features.danceability.toFixed(2)}
@@ -71,7 +62,8 @@ const FeaturesDisplay = ({
                                 gap={0.1}
                             />
                         </div>
-
+                    </div>
+                    <div>
                         <div className="flex justify-between items-center">
                             <small>
                                 Speechiness: {features.speechiness.toFixed(2)}

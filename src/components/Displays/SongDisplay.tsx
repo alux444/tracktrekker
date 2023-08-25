@@ -99,7 +99,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                      selected && "border-purple-400 border-[2px]"
                  }`}
             >
-                <div className="namesAndImage flex gap-1 w-[80%] h-full  ">
+                <div className="namesAndImage flex gap-1 w-[80%] h-full items-center">
                     <div className="imageDiv flex flex-col gap-1 w-fit">
                         <img
                             src={songInfo.album.images[1].url}
