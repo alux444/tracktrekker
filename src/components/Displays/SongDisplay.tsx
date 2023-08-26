@@ -167,7 +167,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                                 removeSong(songInfo);
                             }}
                         >
-                            <span className="flex justify-center xs:justify-start w-full">
+                            <span className="flex justify-center xs:justify-start items-center w-full">
                                 <ClearIcon style={{ fontSize: "0.9rem" }} />
                                 <span className="hidden xs:flex">REMOVE</span>
                             </span>
