@@ -57,6 +57,19 @@ const ResultsPage = ({
         }
     }, [currentPage, songs]);
 
+    useEffect(() => {
+        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+            e.preventDefault();
+            e.returnValue = "Close tab?";
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
+
     const changePage = (page: number) => {
         setCurrentPage(page);
     };
