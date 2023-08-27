@@ -10,11 +10,9 @@ import Pagination from "./Pagination";
 const SearchForm = ({
     type,
     scrollToTop,
-    submit,
 }: {
     type: "track" | "artist";
     scrollToTop: () => void;
-    submit: () => void;
 }) => {
     const { audio, setAudio } = useContext(AudioContext);
 
@@ -157,9 +155,6 @@ const SearchForm = ({
                             onClick={scrollToTop}
                         >
                             <span className="grad">Top</span>
-                        </button>
-                        <button className="button3" onClick={submit}>
-                            <span>Hide</span>
                         </button>
                     </div>
                     <Pagination

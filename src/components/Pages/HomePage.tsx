@@ -53,8 +53,8 @@ const HomePage = () => {
         console.log(form);
     };
 
-    const returnToHome = () => {
-        setPromptPage("home");
+    const returnToSongs = () => {
+        setPromptPage("songs");
     };
 
     if (token === null) {
@@ -67,22 +67,16 @@ const HomePage = () => {
                 <div className="w-[100vw] flex flex-col justify-center items-center">
                     {<PromptScreen submit={generateForm} />}
                     {promptPage === "user" && <UserTopItemsPage />}
-                    {promptPage === "songs" && (
-                        <AskForSongs submit={returnToHome} />
-                    )}
-                    {promptPage === "artists" && (
-                        <AskForArtists submit={returnToHome} />
-                    )}
-                    {promptPage === "genres" && (
-                        <AskForGenres submit={returnToHome} />
-                    )}
+                    {promptPage === "songs" && <AskForSongs />}
+                    {promptPage === "artists" && <AskForArtists />}
+                    {promptPage === "genres" && <AskForGenres />}
                     {promptPage === "extras" && (
-                        <AskForExtra submit={returnToHome} />
+                        <AskForExtra onClose={returnToSongs} />
                     )}
                     {promptPage === "results" && currentQuery !== undefined && (
                         <ResultsPage
                             query={currentQuery}
-                            goBack={returnToHome}
+                            goBack={returnToSongs}
                         />
                     )}
                 </div>

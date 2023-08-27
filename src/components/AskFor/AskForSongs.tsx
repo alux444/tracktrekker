@@ -2,11 +2,7 @@ import { useRef } from "react";
 import SearchForm from "../Misc/SearchForm";
 import VolumeSlider from "../Misc/VolumeSlider";
 
-interface AskForSongsProps {
-    submit: () => void;
-}
-
-const AskForSongs = ({ submit }: AskForSongsProps) => {
+const AskForSongs = () => {
     const topRef = useRef(null);
 
     function scrollToTop(): void {
@@ -23,11 +19,7 @@ const AskForSongs = ({ submit }: AskForSongsProps) => {
         >
             <h2 className="text-lg grad">Select Songs</h2>
             <VolumeSlider />
-            <SearchForm
-                type="track"
-                scrollToTop={scrollToTop}
-                submit={submit}
-            />
+            <SearchForm type="track" scrollToTop={scrollToTop} />
         </div>
     );
 };

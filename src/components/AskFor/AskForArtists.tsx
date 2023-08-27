@@ -1,12 +1,8 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import SearchForm from "../Misc/SearchForm";
 import VolumeSlider from "../Misc/VolumeSlider";
 
-interface AskForArtistsProps {
-    submit: () => void;
-}
-
-const AskForArtists: React.FC<AskForArtistsProps> = ({ submit }) => {
+const AskForArtists = () => {
     const topRef = useRef(null);
 
     function scrollToTop(): void {
@@ -23,11 +19,7 @@ const AskForArtists: React.FC<AskForArtistsProps> = ({ submit }) => {
         >
             <h2 className="text-lg grad">Select Artists</h2>
             <VolumeSlider />
-            <SearchForm
-                type="artist"
-                scrollToTop={scrollToTop}
-                submit={submit}
-            />
+            <SearchForm type="artist" scrollToTop={scrollToTop} />
         </div>
     );
 };

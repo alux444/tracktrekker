@@ -26,7 +26,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
         if (promptPage !== "user") {
             setPromptPage("user");
         } else {
-            setPromptPage("home");
+            setPromptPage("songs");
         }
     };
 
@@ -51,16 +51,6 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                     >
                         <span className="grad">How to use TrackTrekker</span>
                     </button>
-                    {genres.length === 0 &&
-                        songSeeds.length === 0 &&
-                        artistSeeds.length === 0 &&
-                        (promptPage === "home" || promptPage === "user") && (
-                            <div className="flex flex-col flex-wrap text-center p-1">
-                                <h2 className="grad text-lg">
-                                    Select at least one song, artist or genre.
-                                </h2>
-                            </div>
-                        )}
                     {expandTutorial && (
                         <TutorialModal onClose={closeTutorial} />
                     )}
