@@ -5,13 +5,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 export type page = "home" | "about";
-export type PromptPage =
-    | "user"
-    | "songs"
-    | "artists"
-    | "genres"
-    | "extras"
-    | "results";
+export type PromptPage = "user" | "songs" | "artists" | "genres" | "results";
 
 export const PromptPageContext = createContext<{
     promptPage: PromptPage;

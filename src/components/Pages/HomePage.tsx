@@ -9,7 +9,6 @@ import {
 import AskForSongs from "../AskFor/AskForSongs";
 import AskForArtists from "../AskFor/AskForArtists";
 import AskForGenres from "../AskFor/AskForGenres";
-import AskForExtra from "../AskFor/AskForExtra";
 import { RecommendForm } from "../../interfaces/recommendForm";
 import ResultsPage from "./ResultsPage";
 import LandingPage from "./LandingPage";
@@ -29,6 +28,7 @@ const HomePage = () => {
     const { token } = useContext(TokenContext);
     const { promptPage, setPromptPage } = useContext(PromptPageContext);
     const [currentQuery, setCurrentQuery] = useState<RecommendForm>();
+    const [queryFilters, setQueryFilters] = useState<number>(0);
 
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
@@ -40,6 +40,8 @@ const HomePage = () => {
         genres.filter((genre) => {
             genreValues.push(genre.value);
         });
+
+        setQueryFilters(Object.keys(extras).length);
 
         const form: RecommendForm = {
             seed_tracks: songSeeds,
@@ -70,13 +72,11 @@ const HomePage = () => {
                     {promptPage === "songs" && <AskForSongs />}
                     {promptPage === "artists" && <AskForArtists />}
                     {promptPage === "genres" && <AskForGenres />}
-                    {promptPage === "extras" && (
-                        <AskForExtra onClose={returnToSongs} />
-                    )}
                     {promptPage === "results" && currentQuery !== undefined && (
                         <ResultsPage
                             query={currentQuery}
                             goBack={returnToSongs}
+                            filters={queryFilters}
                         />
                     )}
                 </div>
