@@ -3,6 +3,7 @@ import useOutsideClick from "../../utils/useOutsideClose";
 import TutPageOne from "./TutPageOne";
 import TutPageTwo from "./TutPageTwo";
 import TutPageThree from "./TutPageThree";
+import TutPageFour from "./TutPageFour";
 
 const TutorialModal = ({ onClose }: { onClose: () => void }) => {
     const modalRef = useRef(null);
@@ -21,7 +22,7 @@ const TutorialModal = ({ onClose }: { onClose: () => void }) => {
     };
 
     const incrementPage = () => {
-        if (page < 3) {
+        if (page < 4) {
             setPage(page + 1);
         }
     };
@@ -35,13 +36,14 @@ const TutorialModal = ({ onClose }: { onClose: () => void }) => {
                 {page === 1 && <TutPageOne />}
                 {page === 2 && <TutPageTwo />}
                 {page === 3 && <TutPageThree />}
+                {page === 4 && <TutPageFour />}
                 <div className="flex gap-5 w-full justify-center items-center">
                     {page !== 1 && (
                         <button className="button3" onClick={decrementPage}>
                             <span>&lt;</span>
                         </button>
                     )}
-                    {page !== 3 && (
+                    {page !== 4 && (
                         <button className="button3" onClick={incrementPage}>
                             <span>&gt;</span>
                         </button>

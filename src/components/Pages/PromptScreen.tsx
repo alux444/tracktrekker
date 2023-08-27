@@ -143,6 +143,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                         </div>
                     )}
             </div>
+
             {(genres.length !== 0 ||
                 songSeeds.length !== 0 ||
                 artistSeeds.length !== 0) && (

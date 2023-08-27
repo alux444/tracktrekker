@@ -6,7 +6,10 @@ const TutPageThree = () => {
         <div className="flex flex-col p-2 max-w-[90vw] items-center max-h-[90vh] overflow-auto">
             <h2 className="text-lg grad">Getting Results</h2>
             <p>Click the "Get Results" button to get your recommended songs.</p>
-            <img src={firstImage} className="border-[1px] my-2" />
+            <img
+                src={firstImage}
+                className="border-[1px] my-2 max-w-[50vw] lg:max-w-[30vw]"
+            />
             <p>Your results will appear at the bottom of the screen.</p>
             <img
                 src={secondImage}
