@@ -1,12 +1,11 @@
-import React, { useRef } from "react";
+import { useContext, useRef } from "react";
 import SearchForm from "../Misc/SearchForm";
 import VolumeSlider from "../Misc/VolumeSlider";
+import { PromptPageContext } from "../Pages/Views";
 
-interface AskForArtistsProps {
-    submit: () => void;
-}
+const AskForArtists = () => {
+    const { setPromptPage } = useContext(PromptPageContext);
 
-const AskForArtists: React.FC<AskForArtistsProps> = ({ submit }) => {
     const topRef = useRef(null);
 
     function scrollToTop(): void {
@@ -22,12 +21,22 @@ const AskForArtists: React.FC<AskForArtistsProps> = ({ submit }) => {
             ref={topRef}
         >
             <h2 className="text-lg grad">Select Artists</h2>
+            <div className="flex gap-1 flex-wrap justify-center">
+                <button
+                    className="button3"
+                    onClick={() => setPromptPage("songs")}
+                >
+                    <span>Songs</span>
+                </button>
+                <button
+                    className="button3"
+                    onClick={() => setPromptPage("genres")}
+                >
+                    <span>Genres</span>
+                </button>
+            </div>
             <VolumeSlider />
-            <SearchForm
-                type="artist"
-                scrollToTop={scrollToTop}
-                submit={submit}
-            />
+            <SearchForm type="artist" scrollToTop={scrollToTop} />
         </div>
     );
 };

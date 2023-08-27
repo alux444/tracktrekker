@@ -10,9 +10,11 @@ import { AudioContext } from "./Views";
 const ResultsPage = ({
     query,
     goBack,
+    filters,
 }: {
     query: RecommendForm;
     goBack: () => void;
+    filters: number;
 }) => {
     const { audio } = useContext(AudioContext);
     const { getRecommended } = useSpotify();
@@ -97,13 +99,15 @@ const ResultsPage = ({
         <div className="h-full flex flex-col items-center align-center gap-2 mt-12">
             <h2 className="grad text-xl">Search Results</h2>
             <VolumeSlider />
-            <p className="grad">
+            <p className="grad text-center">
                 Searching for {query.seed_tracks.length}{" "}
                 {query.seed_tracks.length === 1 ? "song" : "songs"},{" "}
                 {query.seed_artists.length}{" "}
                 {query.seed_artists.length === 1 ? "artist" : "artists"},{" "}
                 {query.seed_genres.length}{" "}
                 {query.seed_genres.length === 1 ? "genre" : "genres"}
+                <br />
+                With {filters} {filters == 1 ? "filter" : "filters"} applied.
             </p>
             <div className="flex gap-2">
                 <button
@@ -113,7 +117,7 @@ const ResultsPage = ({
                     <span className="grad">Reroll</span>
                 </button>
                 <button className="button3" onClick={goBack} ref={topRef}>
-                    <span>Hide</span>
+                    <span>Back to Search</span>
                 </button>
             </div>
             {songs.length > 0 ? (

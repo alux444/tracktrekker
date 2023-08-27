@@ -9,7 +9,6 @@ import {
 import AskForSongs from "../AskFor/AskForSongs";
 import AskForArtists from "../AskFor/AskForArtists";
 import AskForGenres from "../AskFor/AskForGenres";
-import AskForExtra from "../AskFor/AskForExtra";
 import { RecommendForm } from "../../interfaces/recommendForm";
 import ResultsPage from "./ResultsPage";
 import LandingPage from "./LandingPage";
@@ -29,6 +28,7 @@ const HomePage = () => {
     const { token } = useContext(TokenContext);
     const { promptPage, setPromptPage } = useContext(PromptPageContext);
     const [currentQuery, setCurrentQuery] = useState<RecommendForm>();
+    const [queryFilters, setQueryFilters] = useState<number>(0);
 
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
@@ -40,6 +40,8 @@ const HomePage = () => {
         genres.filter((genre) => {
             genreValues.push(genre.value);
         });
+
+        setQueryFilters(Object.keys(extras).length);
 
         const form: RecommendForm = {
             seed_tracks: songSeeds,
@@ -53,8 +55,8 @@ const HomePage = () => {
         console.log(form);
     };
 
-    const returnToHome = () => {
-        setPromptPage("home");
+    const returnToSongs = () => {
+        setPromptPage("songs");
     };
 
     if (token === null) {
@@ -64,25 +66,17 @@ const HomePage = () => {
     return (
         <div className="w-full mt-8">
             <div className="flex w-full">
-                <div className="w-[100vw] flex flex-col justify-center items-center">
+                <div className="w-[100vw] flex flex-col justify-between items-center">
                     {<PromptScreen submit={generateForm} />}
                     {promptPage === "user" && <UserTopItemsPage />}
-                    {promptPage === "songs" && (
-                        <AskForSongs submit={returnToHome} />
-                    )}
-                    {promptPage === "artists" && (
-                        <AskForArtists submit={returnToHome} />
-                    )}
-                    {promptPage === "genres" && (
-                        <AskForGenres submit={returnToHome} />
-                    )}
-                    {promptPage === "extras" && (
-                        <AskForExtra submit={returnToHome} />
-                    )}
+                    {promptPage === "songs" && <AskForSongs />}
+                    {promptPage === "artists" && <AskForArtists />}
+                    {promptPage === "genres" && <AskForGenres />}
                     {promptPage === "results" && currentQuery !== undefined && (
                         <ResultsPage
                             query={currentQuery}
-                            goBack={returnToHome}
+                            goBack={returnToSongs}
+                            filters={queryFilters}
                         />
                     )}
                 </div>

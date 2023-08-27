@@ -9,6 +9,7 @@ import {
 import CurrentSearchPage from "./CurrentSearchPage";
 import { PromptPageContext } from "./Views";
 import TutorialModal from "../Tutorial/TutorialModal";
+import AskForExtra from "../AskFor/AskForExtra";
 
 const PromptScreen = ({ submit }: { submit: () => void }) => {
     const { devMode } = useContext(DevContext);
@@ -19,6 +20,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
     const { genres } = useContext(GenreContext);
     const { extras } = useContext(ExtrasContext);
 
+    const [openFilterModal, setOpenFilterModal] = useState<boolean>(false);
     const [expandSearch, setExpandSearch] = useState<boolean>(false);
     const [expandTutorial, setExpandTutorial] = useState<boolean>(false);
 
@@ -26,7 +28,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
         if (promptPage !== "user") {
             setPromptPage("user");
         } else {
-            setPromptPage("home");
+            setPromptPage("songs");
         }
     };
 
@@ -51,16 +53,6 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                     >
                         <span className="grad">How to use TrackTrekker</span>
                     </button>
-                    {genres.length === 0 &&
-                        songSeeds.length === 0 &&
-                        artistSeeds.length === 0 &&
-                        (promptPage === "home" || promptPage === "user") && (
-                            <div className="flex flex-col flex-wrap text-center p-1">
-                                <h2 className="grad text-lg">
-                                    Select at least one song, artist or genre.
-                                </h2>
-                            </div>
-                        )}
                     {expandTutorial && (
                         <TutorialModal onClose={closeTutorial} />
                     )}
@@ -128,6 +120,12 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                                 0 && <p>Empty</p>}
                                     </div>
                                 </button>
+                                <button
+                                    className="button2 hfit border-purple-600 border-[1px] w-fit mb-1"
+                                    onClick={() => setOpenFilterModal(true)}
+                                >
+                                    <span className="grad">Add Filters</span>
+                                </button>
                             </div>
                             <hr />
                         </div>
@@ -144,35 +142,8 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                             </div>
                         </div>
                     )}
-                {promptPage !== "user" && (
-                    <div className="flex gap-2 flex-wrap justify-center p-1">
-                        <button
-                            className="button3"
-                            onClick={() => setPromptPage("songs")}
-                        >
-                            <span>Songs</span>
-                        </button>
-                        <button
-                            className="button3"
-                            onClick={() => setPromptPage("artists")}
-                        >
-                            <span>Artists</span>
-                        </button>
-                        <button
-                            className="button3"
-                            onClick={() => setPromptPage("genres")}
-                        >
-                            <span>Genres</span>
-                        </button>
-                        <button
-                            className="button3"
-                            onClick={() => setPromptPage("extras")}
-                        >
-                            <span>Extra</span>
-                        </button>
-                    </div>
-                )}
             </div>
+
             {(genres.length !== 0 ||
                 songSeeds.length !== 0 ||
                 artistSeeds.length !== 0) && (
@@ -183,6 +154,9 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                 >
                     <span className="button1-content">Get results</span>
                 </button>
+            )}
+            {openFilterModal && (
+                <AskForExtra onClose={() => setOpenFilterModal(false)} />
             )}
         </div>
     );

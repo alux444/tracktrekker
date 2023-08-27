@@ -15,7 +15,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
             <button
                 onClick={() => {
                     toHome();
-                    setPromptPage("home");
+                    setPromptPage("songs");
                 }}
                 className="grad text-3xl"
             >
@@ -26,7 +26,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                 <button
                     onClick={() => {
                         toHome();
-                        setPromptPage("home");
+                        setPromptPage("songs");
                     }}
                 >
                     {" "}

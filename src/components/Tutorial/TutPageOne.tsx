@@ -8,10 +8,10 @@ const TutPageOne = () => {
                 TrackTrekker is an app for finding music based on your search.
             </p>
             <p>
-                To begin, click any of the "Songs", "Artists" or "Genres"
-                buttons.
+                To begin, go to any of the "Songs", "Artists" or "Genres"
+                sections.
             </p>
-            <img src={firstImage} className="border-[1px] my-2" />
+            <img src={firstImage} className="border-[1px] my-2 max-h-[40vh]" />
             <p>
                 A search bar will appear. For genres, a multiselect will appear.
             </p>

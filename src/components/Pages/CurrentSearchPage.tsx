@@ -36,7 +36,7 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
         setArtistSeeds([]);
         setArtists([]);
         setGenres([]);
-        setPromptPage("home");
+        setPromptPage("songs");
     };
 
     const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);

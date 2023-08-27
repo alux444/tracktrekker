@@ -5,19 +5,12 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 export type page = "home" | "about";
-export type PromptPage =
-    | "home"
-    | "user"
-    | "songs"
-    | "artists"
-    | "genres"
-    | "extras"
-    | "results";
+export type PromptPage = "user" | "songs" | "artists" | "genres" | "results";
 
 export const PromptPageContext = createContext<{
     promptPage: PromptPage;
     setPromptPage: React.Dispatch<React.SetStateAction<PromptPage>>;
-}>({ promptPage: "home", setPromptPage: () => {} });
+}>({ promptPage: "songs", setPromptPage: () => {} });
 
 export const AudioContext = createContext<{
     audio: HTMLAudioElement | null;
@@ -41,7 +34,7 @@ export const AudioContext = createContext<{
 
 const Views = () => {
     const [currentPage, setCurrentPage] = useState<page>("home");
-    const [promptPage, setPromptPage] = useState<PromptPage>("home");
+    const [promptPage, setPromptPage] = useState<PromptPage>("songs");
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const [audioIsPlaying, setAudioIsPlaying] = useState<boolean>(false);
     const [currentPlayingId, setCurrentPlayingId] = useState<string | null>(
