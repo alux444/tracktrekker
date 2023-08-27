@@ -43,6 +43,12 @@ This allows for you to filter results with a certain range - all the results fro
 
 By setting a target, your results will be sorted based on the closest values to that target.
 
+
+-----
+
+
+## Development History
+
 v0.1 (10 August 2023)
 
 -   Added recommendations from tracks, artists and genres.
