@@ -1,8 +1,11 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import SearchForm from "../Misc/SearchForm";
 import VolumeSlider from "../Misc/VolumeSlider";
+import { PromptPageContext } from "../Pages/Views";
 
 const AskForSongs = () => {
+    const { setPromptPage } = useContext(PromptPageContext);
+
     const topRef = useRef(null);
 
     function scrollToTop(): void {
@@ -18,6 +21,20 @@ const AskForSongs = () => {
             id="askForSongs"
         >
             <h2 className="text-lg grad">Select Songs</h2>
+            <div className="flex gap-1 flex-wrap justify-center">
+                <button
+                    className="button3"
+                    onClick={() => setPromptPage("artists")}
+                >
+                    <span>Artists</span>
+                </button>
+                <button
+                    className="button3"
+                    onClick={() => setPromptPage("genres")}
+                >
+                    <span>Genres</span>
+                </button>
+            </div>
             <VolumeSlider />
             <SearchForm type="track" scrollToTop={scrollToTop} />
         </div>

@@ -134,34 +134,13 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                             </div>
                         </div>
                     )}
-                {promptPage !== "user" && (
-                    <div className="flex gap-2 flex-wrap justify-center p-1">
-                        <button
-                            className="button3"
-                            onClick={() => setPromptPage("songs")}
-                        >
-                            <span>Songs</span>
-                        </button>
-                        <button
-                            className="button3"
-                            onClick={() => setPromptPage("artists")}
-                        >
-                            <span>Artists</span>
-                        </button>
-                        <button
-                            className="button3"
-                            onClick={() => setPromptPage("genres")}
-                        >
-                            <span>Genres</span>
-                        </button>
-                        <button
-                            className="button3"
-                            onClick={() => setPromptPage("extras")}
-                        >
-                            <span>Extra</span>
-                        </button>
-                    </div>
-                )}
+
+                <button
+                    className="button3"
+                    onClick={() => setPromptPage("extras")}
+                >
+                    <span>Extra</span>
+                </button>
             </div>
             {(genres.length !== 0 ||
                 songSeeds.length !== 0 ||
