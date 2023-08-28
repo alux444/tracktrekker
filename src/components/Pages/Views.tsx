@@ -63,6 +63,7 @@ const Views = () => {
     useEffect(() => {
         if (audio !== null) {
             audio.play();
+            setAudioIsPlaying(true);
         }
     }, [audio]);
 
@@ -80,6 +81,7 @@ const Views = () => {
         if (currentPage !== "home") {
             if (audio !== null) {
                 audio.pause();
+                setAudioIsPlaying(false);
             }
         }
     }, [currentPage]);
@@ -88,6 +90,7 @@ const Views = () => {
         if (audio !== null) {
             audio.pause();
             setAudio(null);
+            setAudioIsPlaying(false);
         }
     }, [promptPage]);
 

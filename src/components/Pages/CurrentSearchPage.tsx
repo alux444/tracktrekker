@@ -14,12 +14,12 @@ import { descriptions } from "../../utils/descriptions";
 import ExtraCriteriaTriple from "../AskFor/ExtraCriteriaTriple";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
 import useOutsideClick from "../../utils/useOutsideClose";
-import { PromptPageContext } from "./Views";
+import { AudioContext } from "./Views";
 
 const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
     const modalRef = useRef(null);
 
-    const { setPromptPage } = useContext(PromptPageContext);
+    const { audio, setAudioIsPlaying } = useContext(AudioContext);
     const { songs, setSongs } = useContext(SongsInfoContext);
     const { setSongSeeds } = useContext(SongSeedContext);
     const { artists, setArtists } = useContext(ArtistInfoContext);
@@ -28,7 +28,15 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
     const { extras, setExtras } = useContext(ExtrasContext);
     const { removeGenre } = useManageQuery();
 
-    useOutsideClick(modalRef, onClose);
+    const closeModal = () => {
+        if (audio !== null) {
+            audio.pause();
+            setAudioIsPlaying(false);
+        }
+        onClose();
+    };
+
+    useOutsideClick(modalRef, closeModal);
 
     const clearSearch = () => {
         setSongSeeds([]);
@@ -36,7 +44,7 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
         setArtistSeeds([]);
         setArtists([]);
         setGenres([]);
-        setPromptPage("songs");
+        closeModal();
     };
 
     const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);

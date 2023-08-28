@@ -72,6 +72,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
             } else {
                 if (audio) {
                     audio.pause();
+                    setAudioIsPlaying(false);
                     setCurrentPlayingId(null);
                 }
                 thisAudio.play();
@@ -180,7 +181,8 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                             onClick={playPreview}
                         >
                             <span className="w-full">
-                                {currentPlayingId === songInfo.id ? (
+                                {audioIsPlaying &&
+                                currentPlayingId === songInfo.id ? (
                                     <div className="flex justify-center xs:justify-start items-center w-full">
                                         <PauseIcon
                                             style={{ fontSize: "0.9rem" }}
