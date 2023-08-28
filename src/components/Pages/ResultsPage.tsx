@@ -16,7 +16,7 @@ const ResultsPage = ({
     goBack: () => void;
     filters: number;
 }) => {
-    const { audio } = useContext(AudioContext);
+    const { audio, setAudioIsPlaying } = useContext(AudioContext);
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
@@ -56,6 +56,7 @@ const ResultsPage = ({
     useEffect(() => {
         if (audio !== null) {
             audio.pause();
+            setAudioIsPlaying(false);
         }
     }, [currentPage, songs]);
 

@@ -14,7 +14,7 @@ const SearchForm = ({
     type: "track" | "artist";
     scrollToTop: () => void;
 }) => {
-    const { audio, setAudio } = useContext(AudioContext);
+    const { audio, setAudio, setAudioIsPlaying } = useContext(AudioContext);
 
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
@@ -28,12 +28,19 @@ const SearchForm = ({
         if (audio !== null) {
             audio.pause();
             setAudio(null);
+            setAudioIsPlaying(false);
         }
     }, [trackResults, artistReults]);
 
     useEffect(() => {
         setCurrentPage(1);
     }, [trackResults, artistReults, type]);
+
+    useEffect(() => {
+        if (audio !== null) {
+            audio.pause();
+        }
+    }, [currentPage, query]);
 
     const changePage = (page: number) => {
         setCurrentPage(page);

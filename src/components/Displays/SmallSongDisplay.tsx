@@ -49,6 +49,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
             } else {
                 if (audio) {
                     audio.pause();
+                    setAudioIsPlaying(false);
                     setCurrentPlayingId(null);
                 }
                 thisAudio.play();
@@ -90,7 +91,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 {song.preview_url && (
                     <button className="buttonprev" onClick={playPreview}>
                         <span>
-                            {currentPlayingId === song.id ? (
+                            {audioIsPlaying && currentPlayingId === song.id ? (
                                 <PauseIcon style={{ fontSize: "1rem" }} />
                             ) : (
                                 <PlayArrowIcon style={{ fontSize: "1rem" }} />
