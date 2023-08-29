@@ -5,8 +5,6 @@ STYLES
         - about page
         - footer 
 
-    - reposition selected songs to top of list
-
 FEATURES
     - move authentication to serverside
 
