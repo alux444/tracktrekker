@@ -122,6 +122,7 @@ const ArtistDisplay = ({
                             >
                                 <span>
                                     <AddIcon style={{ fontSize: "1rem" }} />
+                                    ADD
                                 </span>
                             </button>
                         )}
@@ -135,6 +136,7 @@ const ArtistDisplay = ({
                             >
                                 <span>
                                     <ClearIcon style={{ fontSize: "1rem" }} />
+                                    REMOVE
                                 </span>
                             </button>
                         )}

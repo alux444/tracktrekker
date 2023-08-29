@@ -56,7 +56,9 @@ const StatsBar = ({
     } : ${((100 * value) / scale).toFixed(1)}`;
 
     const filterTooltip: string = filters[type]
-        ? `Filter Range: ${filtersRange?.lower} - ${filtersRange?.upper}`
+        ? `Filter Range: ${filtersRange?.lower.toFixed(
+              0
+          )} - ${filtersRange?.upper.toFixed(0)}`
         : "";
 
     return (
@@ -89,7 +91,7 @@ const StatsBar = ({
                         <div className="relative w-full inline-block group">
                             <div className="flex w-full">
                                 <div
-                                    className="filterRange h-[10px] p-1"
+                                    className="filterRange h-[10px]"
                                     style={{
                                         width: `${filtersRange.lower}%`,
                                     }}
@@ -99,7 +101,8 @@ const StatsBar = ({
                                     style={{
                                         width: `${
                                             filtersRange.upper -
-                                            filtersRange.lower
+                                            filtersRange.lower +
+                                            5
                                         }%`,
                                     }}
                                 />
