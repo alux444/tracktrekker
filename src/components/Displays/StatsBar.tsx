@@ -52,7 +52,7 @@ const StatsBar = ({
     }
 
     return (
-        <div className="flex h-full justify-end flex-col items-center">
+        <div className="flex w-fit h-full justify-end flex-col items-center">
             <div className="flex h-[200px] justify-end items-end">
                 <div
                     className="actualValue w-[10px] bg-red-500 rounded-lg"
@@ -80,16 +80,23 @@ const StatsBar = ({
                     </div>
                 )}
             </div>
-            <p className="text-xl">
-                {type === "popularity" && "📊"}
-                {type === "acousticness" && "🎸"}
-                {type === "energy" && "☀️"}
-                {type === "valence" && "😃"}
-                {type === "danceability" && "💃"}
-            </p>
-            <p className="grad text-lg">
-                {scale === 1 ? (value * 100).toFixed(0) : value.toFixed(0)}
-            </p>
+            <div className="flex flex-col items-center text-center">
+                <div className="group inline-block relative">
+                    <p className="text-xl emoji group-hover:cursor-pointer">
+                        {type === "popularity" && "📊"}
+                        {type === "acousticness" && "🎸"}
+                        {type === "energy" && "☀️"}
+                        {type === "valence" && "😃"}
+                        {type === "danceability" && "💃"}
+                    </p>
+                    <div className="tooltip bg-black bg-opacity-70 text-white py-2 px-4 rounded opacity-0 invisible transform -translate-x-1/2 bottom-full left-1/2 transition-opacity duration-200 absolute group-hover:opacity-100 group-hover:visible">
+                        {type}
+                    </div>
+                </div>
+                <p className="grad text-lg">
+                    {scale === 1 ? (value * 100).toFixed(0) : value.toFixed(0)}
+                </p>
+            </div>
         </div>
     );
 };
