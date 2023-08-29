@@ -51,51 +51,65 @@ const StatsBar = ({
         };
     }
 
+    const tooltipText: string = `${
+        type.charAt(0).toUpperCase() + type.slice(1)
+    } : ${((100 * value) / scale).toFixed(1)}`;
+
+    const filterTooltip: string = filters[type]
+        ? `Filter Range: ${filtersRange?.lower} - ${filtersRange?.upper}`
+        : "";
+
     return (
-        <div className="flex w-full h-full justify-end items-center">
-            <div className="flex items-center justify-between text-center w-fit p-1">
-                <div className="group inline-block relative">
-                    <p className="text-4xl emoji group-hover:cursor-pointer">
+        <div className="group relative w-full h-full">
+            <div className="flex w-full h-full justify-end items-center">
+                <div className="flex items-center justify-between text-center w-fit p-1">
+                    <p className="md:text-4xl text-2xl emoji group-hover:cursor-pointer">
                         {type === "popularity" && "📊"}
                         {type === "acousticness" && "🎸"}
                         {type === "energy" && "☀️"}
                         {type === "valence" && "😃"}
                         {type === "danceability" && "💃"}
                     </p>
-                    <div className="tooltip z-50 bg-black bg-opacity-70 text-white py-2 px-4 rounded opacity-0 invisible transition-opacity duration-200 absolute left-full top-1/2 -translate-y-1/2 transform -translate-x-1/2 group-hover:opacity-100 group-hover:visible">
-                        {type}
-                    </div>
+                    <p className="grad text-lg">
+                        {scale === 1
+                            ? (value * 100).toFixed(0)
+                            : value.toFixed(0)}
+                    </p>
                 </div>
-                <p className="grad text-lg">
-                    {scale === 1 ? (value * 100).toFixed(0) : value.toFixed(0)}
-                </p>
+                <div className="flex flex-col w-full group">
+                    <div
+                        className="actualValue h-[10px] bg-red-500 rounded-lg group"
+                        style={{
+                            width: `${pixels + 5}%`,
+                            background: `linear-gradient(to right, ${colours[0]}, ${colours[colourIndex]})`,
+                        }}
+                    ></div>
+                    {filtersRange && (
+                        <div className="relative w-full inline-block group">
+                            <div className="flex w-full">
+                                <div
+                                    className="filterRange bg-slate-300 h-[10px] rounded-lg"
+                                    style={{
+                                        width: `${
+                                            filtersRange.upper -
+                                            filtersRange.lower
+                                        }%`,
+                                    }}
+                                />
+                                <div
+                                    className="filterRange h-[10px]"
+                                    style={{
+                                        width: `${filtersRange.lower + 5}%`,
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
-            <div className="flex flex-col w-full">
-                <div
-                    className="actualValue h-[10px] bg-red-500 rounded-lg"
-                    style={{
-                        width: `${pixels + 5}%`,
-                        background: `linear-gradient(to right, ${colours[0]}, ${colours[colourIndex]})`,
-                    }}
-                />
-                {filtersRange && (
-                    <div className="flex w-full">
-                        <div
-                            className="filterRange bg-slate-300 h-[10px] rounded-lg"
-                            style={{
-                                width: `${
-                                    filtersRange.upper - filtersRange.lower
-                                }%`,
-                            }}
-                        />
-                        <div
-                            className="filterRange h-[10px]"
-                            style={{
-                                width: `${filtersRange.lower + 5}%`,
-                            }}
-                        />
-                    </div>
-                )}
+            <div className="tooltip z-50 bg-black bg-opacity-70 text-white py-2 px-4 rounded opacity-0 invisible transition-opacity duration-200 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform group-hover:opacity-100 group-hover:visible w-fit whitespace-nowrap">
+                <p>{tooltipText}</p>
+                {filtersRange && <p>{filterTooltip}</p>}
             </div>
         </div>
     );
