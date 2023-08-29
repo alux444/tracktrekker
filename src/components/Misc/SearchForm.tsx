@@ -96,7 +96,11 @@ const SearchForm = ({
     );
 
     const tracks = currentTracks.map((song) => (
-        <SongDisplay key={song.external_ids.isrc} songInfo={song} />
+        <SongDisplay
+            key={song.external_ids.isrc}
+            songInfo={song}
+            statsButton={true}
+        />
     ));
 
     const artists = currentArtists.map((artist) => (
