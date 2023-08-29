@@ -36,7 +36,7 @@ const FeaturesDisplay = ({
                 <div className="flex flex-col gap-1 items-center w-full">
                     <SongDisplay songInfo={songInfo} />
                 </div>
-                <div className="flex gap-5 justify-center p-4 h-[300px] w-full border-2">
+                <div className="flex gap-5 flex-col justify-center p-4 w-full">
                     <StatsBar
                         scale={100}
                         value={songInfo.popularity}

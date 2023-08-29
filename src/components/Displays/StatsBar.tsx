@@ -52,50 +52,50 @@ const StatsBar = ({
     }
 
     return (
-        <div className="flex w-fit h-full justify-end flex-col items-center">
-            <div className="flex h-[200px] justify-end items-end">
-                <div
-                    className="actualValue w-[10px] bg-red-500 rounded-lg"
-                    style={{
-                        height: `${pixels + 5}%`,
-                        background: `linear-gradient(to top, ${colours[0]}, ${colours[colourIndex]})`,
-                    }}
-                />
-                {filtersRange && (
-                    <div className="flex flex-col h-full justify-end">
-                        <div
-                            className="filterRange bg-slate-300 w-[10px] rounded-lg"
-                            style={{
-                                height: `${
-                                    filtersRange.upper - filtersRange.lower
-                                }%`,
-                            }}
-                        />
-                        <div
-                            className="filterRange w-[10px]"
-                            style={{
-                                height: `${filtersRange.lower + 5}%`,
-                            }}
-                        />
-                    </div>
-                )}
-            </div>
-            <div className="flex flex-col items-center text-center">
+        <div className="flex w-full h-full justify-end items-center">
+            <div className="flex items-center justify-between text-center w-fit p-1">
                 <div className="group inline-block relative">
-                    <p className="text-xl emoji group-hover:cursor-pointer">
+                    <p className="text-4xl emoji group-hover:cursor-pointer">
                         {type === "popularity" && "📊"}
                         {type === "acousticness" && "🎸"}
                         {type === "energy" && "☀️"}
                         {type === "valence" && "😃"}
                         {type === "danceability" && "💃"}
                     </p>
-                    <div className="tooltip bg-black bg-opacity-70 text-white py-2 px-4 rounded opacity-0 invisible transform -translate-x-1/2 bottom-full left-1/2 transition-opacity duration-200 absolute group-hover:opacity-100 group-hover:visible">
+                    <div className="tooltip z-50 bg-black bg-opacity-70 text-white py-2 px-4 rounded opacity-0 invisible transition-opacity duration-200 absolute left-full top-1/2 -translate-y-1/2 transform -translate-x-1/2 group-hover:opacity-100 group-hover:visible">
                         {type}
                     </div>
                 </div>
                 <p className="grad text-lg">
                     {scale === 1 ? (value * 100).toFixed(0) : value.toFixed(0)}
                 </p>
+            </div>
+            <div className="flex flex-col w-full">
+                <div
+                    className="actualValue h-[10px] bg-red-500 rounded-lg"
+                    style={{
+                        width: `${pixels + 5}%`,
+                        background: `linear-gradient(to right, ${colours[0]}, ${colours[colourIndex]})`,
+                    }}
+                />
+                {filtersRange && (
+                    <div className="flex w-full">
+                        <div
+                            className="filterRange bg-slate-300 h-[10px] rounded-lg"
+                            style={{
+                                width: `${
+                                    filtersRange.upper - filtersRange.lower
+                                }%`,
+                            }}
+                        />
+                        <div
+                            className="filterRange h-[10px]"
+                            style={{
+                                width: `${filtersRange.lower + 5}%`,
+                            }}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );
