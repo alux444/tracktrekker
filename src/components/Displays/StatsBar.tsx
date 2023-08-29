@@ -1,4 +1,3 @@
-import React from "react";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
 
 type FilterOption =
@@ -14,6 +13,20 @@ type Range = {
     target: number;
 };
 
+const colours = [
+    "#FF0D0D",
+    "#FF4E11",
+    "#FF8E15",
+    "#FAB733",
+    "#ACB334",
+    "#69B34C",
+    "#46a656",
+    "#4abd94",
+    "#47ccf5",
+    "#4770f5",
+    "#0a35c2",
+];
+
 const StatsBar = ({
     scale,
     value,
@@ -26,6 +39,7 @@ const StatsBar = ({
     filters: ExtraInfo;
 }) => {
     const heightPercent: number = value / scale;
+    const colourIndex: number = Math.ceil(heightPercent * 10);
     const pixels: number = heightPercent * 100;
 
     let filtersRange: Range | undefined;
@@ -37,20 +51,20 @@ const StatsBar = ({
         };
     }
 
-    console.log(filtersRange);
-
     return (
         <div className="flex h-full justify-end flex-col items-center">
-            <p>{scale === 1 ? value * 100 : value}</p>
-            <div className="flex h-full justify-end items-end">
+            <div className="flex h-[200px] justify-end items-end">
                 <div
-                    className="actualValue w-[10px] bg-red-500"
-                    style={{ height: `${pixels}%` }}
+                    className="actualValue w-[10px] bg-red-500 rounded-lg"
+                    style={{
+                        height: `${pixels + 5}%`,
+                        background: `linear-gradient(to top, ${colours[0]}, ${colours[colourIndex]})`,
+                    }}
                 />
                 {filtersRange && (
                     <div className="flex flex-col h-full justify-end">
                         <div
-                            className="filterRange bg-blue-500 w-[10px]"
+                            className="filterRange bg-slate-300 w-[10px] rounded-lg"
                             style={{
                                 height: `${
                                     filtersRange.upper - filtersRange.lower
@@ -60,12 +74,22 @@ const StatsBar = ({
                         <div
                             className="filterRange w-[10px]"
                             style={{
-                                height: `${filtersRange.lower}%`,
+                                height: `${filtersRange.lower + 5}%`,
                             }}
                         />
                     </div>
                 )}
             </div>
+            <p className="text-xl">
+                {type === "popularity" && "📊"}
+                {type === "acousticness" && "🎸"}
+                {type === "energy" && "☀️"}
+                {type === "valence" && "😃"}
+                {type === "danceability" && "💃"}
+            </p>
+            <p className="grad text-lg">
+                {scale === 1 ? (value * 100).toFixed(0) : value.toFixed(0)}
+            </p>
         </div>
     );
 };

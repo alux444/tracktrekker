@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { AudioFeatures } from "../../interfaces/audioFeatures";
-import FeatureLevel from "./FeatureLevel";
 import useOutsideClick from "../../utils/useOutsideClose";
 import { SongInfo } from "../../interfaces/songInfo";
 import SongDisplay from "./SongDisplay";
@@ -37,90 +36,37 @@ const FeaturesDisplay = ({
                 <div className="flex flex-col gap-1 items-center w-full">
                     <SongDisplay songInfo={songInfo} />
                 </div>
-                <div className="flex gap-1 h-[300px] border-2">
+                <div className="flex justify-between p-4 h-[300px] w-full border-2">
+                    <StatsBar
+                        scale={100}
+                        value={songInfo.popularity}
+                        filters={filters}
+                        type={"popularity"}
+                    />
                     <StatsBar
                         scale={1}
                         value={features.energy}
                         filters={filters}
                         type={"energy"}
                     />
-                </div>
-                <div className="flex flex-col lg:flex-row justify-between w-full p-1">
-                    <div className="flex flex-col align-center">
-                        <div className="flex justify-between items-center">
-                            <small>Energy: {features.energy.toFixed(2)}</small>
-                            <FeatureLevel
-                                inputVal={features.energy}
-                                gap={0.1}
-                            />
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <div className="flex justify-between">
-                                <small>Popularity: {songInfo.popularity}</small>
-                            </div>
-                            <FeatureLevel
-                                inputVal={songInfo.popularity}
-                                gap={10}
-                            />
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <small>
-                                Acousticness: {features.acousticness.toFixed(2)}
-                            </small>
-                            <FeatureLevel
-                                inputVal={features.acousticness}
-                                gap={0.1}
-                            />
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <small>
-                                Danceability: {features.danceability.toFixed(2)}
-                            </small>
-                            <FeatureLevel
-                                inputVal={features.danceability}
-                                gap={0.1}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex justify-between items-center">
-                            <small>
-                                Speechiness: {features.speechiness.toFixed(2)}
-                            </small>
-                            <FeatureLevel
-                                inputVal={features.speechiness}
-                                gap={0.1}
-                            />
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <small>
-                                Instrumentalness:{" "}
-                                {features.instrumentalness.toFixed(2)}
-                            </small>
-                            <FeatureLevel
-                                inputVal={features.instrumentalness}
-                                gap={0.1}
-                            />
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <small>
-                                Liveness: {features.liveness.toFixed(2)}
-                            </small>
-                            <FeatureLevel
-                                inputVal={features.liveness}
-                                gap={0.1}
-                            />
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <small>
-                                Valence: {features.valence.toFixed(2)}
-                            </small>
-                            <FeatureLevel
-                                inputVal={features.valence}
-                                gap={0.1}
-                            />
-                        </div>
-                    </div>
+                    <StatsBar
+                        scale={1}
+                        value={features.acousticness}
+                        filters={filters}
+                        type={"acousticness"}
+                    />
+                    <StatsBar
+                        scale={1}
+                        value={features.danceability}
+                        filters={filters}
+                        type={"danceability"}
+                    />
+                    <StatsBar
+                        scale={1}
+                        value={features.valence}
+                        filters={filters}
+                        type={"valence"}
+                    />
                 </div>
             </div>
         </div>

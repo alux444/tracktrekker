@@ -17,25 +17,7 @@ export type ExtraInfo = {
         target: number;
     };
 
-    instrumentalness?: {
-        min: number;
-        max: number;
-        target: number;
-    };
-
-    liveness?: {
-        min: number;
-        max: number;
-        target: number;
-    };
-
     popularity?: {
-        min: number;
-        max: number;
-        target: number;
-    };
-
-    speechiness?: {
         min: number;
         max: number;
         target: number;

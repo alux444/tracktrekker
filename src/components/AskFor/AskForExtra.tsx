@@ -50,21 +50,6 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ onClose }) => {
                         dialog={descriptions.energy}
                     />
                     <ExtraCriteriaTriple
-                        criteriaName="instrumentalness"
-                        maxValue={1}
-                        dialog={descriptions.instrumentalness}
-                    />
-                    <ExtraCriteriaTriple
-                        criteriaName="liveness"
-                        maxValue={1}
-                        dialog={descriptions.liveness}
-                    />
-                    <ExtraCriteriaTriple
-                        criteriaName="speechiness"
-                        maxValue={1}
-                        dialog={descriptions.speechiness}
-                    />
-                    <ExtraCriteriaTriple
                         criteriaName="valence"
                         maxValue={1}
                         dialog={descriptions.valence}
