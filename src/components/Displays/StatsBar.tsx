@@ -14,17 +14,17 @@ type Range = {
 };
 
 const colours = [
-    "#FF0D0D",
-    "#FF4E11",
-    "#FF8E15",
-    "#FAB733",
-    "#ACB334",
-    "#69B34C",
-    "#46a656",
-    "#4abd94",
-    "#47ccf5",
-    "#4770f5",
-    "#0a35c2",
+    "#1f3a93",
+    "#3953a4",
+    "#4e6ab3",
+    "#6781c1",
+    "#7e99cf",
+    "#967cd1",
+    "#ae60d3",
+    "#c644d5",
+    "#de27d7",
+    "#f609d9",
+    "#d90bf1",
 ];
 
 const StatsBar = ({
@@ -61,8 +61,8 @@ const StatsBar = ({
 
     return (
         <div className="group relative w-full h-full">
-            <div className="flex w-full h-full justify-end items-center">
-                <div className="flex items-center justify-between text-center w-fit p-1">
+            <div className="flex w-full h-full justify-center items-center">
+                <div className="flex items-center justify-between text-center w-[5rem] p-1 mr-1">
                     <p className="md:text-4xl text-2xl emoji group-hover:cursor-pointer">
                         {type === "popularity" && "📊"}
                         {type === "acousticness" && "🎸"}
@@ -76,7 +76,7 @@ const StatsBar = ({
                             : value.toFixed(0)}
                     </p>
                 </div>
-                <div className="flex flex-col w-full group">
+                <div className="flex flex-col w-[70%] group">
                     <div
                         className="actualValue h-[10px] bg-red-500 rounded-lg group"
                         style={{

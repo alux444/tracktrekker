@@ -93,7 +93,7 @@ const ResultsPage = ({
     const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
 
     const results = currentTracks.map((song) => (
-        <SongDisplay songInfo={song} />
+        <SongDisplay songInfo={song} statsButton={true} />
     ));
 
     return (

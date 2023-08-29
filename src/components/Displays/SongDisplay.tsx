@@ -14,7 +14,13 @@ import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import { SongsInfoContext } from "../../App";
 
-const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
+const SongDisplay = ({
+    songInfo,
+    statsButton,
+}: {
+    songInfo: SongInfo;
+    statsButton: boolean;
+}) => {
     const { showStats } = useContext(StatsContext);
     const {
         audio,
@@ -204,7 +210,7 @@ const SongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                             </span>
                         </button>
                     )}
-                    {!showStats && (
+                    {statsButton && !showStats && (
                         <button
                             className="buttonprev w-full"
                             type="button"
