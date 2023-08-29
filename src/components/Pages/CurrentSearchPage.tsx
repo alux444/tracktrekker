@@ -2,7 +2,6 @@ import { useContext, useRef } from "react";
 import {
     ArtistInfoContext,
     ArtistSeedContext,
-    ExtrasContext,
     GenreContext,
     SongSeedContext,
     SongsInfoContext,
@@ -10,9 +9,6 @@ import {
 import ArtistDisplay from "../Displays/ArtistDisplay";
 import useManageQuery from "../../utils/useManageQuery";
 import SmallSongDisplay from "../Displays/SmallSongDisplay";
-import { descriptions } from "../../utils/descriptions";
-import ExtraCriteriaTriple from "../AskFor/ExtraCriteriaTriple";
-import { ExtraInfo } from "../../interfaces/extrasInfo";
 import useOutsideClick from "../../utils/useOutsideClose";
 import { AudioContext } from "./Views";
 
@@ -25,7 +21,6 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
     const { artists, setArtists } = useContext(ArtistInfoContext);
     const { setArtistSeeds } = useContext(ArtistSeedContext);
     const { genres, setGenres } = useContext(GenreContext);
-    const { extras, setExtras } = useContext(ExtrasContext);
     const { removeGenre } = useManageQuery();
 
     const closeModal = () => {
@@ -66,14 +61,6 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
         </div>
     ));
 
-    const allExtras = Object.keys(extras).map((extraName: string) => (
-        <ExtraCriteriaTriple
-            criteriaName={extraName as keyof ExtraInfo}
-            maxValue={extraName === "popularity" ? 100 : 1}
-            dialog={descriptions[extraName]}
-        />
-    ));
-
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
             <div
@@ -109,23 +96,6 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
                         {allGenres}
                     </div>
                 )}
-                {Object.keys(extras).length > 0 && (
-                    <>
-                        <div className="h-[1px] bg-purple-600 w-[50%]" />
-                        <div className="justify-center align-center items-center flex h-full gap-2">
-                            <p className="grad text-lg">
-                                Current Extra Filters
-                            </p>
-                            <button
-                                onClick={() => setExtras({})}
-                                className="button3"
-                            >
-                                Clear Extras
-                            </button>
-                        </div>
-                    </>
-                )}
-                {allExtras}
             </div>
         </div>
     );
