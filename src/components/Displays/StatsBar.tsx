@@ -61,26 +61,27 @@ const StatsBar = ({
 
     return (
         <div className="group relative w-full h-full">
-            <div className="flex w-full h-full justify-center items-center">
-                <div className="flex items-center justify-between text-center w-[5rem] p-1 mr-1">
-                    <p className="md:text-4xl text-2xl emoji group-hover:cursor-pointer">
-                        {type === "popularity" && "📊"}
+            <div className="flex w-full h-full justify-between items-center">
+                <div className="flex items-center justify-between text-center w-[10rem] p-1 mr-1">
+                    {/* <p className="md:text-4xl text-2xl emoji group-hover:cursor-pointer">
+                        {type === "popularity" && "📊"} 
                         {type === "acousticness" && "🎸"}
                         {type === "energy" && "☀️"}
                         {type === "valence" && "😃"}
                         {type === "danceability" && "💃"}
-                    </p>
-                    <p className="grad text-lg">
-                        {scale === 1
-                            ? (value * 100).toFixed(0)
-                            : value.toFixed(0)}
+                    </p> */}
+                    <p className="grad">
+                        {type.charAt(0).toUpperCase() + type.slice(1)}
                     </p>
                 </div>
-                <div className="flex flex-col w-[70%] group">
+                <p className="grad text-lg mr-1">
+                    {scale === 1 ? (value * 100).toFixed(0) : value.toFixed(0)}
+                </p>
+                <div className="flex flex-col w-[60%] group">
                     <div
                         className="actualValue h-[10px] bg-red-500 rounded-lg group"
                         style={{
-                            width: `${pixels + 5}%`,
+                            width: `${pixels}%`,
                             background: `linear-gradient(to right, ${colours[0]}, ${colours[colourIndex]})`,
                         }}
                     ></div>
@@ -99,7 +100,7 @@ const StatsBar = ({
                                 <div
                                     className="filterRange h-[10px]"
                                     style={{
-                                        width: `${filtersRange.lower + 5}%`,
+                                        width: `${filtersRange.lower}%`,
                                     }}
                                 />
                             </div>

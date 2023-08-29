@@ -21,7 +21,6 @@ const FeaturesDisplay = ({
 
     useEffect(() => {
         setFilters(extras);
-        console.log(extras);
     }, []);
 
     const modalRef = useRef(null);
