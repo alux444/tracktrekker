@@ -124,7 +124,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                     className="button2 hfit border-purple-600 border-[1px] w-fit mb-1"
                                     onClick={() => setOpenFilterModal(true)}
                                 >
-                                    <span className="grad">Add Filters</span>
+                                    <span className="grad">Manage Filters</span>
                                 </button>
                             </div>
                             <hr />

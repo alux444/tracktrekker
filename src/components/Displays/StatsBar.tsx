@@ -62,7 +62,7 @@ const StatsBar = ({
     return (
         <div className="group relative w-full h-full">
             <div className="flex w-full h-full justify-between items-center">
-                <div className="flex items-center justify-between text-center w-[10rem] p-1 mr-1">
+                <div className="flex items-center justify-between text-center w-[10rem] mr-1">
                     {/* <p className="md:text-4xl text-2xl emoji group-hover:cursor-pointer">
                         {type === "popularity" && "📊"} 
                         {type === "acousticness" && "🎸"}
@@ -74,12 +74,12 @@ const StatsBar = ({
                         {type.charAt(0).toUpperCase() + type.slice(1)}
                     </p>
                 </div>
-                <p className="grad text-lg mr-1">
+                <p className="text-end grad text-lg mr-1 w-[4rem]">
                     {scale === 1 ? (value * 100).toFixed(0) : value.toFixed(0)}
                 </p>
                 <div className="flex flex-col w-[60%] group">
                     <div
-                        className="actualValue h-[10px] bg-red-500 rounded-lg group"
+                        className="actualValue h-[10px] bg-red-500 rounded-lg group p-1"
                         style={{
                             width: `${pixels}%`,
                             background: `linear-gradient(to right, ${colours[0]}, ${colours[colourIndex]})`,
@@ -89,18 +89,18 @@ const StatsBar = ({
                         <div className="relative w-full inline-block group">
                             <div className="flex w-full">
                                 <div
-                                    className="filterRange bg-slate-300 h-[10px] rounded-lg"
+                                    className="filterRange h-[10px] p-1"
+                                    style={{
+                                        width: `${filtersRange.lower}%`,
+                                    }}
+                                />
+                                <div
+                                    className="filterRange bg-slate-300 h-[10px] rounded-lg p-1"
                                     style={{
                                         width: `${
                                             filtersRange.upper -
                                             filtersRange.lower
                                         }%`,
-                                    }}
-                                />
-                                <div
-                                    className="filterRange h-[10px]"
-                                    style={{
-                                        width: `${filtersRange.lower}%`,
                                     }}
                                 />
                             </div>

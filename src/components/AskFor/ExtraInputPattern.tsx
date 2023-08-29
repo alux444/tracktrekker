@@ -6,7 +6,6 @@ interface CriteriaInputProps {
     type: "Min" | "Max" | "Target";
     max: number;
     enable: () => void;
-    disable: () => void;
 }
 
 const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
@@ -15,7 +14,6 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
     type,
     max,
     enable,
-    disable,
 }) => {
     if (type === "Target" && value === -1) {
         return (
@@ -29,26 +27,23 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
     }
 
     return (
-        <div className="border-[1px] p-1 rounded-[10px] flex flex-col items-center justify-center text-center">
-            <div className="flex gap-1 items-center p-1">
-                <p>
-                    {type} - {value}
-                </p>
-                {type === "Target" && (
-                    <button onClick={disable} className="buttoncancel">
-                        &times;
-                    </button>
-                )}
+        <div className="flex gap-1 items-center">
+            <div className="border-[1px] p-1 rounded-[10px] flex flex-col items-center justify-center text-center">
+                <div className="flex gap-1 items-center p-1">
+                    <p>
+                        {type} - {value}
+                    </p>
+                </div>
+                <input
+                    className="border-[1px]"
+                    min={0}
+                    max={max}
+                    step={max / 100}
+                    type="range"
+                    value={value}
+                    onChange={changeFunction}
+                />
             </div>
-            <input
-                className="border-[1px]"
-                min={0}
-                max={max}
-                step={max / 100}
-                type="range"
-                value={value}
-                onChange={changeFunction}
-            />
         </div>
     );
 };
