@@ -116,13 +116,13 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
     }, [open]);
 
     return (
-        <>
+        <div className="h-[20em] items-center flex flex-col gap-1">
             <div className="flex items-center">
                 <input
                     ref={filterRef}
                     value={search}
                     onChange={handleSearchChange}
-                    className="border-[1px] border-slate-300 p-1 rounded-[7px]"
+                    className="border-[1px] border-slate-300 p-1 rounded-[7px] mr-1"
                     placeholder="Filter Genres"
                 />{" "}
                 <button className="clear-btn" onClick={() => setSearch("")}>
@@ -182,6 +182,6 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
                     ))}
                 </ul>
             </div>
-        </>
+        </div>
     );
 }
