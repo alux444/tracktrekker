@@ -61,55 +61,6 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
     };
 
     useEffect(() => {
-        if (open) {
-            setHighlighted(0);
-        }
-    }, [open]);
-
-    useEffect(() => {
-        const handler = (e: KeyboardEvent) => {
-            if (e.target !== containerRef.current) return;
-            switch (e.code) {
-                case "Enter":
-                case "Space":
-                    setOpen((prev) => !prev);
-                    if (open) selectOption(options[highlighted]);
-                    break;
-                case "ArrowUp":
-                case "ArrowDown":
-                    if (!open) {
-                        setOpen(true);
-                    } else {
-                        const newValue =
-                            highlighted + (e.code === "ArrowDown" ? 1 : -1);
-                        if (newValue >= 0 && newValue < options.length) {
-                            setHighlighted(newValue);
-                        }
-                    }
-                    break;
-                case "Escape":
-                    setOpen(false);
-                    break;
-                case "Backspace":
-                    setSearch((prevSearch) =>
-                        prevSearch.slice(0, prevSearch.length - 1)
-                    );
-                    break;
-                default:
-                    if (e.key.match(/^[a-zA-Z]$/)) {
-                        setSearch((prevSearch) => prevSearch + e.key);
-                    }
-            }
-        };
-
-        containerRef.current?.addEventListener("keydown", handler);
-
-        return () => {
-            containerRef.current?.removeEventListener("keydown", handler);
-        };
-    }, [open, highlighted, options]);
-
-    useEffect(() => {
         if (open && filterRef.current) {
             filterRef.current.focus();
         }
@@ -164,22 +115,29 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
                 </button>
 
                 <ul className={`options ${open ? "show" : ""}`}>
-                    {options.map((option, index) => (
-                        <li
-                            onMouseEnter={() => setHighlighted(index)}
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                selectOption(option);
-                                setOpen(false);
-                            }}
-                            key={option.value}
-                            className={`selectOptionButton option ${
-                                isSelected(option) ? "selected" : ""
-                            } ${index === highlighted ? "highlighted" : ""}`}
-                        >
-                            {option.label}
+                    {options.length > 0 ? (
+                        options.map((option, index) => (
+                            <li
+                                onMouseEnter={() => setHighlighted(index)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    selectOption(option);
+                                }}
+                                key={option.value}
+                                className={`selectOptionButton option ${
+                                    isSelected(option) ? "selected" : ""
+                                } ${
+                                    index === highlighted ? "highlighted" : ""
+                                }`}
+                            >
+                                {option.label}
+                            </li>
+                        ))
+                    ) : (
+                        <li className="selectOptionsButton option">
+                            No results for your search.
                         </li>
-                    ))}
+                    )}
                 </ul>
             </div>
         </div>

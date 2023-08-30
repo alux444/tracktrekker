@@ -88,7 +88,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
             </div>
 
             <div className="w-[20%] buttons flex gap-1 flex-col justify-end items-end">
-                {song.preview_url && (
+                {song.preview_url ? (
                     <button className="buttonprev" onClick={playPreview}>
                         <span>
                             {audioIsPlaying && currentPlayingId === song.id ? (
@@ -96,6 +96,16 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                             ) : (
                                 <PlayArrowIcon style={{ fontSize: "1rem" }} />
                             )}
+                        </span>
+                    </button>
+                ) : (
+                    <button
+                        className="invisible"
+                        disabled={true}
+                        onClick={playPreview}
+                    >
+                        <span>
+                            <PlayArrowIcon style={{ fontSize: "1rem" }} />
                         </span>
                     </button>
                 )}

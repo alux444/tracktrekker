@@ -53,7 +53,10 @@ const ArtistDisplay = ({
     return (
         <div className="artistDisplay w-fit flex items-center justify-center">
             <div
-                className={`hover flex flex-col md:flex-row justify-between gap-2 items-center border-[1px] p-2 w-fit rounded-[20px]`}
+                className={`${
+                    selected &&
+                    "border-purple-400 border-[2px] bg-[rgba(186,138,207,0.05)]"
+                } hover flex flex-col md:flex-row justify-between gap-2 items-center border-[1px] p-2 w-fit rounded-[20px]`}
             >
                 <div className="flex flex-col gap-1 text-center items-center">
                     <div className="flex flex-wrap gap-1">

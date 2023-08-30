@@ -74,7 +74,7 @@ const useSpotify = () => {
                     seed_tracks: arrayToString(songForm.seed_tracks),
                     seed_artists: arrayToString(songForm.seed_artists),
                     seed_genres: arrayToString(songForm.seed_genres),
-                    limit: 48,
+                    limit: 80,
                 },
                 extraParams
             );
@@ -89,7 +89,6 @@ const useSpotify = () => {
             } else {
                 return 2;
             }
-            // You can access the artist data from the response here:
         } catch (error) {
             console.error("Error:", error);
             return 2;
@@ -114,7 +113,6 @@ const useSpotify = () => {
             });
             console.log(response.data);
             return response.data;
-            // You can access the artist data from the response here:
         } catch (error) {
             console.error("Error:", error);
             return null;

@@ -40,6 +40,7 @@ const SearchForm = ({
     useEffect(() => {
         if (audio !== null) {
             audio.pause();
+            setAudioIsPlaying(false);
         }
     }, [currentPage, query]);
 
