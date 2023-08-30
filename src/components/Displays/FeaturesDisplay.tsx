@@ -6,6 +6,7 @@ import SongDisplay from "./SongDisplay";
 import StatsBar from "./StatsBar";
 import { ExtrasContext } from "../../App";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
+import logo from "../../imgs/logoGreen.png";
 
 const FeaturesDisplay = ({
     features,
@@ -66,6 +67,15 @@ const FeaturesDisplay = ({
                         filters={filters}
                         type={"valence"}
                     />
+                </div>
+                <div className="grad flex gap-1 flex-wrap items-center">
+                    <a
+                        href="http://spotify.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <img src={logo} className="h-[1.45rem]" />
+                    </a>
                 </div>
             </div>
         </div>

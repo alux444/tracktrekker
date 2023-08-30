@@ -28,7 +28,7 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ onClose }) => {
                         your given target.
                     </p>
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 w-full">
                     <div className="w-full bg-purple-400 h-[1px]" />
                     <ExtraCriteriaTriple
                         criteriaName="popularity"

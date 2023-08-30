@@ -4,6 +4,8 @@ import TutPageOne from "./TutPageOne";
 import TutPageTwo from "./TutPageTwo";
 import TutPageThree from "./TutPageThree";
 import TutPageFour from "./TutPageFour";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const TutorialModal = ({ onClose }: { onClose: () => void }) => {
     const modalRef = useRef(null);
@@ -39,13 +41,17 @@ const TutorialModal = ({ onClose }: { onClose: () => void }) => {
                 {page === 4 && <TutPageFour />}
                 <div className="flex gap-5 w-full justify-center items-center">
                     {page !== 1 && (
-                        <button className="button3" onClick={decrementPage}>
-                            <span>&lt;</span>
+                        <button className="button4" onClick={decrementPage}>
+                            <span>
+                                <KeyboardArrowLeftIcon />
+                            </span>
                         </button>
                     )}
                     {page !== 4 && (
-                        <button className="button3" onClick={incrementPage}>
-                            <span>&gt;</span>
+                        <button className="button4" onClick={incrementPage}>
+                            <span>
+                                <KeyboardArrowRightIcon />
+                            </span>
                         </button>
                     )}
                 </div>
