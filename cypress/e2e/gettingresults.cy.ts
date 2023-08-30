@@ -36,14 +36,23 @@ describe("E2E - Searching for song, getting results", () => {
         cy.get("#askForArtists").should("not.exist");
         cy.get("#askForGenres").should("be.visible");
         cy.get(".selectOptionButton").eq(0).click();
-        cy.get("#genresMultiselect").click();
         cy.get(".selectOptionButton").eq(5).click();
         cy.get(".deleteOptionButton").eq(0).click();
-        cy.get("#genresMultiselect").click();
         cy.get(".selectOptionButton").eq(3).click();
         cy.contains("2 genres");
 
         cy.get("#getResultsButton").click();
         cy.get("#recommendResults").should("be.visible");
+
+        //return out of results
+        cy.get("#backToSearchBtn").click();
+        cy.get("#askForSongs").should("be.visible");
+
+        //clear search
+        cy.get("#expandSearchBtn").click();
+        cy.get("#clearSearchBtn").click();
+
+        //ensure results arent visible
+        cy.get("#getResultsButton").should("not.exist");
     });
 });
