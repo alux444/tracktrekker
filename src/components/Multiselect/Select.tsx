@@ -28,6 +28,7 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
     const [search, setSearch] = useState<string>("");
 
     const containerRef = useRef<HTMLDivElement>(null);
+    const filterRef = useRef<HTMLInputElement>(null);
 
     const options = optionsRaw.filter((option) =>
         option.label.includes(search.toLowerCase())
@@ -108,21 +109,30 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
         };
     }, [open, highlighted, options]);
 
+    useEffect(() => {
+        if (open && filterRef.current) {
+            filterRef.current.focus();
+        }
+    }, [open]);
+
     return (
         <>
-            <div className="flex flex-col items-center">
+            <div className="flex items-center">
                 <input
+                    ref={filterRef}
                     value={search}
                     onChange={handleSearchChange}
                     className="border-[1px] border-slate-300 p-1 rounded-[7px]"
                     placeholder="Filter Genres"
-                />
+                />{" "}
+                <button className="clear-btn" onClick={() => setSearch("")}>
+                    &times;
+                </button>
             </div>
             <div
                 id="genresMultiselect"
                 ref={containerRef}
-                onClick={() => setOpen(true)}
-                onBlur={() => setOpen(false)}
+                onClick={() => setOpen(!open)}
                 tabIndex={0}
                 className="container"
             >

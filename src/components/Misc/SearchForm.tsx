@@ -22,7 +22,7 @@ const SearchForm = ({
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [error, setError] = useState<boolean>(false);
 
-    // const { getSearch } = useSpotify();
+    const { getSearch } = useSpotify();
     const { getTracks, getArtists } = useSpotify();
 
     useEffect(() => {
@@ -68,10 +68,13 @@ const SearchForm = ({
     //     setArtistResults(res.artists.items.slice(0, 30));
     // };
 
-    //second version
+    //temporary bugfix
     const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(false);
+
+        const test = await getSearch(query);
+        console.log(test);
 
         let res: (SongInfo | ArtistInfo)[] | null = null;
         if (type === "artist") {

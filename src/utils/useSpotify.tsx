@@ -78,7 +78,6 @@ const useSpotify = () => {
                 },
                 extraParams
             );
-            console.log("query" + query);
 
             const response = await axios.get(url, {
                 headers,
@@ -140,7 +139,9 @@ const useSpotify = () => {
             });
 
             const sortedArtists = sortResultsByPopularity(
-                response.data.artists.items
+                response.data.artists.items.filter(
+                    (artist) => artist.images.length > 0
+                )
             );
             return sortedArtists;
         } catch (error) {
@@ -166,7 +167,6 @@ const useSpotify = () => {
                 },
             });
 
-            console.log(response.data);
             const sortedTracks = sortResultsByPopularity(
                 response.data.tracks.items
             );
