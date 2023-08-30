@@ -3,6 +3,8 @@ import { RecommendForm } from "../interfaces/recommendForm";
 import { useContext } from "react";
 import { TokenContext } from "../App";
 import { ExtraInfo } from "../interfaces/extrasInfo";
+import { SongInfo } from "../interfaces/songInfo";
+import { ArtistInfo } from "../interfaces/artistInfo";
 const useSpotify = () => {
     const { token } = useContext(TokenContext);
 
@@ -120,6 +122,71 @@ const useSpotify = () => {
         }
     };
 
+    const getArtists = async (query: string) => {
+        const url = "https://api.spotify.com/v1/search";
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        try {
+            const response = await axios.get(url, {
+                headers,
+                params: {
+                    q: query,
+                    type: "artist",
+                    limit: 30,
+                },
+            });
+
+            const sortedArtists = sortResultsByPopularity(
+                response.data.artists.items
+            );
+            return sortedArtists;
+        } catch (error) {
+            console.error("Error:", error);
+            return null;
+        }
+    };
+
+    const getTracks = async (query: string) => {
+        const url = "https://api.spotify.com/v1/search";
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        try {
+            const response = await axios.get(url, {
+                headers,
+                params: {
+                    q: query,
+                    type: "track",
+                    limit: 32,
+                },
+            });
+
+            console.log(response.data);
+            const sortedTracks = sortResultsByPopularity(
+                response.data.tracks.items
+            );
+            return sortedTracks;
+        } catch (error) {
+            console.error("Error:", error);
+            return null;
+        }
+    };
+
+    const sortResultsByPopularity = (data: (SongInfo | ArtistInfo)[]) => {
+        const sortedItems = data.sort((a, b) => {
+            const popularityA = a.popularity || 0;
+            const popularityB = b.popularity || 0;
+            return popularityB - popularityA;
+        });
+
+        return sortedItems;
+    };
+
     const getTopItems = async (
         term: "short_term" | "medium_term" | "long_term",
         type: "track" | "artist"
@@ -139,7 +206,6 @@ const useSpotify = () => {
                     limit: 48,
                 },
             });
-            console.log(response);
             return response.data.items;
         } catch (error) {
             console.error("Error:", error);
@@ -156,7 +222,6 @@ const useSpotify = () => {
 
         try {
             const response = await axios.get(url, { headers });
-            console.log(response.data);
             return response.data.tracks;
         } catch (error) {
             console.error("Error:", error);
@@ -168,6 +233,8 @@ const useSpotify = () => {
         getGenres,
         getRecommended,
         getSearch,
+        getArtists,
+        getTracks,
         getFeatures,
         getTopItems,
         getArtistTracks,

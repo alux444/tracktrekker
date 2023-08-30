@@ -22,7 +22,8 @@ const SearchForm = ({
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [error, setError] = useState<boolean>(false);
 
-    const { getSearch } = useSpotify();
+    // const { getSearch } = useSpotify();
+    const { getTracks, getArtists } = useSpotify();
 
     useEffect(() => {
         if (audio !== null) {
@@ -46,24 +47,57 @@ const SearchForm = ({
         setCurrentPage(page);
     };
 
+    // first version - temp bug?
+    // const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     setError(false);
+    //     const res = await getSearch(query);
+    //     if (res === null) {
+    //         setError(true);
+    //         return;
+    //     }
+
+    //     if (
+    //         (type === "track" && res.tracks.items.length === 0) ||
+    //         (type === "artist" && res.artists.items.length === 0)
+    //     ) {
+    //         setError(true);
+    //     }
+
+    //     setTrackResults(res.tracks.items);
+    //     setArtistResults(res.artists.items.slice(0, 30));
+    // };
+
+    //second version
     const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(false);
-        const res = await getSearch(query);
+
+        let res: (SongInfo | ArtistInfo)[] | null = null;
+        if (type === "artist") {
+            res = await getArtists(query);
+        } else {
+            res = await getTracks(query);
+        }
+
         if (res === null) {
             setError(true);
             return;
         }
 
-        if (
-            (type === "track" && res.tracks.items.length === 0) ||
-            (type === "artist" && res.artists.items.length === 0)
-        ) {
+        if (res.length === 0) {
             setError(true);
         }
 
-        setTrackResults(res.tracks.items);
-        setArtistResults(res.artists.items.slice(0, 30));
+        console.log(res);
+
+        if (type === "artist") {
+            setArtistResults(res as ArtistInfo[]);
+            setTrackResults([]);
+        } else {
+            setTrackResults(res as SongInfo[]);
+            setArtistResults([]);
+        }
     };
 
     const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {

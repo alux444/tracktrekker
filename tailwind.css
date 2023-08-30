@@ -679,6 +679,10 @@ video {
   display: none;
 }
 
+.h-\[1\.45rem\] {
+  height: 1.45rem;
+}
+
 .h-\[1\.5rem\] {
   height: 1.5rem;
 }
@@ -1127,6 +1131,11 @@ video {
   line-height: 1rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .text-\[rgba\(0\2c 0\2c 0\2c 0\.8\)\] {
   color: rgba(0,0,0,0.8);
 }
@@ -1521,6 +1530,43 @@ input[type="range"]::-webkit-slider-thumb {
   width: 0;
   height: 0;
   background-color: rgba(213, 27, 104, 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.button4 {
+  position: relative;
+  overflow: hidden;
+  height: 2rem;
+  padding: 0 1.1rem;
+  font-weight: 400;
+  border: 1px solid #17419d;
+  border-radius: 1.3rem;
+  background: transparent;
+  background-size: 400%;
+}
+
+.button4:hover::before {
+  width: 200%;
+  height: 200%;
+  opacity: 1;
+}
+
+.button4-content {
+  position: relative;
+  z-index: 1;
+}
+
+.button4::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background-color: rgba(36, 141, 217, 0.5);
   border-radius: 50%;
   opacity: 0;
   transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;

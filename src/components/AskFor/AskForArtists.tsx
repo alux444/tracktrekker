@@ -23,13 +23,13 @@ const AskForArtists = () => {
             <h2 className="text-lg grad">Select Artists</h2>
             <div className="flex gap-1 flex-wrap justify-center">
                 <button
-                    className="button3"
+                    className="button4"
                     onClick={() => setPromptPage("songs")}
                 >
                     <span>Songs</span>
                 </button>
                 <button
-                    className="button3"
+                    className="button4"
                     onClick={() => setPromptPage("genres")}
                 >
                     <span>Genres</span>

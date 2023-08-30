@@ -71,7 +71,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                             <hr />
                             <div className="items-center align-center flex flex-col">
                                 <h2 className="grad">Your Search</h2>
-                                <div className="flex gap-1 justify-center items-center">
+                                <div className="flex gap-1 justify-center items-center mb-1">
                                     {songSeeds.length > 0 && (
                                         <p>
                                             {songSeeds.length}{" "}

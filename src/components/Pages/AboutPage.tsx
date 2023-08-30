@@ -31,7 +31,7 @@ const AboutPage = () => {
             <br />
             <p>
                 Why don't all songs have previews / stats? - They're not
-                avalaible from Spotify.
+                available from Spotify.
             </p>
             <br />
             <p>

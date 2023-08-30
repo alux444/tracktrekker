@@ -31,13 +31,13 @@ const AskForGenres = () => {
             <h2 className="text-lg grad">Select Genres</h2>
             <div className="flex gap-1 flex-wrap justify-center">
                 <button
-                    className="button3"
+                    className="button4"
                     onClick={() => setPromptPage("songs")}
                 >
                     <span>Songs</span>
                 </button>
                 <button
-                    className="button3"
+                    className="button4"
                     onClick={() => setPromptPage("artists")}
                 >
                     <span>Artists</span>

@@ -25,6 +25,7 @@ const ExtraCriteriaTriple = ({
         : [0, maxValue, -1];
 
     const [showSelection, setShowSelection] = useState<boolean>(initial);
+    const [showDesc, setShowDesc] = useState<boolean>(false);
     const [min, setMin] = useState<number>(initialMinMaxTarg[0]);
     const [max, setMax] = useState<number>(initialMinMaxTarg[1]);
     const [targ, setTarg] = useState<number>(initialMinMaxTarg[2]);
@@ -101,10 +102,10 @@ const ExtraCriteriaTriple = ({
     };
 
     return (
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center w-full">
             <div className="flex gap-2 justify-center items-center align-center">
                 {!showSelection && (
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-1 flex-col items-center">
                         <button
                             onClick={resetSelection}
                             className="button2 border-purple-500 border-[1px]"
@@ -113,6 +114,12 @@ const ExtraCriteriaTriple = ({
                                 Enable {criteriaName.charAt(0).toUpperCase()}
                                 {criteriaName.slice(1)} Filter
                             </span>
+                        </button>
+                        <button
+                            className="buttonprev"
+                            onClick={() => setShowDesc(!showDesc)}
+                        >
+                            What is {criteriaName}?
                         </button>
                     </div>
                 )}
@@ -140,6 +147,12 @@ const ExtraCriteriaTriple = ({
                                         Disable Target
                                     </button>
                                 )}
+                                <button
+                                    className="buttonprev"
+                                    onClick={() => setShowDesc(!showDesc)}
+                                >
+                                    Description
+                                </button>
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-1 items-center">
@@ -169,7 +182,7 @@ const ExtraCriteriaTriple = ({
                 )}
             </div>
 
-            <p className="mt-1">{dialog}</p>
+            {showDesc && <p className="mt-1 flex flex-wrap">{dialog}</p>}
         </div>
     );
 };
