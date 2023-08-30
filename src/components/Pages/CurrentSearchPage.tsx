@@ -78,7 +78,11 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
                 ) : (
                     <div className="justify-center align-center items-center flex h-full gap-2">
                         <p className="grad text-lg">Current Search</p>
-                        <button onClick={clearSearch} className="button3">
+                        <button
+                            onClick={clearSearch}
+                            className="button3"
+                            id="clearSearchBtn"
+                        >
                             Clear Search
                         </button>
                     </div>

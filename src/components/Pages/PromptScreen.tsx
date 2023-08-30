@@ -107,6 +107,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                 </div>
                                 <button
                                     className="button2 hfit border-purple-600 border-[1px] w-fit mb-1"
+                                    id="expandSearchBtn"
                                     onClick={() =>
                                         setExpandSearch(!expandSearch)
                                     }
@@ -122,6 +123,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                 </button>
                                 <button
                                     className="button2 hfit border-purple-600 border-[1px] w-fit mb-1"
+                                    id="expandFiltersBtn"
                                     onClick={() => setOpenFilterModal(true)}
                                 >
                                     <span className="grad">Manage Filters</span>

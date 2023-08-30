@@ -117,7 +117,12 @@ const ResultsPage = ({
                 >
                     <span className="grad">Reroll</span>
                 </button>
-                <button className="button3" onClick={goBack} ref={topRef}>
+                <button
+                    className="button3"
+                    id="backToSearchBtn"
+                    onClick={goBack}
+                    ref={topRef}
+                >
                     <span>Back to Search</span>
                 </button>
             </div>
