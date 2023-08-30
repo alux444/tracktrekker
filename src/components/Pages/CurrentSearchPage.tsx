@@ -42,10 +42,12 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
         closeModal();
     };
 
-    const allSongs = songs.map((song) => <SmallSongDisplay song={song} />);
+    const allSongs = songs.map((song) => (
+        <SmallSongDisplay song={song} key={song.id} />
+    ));
 
     const allArtists = artists.map((artist) => (
-        <ArtistDisplay artist={artist} type={"currentsearch"} />
+        <ArtistDisplay artist={artist} type={"currentsearch"} key={artist.id} />
     ));
 
     const allGenres = genres.map((genre) => (
