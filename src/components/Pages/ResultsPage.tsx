@@ -24,6 +24,7 @@ const ResultsPage = ({
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [playlistSaved, setPlaylistSaved] = useState<boolean>(false);
 
     const { createPlaylist } = usePlaylist();
 
@@ -53,6 +54,10 @@ const ResultsPage = ({
     useEffect(() => {
         getSongs();
     }, [query]);
+
+    useEffect(() => {
+        setPlaylistSaved(false);
+    }, [songs]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -115,29 +120,41 @@ const ResultsPage = ({
                 <br />
                 With {filters} {filters == 1 ? "filter" : "filters"} applied.
             </p>
-            <div className="flex gap-2">
-                <button
-                    className="button2 border-purple-500 border-[1px]"
-                    onClick={getSongs}
-                >
-                    <span className="grad">Reroll</span>
-                </button>
-                {devMode && (
+            <div className="flex flex-col gap-1 text-center items-center border-2">
+                <div className="flex gap-1">
                     <button
                         className="button2 border-purple-500 border-[1px]"
-                        onClick={() => createPlaylist(uniqueTracks)}
+                        onClick={getSongs}
                     >
-                        <span className="grad">Save to Playlist</span>
+                        <span className="grad">Reroll</span>
                     </button>
+                    <div className="flex text-center items-center">
+                        {devMode && !playlistSaved && (
+                            <button
+                                className="button2 border-purple-500 border-[1px]"
+                                onClick={() => {
+                                    createPlaylist(uniqueTracks);
+                                    setPlaylistSaved(true);
+                                }}
+                            >
+                                <span className="grad">Save to Playlist</span>
+                            </button>
+                        )}
+                    </div>
+                    <button
+                        className="button3"
+                        id="backToSearchBtn"
+                        onClick={goBack}
+                        ref={topRef}
+                    >
+                        <span>Back to Search</span>
+                    </button>
+                </div>
+                {devMode && playlistSaved && (
+                    <span className="grad">
+                        Created playlist on your Spotify!
+                    </span>
                 )}
-                <button
-                    className="button3"
-                    id="backToSearchBtn"
-                    onClick={goBack}
-                    ref={topRef}
-                >
-                    <span>Back to Search</span>
-                </button>
             </div>
             {songs.length > 0 ? (
                 <div
