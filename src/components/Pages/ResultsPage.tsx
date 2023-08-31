@@ -6,6 +6,8 @@ import SongDisplay from "../Displays/SongDisplay";
 import VolumeSlider from "../Misc/VolumeSlider";
 import Pagination from "../Misc/Pagination";
 import { AudioContext } from "./Views";
+import { DevContext } from "../../App";
+import usePlaylist from "../../utils/usePlaylist";
 
 const ResultsPage = ({
     query,
@@ -16,11 +18,14 @@ const ResultsPage = ({
     goBack: () => void;
     filters: number;
 }) => {
+    const { devMode } = useContext(DevContext);
     const { audio, setAudioIsPlaying } = useContext(AudioContext);
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
+
+    const { createPlaylist } = usePlaylist();
 
     const topRef = useRef(null);
 
@@ -117,6 +122,14 @@ const ResultsPage = ({
                 >
                     <span className="grad">Reroll</span>
                 </button>
+                {devMode && (
+                    <button
+                        className="button2 border-purple-500 border-[1px]"
+                        onClick={() => createPlaylist(uniqueTracks)}
+                    >
+                        <span className="grad">Save to Playlist</span>
+                    </button>
+                )}
                 <button
                     className="button3"
                     id="backToSearchBtn"

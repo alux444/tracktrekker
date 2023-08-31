@@ -9,13 +9,16 @@ const LandingPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { devMode, setDevMode } = useContext(DevContext);
 
-    const { promptUserLogin } = useUser();
+    const { promptUserLogin, getUserId } = useUser();
 
     const setAccessToken = async () => {
         setLoading(true);
         let token: string | null;
         if (devMode) {
             token = await promptUserLogin();
+            if (token != null) {
+                getUserId(token);
+            }
         } else {
             token = await getAccessToken();
         }

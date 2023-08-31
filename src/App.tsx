@@ -64,7 +64,9 @@ export const ExtrasContext = createContext<{
 export const DevContext = createContext<{
     devMode: boolean;
     setDevMode: React.Dispatch<React.SetStateAction<boolean>>;
-}>({ devMode: false, setDevMode: () => {} });
+    userId: string;
+    setUserId: React.Dispatch<React.SetStateAction<string>>;
+}>({ devMode: false, setDevMode: () => {}, userId: "", setUserId: () => {} });
 
 function App() {
     const [token, setToken] = useState<string | null>(null);
@@ -75,6 +77,7 @@ function App() {
     const [genres, setGenres] = useState<SelectOption[]>([]);
     const [extras, setExtras] = useState<ExtraInfo>({});
     const [devMode, setDevMode] = useState<boolean>(false);
+    const [userId, setUserId] = useState<string>("");
 
     return (
         <TokenContext.Provider value={{ token, setToken }}>
@@ -93,7 +96,12 @@ function App() {
                                     value={{ extras, setExtras }}
                                 >
                                     <DevContext.Provider
-                                        value={{ devMode, setDevMode }}
+                                        value={{
+                                            devMode,
+                                            setDevMode,
+                                            userId,
+                                            setUserId,
+                                        }}
                                     >
                                         <div className="flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
                                             <Views />
