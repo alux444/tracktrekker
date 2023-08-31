@@ -37,9 +37,35 @@ const usePlaylist = () => {
             return null;
         }
 
+        const uris: string[] = [];
         songs.map((song) => {
-            console.log(song.id);
+            uris.push(song.uri);
         });
+
+        addSongsToPlaylist(playlistId, uris);
+    };
+
+    const addSongsToPlaylist = async (playlistId: string, songs: string[]) => {
+        const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
+
+        const body = {
+            uris: songs,
+        };
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        };
+
+        try {
+            const response = await axios.post(url, body, {
+                headers,
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     };
 
     return { createPlaylist };

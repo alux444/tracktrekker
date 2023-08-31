@@ -11,12 +11,12 @@ const useUser = () => {
 
     const redirectToSpotifyLogin = async () => {
         const clientId = import.meta.env.VITE_ID;
-        // const redirectUri = encodeURIComponent(
-        //     "https://alux444.github.io/tracktrekker/"
-        // );
         const redirectUri = encodeURIComponent(
-            "http://localhost:5173/tracktrekker/"
+            "https://alux444.github.io/tracktrekker/"
         );
+        // const redirectUri = encodeURIComponent(
+        //     "http://localhost:5173/tracktrekker/"
+        // );
         const scopes = encodeURIComponent(
             "user-top-read,playlist-modify-public,playlist-modify-private,user-read-private,user-read-email"
         );
@@ -34,7 +34,7 @@ const useUser = () => {
                 return result;
             }, {});
 
-        // removeAccessTokenFromURL();
+        removeAccessTokenFromURL();
         return hashParams.access_token || null;
     };
 
