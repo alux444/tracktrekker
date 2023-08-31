@@ -1,4 +1,5 @@
 STYLES
+    - darkmode
     improve visuals of:
         - navbar
         - landing page
@@ -6,6 +7,10 @@ STYLES
         - footer 
 
 FEATURES
+    - add cart function to export to playlist 
+    - view a songs stats while being able to adjust filters
+    - filters order match stats order
+    - readd reveal stats button (?)
     - move authentication to serverside
 
 IN progress
