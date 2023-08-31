@@ -120,7 +120,7 @@ const ResultsPage = ({
                 <br />
                 With {filters} {filters == 1 ? "filter" : "filters"} applied.
             </p>
-            <div className="flex flex-col gap-1 text-center items-center border-2">
+            <div className="flex flex-col gap-1 text-center items-center">
                 <div className="flex gap-1">
                     <button
                         className="button2 border-purple-500 border-[1px]"

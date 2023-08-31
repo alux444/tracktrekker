@@ -37,6 +37,12 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ onClose }) => {
                     />
                     <div className="w-full bg-purple-400 h-[1px]" />
                     <ExtraCriteriaTriple
+                        criteriaName="energy"
+                        maxValue={1}
+                        dialog={descriptions.energy}
+                    />
+                    <div className="w-full bg-purple-400 h-[1px]" />
+                    <ExtraCriteriaTriple
                         criteriaName="acousticness"
                         maxValue={1}
                         dialog={descriptions.acousticness}
@@ -47,12 +53,7 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ onClose }) => {
                         maxValue={1}
                         dialog={descriptions.danceability}
                     />
-                    <div className="w-full bg-purple-400 h-[1px]" />
-                    <ExtraCriteriaTriple
-                        criteriaName="energy"
-                        maxValue={1}
-                        dialog={descriptions.energy}
-                    />
+
                     <div className="w-full bg-purple-400 h-[1px]" />
                     <ExtraCriteriaTriple
                         criteriaName="valence"
