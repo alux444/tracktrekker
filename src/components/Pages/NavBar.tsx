@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import logo from "../../imgs/logoGreen.png";
 import { PromptPageContext, page } from "./Views";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
 
 type NavBarProps = {
     currentPage: page;
@@ -24,6 +27,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
             </button>
             <div className="flex flex-col gap-[3px]">
                 <button
+                    className="flex gap-1 items-center"
                     onClick={() => {
                         toHome();
                         setPromptPage("songs");
@@ -37,8 +41,9 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                     >
                         Home
                     </span>
+                    <HomeIcon />
                 </button>
-                <button onClick={toAbout}>
+                <button onClick={toAbout} className="flex gap-1 items-center">
                     {" "}
                     <span
                         className={`${
@@ -47,6 +52,11 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                     >
                         About
                     </span>
+                    <InfoIcon />
+                </button>
+                <button className="flex gap-1 items-center">
+                    <p>SongCart</p>
+                    <ShoppingCartIcon />
                 </button>
             </div>
         </div>
