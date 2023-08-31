@@ -2,6 +2,7 @@ import { useContext } from "react";
 import {
     ArtistInfoContext,
     ArtistSeedContext,
+    DevContext,
     GenreContext,
     SongSeedContext,
     SongsInfoContext,
@@ -16,6 +17,7 @@ const useManageQuery = () => {
     const { songs, setSongs } = useContext(SongsInfoContext);
     const { artists, setArtists } = useContext(ArtistInfoContext);
     const { genres, setGenres } = useContext(GenreContext);
+    const { songCart, setSongCart } = useContext(DevContext);
 
     const addSong = (song: SongInfo) => {
         if (!songSeeds.includes(song.id)) {
@@ -33,6 +35,20 @@ const useManageQuery = () => {
         );
         setSongSeeds(updatedSongSeeds);
         setSongs(updatedSongs);
+    };
+
+    const addToCart = (song: SongInfo) => {
+        if (!songCart.includes(song)) {
+            const updatedSongs = [...songCart, song];
+            setSongCart(updatedSongs);
+        }
+    };
+
+    const removeFromCart = (song: SongInfo) => {
+        const updatedSongs = songCart.filter(
+            (thisSong) => thisSong.id !== song.id
+        );
+        setSongCart(updatedSongs);
     };
 
     const addArtist = (artist: ArtistInfo) => {
@@ -62,7 +78,15 @@ const useManageQuery = () => {
         setGenres(updatedGenres);
     };
 
-    return { addSong, removeSong, addArtist, removeArtist, removeGenre };
+    return {
+        addSong,
+        removeSong,
+        addToCart,
+        removeFromCart,
+        addArtist,
+        removeArtist,
+        removeGenre,
+    };
 };
 
 export default useManageQuery;
