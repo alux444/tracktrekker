@@ -5,7 +5,7 @@ import CartSongDisplay from "../Displays/CartSongDisplay";
 import usePlaylist from "../../utils/usePlaylist";
 
 const SongCart = ({ onClose }: { onClose: () => void }) => {
-    const { songCart } = useContext(DevContext);
+    const { songCart, setSongCart } = useContext(DevContext);
     const [saved, setSaved] = useState<boolean>(false);
 
     const modalRef = useRef(null);
@@ -30,6 +30,14 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
                 className="bg-white flex flex-col p-5 gap-2 rounded-lg shadow-md flex items-center w-fit z-10 max-h-[90vh] w-[90%] md:w-[70%] lg:w-[50%] xl:w-[40%] border-2 overflow-auto"
             >
                 <p className="grad text-lg">Saved Songs</p>
+                {songCart.length > 0 && (
+                    <button
+                        className="buttoncancel"
+                        onClick={() => setSongCart([])}
+                    >
+                        <span>Clear Songs</span>
+                    </button>
+                )}
                 {cart}
                 {songCart.length > 0 ? (
                     saved ? (

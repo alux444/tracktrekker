@@ -115,13 +115,13 @@ const SongDisplay = ({
 
     return (
         <div
-            className={`songDisplay md:flex flex-col flex-wrap justify-center w-full items-center text-[rgba(0,0,0,0.8)] h-fit`}
+            className={`songDisplay md:flex flex-col flex-wrap justify-center w-full items-center h-fit`}
         >
             <div
-                className={`hover h-full flex justify-between flex xs:flex-row items-center p-2 w-full border-[1px]
+                className={`bg-dark3 hover h-full flex justify-between flex xs:flex-row items-center p-2 w-full border-[1px]
                  rounded-[10px] backdrop-blur-3xl ${
                      selected &&
-                     "border-purple-400 border-[2px] bg-[rgba(186,138,207,0.05)]"
+                     "border-lightred border-[2px] bg-[rgba(248,191,255,0.1)]"
                  }`}
             >
                 <div className="namesAndImage flex gap-1 w-[80%] h-full items-center">

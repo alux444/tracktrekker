@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-    --dark1: #4f547d;
+    --dark1: #1c1b2c;
     --dark2: #363455;
-    --dark3: #2e2c4c;
-    --dark4: #2c2f48;
-    --light: #aeacd2;
-    --lightred: #f29fa0;
+    --dark3: #2a2938;
+    --dark4: #1c1b2c;
+    --light: #dddcf2;
+    --lightred: #fd9899;
 }
 
 body {
@@ -24,10 +24,10 @@ body {
     height: 2.6rem;
     padding: 0 1.3rem;
     border-radius: 1.5rem;
-    background: #3d3a4e;
+    background: var(--dark1);
     background-size: 400%;
-    color: #fff;
-    border: none;
+    color: #ffffff;
+    border: 1px solid var(--light);
 }
 
 .button1:hover::before {
@@ -51,8 +51,8 @@ body {
     border-radius: inherit;
     background: linear-gradient(
         82.3deg,
-        rgba(150, 93, 233, 1) 10.8%,
-        rgba(99, 88, 238, 1) 94.3%
+        rgb(172, 116, 255) 10.8%,
+        rgb(150, 143, 255) 94.3%
     );
     transition: all 0.475s;
 }
@@ -64,7 +64,7 @@ body {
     padding: 0 1.1rem;
     font-weight: 400;
     border-radius: 1.3rem;
-    background: transparent;
+    background: var(--dark2);
     background-size: 400%;
 }
 
@@ -94,7 +94,7 @@ body {
 }
 
 .buttoncancel {
-    background: transparent;
+    background: var(--dark1);
     position: relative;
     padding: 0px 5px;
     display: flex;
@@ -103,11 +103,11 @@ body {
     font-weight: 300;
     text-decoration: none;
     cursor: pointer;
-    border: 1px solid rgb(255, 0, 0);
+    border: 1px solid rgb(255, 142, 142);
     border-radius: 30px;
     outline: none;
     overflow: hidden;
-    color: rgb(255, 0, 0);
+    color: rgb(255, 140, 140);
     transition: color 0.3s 0.1s ease-out;
     text-align: center;
 }
@@ -136,15 +136,15 @@ body {
 
 .buttoncancel:hover {
     color: #fff;
-    border: 1px solid rgb(255, 0, 0);
+    border: 1px solid rgb(255, 142, 142);
 }
 
 .buttoncancel:hover::before {
-    box-shadow: inset 0 0 0 10em rgb(255, 0, 0);
+    box-shadow: inset 0 0 0 10em rgb(255, 150, 150);
 }
 
 .buttonselect {
-    background: transparent;
+    background: var(--dark1);
     position: relative;
     padding: 0 5px;
     display: flex;
@@ -153,11 +153,11 @@ body {
     font-weight: 300;
     text-decoration: none;
     cursor: pointer;
-    border: 1px solid rgb(14, 149, 109);
+    border: 1px solid rgb(103, 255, 209);
     border-radius: 30px;
     outline: none;
     overflow: hidden;
-    color: rgb(14, 149, 109);
+    color: rgb(114, 255, 213);
     transition: color 0.3s 0.1s ease-out;
     text-align: center;
 }
@@ -186,7 +186,6 @@ body {
 
 .buttonselect:hover {
     color: #fff;
-    border: 1px solid rgb(14, 149, 109);
 }
 
 .buttonselect:hover::before {
@@ -194,7 +193,7 @@ body {
 }
 
 .buttonprev {
-    background: transparent;
+    background: var(--dark1);
     position: relative;
     padding: 0px 5px;
     display: flex;
@@ -203,11 +202,11 @@ body {
     font-weight: 300;
     text-decoration: none;
     cursor: pointer;
-    border: 1px solid rgb(12, 91, 194);
+    border: 1px solid rgb(134, 187, 255);
     border-radius: 30px;
     outline: none;
     overflow: hidden;
-    color: rgb(12, 91, 194);
+    color: rgb(119, 178, 255);
     transition: color 0.3s 0.1s ease-out;
     text-align: center;
 }
@@ -236,7 +235,6 @@ body {
 
 .buttonprev:hover {
     color: #fff;
-    border: 1px solid rgb(12, 91, 194);
 }
 
 .buttonprev:hover::before {
@@ -244,7 +242,7 @@ body {
 }
 
 .grad {
-    background: linear-gradient(45deg, #b25dea, #5582db);
+    background: linear-gradient(45deg, #d89dff, #97b8fa);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -259,12 +257,12 @@ body {
     border-radius: 8px;
     outline: none;
     background-color: var(--light);
-    color: #0d0c22;
+    color: var(--dark1);
     transition: 0.3s ease;
 }
 
 .input::placeholder {
-    color: #9e9ea7;
+    color: var(--dark2);
 }
 
 .input:focus,
@@ -301,11 +299,11 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .hover {
-    transition: border-color 0.3s ease-in-out; /* Apply a smooth transition to border color */
+    transition: border-color 0.3s ease-in-out;
 }
 
 .hover:hover {
-    border-color: hsl(263, 92%, 57%); /* Change border color on hover */
+    border-color: hsl(263, 100%, 81%);
 }
 
 .button3 {
@@ -316,7 +314,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-weight: 400;
     border: 1px solid #9d174d;
     border-radius: 1.3rem;
-    background: transparent;
+    background: var(--dark1);
     background-size: 400%;
 }
 
@@ -353,7 +351,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-weight: 400;
     border: 1px solid #17419d;
     border-radius: 1.3rem;
-    background: transparent;
+    background: var(--dark1);
     background-size: 400%;
 }
 
