@@ -121,7 +121,7 @@ const SongDisplay = ({
                 className={`bg-dark3 hover h-full flex justify-between flex xs:flex-row items-center p-2 w-full border-[1px]
                  rounded-[10px] backdrop-blur-3xl ${
                      selected &&
-                     "border-lightred border-[2px] bg-[rgba(248,191,255,0.1)]"
+                     "border-lightgreen border-[2px] bg-[rgba(248,191,255,0.1)]"
                  }`}
             >
                 <div className="namesAndImage flex gap-1 w-[80%] h-full items-center">

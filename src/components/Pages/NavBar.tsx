@@ -65,7 +65,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                         className="flex gap-1 items-center"
                         onClick={() => setOpenCart(true)}
                     >
-                        <p>SongCart</p>
+                        <p>Cart</p>
                         <ShoppingCartIcon />({songCart.length})
                     </button>
                 )}

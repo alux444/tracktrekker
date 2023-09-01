@@ -113,7 +113,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                     }
                                 >
                                     <div className="grad">
-                                        <h2>Expand Search</h2>
+                                        <h2>View Search</h2>
                                         {songSeeds.length === 0 &&
                                             artistSeeds.length === 0 &&
                                             genres.length === 0 &&
@@ -122,7 +122,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                     </div>
                                 </button>
                                 <button
-                                    className="button2 hfit border-purple-600 border-[1px] w-fit mb-1"
+                                    className="button2 hfit w-fit mb-1"
                                     id="expandFiltersBtn"
                                     onClick={() => setOpenFilterModal(true)}
                                 >

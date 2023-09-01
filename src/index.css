@@ -65,6 +65,7 @@ body {
     font-weight: 400;
     border-radius: 1.3rem;
     background: var(--dark2);
+    border: 1px solid #dfa3ff;
     background-size: 400%;
 }
 
@@ -87,7 +88,7 @@ body {
     transform: translate(-50%, -50%);
     width: 0;
     height: 0;
-    background-color: rgba(227, 185, 255, 0.5);
+    background-color: rgba(225, 180, 255, 0.2);
     border-radius: 50%;
     opacity: 0;
     transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
@@ -256,21 +257,16 @@ body {
     border: 2px solid transparent;
     border-radius: 8px;
     outline: none;
-    background-color: var(--light);
-    color: var(--dark1);
+    background-color: var(--dark3);
     transition: 0.3s ease;
-}
-
-.input::placeholder {
-    color: var(--dark2);
 }
 
 .input:focus,
 input:hover {
     outline: none;
-    border-color: rgba(147, 76, 234, 0.4);
-    background-color: var(--light);
-    box-shadow: 0 0 0 4px rgba(200, 76, 234, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: var(--dark3);
+    box-shadow: 0 0 0 4px #f7dcff33;
 }
 
 input[type="range"] {
@@ -312,7 +308,7 @@ input[type="range"]::-webkit-slider-thumb {
     height: 2rem;
     padding: 0 1.1rem;
     font-weight: 400;
-    border: 1px solid #9d174d;
+    border: 1px solid #f15b5b;
     border-radius: 1.3rem;
     background: var(--dark1);
     background-size: 400%;
@@ -337,7 +333,7 @@ input[type="range"]::-webkit-slider-thumb {
     transform: translate(-50%, -50%);
     width: 0;
     height: 0;
-    background-color: rgba(213, 27, 104, 0.5);
+    background-color: rgba(255, 91, 91, 0.2);
     border-radius: 50%;
     opacity: 0;
     transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
@@ -349,7 +345,7 @@ input[type="range"]::-webkit-slider-thumb {
     height: 2rem;
     padding: 0 1.1rem;
     font-weight: 400;
-    border: 1px solid #17419d;
+    border: 1px solid #7aa3fc;
     border-radius: 1.3rem;
     background: var(--dark1);
     background-size: 400%;
@@ -374,7 +370,7 @@ input[type="range"]::-webkit-slider-thumb {
     transform: translate(-50%, -50%);
     width: 0;
     height: 0;
-    background-color: rgba(36, 141, 217, 0.5);
+    background-color: rgba(112, 195, 255, 0.5);
     border-radius: 50%;
     opacity: 0;
     transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;

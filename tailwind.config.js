@@ -11,6 +11,7 @@ export default {
                 dark4: "#1C1B2C",
                 light: "#DDDCF2",
                 lightred: "#FD9899",
+                lightgreen: "rgb(103, 255, 209)",
                 lilac: "#AEACD2",
             },
         },

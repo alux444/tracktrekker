@@ -14,17 +14,17 @@ type Range = {
 };
 
 const colours = [
-    "#1f3a93",
-    "#3953a4",
-    "#4e6ab3",
-    "#6781c1",
-    "#7e99cf",
-    "#967cd1",
-    "#ae60d3",
-    "#c644d5",
-    "#de27d7",
-    "#f609d9",
-    "#d90bf1",
+    "#617BCB",
+    "#708BD3",
+    "#7F9BEA",
+    "#8EABF2",
+    "#9DBBF9",
+    "#ACCDFE",
+    "#BBDEFF",
+    "#CADFFF",
+    "#D9F0FF",
+    "#E8F0FF",
+    "#F2E0FF",
 ];
 
 const StatsBar = ({
@@ -97,7 +97,7 @@ const StatsBar = ({
                                     }}
                                 />
                                 <div
-                                    className="filterRange bg-slate-300 h-[10px] rounded-lg p-1"
+                                    className="filterRange bg-slate-600 h-[10px] rounded-lg p-1"
                                     style={{
                                         width: `${
                                             filtersRange.upper -

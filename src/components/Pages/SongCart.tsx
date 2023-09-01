@@ -44,7 +44,7 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
                         <p className="grad">Saved to your Spotify!</p>
                     ) : (
                         <button
-                            className="grad button2 border-[1px] border-purple-700 my-2"
+                            className="grad button2"
                             onClick={() => {
                                 createPlaylist(songCart);
                                 setSaved(true);
