@@ -4,15 +4,16 @@ import useManageQuery from "../../utils/useManageQuery";
 import useSpotify from "../../utils/useSpotify";
 import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
-import { StatsContext } from "../Pages/HomePage";
 import { AudioContext } from "../Pages/Views";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import AddIcon from "@mui/icons-material/Add";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import ClearIcon from "@mui/icons-material/Clear";
-import { SongsInfoContext } from "../../App";
+import { DevContext, SongsInfoContext } from "../../App";
 
 const SongDisplay = ({
     songInfo,
@@ -21,7 +22,6 @@ const SongDisplay = ({
     songInfo: SongInfo;
     statsButton: boolean;
 }) => {
-    const { showStats } = useContext(StatsContext);
     const {
         audio,
         setAudio,
@@ -31,11 +31,13 @@ const SongDisplay = ({
         setCurrentPlayingId,
     } = useContext(AudioContext);
     const { songs } = useContext(SongsInfoContext);
+    const { devMode, songCart } = useContext(DevContext);
 
     const [thisShowStats, setThisShowStats] = useState<boolean>(false);
     const [selected, setSelected] = useState(false);
+    const [inCart, setInCart] = useState(false);
     const [features, setFeatures] = useState<AudioFeatures | undefined>();
-    const { addSong, removeSong } = useManageQuery();
+    const { addSong, removeSong, addToCart, removeFromCart } = useManageQuery();
 
     const { getFeatures } = useSpotify();
 
@@ -48,6 +50,18 @@ const SongDisplay = ({
         };
         checkSongStatus();
     }, [songs, songInfo]);
+
+    useEffect(() => {
+        const checkSongCartStatus = () => {
+            const isSongSelected = songCart.some(
+                (song) => song.id === songInfo.id
+            );
+            setInCart(isSongSelected);
+        };
+        if (devMode) {
+            checkSongCartStatus();
+        }
+    }, [songCart, songInfo]);
 
     useEffect(() => {
         const fetchFeaturesForThisSong = async () => {
@@ -122,6 +136,33 @@ const SongDisplay = ({
                                 className="float-left md:max-w-[80px] md:max-h-[80px] max-h-[70px] max-w-[70px]"
                             />
                         </a>
+                        {devMode && (
+                            <button
+                                className={`${
+                                    inCart ? "buttoncancel" : "buttonselect"
+                                } w-full`}
+                                type="button"
+                                onClick={() => {
+                                    if (inCart) {
+                                        removeFromCart(songInfo);
+                                    } else {
+                                        addToCart(songInfo);
+                                    }
+                                }}
+                            >
+                                <span className="flex justify-center items-center w-full">
+                                    {inCart ? (
+                                        <RemoveShoppingCartIcon
+                                            style={{ fontSize: "1rem" }}
+                                        />
+                                    ) : (
+                                        <ShoppingCartIcon
+                                            style={{ fontSize: "1rem" }}
+                                        />
+                                    )}
+                                </span>
+                            </button>
+                        )}
                     </div>
 
                     <div className="namesDiv flex justify-between gap-1 p-1 flex-col h-full flex-grow max-w-[70%] sm:max-w-[70%] lg:max-w-[80%]">
@@ -143,9 +184,18 @@ const SongDisplay = ({
                         </div>
 
                         <div className="text-slate-400">
-                            {duration && <span>{duration}</span>}{" "}
-                            {features?.tempo && (
-                                <span> · {features.tempo.toFixed(0)} BPM</span>
+                            {duration && (
+                                <>
+                                    <span>{duration}</span>{" "}
+                                    <span>
+                                        {" "}
+                                        ·{" "}
+                                        {songInfo.album.release_date.slice(
+                                            0,
+                                            4
+                                        )}
+                                    </span>
+                                </>
                             )}
                         </div>
                     </div>
@@ -210,7 +260,7 @@ const SongDisplay = ({
                             </span>
                         </button>
                     )}
-                    {statsButton && !showStats && (
+                    {statsButton && (
                         <button
                             className="buttonprev w-full"
                             type="button"
@@ -235,7 +285,7 @@ const SongDisplay = ({
                 </div>
             </div>
 
-            {features && (showStats || thisShowStats) && (
+            {features && thisShowStats && (
                 <FeaturesDisplay
                     features={features}
                     onClose={() => setThisShowStats(false)}

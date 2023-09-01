@@ -749,6 +749,22 @@ video {
   max-height: 90vh;
 }
 
+.max-h-\[30px\] {
+  max-height: 30px;
+}
+
+.max-h-\[1\.7rem\] {
+  max-height: 1.7rem;
+}
+
+.max-h-\[2\.4rem\] {
+  max-height: 2.4rem;
+}
+
+.max-h-\[2\.6rem\] {
+  max-height: 2.6rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -826,6 +842,22 @@ video {
   width: 100vw;
 }
 
+.w-\[1000px\] {
+  width: 1000px;
+}
+
+.w-\[70vw\] {
+  width: 70vw;
+}
+
+.w-\[70\%\] {
+  width: 70%;
+}
+
+.w-\[90\%\] {
+  width: 90%;
+}
+
 .min-w-0 {
   min-width: 0px;
 }
@@ -852,6 +884,22 @@ video {
 
 .max-w-full {
   max-width: 100%;
+}
+
+.max-w-\[30px\] {
+  max-width: 30px;
+}
+
+.max-w-\[1\.7rem\] {
+  max-width: 1.7rem;
+}
+
+.max-w-\[2\.4rem\] {
+  max-width: 2.4rem;
+}
+
+.max-w-\[2\.6rem\] {
+  max-width: 2.6rem;
 }
 
 .flex-grow {
@@ -886,6 +934,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-end {
@@ -1133,6 +1185,11 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-\[rgba\(0\2c 0\2c 0\2c 0\.8\)\] {
@@ -1655,6 +1712,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 @media (min-width: 640px) {
+  .sm\:flex {
+    display: flex;
+  }
+
   .sm\:w-\[40vw\] {
     width: 40vw;
   }
@@ -1673,6 +1734,10 @@ input[type="range"]::-webkit-slider-thumb {
     max-height: 80px;
   }
 
+  .md\:max-h-\[40px\] {
+    max-height: 40px;
+  }
+
   .md\:w-\[35vw\] {
     width: 35vw;
   }
@@ -1681,8 +1746,16 @@ input[type="range"]::-webkit-slider-thumb {
     width: 70vw;
   }
 
+  .md\:w-\[70\%\] {
+    width: 70%;
+  }
+
   .md\:max-w-\[80px\] {
     max-width: 80px;
+  }
+
+  .md\:max-w-\[40px\] {
+    max-width: 40px;
   }
 
   .md\:flex-row {
@@ -1741,6 +1814,10 @@ input[type="range"]::-webkit-slider-thumb {
     width: 60vw;
   }
 
+  .lg\:w-\[50\%\] {
+    width: 50%;
+  }
+
   .lg\:max-w-\[30vw\] {
     max-width: 30vw;
   }
@@ -1773,5 +1850,9 @@ input[type="range"]::-webkit-slider-thumb {
 
   .xl\:w-\[50vw\] {
     width: 50vw;
+  }
+
+  .xl\:w-\[40\%\] {
+    width: 40%;
   }
 }

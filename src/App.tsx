@@ -66,18 +66,40 @@ export const DevContext = createContext<{
     setDevMode: React.Dispatch<React.SetStateAction<boolean>>;
     userId: string;
     setUserId: React.Dispatch<React.SetStateAction<string>>;
-}>({ devMode: false, setDevMode: () => {}, userId: "", setUserId: () => {} });
+    songCart: SongInfo[];
+    setSongCart: React.Dispatch<React.SetStateAction<SongInfo[]>>;
+}>({
+    devMode: false,
+    setDevMode: () => {},
+    userId: "",
+    setUserId: () => {},
+    songCart: [],
+    setSongCart: () => {},
+});
 
 function App() {
     const [token, setToken] = useState<string | null>(null);
+
+    //song / artist seeds
     const [songSeeds, setSongSeeds] = useState<string[]>([]);
     const [artistSeeds, setArtistSeeds] = useState<string[]>([]);
+
+    //song info
     const [songs, setSongs] = useState<SongInfo[]>([]);
+
+    //artists
     const [artists, setArtists] = useState<ArtistInfo[]>([]);
+
+    //genres
     const [genres, setGenres] = useState<SelectOption[]>([]);
+
+    //extras
     const [extras, setExtras] = useState<ExtraInfo>({});
+
+    //dev context
     const [devMode, setDevMode] = useState<boolean>(false);
     const [userId, setUserId] = useState<string>("");
+    const [songCart, setSongCart] = useState<SongInfo[]>([]);
 
     return (
         <TokenContext.Provider value={{ token, setToken }}>
@@ -101,6 +123,8 @@ function App() {
                                             setDevMode,
                                             userId,
                                             setUserId,
+                                            songCart,
+                                            setSongCart,
                                         }}
                                     >
                                         <div className="flex justify-between align-center items-center min-h-screen w-screen overflow-auto">

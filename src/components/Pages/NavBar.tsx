@@ -1,6 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../imgs/logoGreen.png";
 import { PromptPageContext, page } from "./Views";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import SongCart from "./SongCart";
+import { DevContext } from "../../App";
 
 type NavBarProps = {
     currentPage: page;
@@ -10,6 +15,10 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
     const { setPromptPage } = useContext(PromptPageContext);
+    const { devMode, songCart } = useContext(DevContext);
+
+    const [openCart, setOpenCart] = useState<boolean>(false);
+
     return (
         <div className="flex gap-8 flex-wrap justify-center p-3 items-center">
             <button
@@ -24,6 +33,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
             </button>
             <div className="flex flex-col gap-[3px]">
                 <button
+                    className="flex gap-1 items-center"
                     onClick={() => {
                         toHome();
                         setPromptPage("songs");
@@ -37,8 +47,9 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                     >
                         Home
                     </span>
+                    <HomeIcon />
                 </button>
-                <button onClick={toAbout}>
+                <button onClick={toAbout} className="flex gap-1 items-center">
                     {" "}
                     <span
                         className={`${
@@ -47,8 +58,19 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                     >
                         About
                     </span>
+                    <InfoIcon />
                 </button>
+                {devMode && (
+                    <button
+                        className="flex gap-1 items-center"
+                        onClick={() => setOpenCart(true)}
+                    >
+                        <p>SongCart</p>
+                        <ShoppingCartIcon />({songCart.length})
+                    </button>
+                )}
             </div>
+            {openCart && <SongCart onClose={() => setOpenCart(false)} />}
         </div>
     );
 };
