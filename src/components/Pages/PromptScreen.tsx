@@ -57,7 +57,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                         <TutorialModal onClose={closeTutorial} />
                     )}
                     {devMode && (
-                        <button className="button3" onClick={switchCustomMode}>
+                        <button className="button2" onClick={switchCustomMode}>
                             {promptPage === "user"
                                 ? "To Custom Search"
                                 : "To My Top Artists/Songs"}

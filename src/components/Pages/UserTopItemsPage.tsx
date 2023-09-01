@@ -77,14 +77,14 @@ const UserTopItemsPage = () => {
         <div className="flex gap-2 items-center justify-center flex-col w-screen p-3">
             <div className="flex gap-1 items-center">
                 <button
-                    className="button3 w-fit"
+                    className="button4 w-fit"
                     onClick={() => setShowSongs(!showSongs)}
                 >
                     <span>{showSongs ? "Show Artists" : "Show Songs"}</span>
                 </button>
                 <div>
                     <select
-                        className="border-[2px] p-1 border-purple-400 rounded-[8px]"
+                        className="border-[2px] p-1 border-purple-400 bg-dark3 rounded-[8px]"
                         value={currentTerm}
                         onChange={handleTermChange}
                     >
@@ -99,7 +99,7 @@ const UserTopItemsPage = () => {
             {showSongs ? (
                 <div className="flex flex-col text-center w-full gap-1 items-center">
                     <p className="grad">Your Top Songs ({time})</p>
-                    <div className="p-5 flex flex-col gap-3 text-start w-screen md:w-[70vw] lg:w-[50vw] xl:w-[40vw]">
+                    <div className="p-5 flex flex-col gap-3 text-start w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
                         {tracks}
                     </div>
                 </div>

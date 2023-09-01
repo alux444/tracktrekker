@@ -8,7 +8,7 @@ const TutPageTwo = () => {
             <p>For genres, simply select a genre from the dropdown.</p>
             <img
                 src={firstImage}
-                className="border-[1px] my-2 max-w-[50vw] lg:max-w-[30vw]"
+                className="border-[1px] my-2 max-w-[50vw] lg:max-w-[30vw] border-dark2"
             />
             <p>
                 By clicking the green "+" button, the song / artist will be

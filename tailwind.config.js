@@ -7,6 +7,7 @@ export default {
                 error: "#ed1811",
                 select: "#32a846",
                 white: "#f5f5f5",
+                dark2: "#55527d",
                 dark3: "#2A2938",
                 dark4: "#1C1B2C",
                 light: "#DDDCF2",
