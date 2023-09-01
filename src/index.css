@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --dark1: #4f547d;
+    --dark2: #363455;
+    --dark3: #2e2c4c;
+    --dark4: #2c2f48;
+    --light: #aeacd2;
+    --lightred: #f29fa0;
+}
+
 body {
+    margin: 0;
+    color: var(--light);
+    background-color: var(--dark4);
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -246,7 +258,7 @@ body {
     border: 2px solid transparent;
     border-radius: 8px;
     outline: none;
-    background-color: #f3f3f4;
+    background-color: var(--light);
     color: #0d0c22;
     transition: 0.3s ease;
 }
@@ -259,7 +271,7 @@ body {
 input:hover {
     outline: none;
     border-color: rgba(147, 76, 234, 0.4);
-    background-color: #fff;
+    background-color: var(--light);
     box-shadow: 0 0 0 4px rgba(200, 76, 234, 0.1);
 }
 

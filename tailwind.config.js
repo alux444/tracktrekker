@@ -7,6 +7,12 @@ export default {
                 error: "#ed1811",
                 select: "#32a846",
                 white: "#f5f5f5",
+                dark1: "4F547D",
+                dark2: "363455",
+                dark3: "2E2C4C",
+                dark4: "2C2F48",
+                light: "AEACD2",
+                lightred: "F29FA0",
             },
         },
         screens: {
