@@ -25,10 +25,10 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
 
     return (
         <div className="flex gap-1 items-center">
-            <div className="border-[1px] p-1 rounded-[10px] flex flex-col items-center justify-center text-center">
+            <div className="p-1 rounded-[10px] flex flex-col items-center justify-center text-center">
                 <div className="flex gap-1 items-center p-1">
                     <p>
-                        {type} - {value}
+                        {type}: {value}
                     </p>
                 </div>
                 <input
