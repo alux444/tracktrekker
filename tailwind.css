@@ -1712,6 +1712,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 @media (min-width: 640px) {
+  .sm\:flex {
+    display: flex;
+  }
+
   .sm\:w-\[40vw\] {
     width: 40vw;
   }

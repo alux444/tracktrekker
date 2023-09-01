@@ -4,7 +4,6 @@ import useManageQuery from "../../utils/useManageQuery";
 import { AudioContext } from "../Pages/Views";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { DevContext } from "../../App";
 
@@ -20,7 +19,7 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
     const { devMode, songCart } = useContext(DevContext);
 
     const [inCart, setInCart] = useState(false);
-    const { addToCart, removeFromCart } = useManageQuery();
+    const { removeFromCart } = useManageQuery();
 
     useEffect(() => {
         const checkSongCartStatus = () => {
@@ -66,11 +65,6 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
         .slice(0, 3)
         .map((artist) => artist.name)
         .join(", ");
-
-    const totalSeconds = Math.floor(songInfo.duration_ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = (totalSeconds % 60).toString().padStart(2, "0");
-    const duration: string = `${minutes}:${seconds}`;
 
     return (
         <div
@@ -128,7 +122,7 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                                         <PauseIcon
                                             style={{ fontSize: "0.9rem" }}
                                         />
-                                        <span className="hidden xs:flex">
+                                        <span className="hidden sm:flex">
                                             PAUSE
                                         </span>
                                     </div>
@@ -137,7 +131,7 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                                         <PlayArrowIcon
                                             style={{ fontSize: "0.9rem" }}
                                         />
-                                        <span className="hidden xs:flex">
+                                        <span className="hidden sm:flex">
                                             PLAY
                                         </span>
                                     </div>
@@ -158,7 +152,7 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                                 <RemoveShoppingCartIcon
                                     style={{ fontSize: "0.9rem" }}
                                 />
-                                <span className="hidden xs:flex">CANCEL</span>
+                                <span className="hidden sm:flex">CANCEL</span>
                             </>
                         </span>
                     </button>

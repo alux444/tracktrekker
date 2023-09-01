@@ -136,31 +136,33 @@ const SongDisplay = ({
                                 className="float-left md:max-w-[80px] md:max-h-[80px] max-h-[70px] max-w-[70px]"
                             />
                         </a>
-                        <button
-                            className={`${
-                                inCart ? "buttoncancel" : "buttonselect"
-                            } w-full`}
-                            type="button"
-                            onClick={() => {
-                                if (inCart) {
-                                    removeFromCart(songInfo);
-                                } else {
-                                    addToCart(songInfo);
-                                }
-                            }}
-                        >
-                            <span className="flex justify-center items-center w-full">
-                                {inCart ? (
-                                    <RemoveShoppingCartIcon
-                                        style={{ fontSize: "1rem" }}
-                                    />
-                                ) : (
-                                    <ShoppingCartIcon
-                                        style={{ fontSize: "1rem" }}
-                                    />
-                                )}
-                            </span>
-                        </button>
+                        {devMode && (
+                            <button
+                                className={`${
+                                    inCart ? "buttoncancel" : "buttonselect"
+                                } w-full`}
+                                type="button"
+                                onClick={() => {
+                                    if (inCart) {
+                                        removeFromCart(songInfo);
+                                    } else {
+                                        addToCart(songInfo);
+                                    }
+                                }}
+                            >
+                                <span className="flex justify-center items-center w-full">
+                                    {inCart ? (
+                                        <RemoveShoppingCartIcon
+                                            style={{ fontSize: "1rem" }}
+                                        />
+                                    ) : (
+                                        <ShoppingCartIcon
+                                            style={{ fontSize: "1rem" }}
+                                        />
+                                    )}
+                                </span>
+                            </button>
+                        )}
                     </div>
 
                     <div className="namesDiv flex justify-between gap-1 p-1 flex-col h-full flex-grow max-w-[70%] sm:max-w-[70%] lg:max-w-[80%]">
