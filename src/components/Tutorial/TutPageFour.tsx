@@ -10,7 +10,7 @@ const TutPageFour = () => {
                 className="border-[1px] border-dark2 my-2 max-h-[30vh]"
             />
             <p>
-                You can further refine your results using the "Add Filters"
+                You can further refine your results using the "Manage Filters"
                 button.
             </p>
             <img

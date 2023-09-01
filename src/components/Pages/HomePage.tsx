@@ -1,4 +1,4 @@
-import { SetStateAction, createContext, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import {
     ArtistSeedContext,
     ExtrasContext,
@@ -15,14 +15,6 @@ import LandingPage from "./LandingPage";
 import PromptScreen from "./PromptScreen";
 import { PromptPageContext } from "./Views";
 import UserTopItemsPage from "./UserTopItemsPage";
-
-export const StatsContext = createContext<{
-    showStats: boolean;
-    setShowStats: React.Dispatch<SetStateAction<boolean>>;
-}>({
-    showStats: false,
-    setShowStats: () => {},
-});
 
 const HomePage = () => {
     const { token } = useContext(TokenContext);

@@ -33,8 +33,14 @@ const TutorialModal = ({ onClose }: { onClose: () => void }) => {
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div
                 ref={modalRef}
-                className="bg-dark3 flex flex-col p-2 rounded-lg shadow-md flex justify-center items-center align-center max-w-[90vw]"
+                className="bg-dark3 flex flex-col p-2 rounded-lg shadow-md flex justify-center items-center align-center max-w-[90vw] relative"
             >
+                <button
+                    className="absolute top-2 right-3 cursor-pointer"
+                    onClick={onClose}
+                >
+                    <span>&times;</span>
+                </button>
                 {page === 1 && <TutPageOne />}
                 {page === 2 && <TutPageTwo />}
                 {page === 3 && <TutPageThree />}
