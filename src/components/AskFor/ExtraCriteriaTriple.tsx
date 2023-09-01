@@ -106,10 +106,7 @@ const ExtraCriteriaTriple = ({
             <div className="flex gap-2 justify-center items-center align-center">
                 {!showSelection && (
                     <div className="flex gap-1 flex-col items-center">
-                        <button
-                            onClick={resetSelection}
-                            className="button2 border-purple-500 border-[1px]"
-                        >
+                        <button onClick={resetSelection} className="button2">
                             <span className="grad">
                                 Enable {criteriaName.charAt(0).toUpperCase()}
                                 {criteriaName.slice(1)} Filter

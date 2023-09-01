@@ -127,7 +127,7 @@ function App() {
                                             setSongCart,
                                         }}
                                     >
-                                        <div className="flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
+                                        <div className="light flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
                                             <Views />
                                         </div>
                                     </DevContext.Provider>

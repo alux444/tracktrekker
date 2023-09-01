@@ -68,7 +68,6 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                         genres.length > 0 ||
                         Object.keys(extras).length > 0) && (
                         <div>
-                            <hr />
                             <div className="items-center align-center flex flex-col">
                                 <h2 className="grad">Your Search</h2>
                                 <div className="flex gap-1 justify-center items-center mb-1">
@@ -113,7 +112,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                     }
                                 >
                                     <div className="grad">
-                                        <h2>Expand Search</h2>
+                                        <h2>View Search</h2>
                                         {songSeeds.length === 0 &&
                                             artistSeeds.length === 0 &&
                                             genres.length === 0 &&
@@ -122,14 +121,13 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                     </div>
                                 </button>
                                 <button
-                                    className="button2 hfit border-purple-600 border-[1px] w-fit mb-1"
+                                    className="button2 hfit w-fit mb-1"
                                     id="expandFiltersBtn"
                                     onClick={() => setOpenFilterModal(true)}
                                 >
                                     <span className="grad">Manage Filters</span>
                                 </button>
                             </div>
-                            <hr />
                         </div>
                     )}
                 </div>

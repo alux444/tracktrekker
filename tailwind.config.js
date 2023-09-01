@@ -7,6 +7,12 @@ export default {
                 error: "#ed1811",
                 select: "#32a846",
                 white: "#f5f5f5",
+                dark3: "#2A2938",
+                dark4: "#1C1B2C",
+                light: "#DDDCF2",
+                lightred: "#FD9899",
+                lightgreen: "rgb(103, 255, 209)",
+                lilac: "#AEACD2",
             },
         },
         screens: {

@@ -31,7 +31,7 @@ const FeaturesDisplay = ({
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
             <div
                 ref={modalRef}
-                className="bg-white flex flex-col p-2 rounded-lg shadow-md flex items-center w-[90vw] lg:w-[60vw] xl:w-[45vw] z-10 max-h-[90vh] overflow-auto"
+                className="bg-dark4 border-[1px] border-light flex flex-col p-2 rounded-lg shadow-md flex items-center w-[90vw] lg:w-[60vw] xl:w-[45vw] z-10 max-h-[90vh] overflow-auto"
             >
                 <div className="flex flex-col gap-1 items-center w-full">
                     <SongDisplay songInfo={songInfo} statsButton={false} />

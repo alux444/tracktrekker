@@ -17,10 +17,7 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
 }) => {
     if (type === "Target" && value === -1) {
         return (
-            <button
-                className="button2 border-purple-500 border-[1px]"
-                onClick={enable}
-            >
+            <button className="button2" onClick={enable}>
                 <span className="grad">Enable Target</span>
             </button>
         );

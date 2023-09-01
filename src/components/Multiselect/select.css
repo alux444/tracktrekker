@@ -12,7 +12,7 @@
 }
 
 .container:focus {
-    border-color: hsl(200, 100%, 50%);
+    border-color: hsl(282, 22%, 49%);
 }
 
 .value {
@@ -34,7 +34,7 @@
 
 .clear-btn:focus,
 .clear-btn:hover {
-    color: #333;
+    color: #cecece;
 }
 
 .options {
@@ -50,7 +50,7 @@
     width: 100%;
     left: 0;
     top: calc(100% + 0.25em);
-    background-color: white;
+    background-color: #2a2938;
     z-index: 100;
 }
 
@@ -63,12 +63,12 @@
     cursor: pointer;
 }
 .option.selected {
-    background-color: hsl(200, 100%, 70%);
+    background-color: hsl(273, 31%, 52%);
 }
 
 .option.highlighted {
     background-color: hsl(200, 100%, 50%);
-    color: white;
+    color: #2a2938;
 }
 
 .option-badge {
@@ -83,11 +83,11 @@
 .option-badge:hover,
 .option-badge:focus {
     background-color: transparent;
-    border-color: red;
-    color: red;
+    border-color: rgb(255, 148, 148);
+    color: rgb(255, 141, 141);
 }
 
 .option-badge:hover > .remove-btn,
 .option-badge:focus > .remove-btn {
-    color: red;
+    color: rgb(255, 117, 117);
 }

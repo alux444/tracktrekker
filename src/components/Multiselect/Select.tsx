@@ -73,7 +73,7 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
                     ref={filterRef}
                     value={search}
                     onChange={handleSearchChange}
-                    className="border-[1px] border-slate-300 p-1 rounded-[7px] mr-1"
+                    className="border-[1px] border-slate-300 bg-dark3 p-1 rounded-[7px] mr-1"
                     placeholder="Filter Genres"
                 />{" "}
                 <button className="clear-btn" onClick={() => setSearch("")}>

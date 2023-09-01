@@ -122,16 +122,13 @@ const ResultsPage = ({
             </p>
             <div className="flex flex-col gap-1 text-center items-center">
                 <div className="flex gap-1">
-                    <button
-                        className="button2 border-purple-500 border-[1px]"
-                        onClick={getSongs}
-                    >
+                    <button className="button2" onClick={getSongs}>
                         <span className="grad">Reroll</span>
                     </button>
                     <div className="flex text-center items-center">
                         {devMode && !playlistSaved && (
                             <button
-                                className="button2 border-purple-500 border-[1px]"
+                                className="button2"
                                 onClick={() => {
                                     createPlaylist(uniqueTracks);
                                     setPlaylistSaved(true);
@@ -165,7 +162,7 @@ const ResultsPage = ({
                         {results}
                     </div>
                     <button
-                        className="button2 border-purple-500 border-[1px]"
+                        className="button2"
                         onClick={scrollToTop}
                         ref={topRef}
                     >

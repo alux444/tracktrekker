@@ -61,7 +61,7 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     };
 
     return (
-        <div className="w-full flex gap-1 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-[rgba(255,255,255,0.5)]">
+        <div className="w-full flex gap-1 border-slate-400 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-dark3">
             <div className="flex gap-1 w-[80%]">
                 <a
                     href={song.external_urls.spotify}
