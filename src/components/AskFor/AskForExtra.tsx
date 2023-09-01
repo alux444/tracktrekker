@@ -28,33 +28,31 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ onClose }) => {
                         your given target.
                     </p>
                 </div>
-                <div className="flex flex-col gap-2 w-full">
-                    <div className="w-full bg-purple-400 h-[1px]" />
+                <div className="flex flex-col gap-3 w-full">
                     <ExtraCriteriaTriple
                         criteriaName="popularity"
                         maxValue={100}
                         dialog={descriptions.popularity}
                     />
-                    <div className="w-full bg-purple-400 h-[1px]" />
+
                     <ExtraCriteriaTriple
                         criteriaName="energy"
                         maxValue={1}
                         dialog={descriptions.energy}
                     />
-                    <div className="w-full bg-purple-400 h-[1px]" />
+
                     <ExtraCriteriaTriple
                         criteriaName="acousticness"
                         maxValue={1}
                         dialog={descriptions.acousticness}
                     />
-                    <div className="w-full bg-purple-400 h-[1px]" />
+
                     <ExtraCriteriaTriple
                         criteriaName="danceability"
                         maxValue={1}
                         dialog={descriptions.danceability}
                     />
 
-                    <div className="w-full bg-purple-400 h-[1px]" />
                     <ExtraCriteriaTriple
                         criteriaName="valence"
                         maxValue={1}

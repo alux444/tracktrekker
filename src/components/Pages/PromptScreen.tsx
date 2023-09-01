@@ -68,7 +68,6 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                         genres.length > 0 ||
                         Object.keys(extras).length > 0) && (
                         <div>
-                            <hr />
                             <div className="items-center align-center flex flex-col">
                                 <h2 className="grad">Your Search</h2>
                                 <div className="flex gap-1 justify-center items-center mb-1">
@@ -129,7 +128,6 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                                     <span className="grad">Manage Filters</span>
                                 </button>
                             </div>
-                            <hr />
                         </div>
                     )}
                 </div>
