@@ -8,12 +8,12 @@ const TutPageThree = () => {
             <p>Click the "Get Results" button to get your recommended songs.</p>
             <img
                 src={firstImage}
-                className="border-[1px] my-2 max-w-[50vw] lg:max-w-[30vw]"
+                className="border-[1px] my-2 max-h-[30vh] border-dark2"
             />
             <p>Your results will appear at the bottom of the screen.</p>
             <img
                 src={secondImage}
-                className="border-[1px] my-2 max-w-[50vw] lg:max-w-[30vw]"
+                className="border-[1px] my-2 max-h-[30vh] border-dark2"
             />
             <p>
                 If you ever change your search, you should click "Get Results"

@@ -7,7 +7,7 @@ const TutPageFour = () => {
             <h2 className="text-lg grad">Filtering Results</h2>
             <img
                 src={firstImage}
-                className="border-[1px] my-2 max-w-[50vw] lg:max-w-[30vw]"
+                className="border-[1px] border-dark2 my-2 max-h-[30vh]"
             />
             <p>
                 You can further refine your results using the "Add Filters"
@@ -15,7 +15,7 @@ const TutPageFour = () => {
             </p>
             <img
                 src={secondImage}
-                className="border-[1px] my-2 max-w-[50vw] max-h-[30vh] lg:max-w-[30vw]"
+                className="border-[1px] border-dark2 my-2 max-h-[30vh]"
             />
             <p>You can click to enable any of the available filters.</p>
             <p>
