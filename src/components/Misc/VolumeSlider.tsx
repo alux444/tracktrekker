@@ -10,7 +10,7 @@ const VolumeSlider = () => {
     };
 
     return (
-        <div className="border-[1px] p-2 rounded-[10px] flex flex-col items-center justify-center text-center">
+        <div className=" p-2 rounded-[10px] flex flex-col items-center justify-center text-center">
             <div className="flex gap-1 items-center p-1">
                 <p>Volume: {volume}</p>
             </div>
