@@ -67,7 +67,10 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
             <div
                 ref={modalRef}
-                className="flex flex-col w-[95vw] lg:w-[40vw] max-h-[90vh] overflow-auto gap-2 p-2 rounded-[10px] z-10 items-center bg-dark3 relative"
+                className={`flex flex-col w-[95vw] lg:w-[40vw] max-h-[90vh] overflow-auto gap-2 p-2 rounded-[10px] z-10 items-center bg-dark3 relative ${
+                    songs.length + artists.length + genres.length > 5 &&
+                    "border-lightred border-2"
+                }`}
             >
                 <button
                     className="absolute top-2 right-3 cursor-pointer"
@@ -92,6 +95,12 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
                             Clear Search
                         </button>
                     </div>
+                )}
+                {songs.length + artists.length + genres.length > 5 && (
+                    <p className="px-3 text-center text-lightred">
+                        Your search is above the recommended 5 combined total of
+                        songs, artists and genres.
+                    </p>
                 )}
                 {songs.length > 0 && (
                     <div className="flex flex-wrap w-full items-center justify-center gap-2 flex-col">

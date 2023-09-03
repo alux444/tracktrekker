@@ -155,6 +155,12 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                     <span className="button1-content">Get results</span>
                 </button>
             )}
+            {songSeeds.length + artistSeeds.length + genres.length > 5 && (
+                <p className="px-3 text-center text-lightred">
+                    Your search is above the recommended 5 combined total of
+                    songs, artists and genres.
+                </p>
+            )}
             {openFilterModal && (
                 <AskForExtra onClose={() => setOpenFilterModal(false)} />
             )}
