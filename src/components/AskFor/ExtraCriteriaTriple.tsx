@@ -2,6 +2,7 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 import ExtraInputPattern from "./ExtraInputPattern";
 import { ExtrasContext } from "../../App";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
+import "./multislider.css";
 
 type MinMaxTargConfig = [number, number, number];
 
@@ -101,6 +102,34 @@ const ExtraCriteriaTriple = ({
         setExtras(updatedExtras);
     };
 
+    const handleSliderClick = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const sliderWidth = rect.width;
+        const minValuePosition = (min / maxValue) * sliderWidth;
+        const maxValuePosition = (max / maxValue) * sliderWidth;
+        const distanceToMin = Math.abs(clickX - minValuePosition).toFixed(
+            maxValue == 1 ? 2 : 0
+        );
+        const distanceToMax = Math.abs(clickX - maxValuePosition).toFixed(
+            maxValue == 1 ? 2 : 0
+        );
+
+        if (parseFloat(distanceToMin) < parseFloat(distanceToMax)) {
+            const val: string = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue == 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            setMin(res);
+        } else {
+            const val: string = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue == 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            setMax(res);
+        }
+    };
+
     return (
         <div className="flex flex-col items-center text-center w-full">
             <div className="flex gap-2 justify-center items-center align-center">
@@ -153,20 +182,31 @@ const ExtraCriteriaTriple = ({
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-1 items-center">
-                            <ExtraInputPattern
-                                value={min}
-                                changeFunction={handleChangeMin}
-                                type="Min"
-                                max={maxValue}
-                                enable={enableTarget}
-                            />
-                            <ExtraInputPattern
-                                value={max}
-                                changeFunction={handleChangeMax}
-                                type="Max"
-                                max={maxValue}
-                                enable={enableTarget}
-                            />
+                            <div className="flex flex-col">
+                                <p>
+                                    Range: {min} - {max}
+                                </p>
+                                <div
+                                    className="range-slider flex border-2"
+                                    onClick={handleSliderClick}
+                                >
+                                    <input
+                                        type="range"
+                                        step={maxValue / 100}
+                                        max={maxValue}
+                                        value={min}
+                                        onChange={handleChangeMin}
+                                    />
+                                    <input
+                                        className="w-[500px]"
+                                        type="range"
+                                        step={maxValue / 100}
+                                        max={maxValue}
+                                        value={max}
+                                        onChange={handleChangeMax}
+                                    />
+                                </div>
+                            </div>
                             <ExtraInputPattern
                                 value={targ}
                                 changeFunction={handleChangeTarg}
