@@ -842,6 +842,10 @@ video {
   width: 100vw;
 }
 
+.w-\[200px\] {
+  width: 200px;
+}
+
 .min-w-0 {
   min-width: 0px;
 }
@@ -1718,6 +1722,10 @@ input[type="range"]::-webkit-slider-thumb {
 
   .lg\:w-\[60vw\] {
     width: 60vw;
+  }
+
+  .lg\:w-\[300px\] {
+    width: 300px;
   }
 
   .lg\:max-w-\[30vw\] {

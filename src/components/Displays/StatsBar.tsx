@@ -53,7 +53,7 @@ const StatsBar = ({
 
     const tooltipText: string = `${
         type.charAt(0).toUpperCase() + type.slice(1)
-    } : ${((100 * value) / scale).toFixed(1)}`;
+    }: ${((100 * value) / scale).toFixed(1)}`;
 
     const filterTooltip: string = filters[type]
         ? `Filter Range: ${filtersRange?.lower.toFixed(
@@ -65,13 +65,6 @@ const StatsBar = ({
         <div className="group relative w-full h-full">
             <div className="flex w-full h-full justify-between items-center">
                 <div className="flex items-center justify-between text-center w-[10rem] mr-1">
-                    {/* <p className="md:text-4xl text-2xl emoji group-hover:cursor-pointer">
-                        {type === "popularity" && "📊"} 
-                        {type === "acousticness" && "🎸"}
-                        {type === "energy" && "☀️"}
-                        {type === "valence" && "😃"}
-                        {type === "danceability" && "💃"}
-                    </p> */}
                     <p className="grad">
                         {type.charAt(0).toUpperCase() + type.slice(1)}
                     </p>

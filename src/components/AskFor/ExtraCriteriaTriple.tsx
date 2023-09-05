@@ -11,7 +11,7 @@ const ExtraCriteriaTriple = ({
     dialog,
 }: {
     criteriaName: keyof ExtraInfo;
-    maxValue: number;
+    maxValue: 1 | 100;
     dialog: string;
 }) => {
     const { extras, setExtras } = useContext(ExtrasContext);
@@ -59,15 +59,26 @@ const ExtraCriteriaTriple = ({
     };
 
     useEffect(() => {
-        updateForm();
+        const timer = setTimeout(updateForm, 500);
+        return () => clearTimeout(timer);
     }, [min, max, targ, showSelection]);
 
     const handleChangeMin = (e: ChangeEvent<HTMLInputElement>) => {
-        setMin(parseFloat(e.target.value));
+        const val: number = parseFloat(e.target.value);
+        if (val < max) {
+            setMin(parseFloat(e.target.value));
+        } else {
+            setMin(max - (maxValue === 1 ? 0.01 : 1));
+        }
     };
 
     const handleChangeMax = (e: ChangeEvent<HTMLInputElement>) => {
-        setMax(parseFloat(e.target.value));
+        const val: number = parseFloat(e.target.value);
+        if (val > min) {
+            setMax(parseFloat(e.target.value));
+        } else {
+            setMax(min + (maxValue === 1 ? 0.01 : 1));
+        }
     };
 
     const handleChangeTarg = (e: ChangeEvent<HTMLInputElement>) => {
@@ -102,101 +113,6 @@ const ExtraCriteriaTriple = ({
         const updatedExtras = { ...extras };
         delete updatedExtras[criteriaName];
         setExtras(updatedExtras);
-    };
-
-    const handleSliderClickNoTarg = (e) => {
-        const rect = e.target.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const sliderWidth = rect.width;
-        const minValuePosition = (min / maxValue) * sliderWidth;
-        const maxValuePosition = (max / maxValue) * sliderWidth;
-        const distanceToMin = Math.abs(clickX - minValuePosition).toFixed(
-            maxValue == 1 ? 2 : 0
-        );
-        const distanceToMax = Math.abs(clickX - maxValuePosition).toFixed(
-            maxValue == 1 ? 2 : 0
-        );
-
-        if (parseFloat(distanceToMin) < parseFloat(distanceToMax)) {
-            const val: string = ((clickX / sliderWidth) * maxValue).toFixed(
-                maxValue == 1 ? 2 : 0
-            );
-            const res = parseFloat(val);
-            if (res < max) {
-                setMin(res);
-            } else {
-                setMin(max);
-            }
-        } else {
-            const val: string = ((clickX / sliderWidth) * maxValue).toFixed(
-                maxValue == 1 ? 2 : 0
-            );
-            const res = parseFloat(val);
-            if (res > min) {
-                setMax(res);
-            } else {
-                setMax(min);
-            }
-        }
-    };
-
-    const handleSliderClickWithTarg = (e) => {
-        const rect = e.target.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const sliderWidth = rect.width;
-
-        const minValuePosition = (min / maxValue) * sliderWidth;
-        const midValuePosition = (targ / maxValue) * sliderWidth;
-        const maxValuePosition = (max / maxValue) * sliderWidth;
-
-        const distanceToMin = Math.abs(clickX - minValuePosition).toFixed(
-            maxValue === 1 ? 2 : 0
-        );
-        const distanceToMid = Math.abs(clickX - midValuePosition).toFixed(
-            maxValue === 1 ? 2 : 0
-        );
-        const distanceToMax = Math.abs(clickX - maxValuePosition).toFixed(
-            maxValue === 1 ? 2 : 0
-        );
-
-        if (
-            parseFloat(distanceToMin) < parseFloat(distanceToMid) &&
-            parseFloat(distanceToMin) < parseFloat(distanceToMax)
-        ) {
-            const val = ((clickX / sliderWidth) * maxValue).toFixed(
-                maxValue === 1 ? 2 : 0
-            );
-            const res = parseFloat(val);
-            if (res < max) {
-                setMin(res);
-            } else {
-                setMin(max);
-            }
-        } else if (parseFloat(distanceToMid) < parseFloat(distanceToMax)) {
-            const val = ((clickX / sliderWidth) * maxValue).toFixed(
-                maxValue === 1 ? 2 : 0
-            );
-            const res = parseFloat(val);
-            if (res < max) {
-                if (res > min) {
-                    setTarg(res);
-                } else {
-                    setTarg(min);
-                }
-            } else {
-                setTarg(max);
-            }
-        } else {
-            const val = ((clickX / sliderWidth) * maxValue).toFixed(
-                maxValue === 1 ? 2 : 0
-            );
-            const res = parseFloat(val);
-            if (res > min) {
-                setMax(res);
-            } else {
-                setMax(min);
-            }
-        }
     };
 
     return (
@@ -260,17 +176,24 @@ const ExtraCriteriaTriple = ({
                         <div className="flex flex-col md:flex-row gap-1 items-center">
                             <div className="flex flex-col items-center">
                                 <p>
-                                    Range: {min} - {max}
+                                    Range:{" "}
+                                    {maxValue === 1
+                                        ? (min * 100).toFixed(0)
+                                        : min}{" "}
+                                    -{" "}
+                                    {maxValue === 1
+                                        ? (max * 100).toFixed(0)
+                                        : max}
                                 </p>
-                                {targ !== -1 && <p>Target: {targ}</p>}
-                                <div
-                                    className="range-slider flex h-[30px] mt-[20px]"
-                                    onClick={
-                                        targ == -1
-                                            ? handleSliderClickNoTarg
-                                            : handleSliderClickWithTarg
-                                    }
-                                >
+                                {targ !== -1 && (
+                                    <p>
+                                        Target:{" "}
+                                        {maxValue === 1
+                                            ? (targ * 100).toFixed(0)
+                                            : targ}
+                                    </p>
+                                )}
+                                <div className="range-slider flex h-[30px] mt-[20px] w-[200px] lg:w-[300px]">
                                     <input
                                         className="min"
                                         type="range"

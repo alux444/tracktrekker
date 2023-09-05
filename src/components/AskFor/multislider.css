@@ -1,6 +1,5 @@
 .range-slider {
     position: relative;
-    width: 300px;
     float: left;
     text-align: center;
 }
@@ -32,8 +31,8 @@
     width: 0;
     height: 0;
     background-color: transparent;
-    border-left: 7.5px solid transparent;
-    border-right: 7.5px solid transparent;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
     pointer-events: auto;
     position: relative;
     top: -12px;
@@ -42,18 +41,18 @@
 }
 
 .range-slider input[type="range"].min::-webkit-slider-thumb {
-    border-top: 15px solid rgb(198, 198, 255);
+    border-top: 15px solid #79cbff;
 }
 
 .range-slider input[type="range"].max::-webkit-slider-thumb {
-    border-top: 15px solid #ffd0d0;
+    border-top: 15px solid #c96cff;
 }
 
 .range-slider input[type="range"].targ::-webkit-slider-thumb {
     -webkit-appearance: none;
     box-sizing: content-box;
-    width: 8px;
-    height: 20px;
+    width: 10px;
+    height: 18px;
     border: none;
     pointer-events: auto;
     border-radius: 14px;
