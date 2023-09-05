@@ -1,5 +1,4 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
-import ExtraInputPattern from "./ExtraInputPattern";
 import { ExtrasContext } from "../../App";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
 import "./multislider.css";
@@ -102,7 +101,7 @@ const ExtraCriteriaTriple = ({
         setExtras(updatedExtras);
     };
 
-    const handleSliderClick = (e) => {
+    const handleSliderClickNoTarg = (e) => {
         const rect = e.target.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
         const sliderWidth = rect.width;
@@ -124,6 +123,49 @@ const ExtraCriteriaTriple = ({
         } else {
             const val: string = ((clickX / sliderWidth) * maxValue).toFixed(
                 maxValue == 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            setMax(res);
+        }
+    };
+
+    const handleSliderClickWithTarg = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const sliderWidth = rect.width;
+
+        const minValuePosition = (min / maxValue) * sliderWidth;
+        const midValuePosition = (targ / maxValue) * sliderWidth;
+        const maxValuePosition = (max / maxValue) * sliderWidth;
+
+        const distanceToMin = Math.abs(clickX - minValuePosition).toFixed(
+            maxValue === 1 ? 2 : 0
+        );
+        const distanceToMid = Math.abs(clickX - midValuePosition).toFixed(
+            maxValue === 1 ? 2 : 0
+        );
+        const distanceToMax = Math.abs(clickX - maxValuePosition).toFixed(
+            maxValue === 1 ? 2 : 0
+        );
+
+        if (
+            parseFloat(distanceToMin) < parseFloat(distanceToMid) &&
+            parseFloat(distanceToMin) < parseFloat(distanceToMax)
+        ) {
+            const val = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue === 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            setMin(res);
+        } else if (parseFloat(distanceToMid) < parseFloat(distanceToMax)) {
+            const val = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue === 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            setTarg(res);
+        } else {
+            const val = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue === 1 ? 2 : 0
             );
             const res = parseFloat(val);
             setMax(res);
@@ -165,12 +207,19 @@ const ExtraCriteriaTriple = ({
                                 >
                                     Disable Filter
                                 </button>
-                                {targ !== -1 && (
+                                {targ !== -1 ? (
                                     <button
                                         onClick={disableTarget}
                                         className="buttoncancel h-fit"
                                     >
                                         Disable Target
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={enableTarget}
+                                        className="buttonselect h-fit"
+                                    >
+                                        Enable Target
                                     </button>
                                 )}
                                 <button
@@ -182,13 +231,18 @@ const ExtraCriteriaTriple = ({
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-1 items-center">
-                            <div className="flex flex-col">
+                            <div className="flex flex-col items-center border-2">
                                 <p>
                                     Range: {min} - {max}
                                 </p>
+                                {targ !== -1 && <p>Target: {targ}</p>}
                                 <div
-                                    className="range-slider flex border-2"
-                                    onClick={handleSliderClick}
+                                    className="range-slider flex border-2 "
+                                    onClick={
+                                        targ == -1
+                                            ? handleSliderClickNoTarg
+                                            : handleSliderClickWithTarg
+                                    }
                                 >
                                     <input
                                         type="range"
@@ -205,15 +259,18 @@ const ExtraCriteriaTriple = ({
                                         value={max}
                                         onChange={handleChangeMax}
                                     />
+                                    {targ !== -1 && (
+                                        <input
+                                            className="targ"
+                                            type="range"
+                                            step={maxValue / 100}
+                                            max={maxValue}
+                                            value={targ}
+                                            onChange={handleChangeTarg}
+                                        />
+                                    )}
                                 </div>
                             </div>
-                            <ExtraInputPattern
-                                value={targ}
-                                changeFunction={handleChangeTarg}
-                                type="Target"
-                                max={maxValue}
-                                enable={enableTarget}
-                            />
                         </div>
                     </div>
                 )}

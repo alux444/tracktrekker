@@ -1,7 +1,6 @@
 .range-slider {
     position: relative;
     width: 300px;
-    margin-left: calc(50% - 40%);
     height: 54px;
     float: left;
     text-align: center;
@@ -91,4 +90,8 @@
 
 .range-slider input[type="range"]::-ms-tooltip {
     display: none;
+}
+
+.targ {
+    background-color: white;
 }
