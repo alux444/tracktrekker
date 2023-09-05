@@ -5,7 +5,6 @@
 }
 
 .range-slider input[type="range"] {
-    -webkit-appearance: none;
     height: 5px;
     pointer-events: none;
     padding: 0;
@@ -87,7 +86,7 @@
     border-right: 9px solid transparent;
     pointer-events: auto;
     position: relative;
-    top: -12px;
+    transform: translateY(-12px);
     cursor: pointer;
     border-radius: 0;
 }
