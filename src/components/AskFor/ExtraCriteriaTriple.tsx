@@ -122,13 +122,21 @@ const ExtraCriteriaTriple = ({
                 maxValue == 1 ? 2 : 0
             );
             const res = parseFloat(val);
-            setMin(res);
+            if (res < max) {
+                setMin(res);
+            } else {
+                setMin(max);
+            }
         } else {
             const val: string = ((clickX / sliderWidth) * maxValue).toFixed(
                 maxValue == 1 ? 2 : 0
             );
             const res = parseFloat(val);
-            setMax(res);
+            if (res > min) {
+                setMax(res);
+            } else {
+                setMax(min);
+            }
         }
     };
 
@@ -159,19 +167,35 @@ const ExtraCriteriaTriple = ({
                 maxValue === 1 ? 2 : 0
             );
             const res = parseFloat(val);
-            setMin(res);
+            if (res < max) {
+                setMin(res);
+            } else {
+                setMin(max);
+            }
         } else if (parseFloat(distanceToMid) < parseFloat(distanceToMax)) {
             const val = ((clickX / sliderWidth) * maxValue).toFixed(
                 maxValue === 1 ? 2 : 0
             );
             const res = parseFloat(val);
-            setTarg(res);
+            if (res < max) {
+                if (res > min) {
+                    setTarg(res);
+                } else {
+                    setTarg(min);
+                }
+            } else {
+                setTarg(max);
+            }
         } else {
             const val = ((clickX / sliderWidth) * maxValue).toFixed(
                 maxValue === 1 ? 2 : 0
             );
             const res = parseFloat(val);
-            setMax(res);
+            if (res > min) {
+                setMax(res);
+            } else {
+                setMax(min);
+            }
         }
     };
 
@@ -240,7 +264,7 @@ const ExtraCriteriaTriple = ({
                                 </p>
                                 {targ !== -1 && <p>Target: {targ}</p>}
                                 <div
-                                    className="range-slider flex h-[30px]"
+                                    className="range-slider flex h-[30px] mt-[20px]"
                                     onClick={
                                         targ == -1
                                             ? handleSliderClickNoTarg
