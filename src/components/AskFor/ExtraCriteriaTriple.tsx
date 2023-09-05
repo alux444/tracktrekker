@@ -75,7 +75,10 @@ const ExtraCriteriaTriple = ({
     };
 
     const enableTarget = () => {
-        setTarg(max / 2);
+        const val: number = parseFloat(
+            Math.abs((max - min) / 2 + min).toFixed(maxValue == 1 ? 2 : 0)
+        );
+        setTarg(val);
     };
 
     const disableTarget = () => {
@@ -231,13 +234,13 @@ const ExtraCriteriaTriple = ({
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-1 items-center">
-                            <div className="flex flex-col items-center border-2">
+                            <div className="flex flex-col items-center">
                                 <p>
                                     Range: {min} - {max}
                                 </p>
                                 {targ !== -1 && <p>Target: {targ}</p>}
                                 <div
-                                    className="range-slider flex border-2 "
+                                    className="range-slider flex h-[30px]"
                                     onClick={
                                         targ == -1
                                             ? handleSliderClickNoTarg
@@ -245,6 +248,7 @@ const ExtraCriteriaTriple = ({
                                     }
                                 >
                                     <input
+                                        className="min"
                                         type="range"
                                         step={maxValue / 100}
                                         max={maxValue}
@@ -252,7 +256,7 @@ const ExtraCriteriaTriple = ({
                                         onChange={handleChangeMin}
                                     />
                                     <input
-                                        className="w-[500px]"
+                                        className="max"
                                         type="range"
                                         step={maxValue / 100}
                                         max={maxValue}
