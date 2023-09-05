@@ -32,7 +32,7 @@ const ExtraInputPattern: React.FC<CriteriaInputProps> = ({
                     </p>
                 </div>
                 <input
-                    className="border-[1px]"
+                    className="targ"
                     min={0}
                     max={max}
                     step={max / 100}

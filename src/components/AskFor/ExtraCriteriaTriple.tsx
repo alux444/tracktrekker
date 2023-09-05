@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
-import ExtraInputPattern from "./ExtraInputPattern";
 import { ExtrasContext } from "../../App";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
+import "./multislider.css";
 
 type MinMaxTargConfig = [number, number, number];
 
@@ -75,7 +75,10 @@ const ExtraCriteriaTriple = ({
     };
 
     const enableTarget = () => {
-        setTarg(max / 2);
+        const val: number = parseFloat(
+            Math.abs((max - min) / 2 + min).toFixed(maxValue == 1 ? 2 : 0)
+        );
+        setTarg(val);
     };
 
     const disableTarget = () => {
@@ -99,6 +102,101 @@ const ExtraCriteriaTriple = ({
         const updatedExtras = { ...extras };
         delete updatedExtras[criteriaName];
         setExtras(updatedExtras);
+    };
+
+    const handleSliderClickNoTarg = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const sliderWidth = rect.width;
+        const minValuePosition = (min / maxValue) * sliderWidth;
+        const maxValuePosition = (max / maxValue) * sliderWidth;
+        const distanceToMin = Math.abs(clickX - minValuePosition).toFixed(
+            maxValue == 1 ? 2 : 0
+        );
+        const distanceToMax = Math.abs(clickX - maxValuePosition).toFixed(
+            maxValue == 1 ? 2 : 0
+        );
+
+        if (parseFloat(distanceToMin) < parseFloat(distanceToMax)) {
+            const val: string = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue == 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            if (res < max) {
+                setMin(res);
+            } else {
+                setMin(max);
+            }
+        } else {
+            const val: string = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue == 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            if (res > min) {
+                setMax(res);
+            } else {
+                setMax(min);
+            }
+        }
+    };
+
+    const handleSliderClickWithTarg = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const sliderWidth = rect.width;
+
+        const minValuePosition = (min / maxValue) * sliderWidth;
+        const midValuePosition = (targ / maxValue) * sliderWidth;
+        const maxValuePosition = (max / maxValue) * sliderWidth;
+
+        const distanceToMin = Math.abs(clickX - minValuePosition).toFixed(
+            maxValue === 1 ? 2 : 0
+        );
+        const distanceToMid = Math.abs(clickX - midValuePosition).toFixed(
+            maxValue === 1 ? 2 : 0
+        );
+        const distanceToMax = Math.abs(clickX - maxValuePosition).toFixed(
+            maxValue === 1 ? 2 : 0
+        );
+
+        if (
+            parseFloat(distanceToMin) < parseFloat(distanceToMid) &&
+            parseFloat(distanceToMin) < parseFloat(distanceToMax)
+        ) {
+            const val = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue === 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            if (res < max) {
+                setMin(res);
+            } else {
+                setMin(max);
+            }
+        } else if (parseFloat(distanceToMid) < parseFloat(distanceToMax)) {
+            const val = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue === 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            if (res < max) {
+                if (res > min) {
+                    setTarg(res);
+                } else {
+                    setTarg(min);
+                }
+            } else {
+                setTarg(max);
+            }
+        } else {
+            const val = ((clickX / sliderWidth) * maxValue).toFixed(
+                maxValue === 1 ? 2 : 0
+            );
+            const res = parseFloat(val);
+            if (res > min) {
+                setMax(res);
+            } else {
+                setMax(min);
+            }
+        }
     };
 
     return (
@@ -136,12 +234,19 @@ const ExtraCriteriaTriple = ({
                                 >
                                     Disable Filter
                                 </button>
-                                {targ !== -1 && (
+                                {targ !== -1 ? (
                                     <button
                                         onClick={disableTarget}
                                         className="buttoncancel h-fit"
                                     >
                                         Disable Target
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={enableTarget}
+                                        className="buttonselect h-fit"
+                                    >
+                                        Enable Target
                                     </button>
                                 )}
                                 <button
@@ -153,27 +258,47 @@ const ExtraCriteriaTriple = ({
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-1 items-center">
-                            <ExtraInputPattern
-                                value={min}
-                                changeFunction={handleChangeMin}
-                                type="Min"
-                                max={maxValue}
-                                enable={enableTarget}
-                            />
-                            <ExtraInputPattern
-                                value={max}
-                                changeFunction={handleChangeMax}
-                                type="Max"
-                                max={maxValue}
-                                enable={enableTarget}
-                            />
-                            <ExtraInputPattern
-                                value={targ}
-                                changeFunction={handleChangeTarg}
-                                type="Target"
-                                max={maxValue}
-                                enable={enableTarget}
-                            />
+                            <div className="flex flex-col items-center">
+                                <p>
+                                    Range: {min} - {max}
+                                </p>
+                                {targ !== -1 && <p>Target: {targ}</p>}
+                                <div
+                                    className="range-slider flex h-[30px] mt-[20px]"
+                                    onClick={
+                                        targ == -1
+                                            ? handleSliderClickNoTarg
+                                            : handleSliderClickWithTarg
+                                    }
+                                >
+                                    <input
+                                        className="min"
+                                        type="range"
+                                        step={maxValue / 100}
+                                        max={maxValue}
+                                        value={min}
+                                        onChange={handleChangeMin}
+                                    />
+                                    <input
+                                        className="max"
+                                        type="range"
+                                        step={maxValue / 100}
+                                        max={maxValue}
+                                        value={max}
+                                        onChange={handleChangeMax}
+                                    />
+                                    {targ !== -1 && (
+                                        <input
+                                            className="targ"
+                                            type="range"
+                                            step={maxValue / 100}
+                                            max={maxValue}
+                                            value={targ}
+                                            onChange={handleChangeTarg}
+                                        />
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}

@@ -1,0 +1,87 @@
+.range-slider {
+    position: relative;
+    width: 300px;
+    float: left;
+    text-align: center;
+}
+
+.range-slider input[type="range"] {
+    -webkit-appearance: none;
+    height: 5px;
+    pointer-events: none;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid grey;
+    background: linear-gradient(to right, #009dff, #a200ff);
+    z-index: 1;
+}
+
+.range-slider input[type="range"]:focus,
+.range-slider input[type="range"]:active {
+    outline: none;
+}
+
+.range-slider input[type="range"].min::-webkit-slider-thumb,
+.range-slider input[type="range"].max::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-sizing: content-box;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+    border-left: 7.5px solid transparent;
+    border-right: 7.5px solid transparent;
+    pointer-events: auto;
+    position: relative;
+    top: -12px;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.range-slider input[type="range"].min::-webkit-slider-thumb {
+    border-top: 15px solid rgb(198, 198, 255);
+}
+
+.range-slider input[type="range"].max::-webkit-slider-thumb {
+    border-top: 15px solid #ffd0d0;
+}
+
+.range-slider input[type="range"].targ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-sizing: content-box;
+    width: 8px;
+    height: 20px;
+    border: none;
+    pointer-events: auto;
+    border-radius: 14px;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+}
+
+.range-slider input[type="range"]::-moz-range-track {
+    -moz-appearance: none;
+    background: none;
+}
+
+.range-slider input[type="range"]::-ms-track {
+    border-color: transparent;
+    color: transparent;
+    background: transparent;
+}
+
+.range-slider input[type="range"]::-ms-fill-upper {
+    background: transparent;
+}
+
+.range-slider input[type="range"]::-ms-fill-lower {
+    background: transparent;
+}
+
+.range-slider input[type="range"]::-ms-tooltip {
+    display: none;
+}
