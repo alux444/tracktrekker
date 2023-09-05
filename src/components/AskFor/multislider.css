@@ -25,7 +25,9 @@
 }
 
 .range-slider input[type="range"].min::-webkit-slider-thumb,
-.range-slider input[type="range"].max::-webkit-slider-thumb {
+.range-slider input[type="range"].min::-moz-range-thumb,
+.range-slider input[type="range"].max::-webkit-slider-thumb,
+.range-slider input[type="range"].max::-moz-range-thumb {
     -webkit-appearance: none;
     box-sizing: content-box;
     width: 0;
@@ -40,15 +42,18 @@
     border-radius: 0;
 }
 
-.range-slider input[type="range"].min::-webkit-slider-thumb {
+.range-slider input[type="range"].min::-webkit-slider-thumb,
+.range-slider input[type="range"].min::-moz-range-thumb {
     border-top: 15px solid #79cbff;
 }
 
-.range-slider input[type="range"].max::-webkit-slider-thumb {
+.range-slider input[type="range"].max::-webkit-slider-thumb,
+.range-slider input[type="range"].max::-moz-range-thumb {
     border-top: 15px solid #c96cff;
 }
 
-.range-slider input[type="range"].targ::-webkit-slider-thumb {
+.range-slider input[type="range"].targ::-webkit-slider-thumb,
+.range-slider input[type="range"].targ::-moz-range-thumb {
     -webkit-appearance: none;
     box-sizing: content-box;
     width: 10px;
