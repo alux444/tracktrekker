@@ -115,9 +115,9 @@ const SongDisplay = ({
             className={`songDisplay md:flex flex-col flex-wrap justify-center w-full items-center h-fit`}
         >
             <div className="flex flex-col w-full">
-                <div className="flex justify-between w-full">
+                <div className="flex justify-between w-full h-fit">
                     <button
-                        className={`absolute w-fit right-2 top-3 py-[3px] z-50 ${
+                        className={`absolute w-fit right-2 top-3 py-[3px] z-10 ${
                             inCart ? "buttoncancel" : "buttonselect"
                         }`}
                         type="button"
@@ -138,7 +138,7 @@ const SongDisplay = ({
                     {!selected && (
                         <button
                             id="songAddButton"
-                            className="buttonselect w-fit absolute left-2 top-3 py-[3px] z-50"
+                            className="buttonselect w-fit absolute left-2 top-3 py-[3px] z-10"
                             onClick={() => {
                                 addSong(songInfo);
                             }}
@@ -151,7 +151,7 @@ const SongDisplay = ({
                     {selected && (
                         <button
                             id="songRemoveButton"
-                            className="buttoncancel absolute w-fit left-2 top-3 py-[3px] z-50"
+                            className="buttoncancel absolute w-fit left-2 top-3 py-[3px] z-10"
                             onClick={() => {
                                 removeSong(songInfo);
                             }}
@@ -169,21 +169,22 @@ const SongDisplay = ({
                      "border-lightgreen border-[2px] bg-[rgba(248,191,255,0.1)]"
                  }`}
                 >
-                    <div className="namesAndImage flex gap-1 w-[80%] h-full items-center">
-                        <div className="imageDiv flex flex-col gap-1 w-fit">
-                            <a
-                                href={songInfo.external_urls.spotify}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img
-                                    src={songInfo.album.images[1].url}
-                                    className="float-left md:max-w-[80px] md:max-h-[80px] max-h-[70px] max-w-[70px]"
-                                />
-                            </a>
-                        </div>
+                    <div className="namesAndImage flex gap-1 w-full h-full items-center">
+                        <a
+                            href={songInfo.external_urls.spotify}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <img
+                                src={songInfo.album.images[1].url}
+                                className="float-left md:max-w-[80px] md:max-h-[80px] max-h-[70px] max-w-[70px]"
+                            />
+                        </a>
 
-                        <div className="namesDiv flex justify-between gap-1 p-1 flex-col h-full flex-grow max-w-[70%] sm:max-w-[70%] lg:max-w-[80%]">
+                        <div
+                            className="namesDiv flex justify-between p-1 flex-col h-full"
+                            style={{ width: `calc(100% - 70px)` }}
+                        >
                             <div className="flex flex-col w-full">
                                 <h2 className="text-md flex gap-2 w-full overflow-hidden min-w-0 mb-1">
                                     <span className="truncate max-w-full">
@@ -201,79 +202,94 @@ const SongDisplay = ({
                                 </div>
                             </div>
 
-                            <div className="text-slate-400">
-                                {duration && (
-                                    <>
-                                        <span>{duration}</span>{" "}
-                                        <span>
-                                            {" "}
-                                            ·{" "}
-                                            {songInfo.album.release_date.slice(
-                                                0,
-                                                4
-                                            )}
-                                        </span>
-                                    </>
-                                )}
+                            <div className="flex justify-between ">
+                                <div className="text-slate-400 mt-auto">
+                                    {duration && (
+                                        <>
+                                            <span>{duration}</span>{" "}
+                                            <span>
+                                                {" "}
+                                                ·{" "}
+                                                {songInfo.album.release_date.slice(
+                                                    0,
+                                                    4
+                                                )}
+                                            </span>
+                                        </>
+                                    )}
+                                </div>
+                                <div className="buttonsArea flex justify-end gap-1">
+                                    {songInfo.preview_url && (
+                                        <button
+                                            className="buttonprev w-full"
+                                            type="button"
+                                            onClick={playPreview}
+                                        >
+                                            <span className="w-full">
+                                                {audioIsPlaying &&
+                                                currentPlayingId ===
+                                                    songInfo.id ? (
+                                                    <div className="flex justify-center xs:justify-start items-center w-full">
+                                                        <PauseIcon
+                                                            style={{
+                                                                fontSize:
+                                                                    "0.9rem",
+                                                            }}
+                                                        />
+                                                        <span className="hidden xs:flex">
+                                                            PAUSE
+                                                        </span>
+                                                    </div>
+                                                ) : (
+                                                    <div className="flex justify-center xs:justify-start items-center w-full">
+                                                        <PlayArrowIcon
+                                                            style={{
+                                                                fontSize:
+                                                                    "0.9rem",
+                                                            }}
+                                                        />
+                                                        <span className="hidden xs:flex">
+                                                            PLAY
+                                                        </span>
+                                                    </div>
+                                                )}
+                                            </span>
+                                        </button>
+                                    )}
+                                    {statsButton && (
+                                        <button
+                                            className="buttonprev w-full"
+                                            type="button"
+                                            onClick={() =>
+                                                setThisShowStats(!thisShowStats)
+                                            }
+                                        >
+                                            <span className="flex justify-center xs:justify-start items-center w-full">
+                                                {thisShowStats ? (
+                                                    <span>
+                                                        <VisibilityOffIcon
+                                                            style={{
+                                                                fontSize:
+                                                                    "1rem",
+                                                            }}
+                                                        />
+                                                    </span>
+                                                ) : (
+                                                    <BarChartIcon
+                                                        style={{
+                                                            fontSize: "1rem",
+                                                        }}
+                                                    />
+                                                )}
+                                                <span className="hidden xs:flex">
+                                                    STATS
+                                                </span>
+                                            </span>
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="buttonsArea flex flex-col align-center flex-wrap gap-1 justify-end items-end w-[15%] xs:w-[20%]">
-                        {songInfo.preview_url && (
-                            <button
-                                className="buttonprev w-full"
-                                type="button"
-                                onClick={playPreview}
-                            >
-                                <span className="w-full">
-                                    {audioIsPlaying &&
-                                    currentPlayingId === songInfo.id ? (
-                                        <div className="flex justify-center xs:justify-start items-center w-full">
-                                            <PauseIcon
-                                                style={{ fontSize: "0.9rem" }}
-                                            />
-                                            <span className="hidden xs:flex">
-                                                PAUSE
-                                            </span>
-                                        </div>
-                                    ) : (
-                                        <div className="flex justify-center xs:justify-start items-center w-full">
-                                            <PlayArrowIcon
-                                                style={{ fontSize: "0.9rem" }}
-                                            />
-                                            <span className="hidden xs:flex">
-                                                PLAY
-                                            </span>
-                                        </div>
-                                    )}
-                                </span>
-                            </button>
-                        )}
-                        {statsButton && (
-                            <button
-                                className="buttonprev w-full"
-                                type="button"
-                                onClick={() => setThisShowStats(!thisShowStats)}
-                            >
-                                <span className="flex justify-center xs:justify-start items-center w-full">
-                                    {thisShowStats ? (
-                                        <span>
-                                            <VisibilityOffIcon
-                                                style={{ fontSize: "1rem" }}
-                                            />
-                                        </span>
-                                    ) : (
-                                        <BarChartIcon
-                                            style={{ fontSize: "1rem" }}
-                                        />
-                                    )}
-                                    <span className="hidden xs:flex">
-                                        STATS
-                                    </span>
-                                </span>
-                            </button>
-                        )}
                     </div>
                 </div>
                 {features && thisShowStats && (
