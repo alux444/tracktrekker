@@ -45,9 +45,7 @@ This allows for you to filter results with a certain range - all the results fro
 
 By setting a target, your results will be sorted based on the closest values to that target.
 
-
------
-
+---
 
 ## Development History
 
