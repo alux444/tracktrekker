@@ -97,7 +97,8 @@ body {
 .buttoncancel {
     background: var(--dark1);
     position: relative;
-    padding: 0px 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     display: flex;
     align-items: center;
     font-size: 12px;
@@ -129,7 +130,8 @@ body {
 .buttonselect {
     background: var(--dark1);
     position: relative;
-    padding: 0 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     display: flex;
     align-items: center;
     font-size: 13px;
@@ -156,7 +158,8 @@ body {
 .buttonprev {
     background: var(--dark1);
     position: relative;
-    padding: 0px 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     display: flex;
     align-items: center;
     font-size: 13px;
