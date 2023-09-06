@@ -61,57 +61,11 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     };
 
     return (
-        <div className="w-full flex gap-1 border-slate-400 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-dark3">
-            <div className="flex gap-1 w-[80%]">
-                <a
-                    href={song.external_urls.spotify}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    <img
-                        src={song.album.images[1].url}
-                        className="w-[2.2rem] lg:w-[3rem]"
-                    />
-                </a>
-                <div className="flex flex-col w-[80%] align-center">
-                    <div className="flex gap-2 w-full overflow-hidden">
-                        <span className="truncate max-w-full">{song.name}</span>
-                    </div>
-                    <small className="text-slate-400 ">
-                        {song.artists.length > 1
-                            ? song.artists[0].name +
-                              " +" +
-                              (song.artists.length - 1)
-                            : song.artists[0].name}
-                    </small>
-                </div>
-            </div>
-
-            <div className="w-[20%] buttons flex gap-1 flex-col justify-end items-end">
-                {song.preview_url ? (
-                    <button className="buttonprev" onClick={playPreview}>
-                        <span>
-                            {audioIsPlaying && currentPlayingId === song.id ? (
-                                <PauseIcon style={{ fontSize: "1rem" }} />
-                            ) : (
-                                <PlayArrowIcon style={{ fontSize: "1rem" }} />
-                            )}
-                        </span>
-                    </button>
-                ) : (
-                    <button
-                        className="invisible"
-                        disabled={true}
-                        onClick={playPreview}
-                    >
-                        <span>
-                            <PlayArrowIcon style={{ fontSize: "1rem" }} />
-                        </span>
-                    </button>
-                )}
+        <div className="flex flex-col p-1 w-full">
+            <div className="flex justify-end h-[10px]">
                 {!selected ? (
                     <button
-                        className="buttonselect"
+                        className="buttonselect absolute bottom-0 left-2 h-fit"
                         onClick={() => {
                             addSong(song);
                         }}
@@ -123,13 +77,73 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 ) : (
                     <button
                         onClick={() => removeSong(song)}
-                        className="buttoncancel"
+                        className="buttoncancel absolute bottom-0 left-2 h-fit"
                     >
                         <span>
                             <ClearIcon style={{ fontSize: "1rem" }} />
                         </span>
                     </button>
                 )}
+            </div>
+            <div
+                className={`w-full flex gap-1 border-dark2 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-dark3 ${
+                    selected &&
+                    "border-lightgreen border-[2px] bg-[rgba(248,191,255,0.1)]"
+                }`}
+            >
+                <div className="flex gap-1 w-[80%]">
+                    <a
+                        href={song.external_urls.spotify}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <img
+                            src={song.album.images[1].url}
+                            className="w-[2.2rem] h-[2.2rem] lg:w-[3rem] lg:h-[3rem]"
+                        />
+                    </a>
+                    <div className="flex flex-col w-[80%] align-center">
+                        <div className="flex gap-2 w-full overflow-hidden">
+                            <span className="truncate max-w-full">
+                                {song.name}
+                            </span>
+                        </div>
+                        <small className="text-slate-400 ">
+                            {song.artists.length > 1
+                                ? song.artists[0].name +
+                                  " +" +
+                                  (song.artists.length - 1)
+                                : song.artists[0].name}
+                        </small>
+                    </div>
+                </div>
+
+                <div className="w-[20%] buttons flex gap-1 flex-col justify-end items-end">
+                    {song.preview_url ? (
+                        <button onClick={playPreview}>
+                            <span>
+                                {audioIsPlaying &&
+                                currentPlayingId === song.id ? (
+                                    <PauseIcon style={{ fontSize: "1.5rem" }} />
+                                ) : (
+                                    <PlayArrowIcon
+                                        style={{ fontSize: "1.5rem" }}
+                                    />
+                                )}
+                            </span>
+                        </button>
+                    ) : (
+                        <button
+                            className="invisible"
+                            disabled={true}
+                            onClick={playPreview}
+                        >
+                            <span>
+                                <PlayArrowIcon style={{ fontSize: "1rem" }} />
+                            </span>
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     );

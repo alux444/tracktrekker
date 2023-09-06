@@ -13,6 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import { DevContext, SongsInfoContext } from "../../App";
 import { FavoriteBorderOutlined } from "@mui/icons-material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const SongDisplay = ({
     songInfo,
@@ -130,9 +131,13 @@ const SongDisplay = ({
                         }}
                     >
                         <span className="flex justify-center items-center w-full">
-                            <FavoriteBorderOutlined
-                                style={{ fontSize: "1rem" }}
-                            />
+                            {inCart ? (
+                                <FavoriteIcon style={{ fontSize: "1rem" }} />
+                            ) : (
+                                <FavoriteBorderOutlined
+                                    style={{ fontSize: "1rem" }}
+                                />
+                            )}
                         </span>
                     </button>
                     {!selected && (
@@ -182,7 +187,7 @@ const SongDisplay = ({
                         </a>
 
                         <div
-                            className="namesDiv flex justify-between p-1 flex-col h-full"
+                            className="namesDiv flex justify-between p-1 gap-2 flex-col h-full"
                             style={{ width: `calc(100% - 70px)` }}
                         >
                             <div className="flex flex-col w-full">
@@ -221,7 +226,7 @@ const SongDisplay = ({
                                 <div className="buttonsArea flex justify-end gap-1">
                                     {songInfo.preview_url && (
                                         <button
-                                            className="buttonprev w-full"
+                                            className="w-full"
                                             type="button"
                                             onClick={playPreview}
                                         >
@@ -233,24 +238,18 @@ const SongDisplay = ({
                                                         <PauseIcon
                                                             style={{
                                                                 fontSize:
-                                                                    "0.9rem",
+                                                                    "1.5rem",
                                                             }}
                                                         />
-                                                        <span className="hidden xs:flex">
-                                                            PAUSE
-                                                        </span>
                                                     </div>
                                                 ) : (
                                                     <div className="flex justify-center xs:justify-start items-center w-full">
                                                         <PlayArrowIcon
                                                             style={{
                                                                 fontSize:
-                                                                    "0.9rem",
+                                                                    "1.5rem",
                                                             }}
                                                         />
-                                                        <span className="hidden xs:flex">
-                                                            PLAY
-                                                        </span>
                                                     </div>
                                                 )}
                                             </span>
@@ -258,7 +257,7 @@ const SongDisplay = ({
                                     )}
                                     {statsButton && (
                                         <button
-                                            className="buttonprev w-full"
+                                            className="w-full"
                                             type="button"
                                             onClick={() =>
                                                 setThisShowStats(!thisShowStats)
@@ -270,20 +269,17 @@ const SongDisplay = ({
                                                         <VisibilityOffIcon
                                                             style={{
                                                                 fontSize:
-                                                                    "1rem",
+                                                                    "1.5rem",
                                                             }}
                                                         />
                                                     </span>
                                                 ) : (
                                                     <BarChartIcon
                                                         style={{
-                                                            fontSize: "1rem",
+                                                            fontSize: "1.5rem",
                                                         }}
                                                     />
                                                 )}
-                                                <span className="hidden xs:flex">
-                                                    STATS
-                                                </span>
                                             </span>
                                         </button>
                                     )}
