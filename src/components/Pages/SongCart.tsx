@@ -5,7 +5,7 @@ import CartSongDisplay from "../Displays/CartSongDisplay";
 import usePlaylist from "../../utils/usePlaylist";
 
 const SongCart = ({ onClose }: { onClose: () => void }) => {
-    const { songCart, setSongCart } = useContext(DevContext);
+    const { devMode, songCart, setSongCart } = useContext(DevContext);
     const [saved, setSaved] = useState<boolean>(false);
 
     const modalRef = useRef(null);
@@ -44,8 +44,9 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
                     </button>
                 )}
                 {cart}
-                {songCart.length > 0 ? (
-                    saved ? (
+                {songCart.length > 0 &&
+                    devMode &&
+                    (saved ? (
                         <p className="grad">Saved to your Spotify!</p>
                     ) : (
                         <button
@@ -57,10 +58,8 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
                         >
                             Create a Playlist
                         </button>
-                    )
-                ) : (
-                    <p>Your cart is empty.</p>
-                )}
+                    ))}
+                {songCart.length == 0 && <p>Your cart is empty.</p>}
             </div>
         </div>
     );

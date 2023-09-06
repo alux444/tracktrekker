@@ -4,8 +4,8 @@ import useManageQuery from "../../utils/useManageQuery";
 import { AudioContext } from "../Pages/Views";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { DevContext } from "../../App";
+import { FavoriteOutlined } from "@mui/icons-material";
 
 const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
     const {
@@ -16,7 +16,7 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
         currentPlayingId,
         setCurrentPlayingId,
     } = useContext(AudioContext);
-    const { devMode, songCart } = useContext(DevContext);
+    const { songCart } = useContext(DevContext);
 
     const [inCart, setInCart] = useState(false);
     const { removeFromCart } = useManageQuery();
@@ -28,9 +28,7 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
             );
             setInCart(isSongSelected);
         };
-        if (devMode) {
-            checkSongCartStatus();
-        }
+        checkSongCartStatus();
     }, [songCart, songInfo]);
 
     const playPreview = () => {
@@ -127,9 +125,7 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
                 >
                     <span className="flex justify-center sm:justify-start items-center w-full">
                         <>
-                            <RemoveShoppingCartIcon
-                                style={{ fontSize: "0.9rem" }}
-                            />
+                            <FavoriteOutlined style={{ fontSize: "0.8rem" }} />
                             <span className="hidden sm:flex">CANCEL</span>
                         </>
                     </span>
