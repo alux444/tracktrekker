@@ -10,10 +10,9 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import AddIcon from "@mui/icons-material/Add";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import ClearIcon from "@mui/icons-material/Clear";
 import { DevContext, SongsInfoContext } from "../../App";
+import { FavoriteBorderOutlined } from "@mui/icons-material";
 
 const SongDisplay = ({
     songInfo,
@@ -31,7 +30,7 @@ const SongDisplay = ({
         setCurrentPlayingId,
     } = useContext(AudioContext);
     const { songs } = useContext(SongsInfoContext);
-    const { devMode, songCart } = useContext(DevContext);
+    const { songCart } = useContext(DevContext);
 
     const [thisShowStats, setThisShowStats] = useState<boolean>(false);
     const [selected, setSelected] = useState(false);
@@ -58,9 +57,7 @@ const SongDisplay = ({
             );
             setInCart(isSongSelected);
         };
-        if (devMode) {
-            checkSongCartStatus();
-        }
+        checkSongCartStatus();
     }, [songCart, songInfo]);
 
     useEffect(() => {
@@ -136,33 +133,25 @@ const SongDisplay = ({
                                 className="float-left md:max-w-[80px] md:max-h-[80px] max-h-[70px] max-w-[70px]"
                             />
                         </a>
-                        {devMode && (
-                            <button
-                                className={`${
-                                    inCart ? "buttoncancel" : "buttonselect"
-                                } w-full`}
-                                type="button"
-                                onClick={() => {
-                                    if (inCart) {
-                                        removeFromCart(songInfo);
-                                    } else {
-                                        addToCart(songInfo);
-                                    }
-                                }}
-                            >
-                                <span className="flex justify-center items-center w-full">
-                                    {inCart ? (
-                                        <RemoveShoppingCartIcon
-                                            style={{ fontSize: "1rem" }}
-                                        />
-                                    ) : (
-                                        <ShoppingCartIcon
-                                            style={{ fontSize: "1rem" }}
-                                        />
-                                    )}
-                                </span>
-                            </button>
-                        )}
+                        <button
+                            className={`${
+                                inCart ? "buttoncancel" : "buttonselect"
+                            } w-full`}
+                            type="button"
+                            onClick={() => {
+                                if (inCart) {
+                                    removeFromCart(songInfo);
+                                } else {
+                                    addToCart(songInfo);
+                                }
+                            }}
+                        >
+                            <span className="flex justify-center items-center w-full">
+                                <FavoriteBorderOutlined
+                                    style={{ fontSize: "1rem" }}
+                                />
+                            </span>
+                        </button>
                     </div>
 
                     <div className="namesDiv flex justify-between gap-1 p-1 flex-col h-full flex-grow max-w-[70%] sm:max-w-[70%] lg:max-w-[80%]">

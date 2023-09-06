@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import logo from "../../imgs/logoGreen.png";
 import { PromptPageContext, page } from "./Views";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import SongCart from "./SongCart";
 import { DevContext } from "../../App";
+import { FavoriteBorderOutlined } from "@mui/icons-material";
 
 type NavBarProps = {
     currentPage: page;
@@ -15,7 +15,7 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
     const { setPromptPage } = useContext(PromptPageContext);
-    const { devMode, songCart } = useContext(DevContext);
+    const { songCart } = useContext(DevContext);
 
     const [openCart, setOpenCart] = useState<boolean>(false);
 
@@ -60,15 +60,13 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                     </span>
                     <InfoIcon />
                 </button>
-                {devMode && (
-                    <button
-                        className="flex gap-1 items-center"
-                        onClick={() => setOpenCart(true)}
-                    >
-                        <p>Cart</p>
-                        <ShoppingCartIcon />({songCart.length})
-                    </button>
-                )}
+                <button
+                    className="flex gap-1 items-center"
+                    onClick={() => setOpenCart(true)}
+                >
+                    <p>{songCart.length} Saved</p>
+                    <FavoriteBorderOutlined />
+                </button>
             </div>
             {openCart && <SongCart onClose={() => setOpenCart(false)} />}
         </div>
