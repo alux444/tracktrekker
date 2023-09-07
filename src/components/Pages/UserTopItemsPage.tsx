@@ -99,7 +99,7 @@ const UserTopItemsPage = () => {
             {showSongs ? (
                 <div className="flex flex-col text-center w-full gap-1 items-center">
                     <p className="grad">Your Top Songs ({time})</p>
-                    <div className="p-5 flex flex-col gap-3 text-start w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
+                    <div className="p-5 flex flex-col text-start w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
                         {tracks}
                     </div>
                 </div>

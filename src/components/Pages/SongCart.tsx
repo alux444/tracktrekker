@@ -19,10 +19,10 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
     const cart = songCart.map((song) => <CartSongDisplay songInfo={song} />);
 
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10 w-screen h-screen">
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50 w-screen h-screen">
             <div
                 ref={modalRef}
-                className="relative bg-dark3 flex flex-col p-5 gap-1 rounded-lg shadow-md flex items-center z-10 max-h-[90vh] w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] overflow-auto"
+                className="relative bg-dark3 flex flex-col p-5 gap-1 rounded-lg shadow-md flex items-center max-h-[90vh] w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] overflow-auto"
             >
                 <button
                     className="absolute top-2 right-3 cursor-pointer"
@@ -31,7 +31,8 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
                     <span>&times;</span>
                 </button>
                 <p className="grad text-lg">Saved Songs</p>
-                <p className="grad">
+                <p>Click the heart button to save songs!</p>
+                <p className="">
                     {songCart.length} {songCart.length == 1 ? "Song" : "Songs"}{" "}
                     Saved
                 </p>
@@ -59,7 +60,6 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
                             Create a Playlist
                         </button>
                     ))}
-                {songCart.length == 0 && <p>Your cart is empty.</p>}
             </div>
         </div>
     );
