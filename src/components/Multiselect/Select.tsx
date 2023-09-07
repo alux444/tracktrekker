@@ -29,6 +29,7 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const filterRef = useRef<HTMLInputElement>(null);
+    const overallRef = useRef<HTMLDivElement>(null);
 
     const options = optionsRaw.filter((option) =>
         option.label.includes(search.toLowerCase())
@@ -66,8 +67,30 @@ export function Select({ multiple, value, onChange, optionsRaw }: SelectProps) {
         }
     }, [open]);
 
+    useEffect(() => {
+        if (open) {
+            const handleClickOutside = (event: MouseEvent) => {
+                if (
+                    overallRef.current &&
+                    !overallRef.current.contains(event.target as Node)
+                ) {
+                    setOpen(false);
+                }
+            };
+
+            document.addEventListener("mousedown", handleClickOutside);
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }
+    }, [open]);
+
     return (
-        <div className="h-[20em] items-center flex flex-col gap-1">
+        <div
+            className="h-[20em] items-center flex flex-col gap-1"
+            ref={overallRef}
+        >
             <div className="flex items-center">
                 <input
                     ref={filterRef}
