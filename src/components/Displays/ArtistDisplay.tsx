@@ -3,7 +3,7 @@ import { ArtistInfo } from "../../interfaces/artistInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
-import { ArtistInfoContext } from "../../App";
+import { ArtistInfoContext, GenreContext, SongsInfoContext } from "../../App";
 import useSpotify from "../../utils/useSpotify";
 import { SongInfo } from "../../interfaces/songInfo";
 import SmallSongDisplay from "./SmallSongDisplay";
@@ -18,6 +18,9 @@ const ArtistDisplay = ({
     type: Types;
 }) => {
     const { artists } = useContext(ArtistInfoContext);
+    const { songs } = useContext(SongsInfoContext);
+    const { genres } = useContext(GenreContext);
+
     const [selected, setSelected] = useState<boolean>(false);
     const [topSongs, setTopSongs] = useState<SongInfo[]>([]);
 
@@ -55,8 +58,12 @@ const ArtistDisplay = ({
             <div
                 className={`${
                     selected &&
-                    "border-purple-400 border-[2px] bg-[rgba(186,138,207,0.05)]"
-                } hover flex flex-col md:flex-row justify-between gap-2 items-center border-[1px] border-dark2 p-2 w-fit rounded-[20px]`}
+                    "border-lightgreen border-[2px] bg-[rgba(186,138,207,0.05)]"
+                } ${
+                    selected &&
+                    songs.length + artists.length + genres.length > 5 &&
+                    "border-lightred"
+                } hover flex flex-col md:flex-row justify-between gap-2 items-center border-[1px] border-dark2 p-3 w-fit rounded-[20px]`}
             >
                 <div className="flex flex-col gap-1 text-center items-center">
                     <div className="flex flex-wrap gap-1">
@@ -147,7 +154,7 @@ const ArtistDisplay = ({
                 </div>
 
                 {type === "search" && (
-                    <div className="flex flex-col w-[90vw] sm:w-[40vw] lg:w-[25vw] xl:w-[20vw] md:w-[35vw] gap-1">
+                    <div className="flex flex-col w-[90vw] sm:w-[40vw] lg:w-[25vw] xl:w-[20vw] md:w-[35vw]">
                         {allSongs}
                     </div>
                 )}

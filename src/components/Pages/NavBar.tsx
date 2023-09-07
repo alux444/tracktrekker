@@ -5,7 +5,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import SongCart from "./SongCart";
 import { DevContext } from "../../App";
-import { FavoriteBorderOutlined } from "@mui/icons-material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 type NavBarProps = {
     currentPage: page;
@@ -65,7 +65,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                     onClick={() => setOpenCart(true)}
                 >
                     <p>{songCart.length} Saved</p>
-                    <FavoriteBorderOutlined />
+                    <FavoriteIcon />
                 </button>
             </div>
             {openCart && <SongCart onClose={() => setOpenCart(false)} />}

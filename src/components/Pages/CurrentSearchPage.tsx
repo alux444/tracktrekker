@@ -64,10 +64,10 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
     ));
 
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div
                 ref={modalRef}
-                className={`flex flex-col w-[95vw] lg:w-[40vw] max-h-[90vh] overflow-auto gap-2 p-2 rounded-[10px] z-10 items-center bg-dark3 relative ${
+                className={`flex flex-col w-[95vw] lg:w-[40vw] max-h-[90vh] overflow-auto gap-2 p-3 border-[1px] border-dark2 rounded-[10px] z-10 items-center bg-dark3 relative ${
                     songs.length + artists.length + genres.length > 5 &&
                     "border-lightred border-2"
                 }`}
@@ -103,7 +103,7 @@ const CurrentSearchPage = ({ onClose }: { onClose: () => void }) => {
                     </p>
                 )}
                 {songs.length > 0 && (
-                    <div className="flex flex-wrap w-full items-center justify-center gap-2 flex-col">
+                    <div className="flex flex-wrap w-full items-center justify-center flex-col">
                         {allSongs}
                     </div>
                 )}
