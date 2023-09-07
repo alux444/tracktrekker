@@ -11,7 +11,12 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
-import { DevContext, SongsInfoContext } from "../../App";
+import {
+    ArtistSeedContext,
+    DevContext,
+    GenreContext,
+    SongsInfoContext,
+} from "../../App";
 import { FavoriteBorderOutlined } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
@@ -32,6 +37,8 @@ const SongDisplay = ({
     } = useContext(AudioContext);
     const { songs } = useContext(SongsInfoContext);
     const { songCart } = useContext(DevContext);
+    const { artistSeeds } = useContext(ArtistSeedContext);
+    const { genres } = useContext(GenreContext);
 
     const [thisShowStats, setThisShowStats] = useState<boolean>(false);
     const [selected, setSelected] = useState(false);
@@ -172,7 +179,11 @@ const SongDisplay = ({
                  rounded-[10px] border-dark2 backdrop-blur-3xl ${
                      selected &&
                      "border-lightgreen border-[2px] bg-[rgba(248,191,255,0.1)]"
-                 }`}
+                 } ${
+                        selected &&
+                        songs.length + artistSeeds.length + genres.length > 5 &&
+                        "border-lightred"
+                    }`}
                 >
                     <div className="namesAndImage flex gap-1 w-full h-full items-center">
                         <a

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
-import { SongsInfoContext } from "../../App";
+import { ArtistSeedContext, GenreContext, SongsInfoContext } from "../../App";
 import { AudioContext } from "../Pages/Views";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
@@ -12,6 +12,9 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
     const [selected, setSelected] = useState(false);
 
     const { songs } = useContext(SongsInfoContext);
+    const { artistSeeds } = useContext(ArtistSeedContext);
+    const { genres } = useContext(GenreContext);
+
     const { addSong, removeSong } = useManageQuery();
     const {
         audio,
@@ -89,9 +92,13 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                 className={`w-full flex gap-1 border-dark2 border-[1px] p-2 rounded-[10px] justify-between items-center hover bg-dark3 ${
                     selected &&
                     "border-lightgreen border-[2px] bg-[rgba(248,191,255,0.1)]"
+                } ${
+                    selected &&
+                    songs.length + artistSeeds.length + genres.length > 5 &&
+                    "border-lightred"
                 }`}
             >
-                <div className="flex gap-1 w-[80%]">
+                <div className="flex gap-1 w-full">
                     <a
                         href={song.external_urls.spotify}
                         target="_blank"
@@ -102,7 +109,10 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                             className="w-[2.2rem] h-[2.2rem] lg:w-[3rem] lg:h-[3rem]"
                         />
                     </a>
-                    <div className="flex flex-col w-[80%] align-center">
+                    <div
+                        className="flex flex-col align-center "
+                        style={{ width: `calc(100% - 4.5rem)` }}
+                    >
                         <div className="flex gap-2 w-full overflow-hidden">
                             <span className="truncate max-w-full">
                                 {song.name}
@@ -116,33 +126,36 @@ const SmallSongDisplay = ({ song }: { song: SongInfo }) => {
                                 : song.artists[0].name}
                         </small>
                     </div>
-                </div>
-
-                <div className="w-[20%] buttons flex gap-1 flex-col justify-end items-end">
-                    {song.preview_url ? (
-                        <button onClick={playPreview}>
-                            <span>
-                                {audioIsPlaying &&
-                                currentPlayingId === song.id ? (
-                                    <PauseIcon style={{ fontSize: "1.5rem" }} />
-                                ) : (
+                    <div className="flex items-center">
+                        {song.preview_url ? (
+                            <button onClick={playPreview}>
+                                <span>
+                                    {audioIsPlaying &&
+                                    currentPlayingId === song.id ? (
+                                        <PauseIcon
+                                            style={{ fontSize: "1.5rem" }}
+                                        />
+                                    ) : (
+                                        <PlayArrowIcon
+                                            style={{ fontSize: "1.5rem" }}
+                                        />
+                                    )}
+                                </span>
+                            </button>
+                        ) : (
+                            <button
+                                className="invisible"
+                                disabled={true}
+                                onClick={playPreview}
+                            >
+                                <span>
                                     <PlayArrowIcon
-                                        style={{ fontSize: "1.5rem" }}
+                                        style={{ fontSize: "1rem" }}
                                     />
-                                )}
-                            </span>
-                        </button>
-                    ) : (
-                        <button
-                            className="invisible"
-                            disabled={true}
-                            onClick={playPreview}
-                        >
-                            <span>
-                                <PlayArrowIcon style={{ fontSize: "1rem" }} />
-                            </span>
-                        </button>
-                    )}
+                                </span>
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
