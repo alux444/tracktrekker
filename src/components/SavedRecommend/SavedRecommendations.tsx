@@ -4,8 +4,7 @@ import { SongInfo } from "../../interfaces/songInfo";
 import SongDisplay from "../Displays/SongDisplay";
 import { DevContext } from "../../App";
 
-const SavedRecommendations = () => {
-    const { songCart } = useContext(DevContext);
+const SavedRecommendations = ({ query }: { query: string }) => {
     const { getSavedRecommendations } = useSpotify();
     const [results, setResults] = useState<SongInfo[]>([]);
 
@@ -18,7 +17,7 @@ const SavedRecommendations = () => {
             setResults(res.tracks);
         };
         getResults();
-    }, [songCart]);
+    }, [query]);
 
     const recommendedTracks = results.map((song) => (
         <SongDisplay songInfo={song} statsButton={true} key={song.id} />
