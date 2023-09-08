@@ -247,6 +247,10 @@ const useSpotify = () => {
                     uniqueNumbers.push(randomNumber);
                 }
             }
+
+            for (let i = 0; i < 5; i++) {
+                search.push(songCart[uniqueNumbers[i]].id);
+            }
         } else {
             songCart.map((song) => search.push(song.id));
         }
