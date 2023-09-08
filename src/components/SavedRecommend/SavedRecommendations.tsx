@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useSpotify from "../../utils/useSpotify";
 import { SongInfo } from "../../interfaces/songInfo";
 import SongDisplay from "../Displays/SongDisplay";
-import { DevContext } from "../../App";
 
 const SavedRecommendations = ({ query }: { query: string }) => {
     const { getSavedRecommendations } = useSpotify();
