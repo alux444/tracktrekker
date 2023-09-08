@@ -845,6 +845,10 @@ video {
   width: 90vw;
 }
 
+.w-\[95\%\] {
+  width: 95%;
+}
+
 .w-\[95vw\] {
   width: 95vw;
 }
@@ -1053,11 +1057,6 @@ video {
 .border-slate-400 {
   --tw-border-opacity: 1;
   border-color: rgb(148 163 184 / var(--tw-border-opacity));
-}
-
-.border-dark3 {
-  --tw-border-opacity: 1;
-  border-color: rgb(42 41 56 / var(--tw-border-opacity));
 }
 
 .bg-\[rgba\(186\2c 138\2c 207\2c 0\.05\)\] {

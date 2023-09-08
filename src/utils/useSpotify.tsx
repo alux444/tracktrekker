@@ -1,12 +1,14 @@
 import axios from "axios";
 import { RecommendForm } from "../interfaces/recommendForm";
 import { useContext } from "react";
-import { TokenContext } from "../App";
+import { DevContext, TokenContext } from "../App";
 import { ExtraInfo } from "../interfaces/extrasInfo";
 import { SongInfo } from "../interfaces/songInfo";
 import { ArtistInfo } from "../interfaces/artistInfo";
+
 const useSpotify = () => {
     const { token } = useContext(TokenContext);
+    const { songCart } = useContext(DevContext);
 
     const getGenres = async () => {
         const url =
@@ -227,6 +229,14 @@ const useSpotify = () => {
         }
     };
 
+    const getSavedRecommendations = async () => {
+        if (songCart.length == 0) {
+            console.log("No saved songs");
+            return;
+        }
+        console.log(songCart);
+    };
+
     return {
         getGenres,
         getRecommended,
@@ -236,6 +246,7 @@ const useSpotify = () => {
         getFeatures,
         getTopItems,
         getArtistTracks,
+        getSavedRecommendations,
     };
 };
 

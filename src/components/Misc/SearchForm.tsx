@@ -6,6 +6,8 @@ import ArtistDisplay from "../Displays/ArtistDisplay";
 import SongDisplay from "../Displays/SongDisplay";
 import { AudioContext } from "../Pages/Views";
 import Pagination from "./Pagination";
+import SavedRecommendations from "../SavedRecommend/SavedRecommendations";
+import { DevContext } from "../../App";
 
 const SearchForm = ({
     type,
@@ -15,6 +17,7 @@ const SearchForm = ({
     scrollToTop: () => void;
 }) => {
     const { audio, setAudio, setAudioIsPlaying } = useContext(AudioContext);
+    const { songCart } = useContext(DevContext);
 
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
@@ -180,9 +183,12 @@ const SearchForm = ({
                     </button>
                 </div>
             </form>
+            {type === "track" && songCart.length > 0 && (
+                <SavedRecommendations />
+            )}
             {error && <p className="grad">Your search had no results :(</p>}
             {type === "track" && uniqueTracks.length > 0 && (
-                <div className="p-3 flex flex-col w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
+                <div className="p-3 flex flex-col w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
                     {tracks}
                 </div>
             )}
