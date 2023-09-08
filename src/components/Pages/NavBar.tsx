@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../imgs/logoGreen.png";
 import { PromptPageContext, page } from "./Views";
 import HomeIcon from "@mui/icons-material/Home";
@@ -6,6 +6,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import SongCart from "./SongCart";
 import { DevContext } from "../../App";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import useLocalStorage from "../../utils/useLocalStorage";
 
 type NavBarProps = {
     currentPage: page;
@@ -18,6 +19,14 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
     const { songCart } = useContext(DevContext);
 
     const [openCart, setOpenCart] = useState<boolean>(false);
+
+    const { updateSaved } = useLocalStorage();
+
+    useEffect(() => {
+        if (songCart.length > 0) {
+            updateSaved();
+        }
+    }, [songCart]);
 
     return (
         <div className="flex gap-8 flex-wrap justify-center p-3 items-center">

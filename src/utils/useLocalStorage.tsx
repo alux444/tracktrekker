@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { DevContext } from "../App";
 
 const useLocalStorage = () => {
-    const { songCart } = useContext(DevContext);
+    const { songCart, setSongCart } = useContext(DevContext);
 
     const updateSaved = () => {
+        console.log("updating saved");
         localStorage.setItem("saved", JSON.stringify(songCart));
     };
 
@@ -15,6 +16,7 @@ const useLocalStorage = () => {
             return;
         }
         const res = JSON.parse(storedObject);
+        setSongCart(res);
         console.log(res);
     };
 

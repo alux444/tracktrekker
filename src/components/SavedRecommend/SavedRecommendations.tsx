@@ -21,7 +21,7 @@ const SavedRecommendations = () => {
     }, [songCart]);
 
     const recommendedTracks = results.map((song) => (
-        <SongDisplay songInfo={song} statsButton={true} />
+        <SongDisplay songInfo={song} statsButton={true} key={song.id} />
     ));
 
     return (
