@@ -1360,7 +1360,6 @@ body {
   border: 1px solid rgb(255, 142, 142);
   border-radius: 30px;
   outline: none;
-  overflow: hidden;
   color: rgb(255, 140, 140);
   transition: color 0.3s 0.1s ease-out;
   text-align: center;
