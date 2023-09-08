@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     ArtistSeedContext,
     ExtrasContext,
@@ -15,6 +15,7 @@ import LandingPage from "./LandingPage";
 import PromptScreen from "./PromptScreen";
 import { PromptPageContext } from "./Views";
 import UserTopItemsPage from "./UserTopItemsPage";
+import useLocalStorage from "../../utils/useLocalStorage";
 
 const HomePage = () => {
     const { token } = useContext(TokenContext);
@@ -26,6 +27,12 @@ const HomePage = () => {
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
     const { extras } = useContext(ExtrasContext);
+
+    const { getSaved } = useLocalStorage();
+
+    useEffect(() => {
+        getSaved();
+    }, []);
 
     const generateForm = () => {
         const genreValues: string[] = [];
