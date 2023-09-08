@@ -38,7 +38,7 @@ const ResultsPage = ({
     }
 
     const getSongs = async () => {
-        const res = await getRecommended(query);
+        const res = await getRecommended(query, 80);
 
         if (res === 2) {
             setMessage(
@@ -158,7 +158,7 @@ const ResultsPage = ({
                     className="flex flex-col justify-center w-[100vw] items-center"
                     id="recommendResults"
                 >
-                    <div className="p-5 flex w-full flex-col w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
+                    <div className="p-5 flex w-[95%] flex-col w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
                         {results}
                     </div>
                     <button

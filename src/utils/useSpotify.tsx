@@ -1,12 +1,14 @@
 import axios from "axios";
 import { RecommendForm } from "../interfaces/recommendForm";
 import { useContext } from "react";
-import { TokenContext } from "../App";
+import { DevContext, TokenContext } from "../App";
 import { ExtraInfo } from "../interfaces/extrasInfo";
 import { SongInfo } from "../interfaces/songInfo";
 import { ArtistInfo } from "../interfaces/artistInfo";
+
 const useSpotify = () => {
     const { token } = useContext(TokenContext);
+    const { songCart } = useContext(DevContext);
 
     const getGenres = async () => {
         const url =
@@ -42,7 +44,7 @@ const useSpotify = () => {
         }
     };
 
-    const getRecommended = async (songForm: RecommendForm) => {
+    const getRecommended = async (songForm: RecommendForm, limit: number) => {
         const extraParams: { [key: string]: number } = {};
 
         for (const key in songForm.extras) {
@@ -74,7 +76,7 @@ const useSpotify = () => {
                     seed_tracks: arrayToString(songForm.seed_tracks),
                     seed_artists: arrayToString(songForm.seed_artists),
                     seed_genres: arrayToString(songForm.seed_genres),
-                    limit: 80,
+                    limit: limit,
                 },
                 extraParams
             );
@@ -227,6 +229,40 @@ const useSpotify = () => {
         }
     };
 
+    const getSavedRecommendations = async () => {
+        if (songCart.length == 0) {
+            console.log("No saved songs");
+            return;
+        }
+
+        const search: string[] = [];
+
+        if (songCart.length > 5) {
+            const uniqueNumbers: number[] = [];
+
+            while (uniqueNumbers.length < 5) {
+                const randomNumber = Math.floor(Math.random() * 6);
+
+                if (!uniqueNumbers.includes(randomNumber)) {
+                    uniqueNumbers.push(randomNumber);
+                }
+            }
+        } else {
+            songCart.map((song) => search.push(song.id));
+        }
+
+        const query: RecommendForm = {
+            seed_artists: [],
+            seed_genres: [],
+            seed_tracks: search,
+            extras: {},
+        };
+
+        const res = await getRecommended(query, 10);
+        console.log(res);
+        return res;
+    };
+
     return {
         getGenres,
         getRecommended,
@@ -236,6 +272,7 @@ const useSpotify = () => {
         getFeatures,
         getTopItems,
         getArtistTracks,
+        getSavedRecommendations,
     };
 };
 
