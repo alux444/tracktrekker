@@ -183,10 +183,20 @@ const SearchForm = ({
                     </button>
                 </div>
             </form>
-            {type === "track" && songCart.length > 0 && (
-                <SavedRecommendations />
-            )}
             {error && <p className="grad">Your search had no results :(</p>}
+
+            {type === "track" &&
+                songCart.length > 0 &&
+                uniqueTracks.length == 0 &&
+                (error ? (
+                    <div className="flex flex-col items-center text-center">
+                        <p>But based off your saved songs, you might like:</p>
+                        <SavedRecommendations />
+                    </div>
+                ) : (
+                    <SavedRecommendations />
+                ))}
+
             {type === "track" && uniqueTracks.length > 0 && (
                 <div className="p-3 flex flex-col w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
                     {tracks}
