@@ -3,7 +3,6 @@ import { DevContext, TokenContext } from "../../App";
 import hero from "../../imgs/hero.jpg";
 import useUser from "../../utils/useUser";
 import getAccessToken from "../../utils/noAuthAccessToken";
-import useLocalStorage from "../../utils/useLocalStorage";
 
 const LandingPage = () => {
     const { setToken } = useContext(TokenContext);
@@ -11,7 +10,6 @@ const LandingPage = () => {
     const { devMode, setDevMode } = useContext(DevContext);
 
     const { promptUserLogin, getUserId } = useUser();
-    const { getSaved } = useLocalStorage();
 
     const setAccessToken = async () => {
         setLoading(true);
@@ -31,8 +29,6 @@ const LandingPage = () => {
         } else {
             console.log("error getting token");
         }
-
-        getSaved();
     };
 
     return (
