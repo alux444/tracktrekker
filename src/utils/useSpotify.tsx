@@ -44,7 +44,7 @@ const useSpotify = () => {
         }
     };
 
-    const getRecommended = async (songForm: RecommendForm) => {
+    const getRecommended = async (songForm: RecommendForm, limit: number) => {
         const extraParams: { [key: string]: number } = {};
 
         for (const key in songForm.extras) {
@@ -76,7 +76,7 @@ const useSpotify = () => {
                     seed_tracks: arrayToString(songForm.seed_tracks),
                     seed_artists: arrayToString(songForm.seed_artists),
                     seed_genres: arrayToString(songForm.seed_genres),
-                    limit: 80,
+                    limit: limit,
                 },
                 extraParams
             );
@@ -234,7 +234,33 @@ const useSpotify = () => {
             console.log("No saved songs");
             return;
         }
-        console.log(songCart);
+
+        const search: string[] = [];
+
+        if (songCart.length > 5) {
+            const uniqueNumbers: number[] = [];
+
+            while (uniqueNumbers.length < 5) {
+                const randomNumber = Math.floor(Math.random() * 6);
+
+                if (!uniqueNumbers.includes(randomNumber)) {
+                    uniqueNumbers.push(randomNumber);
+                }
+            }
+        } else {
+            songCart.map((song) => search.push(song.id));
+        }
+
+        const query: RecommendForm = {
+            seed_artists: [],
+            seed_genres: [],
+            seed_tracks: search,
+            extras: {},
+        };
+
+        const res = await getRecommended(query, 10);
+        console.log(res);
+        return res;
     };
 
     return {

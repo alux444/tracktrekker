@@ -38,7 +38,7 @@ const ResultsPage = ({
     }
 
     const getSongs = async () => {
-        const res = await getRecommended(query);
+        const res = await getRecommended(query, 80);
 
         if (res === 2) {
             setMessage(
