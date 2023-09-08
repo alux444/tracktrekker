@@ -113,6 +113,7 @@ const SearchForm = ({
 
     const resetSearch = () => {
         setQuery("");
+        setError(false);
         setTrackResults([]);
         setArtistResults([]);
     };
@@ -193,7 +194,7 @@ const SearchForm = ({
                             {error ? "But b" : "B"}ased off your saved songs,
                             you might like:
                         </p>
-                        <SavedRecommendations />
+                        <SavedRecommendations query={query} />
                     </div>
                 )}
 
