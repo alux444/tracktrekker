@@ -3,16 +3,28 @@ import useSpotify from "../../utils/useSpotify";
 import { SongInfo } from "../../interfaces/songInfo";
 import SongDisplay from "../Displays/SongDisplay";
 
-const SavedRecommendations = () => {
+type NameAndArtist = {
+    name: string;
+    artist: string;
+};
+
+const SavedRecommendations = ({ error }: { error: boolean }) => {
     const { getSavedRecommendations } = useSpotify();
     const [results, setResults] = useState<SongInfo[]>([]);
+    const [songSearched, setSongSearched] = useState<NameAndArtist>();
+    const [message, setMessage] = useState<boolean>(false);
 
     const getResults = async () => {
         const res = await getSavedRecommendations();
-        if (res == 2) {
+        setMessage(false);
+        if (res == -1 || res == null) {
             setResults([]);
+            setMessage(true);
+            return;
         }
-        setResults(res.tracks);
+        console.log(res);
+        setResults(res.res);
+        setSongSearched({ name: res.songName, artist: res.artist });
     };
 
     useEffect(() => {
@@ -28,10 +40,21 @@ const SavedRecommendations = () => {
     ));
 
     return (
-        <div className="px-5 mt-1 flex w-[95%] flex-col items-center w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
+        <div className="px-5 mt-1 flex w-[95%] flex-col flex-wrap text-center gap-1 items-center w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
             <button className="button2 w-fit" onClick={rerollSearch}>
                 <span className="grad">Reroll</span>
             </button>
+            {songSearched && (
+                <>
+                    <p>
+                        {error ? "But b" : "B"}ecause you saved{" "}
+                        <span className="grad">{songSearched.name}</span> by{" "}
+                        <span className="grad">{songSearched.artist}</span>
+                    </p>
+                    <p>You might like:</p>
+                </>
+            )}
+            {error && <p>Click reroll!</p>}
             {recommendedTracks}
         </div>
     );
