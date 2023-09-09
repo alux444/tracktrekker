@@ -54,7 +54,7 @@ const SavedRecommendations = ({ error }: { error: boolean }) => {
                     <p>You might like:</p>
                 </>
             )}
-            {error && <p>Click reroll!</p>}
+            {message && <p>Click reroll!</p>}
             {recommendedTracks}
         </div>
     );
