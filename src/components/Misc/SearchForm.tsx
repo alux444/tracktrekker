@@ -190,11 +190,7 @@ const SearchForm = ({
                 songCart.length > 0 &&
                 uniqueTracks.length == 0 && (
                     <div className="flex flex-col items-center text-center">
-                        <p>
-                            {error ? "But b" : "B"}ased off your saved songs,
-                            you might like:
-                        </p>
-                        <SavedRecommendations />
+                        <SavedRecommendations error={error} />
                     </div>
                 )}
 

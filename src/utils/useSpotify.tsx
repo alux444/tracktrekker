@@ -237,23 +237,8 @@ const useSpotify = () => {
 
         const search: string[] = [];
 
-        if (songCart.length > 5) {
-            const uniqueNumbers: number[] = [];
-
-            while (uniqueNumbers.length < 5) {
-                const randomNumber = Math.floor(Math.random() * 6);
-
-                if (!uniqueNumbers.includes(randomNumber)) {
-                    uniqueNumbers.push(randomNumber);
-                }
-            }
-
-            for (let i = 0; i < 5; i++) {
-                search.push(songCart[uniqueNumbers[i]].id);
-            }
-        } else {
-            songCart.map((song) => search.push(song.id));
-        }
+        const randomIndex = Math.floor(Math.random() * songCart.length);
+        search.push(songCart[randomIndex].id);
 
         const query: RecommendForm = {
             seed_artists: [],
@@ -264,7 +249,16 @@ const useSpotify = () => {
 
         const res = await getRecommended(query, 10);
         console.log(res);
-        return res;
+
+        if (res !== 2) {
+            return {
+                res: res.tracks,
+                songName: songCart[randomIndex].name,
+                artist: songCart[randomIndex].artists[0].name,
+            };
+        } else {
+            return -1;
+        }
     };
 
     return {
