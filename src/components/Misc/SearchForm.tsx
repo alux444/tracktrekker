@@ -194,7 +194,7 @@ const SearchForm = ({
                             {error ? "But b" : "B"}ased off your saved songs,
                             you might like:
                         </p>
-                        <SavedRecommendations query={query} />
+                        <SavedRecommendations />
                     </div>
                 )}
 
