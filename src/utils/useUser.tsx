@@ -69,8 +69,7 @@ const useUser = () => {
             setUserId(response.data.id);
             return response.data;
         } catch (error) {
-            console.log(error);
-            return null;
+            return -1;
         }
     };
 

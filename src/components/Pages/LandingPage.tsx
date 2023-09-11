@@ -17,7 +17,11 @@ const LandingPage = () => {
         if (devMode) {
             token = await promptUserLogin();
             if (token != null) {
-                getUserId(token);
+                const res = await getUserId(token);
+                if (res == -1) {
+                    token = await getAccessToken();
+                    setDevMode(false);
+                }
             }
         } else {
             token = await getAccessToken();
@@ -32,7 +36,10 @@ const LandingPage = () => {
     };
 
     return (
-        <div className="p-3 w-[80vw] gap-5 items-center flex flex-col md:flex-row justify-center">
+        <div
+            id="landing"
+            className="p-3 w-[80vw] gap-5 items-center flex flex-col md:flex-row justify-center"
+        >
             <div className="flex flex-col gap-3 items-center md:items-center">
                 <div className="flex flex-col">
                     <h2 className="grad text-4xl ">Find</h2>

@@ -2,9 +2,14 @@ describe("E2E - Searching for song, getting results", () => {
     it("should visit", () => {
         cy.visit("http://localhost:5173/tracktrekker/");
 
+        cy.get("#navbar").should("exist");
+        cy.get("#footer").should("exist");
+        cy.get("#landing").should("exist");
         cy.contains("Get Started").click();
 
+        cy.get("#landing").should("not.exist");
         //select a song
+
         cy.get("#getResultsButton").should("not.exist");
         cy.contains("Songs").click();
         cy.get("#askForSongs").should("be.visible");
