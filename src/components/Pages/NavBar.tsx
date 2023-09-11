@@ -36,7 +36,10 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
     }, []);
 
     return (
-        <div className="flex gap-4 flex-wrap justify-center p-3 items-center">
+        <div
+            id="navbar"
+            className="flex gap-4 flex-wrap justify-center p-3 items-center"
+        >
             <button
                 onClick={() => {
                     toHome();
