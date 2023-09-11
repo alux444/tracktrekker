@@ -17,7 +17,11 @@ const LandingPage = () => {
         if (devMode) {
             token = await promptUserLogin();
             if (token != null) {
-                getUserId(token);
+                const res = await getUserId(token);
+                if (res == -1) {
+                    token = await getAccessToken();
+                    setDevMode(false);
+                }
             }
         } else {
             token = await getAccessToken();
