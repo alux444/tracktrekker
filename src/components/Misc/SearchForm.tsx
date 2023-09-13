@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import useSpotify from "../../utils/useSpotify";
 import { ArtistInfo } from "../../interfaces/artistInfo";
 import { SongInfo } from "../../interfaces/songInfo";
@@ -8,6 +8,7 @@ import { AudioContext } from "../Pages/Views";
 import Pagination from "./Pagination";
 import SavedRecommendations from "../SavedRecommend/SavedRecommendations";
 import { DevContext } from "../../App";
+import useDebounce from "../../utils/useDebounce";
 
 const SearchForm = ({
     type,
@@ -24,6 +25,8 @@ const SearchForm = ({
     const [artistReults, setArtistResults] = useState<ArtistInfo[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [error, setError] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const debouncedSearch = useDebounce(query, 500);
 
     const { getSearch } = useSpotify();
     // const { getTracks, getArtists } = useSpotify();
@@ -45,16 +48,20 @@ const SearchForm = ({
             audio.pause();
             setAudioIsPlaying(false);
         }
-    }, [currentPage, query]);
+    }, [currentPage, debouncedSearch]);
 
     const changePage = (page: number) => {
         setCurrentPage(page);
     };
 
     // first version - temp bug?
-    const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const searchQuery = async () => {
         setError(false);
+
+        if (query == "") {
+            resetSearch();
+        }
+
         const res = await getSearch(query);
         if (res === null) {
             setError(true);
@@ -71,6 +78,10 @@ const SearchForm = ({
         setTrackResults(res.tracks.items);
         setArtistResults(res.artists.items.slice(0, 30));
     };
+
+    useEffect(() => {
+        searchQuery();
+    }, [debouncedSearch]);
 
     //temporary bugfix
     // const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
@@ -151,11 +162,7 @@ const SearchForm = ({
 
     return (
         <div className="flex flex-col p-2 w-screen items-center gap-1">
-            <form
-                id="searchForm"
-                className="flex flex-col gap-2 items-center"
-                onSubmit={searchQuery}
-            >
+            <form id="searchForm" className="flex flex-col gap-2 items-center">
                 <input
                     id={type === "track" ? "songSearchBar" : "artistSearchBar"}
                     placeholder={
@@ -169,12 +176,6 @@ const SearchForm = ({
                     onChange={handleQueryChange}
                 ></input>
                 <div className="flex gap-2 justify-center mb-2">
-                    <button
-                        className="button2 border-purple-500 border-[1px]"
-                        type="submit"
-                    >
-                        <span className="grad">Search</span>
-                    </button>
                     <button
                         className="button3 border-purple-500 border-[1px]"
                         type="button"
