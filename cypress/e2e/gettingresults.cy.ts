@@ -14,7 +14,6 @@ describe("E2E - Searching for song, getting results", () => {
         cy.contains("Songs").click();
         cy.get("#askForSongs").should("be.visible");
         cy.get("#songSearchBar").type("Miracle");
-        cy.get("#searchForm").submit();
         cy.get("#searchResults").should("be.visible");
         cy.get(".songDisplay").eq(0).find("#songAddButton").click();
         cy.get(".songDisplay").eq(1).find("#songAddButton").click();
@@ -29,7 +28,6 @@ describe("E2E - Searching for song, getting results", () => {
         cy.get("#askForSongs").should("not.exist");
         cy.get("#askForArtists").should("be.visible");
         cy.get("#artistSearchBar").type("keshi");
-        cy.get("#searchForm").submit();
         cy.get("#searchResults").should("be.visible");
         cy.get(".artistDisplay").eq(0).find("#artistAddButton").click();
         cy.get(".artistDisplay").eq(1).find("#artistAddButton").click();
