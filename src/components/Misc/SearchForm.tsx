@@ -52,60 +52,60 @@ const SearchForm = ({
     };
 
     // first version - temp bug?
-    // const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     setError(false);
-    //     const res = await getSearch(query);
-    //     if (res === null) {
-    //         setError(true);
-    //         return;
-    //     }
-
-    //     if (
-    //         (type === "track" && res.tracks.items.length === 0) ||
-    //         (type === "artist" && res.artists.items.length === 0)
-    //     ) {
-    //         setError(true);
-    //     }
-
-    //     setTrackResults(res.tracks.items);
-    //     setArtistResults(res.artists.items.slice(0, 30));
-    // };
-
-    //temporary bugfix
     const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(false);
-
-        const test = await getSearch(query);
-        console.log(test);
-
-        let res: (SongInfo | ArtistInfo)[] | null = null;
-        if (type === "artist") {
-            res = await getArtists(query);
-        } else {
-            res = await getTracks(query);
-        }
-
+        const res = await getSearch(query);
         if (res === null) {
             setError(true);
             return;
         }
 
-        if (res.length === 0) {
+        if (
+            (type === "track" && res.tracks.items.length === 0) ||
+            (type === "artist" && res.artists.items.length === 0)
+        ) {
             setError(true);
         }
 
-        console.log(res);
-
-        if (type === "artist") {
-            setArtistResults(res as ArtistInfo[]);
-            setTrackResults([]);
-        } else {
-            setTrackResults(res as SongInfo[]);
-            setArtistResults([]);
-        }
+        setTrackResults(res.tracks.items);
+        setArtistResults(res.artists.items.slice(0, 30));
     };
+
+    //temporary bugfix
+    // const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     setError(false);
+
+    //     const test = await getSearch(query);
+    //     console.log(test);
+
+    //     let res: (SongInfo | ArtistInfo)[] | null = null;
+    //     if (type === "artist") {
+    //         res = await getArtists(query);
+    //     } else {
+    //         res = await getTracks(query);
+    //     }
+
+    //     if (res === null) {
+    //         setError(true);
+    //         return;
+    //     }
+
+    //     if (res.length === 0) {
+    //         setError(true);
+    //     }
+
+    //     console.log(res);
+
+    //     if (type === "artist") {
+    //         setArtistResults(res as ArtistInfo[]);
+    //         setTrackResults([]);
+    //     } else {
+    //         setTrackResults(res as SongInfo[]);
+    //         setArtistResults([]);
+    //     }
+    // };
 
     const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
