@@ -60,7 +60,7 @@ const SavedRecommendations = ({ error }: { error: boolean }) => {
                         <span className="grad">{songSearched.name}</span> by{" "}
                         <span className="grad">{songSearched.artist}</span>
                     </p>
-                    <p>You might like:</p>
+                    <p>You may like:</p>
                 </>
             )}
             {message && <p>Click reroll!</p>}

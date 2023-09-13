@@ -57,9 +57,12 @@ const SearchForm = ({
     // first version - temp bug?
     const searchQuery = async () => {
         setError(false);
+        setLoading(true);
 
         if (query == "") {
+            setLoading(false);
             resetSearch();
+            return;
         }
 
         const res = await getSearch(query);
@@ -77,9 +80,12 @@ const SearchForm = ({
 
         setTrackResults(res.tracks.items);
         setArtistResults(res.artists.items.slice(0, 30));
+        setLoading(false);
     };
 
     useEffect(() => {
+        setError(false);
+        setLoading(false);
         searchQuery();
     }, [debouncedSearch]);
 
@@ -186,6 +192,7 @@ const SearchForm = ({
                 </div>
             </form>
             {error && <p className="grad">Your search had no results :(</p>}
+            {loading && <p className="grad">Loading...</p>}
 
             {type === "track" &&
                 songCart.length > 0 &&
