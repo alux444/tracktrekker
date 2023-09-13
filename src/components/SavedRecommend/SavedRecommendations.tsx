@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useSpotify from "../../utils/useSpotify";
 import { SongInfo } from "../../interfaces/songInfo";
 import SongDisplay from "../Displays/SongDisplay";
+import { AudioContext } from "../Pages/Views";
 
 type NameAndArtist = {
     name: string;
@@ -9,10 +10,18 @@ type NameAndArtist = {
 };
 
 const SavedRecommendations = ({ error }: { error: boolean }) => {
+    const { audio, setAudioIsPlaying } = useContext(AudioContext);
     const { getSavedRecommendations } = useSpotify();
     const [results, setResults] = useState<SongInfo[]>([]);
     const [songSearched, setSongSearched] = useState<NameAndArtist>();
     const [message, setMessage] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (audio !== null) {
+            audio.pause();
+            setAudioIsPlaying(false);
+        }
+    }, [results]);
 
     const getResults = async () => {
         const res = await getSavedRecommendations();
@@ -51,7 +60,7 @@ const SavedRecommendations = ({ error }: { error: boolean }) => {
                         <span className="grad">{songSearched.name}</span> by{" "}
                         <span className="grad">{songSearched.artist}</span>
                     </p>
-                    <p>You might like:</p>
+                    <p>You may like:</p>
                 </>
             )}
             {message && <p>Click reroll!</p>}

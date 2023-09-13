@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import useSpotify from "../../utils/useSpotify";
 import { ArtistInfo } from "../../interfaces/artistInfo";
 import { SongInfo } from "../../interfaces/songInfo";
@@ -8,6 +8,7 @@ import { AudioContext } from "../Pages/Views";
 import Pagination from "./Pagination";
 import SavedRecommendations from "../SavedRecommend/SavedRecommendations";
 import { DevContext } from "../../App";
+import useDebounce from "../../utils/useDebounce";
 
 const SearchForm = ({
     type,
@@ -24,9 +25,11 @@ const SearchForm = ({
     const [artistReults, setArtistResults] = useState<ArtistInfo[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [error, setError] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const debouncedSearch = useDebounce(query, 500);
 
     const { getSearch } = useSpotify();
-    const { getTracks, getArtists } = useSpotify();
+    // const { getTracks, getArtists } = useSpotify();
 
     useEffect(() => {
         if (audio !== null) {
@@ -45,67 +48,81 @@ const SearchForm = ({
             audio.pause();
             setAudioIsPlaying(false);
         }
-    }, [currentPage, query]);
+    }, [currentPage, debouncedSearch]);
 
     const changePage = (page: number) => {
         setCurrentPage(page);
     };
 
     // first version - temp bug?
-    // const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     setError(false);
-    //     const res = await getSearch(query);
-    //     if (res === null) {
-    //         setError(true);
-    //         return;
-    //     }
-
-    //     if (
-    //         (type === "track" && res.tracks.items.length === 0) ||
-    //         (type === "artist" && res.artists.items.length === 0)
-    //     ) {
-    //         setError(true);
-    //     }
-
-    //     setTrackResults(res.tracks.items);
-    //     setArtistResults(res.artists.items.slice(0, 30));
-    // };
-
-    //temporary bugfix
-    const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const searchQuery = async () => {
         setError(false);
+        setLoading(true);
 
-        const test = await getSearch(query);
-        console.log(test);
-
-        let res: (SongInfo | ArtistInfo)[] | null = null;
-        if (type === "artist") {
-            res = await getArtists(query);
-        } else {
-            res = await getTracks(query);
+        if (query == "") {
+            setLoading(false);
+            resetSearch();
+            return;
         }
 
+        const res = await getSearch(query);
         if (res === null) {
             setError(true);
             return;
         }
 
-        if (res.length === 0) {
+        if (
+            (type === "track" && res.tracks.items.length === 0) ||
+            (type === "artist" && res.artists.items.length === 0)
+        ) {
             setError(true);
         }
 
-        console.log(res);
-
-        if (type === "artist") {
-            setArtistResults(res as ArtistInfo[]);
-            setTrackResults([]);
-        } else {
-            setTrackResults(res as SongInfo[]);
-            setArtistResults([]);
-        }
+        setTrackResults(res.tracks.items);
+        setArtistResults(res.artists.items.slice(0, 30));
+        setLoading(false);
     };
+
+    useEffect(() => {
+        setError(false);
+        setLoading(false);
+        searchQuery();
+    }, [debouncedSearch]);
+
+    //temporary bugfix
+    // const searchQuery = async (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     setError(false);
+
+    //     const test = await getSearch(query);
+    //     console.log(test);
+
+    //     let res: (SongInfo | ArtistInfo)[] | null = null;
+    //     if (type === "artist") {
+    //         res = await getArtists(query);
+    //     } else {
+    //         res = await getTracks(query);
+    //     }
+
+    //     if (res === null) {
+    //         setError(true);
+    //         return;
+    //     }
+
+    //     if (res.length === 0) {
+    //         setError(true);
+    //     }
+
+    //     console.log(res);
+
+    //     if (type === "artist") {
+    //         setArtistResults(res as ArtistInfo[]);
+    //         setTrackResults([]);
+    //     } else {
+    //         setTrackResults(res as SongInfo[]);
+    //         setArtistResults([]);
+    //     }
+    // };
 
     const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -151,11 +168,7 @@ const SearchForm = ({
 
     return (
         <div className="flex flex-col p-2 w-screen items-center gap-1">
-            <form
-                id="searchForm"
-                className="flex flex-col gap-2 items-center"
-                onSubmit={searchQuery}
-            >
+            <form id="searchForm" className="flex flex-col gap-2 items-center">
                 <input
                     id={type === "track" ? "songSearchBar" : "artistSearchBar"}
                     placeholder={
@@ -170,12 +183,6 @@ const SearchForm = ({
                 ></input>
                 <div className="flex gap-2 justify-center mb-2">
                     <button
-                        className="button2 border-purple-500 border-[1px]"
-                        type="submit"
-                    >
-                        <span className="grad">Search</span>
-                    </button>
-                    <button
                         className="button3 border-purple-500 border-[1px]"
                         type="button"
                         onClick={resetSearch}
@@ -185,6 +192,7 @@ const SearchForm = ({
                 </div>
             </form>
             {error && <p className="grad">Your search had no results :(</p>}
+            {loading && <p className="grad">Loading...</p>}
 
             {type === "track" &&
                 songCart.length > 0 &&
