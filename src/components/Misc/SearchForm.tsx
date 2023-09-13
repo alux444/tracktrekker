@@ -26,7 +26,7 @@ const SearchForm = ({
     const [error, setError] = useState<boolean>(false);
 
     const { getSearch } = useSpotify();
-    const { getTracks, getArtists } = useSpotify();
+    // const { getTracks, getArtists } = useSpotify();
 
     useEffect(() => {
         if (audio !== null) {
