@@ -18,7 +18,7 @@ const SearchForm = ({
     scrollToTop: () => void;
 }) => {
     const { audio, setAudio, setAudioIsPlaying } = useContext(AudioContext);
-    const { songCart } = useContext(DevContext);
+    const { savedSongs } = useContext(DevContext);
 
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
@@ -195,7 +195,7 @@ const SearchForm = ({
             {loading && <p className="grad">Loading...</p>}
 
             {type === "track" &&
-                songCart.length > 0 &&
+                savedSongs.length > 0 &&
                 uniqueTracks.length == 0 && (
                     <div className="flex flex-col items-center text-center">
                         <SavedRecommendations error={error} />

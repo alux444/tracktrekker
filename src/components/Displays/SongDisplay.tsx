@@ -36,7 +36,7 @@ const SongDisplay = ({
         setCurrentPlayingId,
     } = useContext(AudioContext);
     const { songs } = useContext(SongsInfoContext);
-    const { songCart } = useContext(DevContext);
+    const { savedSongs } = useContext(DevContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
 
@@ -59,14 +59,14 @@ const SongDisplay = ({
     }, [songs, songInfo]);
 
     useEffect(() => {
-        const checkSongCartStatus = () => {
-            const isSongSelected = songCart.some(
+        const checksavedSongsStatus = () => {
+            const isSongSelected = savedSongs.some(
                 (song) => song.id === songInfo.id
             );
             setInCart(isSongSelected);
         };
-        checkSongCartStatus();
-    }, [songCart, songInfo]);
+        checksavedSongsStatus();
+    }, [savedSongs, songInfo]);
 
     useEffect(() => {
         const fetchFeaturesForThisSong = async () => {

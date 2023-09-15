@@ -8,7 +8,7 @@ import { ArtistInfo } from "../interfaces/artistInfo";
 
 const useSpotify = () => {
     const { token } = useContext(TokenContext);
-    const { songCart } = useContext(DevContext);
+    const { savedSongs } = useContext(DevContext);
 
     const getGenres = async () => {
         const url =
@@ -230,15 +230,15 @@ const useSpotify = () => {
     };
 
     const getSavedRecommendations = async () => {
-        if (songCart.length == 0) {
+        if (savedSongs.length == 0) {
             console.log("No saved songs");
             return;
         }
 
         const search: string[] = [];
 
-        const randomIndex = Math.floor(Math.random() * songCart.length);
-        search.push(songCart[randomIndex].id);
+        const randomIndex = Math.floor(Math.random() * savedSongs.length);
+        search.push(savedSongs[randomIndex].id);
 
         const query: RecommendForm = {
             seed_artists: [],
@@ -253,8 +253,8 @@ const useSpotify = () => {
         if (res !== 2) {
             return {
                 res: res.tracks,
-                songName: songCart[randomIndex].name,
-                artist: songCart[randomIndex].artists[0].name,
+                songName: savedSongs[randomIndex].name,
+                artist: savedSongs[randomIndex].artists[0].name,
             };
         } else {
             return -1;

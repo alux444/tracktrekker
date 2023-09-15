@@ -3,7 +3,7 @@ import logo from "../../imgs/logoGreen.png";
 import { PromptPageContext, page } from "./Views";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
-import SongCart from "./SongCart";
+import SavedSongsModal from "./SavedSongsModal";
 import { DevContext } from "../../App";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useLocalStorage from "../../utils/useLocalStorage";
@@ -16,7 +16,7 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
     const { setPromptPage } = useContext(PromptPageContext);
-    const { songCart } = useContext(DevContext);
+    const { savedSongs } = useContext(DevContext);
 
     const [openCart, setOpenCart] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
@@ -26,7 +26,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
         if (!loading) {
             updateSaved();
         }
-    }, [songCart]);
+    }, [savedSongs]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -86,12 +86,12 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                         className="flex gap-1 items-center"
                         onClick={() => setOpenCart(true)}
                     >
-                        <p>{songCart.length} Saved</p>
+                        <p>{savedSongs.length} Saved</p>
                         <FavoriteIcon />
                     </button>
                 )}
             </div>
-            {openCart && <SongCart onClose={() => setOpenCart(false)} />}
+            {openCart && <SavedSongsModal onClose={() => setOpenCart(false)} />}
         </div>
     );
 };

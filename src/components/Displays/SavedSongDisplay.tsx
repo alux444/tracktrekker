@@ -7,7 +7,7 @@ import PauseIcon from "@mui/icons-material/Pause";
 import { DevContext } from "../../App";
 import { FavoriteOutlined } from "@mui/icons-material";
 
-const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
+const SavedSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
     const {
         audio,
         setAudio,
@@ -16,20 +16,20 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
         currentPlayingId,
         setCurrentPlayingId,
     } = useContext(AudioContext);
-    const { songCart } = useContext(DevContext);
+    const { savedSongs } = useContext(DevContext);
 
     const [inCart, setInCart] = useState(false);
     const { removeFromCart } = useManageQuery();
 
     useEffect(() => {
-        const checkSongCartStatus = () => {
-            const isSongSelected = songCart.some(
+        const checksavedSongsStatus = () => {
+            const isSongSelected = savedSongs.some(
                 (song) => song.id === songInfo.id
             );
             setInCart(isSongSelected);
         };
-        checkSongCartStatus();
-    }, [songCart, songInfo]);
+        checksavedSongsStatus();
+    }, [savedSongs, songInfo]);
 
     const playPreview = () => {
         if (songInfo.preview_url) {
@@ -135,4 +135,4 @@ const CartSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
     );
 };
 
-export default CartSongDisplay;
+export default SavedSongDisplay;
