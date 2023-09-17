@@ -48,7 +48,6 @@ const useUser = () => {
 
     const promptUserLogin = async () => {
         const code = extractAccessTokenFromURL();
-        console.log(code);
         if (code === null) {
             redirectToSpotifyLogin();
             return null;

@@ -48,7 +48,6 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                         className="button2 border-[1px] border-purple-700 my-2"
                         onClick={() => {
                             setExpandTutorial(true);
-                            console.log("ran");
                         }}
                     >
                         <span className="grad">How to use TrackTrekker</span>

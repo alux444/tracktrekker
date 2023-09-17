@@ -85,7 +85,6 @@ const useSpotify = () => {
                 headers,
                 params: query,
             });
-            console.log(response.data);
             if (response.data.tracks) {
                 return response.data;
             } else {
@@ -113,7 +112,6 @@ const useSpotify = () => {
                     limit: 32,
                 },
             });
-            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error("Error:", error);
@@ -231,7 +229,6 @@ const useSpotify = () => {
 
     const getSavedRecommendations = async () => {
         if (savedSongs.length == 0) {
-            console.log("No saved songs");
             return;
         }
 
@@ -248,7 +245,6 @@ const useSpotify = () => {
         };
 
         const res = await getRecommended(query, 10);
-        console.log(res);
 
         if (res !== 2) {
             return {
