@@ -7,14 +7,17 @@ STYLES
         - footer 
 
 FEATURES
-    - add cart function to export to playlist 
     - view a songs stats while being able to adjust filters
-    - filters order match stats order
     - readd reveal stats button (?)
     - move authentication to serverside
 
 IN progress
 - Restyling design
+
+September
+COMPLETED add cart function to export to playlist 
+COMPLETED filters order match stats order
+COMPLETED dark mode implementation
 
 20 Aug
 COMPLETED added basic testing to workflow

@@ -17,7 +17,6 @@ const getAccessToken = async () => {
 
     try {
         const response = await axios.post(url, data, { headers });
-        console.log(response.data);
         return response.data.access_token;
     } catch (error) {
         console.error("Error:", error);

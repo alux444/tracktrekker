@@ -51,7 +51,6 @@ const HomePage = () => {
 
         setCurrentQuery(form);
         setPromptPage("results");
-        console.log(form);
     };
 
     const returnToSongs = () => {

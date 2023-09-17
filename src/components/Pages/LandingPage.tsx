@@ -27,7 +27,6 @@ const LandingPage = () => {
             token = await getAccessToken();
         }
         if (token !== null) {
-            console.log(token);
             setToken(token);
             setLoading(false);
         } else {

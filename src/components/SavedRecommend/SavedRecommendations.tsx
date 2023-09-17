@@ -31,7 +31,6 @@ const SavedRecommendations = ({ error }: { error: boolean }) => {
             setMessage(true);
             return;
         }
-        console.log(res);
         setResults(res.res);
         setSongSearched({ name: res.songName, artist: res.artist });
     };
