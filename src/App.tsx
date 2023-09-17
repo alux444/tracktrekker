@@ -66,15 +66,15 @@ export const DevContext = createContext<{
     setDevMode: React.Dispatch<React.SetStateAction<boolean>>;
     userId: string;
     setUserId: React.Dispatch<React.SetStateAction<string>>;
-    songCart: SongInfo[];
-    setSongCart: React.Dispatch<React.SetStateAction<SongInfo[]>>;
+    savedSongs: SongInfo[];
+    setSavedSongs: React.Dispatch<React.SetStateAction<SongInfo[]>>;
 }>({
     devMode: false,
     setDevMode: () => {},
     userId: "",
     setUserId: () => {},
-    songCart: [],
-    setSongCart: () => {},
+    savedSongs: [],
+    setSavedSongs: () => {},
 });
 
 function App() {
@@ -99,7 +99,7 @@ function App() {
     //dev context
     const [devMode, setDevMode] = useState<boolean>(false);
     const [userId, setUserId] = useState<string>("");
-    const [songCart, setSongCart] = useState<SongInfo[]>([]);
+    const [savedSongs, setSavedSongs] = useState<SongInfo[]>([]);
 
     return (
         <TokenContext.Provider value={{ token, setToken }}>
@@ -123,8 +123,8 @@ function App() {
                                             setDevMode,
                                             userId,
                                             setUserId,
-                                            songCart,
-                                            setSongCart,
+                                            savedSongs,
+                                            setSavedSongs,
                                         }}
                                     >
                                         <div className="light flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
