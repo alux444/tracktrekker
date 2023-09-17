@@ -181,15 +181,17 @@ const SearchForm = ({
                     value={query}
                     onChange={handleQueryChange}
                 ></input>
-                <div className="flex gap-2 justify-center mb-2">
-                    <button
-                        className="button3 border-purple-500 border-[1px]"
-                        type="button"
-                        onClick={resetSearch}
-                    >
-                        <span>Reset</span>
-                    </button>
-                </div>
+                {query !== "" && (
+                    <div className="flex gap-2 justify-center mb-2">
+                        <button
+                            className="button3 border-purple-500 border-[1px]"
+                            type="button"
+                            onClick={resetSearch}
+                        >
+                            <span>Clear</span>
+                        </button>
+                    </div>
+                )}
             </form>
             {error && <p className="grad">Your search had no results :(</p>}
             {loading && <p className="grad">Loading...</p>}
