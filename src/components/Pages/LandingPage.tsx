@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DevContext, TokenContext } from "../../App";
 import hero from "../../imgs/hero.jpg";
 import useUser from "../../utils/useUser";
@@ -9,29 +9,37 @@ const LandingPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { devMode, setDevMode } = useContext(DevContext);
 
-    const { promptUserLogin, getUserId } = useUser();
+    const { promptUserLogin, initialiseCookies } = useUser();
+
+    useEffect(() => {
+        const checkForCookies = async () => {
+            const cookiesExist = await initialiseCookies();
+
+            if (cookiesExist) {
+                setLoading(false);
+                setDevMode(true);
+                return;
+            }
+        };
+        checkForCookies();
+    }, []);
 
     const setAccessToken = async () => {
         setLoading(true);
-        let token: string | null;
+
         if (devMode) {
-            token = await promptUserLogin();
-            if (token != null) {
-                const res = await getUserId(token);
-                if (res == -1) {
-                    token = await getAccessToken();
-                    setDevMode(false);
-                }
+            const res: number = await promptUserLogin();
+            if (res == null) {
+                const token = await getAccessToken();
+                setToken(token);
+                setDevMode(false);
             }
         } else {
-            token = await getAccessToken();
-        }
-        if (token !== null) {
+            const token = await getAccessToken();
             setToken(token);
-            setLoading(false);
-        } else {
-            console.log("error getting token");
         }
+
+        setLoading(false);
     };
 
     return (

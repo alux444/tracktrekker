@@ -7,6 +7,7 @@ import SavedSongsModal from "./SavedSongsModal";
 import { DevContext } from "../../App";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useLocalStorage from "../../utils/useLocalStorage";
+import useCookieManager from "../../utils/useCookieManager";
 
 type NavBarProps = {
     currentPage: page;
@@ -16,10 +17,11 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
     const { setPromptPage } = useContext(PromptPageContext);
-    const { savedSongs } = useContext(DevContext);
+    const { userId, savedSongs } = useContext(DevContext);
 
     const [openCart, setOpenCart] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
+    const { deleteCookies } = useCookieManager();
     const { updateSaved } = useLocalStorage();
 
     useEffect(() => {
@@ -50,7 +52,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                 TrackTrekker
                 <img src={logo} className="h-[1.5rem]" />
             </button>
-            <div className="flex flex-col gap-[3px]">
+            <div className="flex flex-col gap-[3px] items-start">
                 <button
                     className="flex gap-1 items-center"
                     onClick={() => {
@@ -89,6 +91,9 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                         <p>{savedSongs.length} Saved</p>
                         <FavoriteIcon />
                     </button>
+                )}
+                {userId !== "" && (
+                    <button onClick={deleteCookies}>Log out</button>
                 )}
             </div>
             {openCart && <SavedSongsModal onClose={() => setOpenCart(false)} />}

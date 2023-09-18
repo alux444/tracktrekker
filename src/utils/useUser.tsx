@@ -1,42 +1,13 @@
 import axios from "axios";
 import { useContext } from "react";
-import { DevContext } from "../App";
-
-type HashParams = {
-    access_token?: string;
-};
+import { DevContext, TokenContext } from "../App";
+import useCookieManager from "./useCookieManager";
 
 const useUser = () => {
     const { setUserId } = useContext(DevContext);
-
-    const redirectToSpotifyLogin = async () => {
-        const clientId = import.meta.env.VITE_ID;
-        const redirectUri = encodeURIComponent(
-            "https://alux444.github.io/tracktrekker/"
-        );
-        // const redirectUri = encodeURIComponent(
-        //     "http://localhost:5173/tracktrekker/"
-        // );
-        const scopes = encodeURIComponent(
-            "user-top-read,playlist-modify-public,playlist-modify-private,user-read-private,user-read-email"
-        );
-        const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scopes}&show_dialog=true`;
-        window.location.href = authUrl;
-    };
-
-    const extractAccessTokenFromURL = (): string | null => {
-        const hashParams: HashParams = window.location.hash
-            .substr(1)
-            .split("&")
-            .reduce((result, item) => {
-                const parts = item.split("=");
-                result[parts[0]] = parts[1];
-                return result;
-            }, {});
-
-        removeAccessTokenFromURL();
-        return hashParams.access_token || null;
-    };
+    const { setToken } = useContext(TokenContext);
+    const { getAuth, getTokenFromUrl, findTokenFromCookie, checkCookie } =
+        useCookieManager();
 
     const removeAccessTokenFromURL = () => {
         window.history.replaceState(
@@ -47,13 +18,14 @@ const useUser = () => {
     };
 
     const promptUserLogin = async () => {
-        const code = extractAccessTokenFromURL();
-        if (code === null) {
-            redirectToSpotifyLogin();
-            return null;
+        const res = await getTokenFromUrl();
+        if (res == null) {
+            getAuth();
         } else {
-            return code;
+            removeAccessTokenFromURL();
+            await getUserId(res);
         }
+        return 1;
     };
 
     const getUserId = async (token: string) => {
@@ -72,7 +44,25 @@ const useUser = () => {
         }
     };
 
-    return { promptUserLogin, getUserId };
+    const initialiseCookies = async () => {
+        checkCookie();
+        const hashCode = getTokenFromUrl();
+        let token = findTokenFromCookie();
+        if (!token && hashCode) {
+            token = getTokenFromUrl();
+        } else if (token && hashCode) {
+            token = getTokenFromUrl();
+        }
+        window.location.hash = "";
+        if (token) {
+            setToken(token);
+            await getUserId(token);
+            return true;
+        }
+        return false;
+    };
+
+    return { promptUserLogin, getUserId, initialiseCookies };
 };
 
 export default useUser;
