@@ -73,9 +73,8 @@ const useCookieManager = () => {
                 .split(";")
                 .some((item) => item.trim().startsWith("token="))
         ) {
-            document.cookie = "selection=;max-age=0;samesite=lax;Secure";
+            console.log("found token");
         } else {
-            document.cookie = "selection=;max-age=0;samesite=lax;Secure";
             localStorage.removeItem("token");
             return null;
         }
