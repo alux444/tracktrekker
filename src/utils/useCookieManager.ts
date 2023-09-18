@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext } from "react";
 import { TokenContext } from "../App";
 
@@ -7,6 +6,7 @@ const useCookieManager = () => {
 
     const scope =
         "user-top-read,playlist-modify-public,playlist-modify-private,user-read-private,user-read-email";
+
     // const redirectUri = "https://alux444.github.io/tracktrekker/";
     const redirectUri = "http://localhost:5173/tracktrekker/";
 
@@ -43,18 +43,58 @@ const useCookieManager = () => {
         const token = hashParams.get("access_token");
         const error = queryParams.get("error");
         if (token) {
-            document.cookie = `spotiToken=${token};max-age=3600;samesite=lax;Secure`;
+            document.cookie = `token=${token};max-age=3600;samesite=lax;Secure`;
             setToken(token);
             return token;
         } else if (error) {
             console.log(error);
-            return -1;
+            return null;
         } else {
-            return -1;
+            return null;
         }
     };
 
-    return { getAuth, getTokenFromUrl };
+    const findTokenFromCookie = () => {
+        if (document.cookie) {
+            console.log(document.cookie);
+            return (
+                document.cookie
+                    .split(";")
+                    .find((row) => row.startsWith("token="))
+                    ?.split("=")[1] || null
+            );
+        } else {
+            return null;
+        }
+    };
+
+    const checkCookie = () => {
+        if (
+            document.cookie
+                .split(";")
+                .some((item) => item.trim().startsWith("token="))
+        ) {
+            document.cookie = "selection=;max-age=0;samesite=lax;Secure";
+        } else {
+            document.cookie = "selection=;max-age=0;samesite=lax;Secure";
+            localStorage.removeItem("token");
+            return null;
+        }
+    };
+
+    const deleteCookies = () => {
+        document.cookie = "token=;max-age=0;samesite=lax;Secure";
+        localStorage.removeItem("token");
+        window.location.reload();
+    };
+
+    return {
+        getAuth,
+        getTokenFromUrl,
+        deleteCookies,
+        checkCookie,
+        findTokenFromCookie,
+    };
 };
 
 export default useCookieManager;

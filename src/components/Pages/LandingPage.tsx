@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DevContext, TokenContext } from "../../App";
 import hero from "../../imgs/hero.jpg";
 import useUser from "../../utils/useUser";
@@ -9,14 +9,27 @@ const LandingPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { devMode, setDevMode } = useContext(DevContext);
 
-    const { promptUserLogin, getUserId } = useUser();
+    const { promptUserLogin, initialiseCookies } = useUser();
+
+    useEffect(() => {
+        const checkForCookies = async () => {
+            const cookiesExist = await initialiseCookies();
+
+            if (cookiesExist) {
+                setLoading(false);
+                setDevMode(true);
+                return;
+            }
+        };
+        checkForCookies();
+    }, []);
 
     const setAccessToken = async () => {
         setLoading(true);
 
         if (devMode) {
             const res: number = await promptUserLogin();
-            if (res == -1) {
+            if (res == null) {
                 const token = await getAccessToken();
                 setToken(token);
                 setDevMode(false);
