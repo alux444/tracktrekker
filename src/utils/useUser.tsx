@@ -9,92 +9,6 @@ const useUser = () => {
     const { getAuth, getTokenFromUrl, findTokenFromCookie, checkCookie } =
         useCookieManager();
 
-    // async function generateCodeChallenge(codeVerifier) {
-    //     function base64encode(uint8Array) {
-    //         const array: number[] = Array.from(uint8Array);
-    //         const string: string = String.fromCharCode.apply(null, array);
-
-    //         return btoa(string)
-    //             .replace(/\+/g, "-")
-    //             .replace(/\//g, "_")
-    //             .replace(/=+$/, "");
-    //     }
-
-    //     const encoder = new TextEncoder();
-    //     const data = encoder.encode(codeVerifier);
-    //     const digest = await window.crypto.subtle.digest("SHA-256", data);
-
-    //     return base64encode(digest);
-    // }
-
-    // const pkceTest = async () => {
-    //     const clientId = import.meta.env.VITE_ID;
-    //     // const redirectUri = "https://alux444.github.io/tracktrekker/";
-    //     const redirectUri = "http://localhost:5173/tracktrekker/";
-
-    //     const codeVerifier = generateRandomString(128);
-
-    //     generateCodeChallenge(codeVerifier).then((codeChallenge) => {
-    //         const state = generateRandomString(16);
-    //         const scope =
-    //             "user-top-read,playlist-modify-public,playlist-modify-private,user-read-private,user-read-email";
-
-    //         localStorage.setItem("code_verifier", codeVerifier);
-
-    //         const args = new URLSearchParams({
-    //             response_type: "code",
-    //             client_id: clientId,
-    //             scope: scope,
-    //             redirect_uri: redirectUri,
-    //             state: state,
-    //             code_challenge_method: "S256",
-    //             code_challenge: codeChallenge,
-    //         });
-
-    //         window.location.href =
-    //             "https://accounts.spotify.com/authorize?" + args;
-    //     });
-    // };
-
-    // const extractAccessTokenFromURL = async () => {
-    //     console.log("getting token from url");
-    //     const urlParams = new URLSearchParams(window.location.search);
-    //     const code = urlParams.get("code");
-    //     const codeVerifier = localStorage.getItem("code_verifier");
-    //     const redirectUri = "http://localhost:5173/tracktrekker/";
-    //     removeAccessTokenFromURL();
-
-    //     if (codeVerifier && code) {
-    //         const body = new URLSearchParams();
-    //         body.append("grant_type", "authorization_code");
-    //         body.append("code", code);
-    //         body.append("redirect_uri", redirectUri);
-    //         body.append("client_id", import.meta.env.VITE_ID);
-    //         body.append("code_verifier", codeVerifier);
-
-    //         try {
-    //             const response = await axios.post(
-    //                 "https://accounts.spotify.com/api/token",
-    //                 body.toString(),
-    //                 {
-    //                     headers: {
-    //                         "Content-Type": "application/x-www-form-urlencoded",
-    //                     },
-    //                 }
-    //             );
-
-    //             const data = response.data;
-    //             console.log(data);
-    //             getUserId(data.access_token);
-    //             setToken(data.access_token);
-    //             return 1;
-    //         } catch (error) {
-    //             console.error("Error:", error);
-    //         }
-    //     }
-    //     return -1;
-    // };
-
     const removeAccessTokenFromURL = () => {
         window.history.replaceState(
             {},
@@ -104,16 +18,6 @@ const useUser = () => {
     };
 
     const promptUserLogin = async () => {
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const code = urlParams.get("code");
-        // if (code === null) {
-        //     pkceTest();
-        //     return null;
-        // } else {
-        //     const res = await extractAccessTokenFromURL();
-        //     return res;
-        // }
-        console.log(await findTokenFromCookie());
         const res = await getTokenFromUrl();
         if (res == null) {
             getAuth();
@@ -152,6 +56,7 @@ const useUser = () => {
         window.location.hash = "";
         if (token) {
             setToken(token);
+            await getUserId(token);
             return true;
         }
         return false;
