@@ -8,6 +8,7 @@ import { DevContext } from "../../App";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useLocalStorage from "../../utils/useLocalStorage";
 import useCookieManager from "../../utils/useCookieManager";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 type NavBarProps = {
     currentPage: page;
@@ -93,7 +94,12 @@ const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
                     </button>
                 )}
                 {userId !== "" && (
-                    <button onClick={deleteCookies}>Log out</button>
+                    <button
+                        className="flex gap-1 items-center"
+                        onClick={deleteCookies}
+                    >
+                        <p>Log out</p> <ExitToAppIcon />
+                    </button>
                 )}
             </div>
             {openCart && <SavedSongsModal onClose={() => setOpenCart(false)} />}
