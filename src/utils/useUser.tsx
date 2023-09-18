@@ -1,26 +1,19 @@
 import axios from "axios";
 import { useContext } from "react";
-import { DevContext } from "../App";
+import { DevContext, TokenContext } from "../App";
+import useCookieManager from "./useCookieManager";
 
 const useUser = () => {
     const { setUserId } = useContext(DevContext);
-
-    const generateRandomString = (length: number) => {
-        let text = "";
-        const possible =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for (let i = 0; i < length; i++) {
-            text += possible.charAt(
-                Math.floor(Math.random() * possible.length)
-            );
-        }
-        return text;
-    };
+    const { setToken } = useContext(TokenContext);
+    const { getAuth, getTokenFromUrl } = useCookieManager();
 
     async function generateCodeChallenge(codeVerifier) {
-        function base64encode(string) {
-            return btoa(String.fromCharCode.apply(null, new Uint8Array(string)))
+        function base64encode(uint8Array) {
+            const array: number[] = Array.from(uint8Array);
+            const string: string = String.fromCharCode.apply(null, array);
+
+            return btoa(string)
                 .replace(/\+/g, "-")
                 .replace(/\//g, "_")
                 .replace(/=+$/, "");
@@ -79,12 +72,12 @@ const useUser = () => {
     // };
 
     const extractAccessTokenFromURL = async () => {
+        console.log("getting token from url");
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get("code");
-        console.log("code" + code);
         const codeVerifier = localStorage.getItem("code_verifier");
-        console.log("verif" + codeVerifier);
         const redirectUri = "http://localhost:5173/tracktrekker/";
+        removeAccessTokenFromURL();
 
         if (codeVerifier && code) {
             const body = new URLSearchParams();
@@ -107,14 +100,14 @@ const useUser = () => {
 
                 const data = response.data;
                 console.log(data);
-                localStorage.setItem("access_token", data.access_token);
+                getUserId(data.access_token);
+                setToken(data.access_token);
+                return 1;
             } catch (error) {
                 console.error("Error:", error);
             }
         }
-
-        removeAccessTokenFromURL();
-        return 1;
+        return -1;
     };
 
     const removeAccessTokenFromURL = () => {
@@ -126,15 +119,23 @@ const useUser = () => {
     };
 
     const promptUserLogin = async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get("code");
-        if (code === null) {
-            pkceTest();
-            return null;
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const code = urlParams.get("code");
+        // if (code === null) {
+        //     pkceTest();
+        //     return null;
+        // } else {
+        //     const res = await extractAccessTokenFromURL();
+        //     return res;
+        // }
+        const res = await getTokenFromUrl();
+        console.log(res);
+        if (res == -1) {
+            getAuth();
         } else {
-            await extractAccessTokenFromURL();
-            return code;
+            removeAccessTokenFromURL();
         }
+        return 1;
     };
 
     const getUserId = async (token: string) => {

@@ -13,25 +13,20 @@ const LandingPage = () => {
 
     const setAccessToken = async () => {
         setLoading(true);
-        let token: string | null;
+
         if (devMode) {
-            token = await promptUserLogin();
-            if (token != null) {
-                const res = await getUserId(token);
-                if (res == -1) {
-                    token = await getAccessToken();
-                    setDevMode(false);
-                }
+            const res: number = await promptUserLogin();
+            if (res == -1) {
+                const token = await getAccessToken();
+                setToken(token);
+                setDevMode(false);
             }
         } else {
-            token = await getAccessToken();
-        }
-        if (token !== null) {
+            const token = await getAccessToken();
             setToken(token);
-            setLoading(false);
-        } else {
-            console.log("error getting token");
         }
+
+        setLoading(false);
     };
 
     return (
