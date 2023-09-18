@@ -20,11 +20,17 @@ const useUser = () => {
     const promptUserLogin = async () => {
         const res = await getTokenFromUrl();
         if (res == null) {
-            getAuth();
+            await getAuth();
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get("code");
+            if (code) {
+                window.location.reload();
+            }
         } else {
             removeAccessTokenFromURL();
             await getUserId(res);
         }
+
         return 1;
     };
 
