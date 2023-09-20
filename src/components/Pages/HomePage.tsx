@@ -26,7 +26,7 @@ const HomePage = () => {
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
-    const { extras } = useContext(ExtrasContext);
+    const { extras, setExtras } = useContext(ExtrasContext);
 
     const generateForm = () => {
         const genreValues: string[] = [];
@@ -45,7 +45,6 @@ const HomePage = () => {
 
         setCurrentQuery(form);
         setPromptPage("results");
-        console.log(form);
     };
 
     const changeSort = (sortBy: SortOption) => {
@@ -53,7 +52,7 @@ const HomePage = () => {
 
         const max: number = sortBy.sortBy == "popularity" ? 100 : 1;
         if (currentQuery) {
-            const newExtras: ExtraInfo = currentQuery.extras;
+            const newExtras: ExtraInfo = extras;
 
             if (key === "none") {
                 for (const extraKey in newExtras) {
@@ -63,7 +62,9 @@ const HomePage = () => {
                             extraKey
                         )
                     ) {
-                        newExtras[extraKey].target = -1;
+                        if (newExtras[extraKey]) {
+                            newExtras[extraKey].target = -1;
+                        }
                     }
                 }
             } else {
@@ -74,11 +75,12 @@ const HomePage = () => {
                         target: sortBy.descending ? max : 0,
                     };
                 } else {
-                    newExtras[key].target = sortBy.descending ? max : 0;
+                    newExtras[key]!.target = sortBy.descending ? max : 0;
                 }
             }
 
-            console.log(newExtras);
+            setExtras(newExtras);
+            generateForm();
             return;
         }
     };
