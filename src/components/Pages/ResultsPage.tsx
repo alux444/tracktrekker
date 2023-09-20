@@ -73,8 +73,11 @@ const ResultsPage = ({
     const [message, setMessage] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [playlistSaved, setPlaylistSaved] = useState<boolean>(false);
-    const [sortBy, setSortBy] = useState<SortBy>("none");
-    const [descending, setDescending] = useState<boolean>(true);
+    const [sortingOrder, setSortingOrder] = useState<SortOption>({
+        label: "none",
+        sortBy: "none",
+        descending: true,
+    });
 
     const { createPlaylist } = usePlaylist();
 
@@ -147,30 +150,26 @@ const ResultsPage = ({
           )
         : [];
 
-    const ascendingOrder = uniqueTracks.sort((a, b) => b[sortBy] - a[sortBy]);
-    const descendingOrder = uniqueTracks.sort((a, b) => a[sortBy] - b[sortBy]);
-
-    // const sortedItems = data.sort((a, b) => {
-    //     const popularityA = a.popularity || 0;
-    //     const popularityB = b.popularity || 0;
-    //     return popularityB - popularityA;
-    // });
+    const ascendingOrder = uniqueTracks.sort(
+        (a, b) => b[sortingOrder.sortBy] - a[sortingOrder.sortBy]
+    );
+    const descendingOrder = uniqueTracks.sort(
+        (a, b) => a[sortingOrder.sortBy] - b[sortingOrder.sortBy]
+    );
 
     const displaysPerPage = 8;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
-    const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
+    const currentTracks = sortingOrder.descending
+        ? descendingOrder.slice(indexOfFirstItem, indexOfLastItem)
+        : ascendingOrder.slice(indexOfFirstItem, indexOfLastItem);
 
     const results = currentTracks.map((song) => (
         <SongDisplay songInfo={song} statsButton={true} />
     ));
 
-    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedTerm = event.target.value as
-            | "short_term"
-            | "medium_term"
-            | "long_term";
-        setCurrentTerm(selectedTerm);
+    const handleSortChange = (value: SortOption) => {
+        setSortingOrder(value);
     };
 
     return (
@@ -223,10 +222,21 @@ const ResultsPage = ({
                     <p>Sort By:</p>
                     <select
                         className="border-[2px] p-1 border-purple-400 bg-dark3 rounded-[8px]"
-                        value={sortBy}
+                        value={sortingOrder.label}
+                        onChange={(e) => {
+                            const selectedLabel = e.target.value;
+                            const selectedSortOption = sortableOptions.find(
+                                (option) => option.label === selectedLabel
+                            );
+                            if (selectedSortOption) {
+                                handleSortChange(selectedSortOption);
+                            }
+                        }}
                     >
                         {sortableOptions.map((option) => (
-                            <option>{option.label}</option>
+                            <option key={option.label} value={option.label}>
+                                {option.label}
+                            </option>
                         ))}
                     </select>
                 </div>
