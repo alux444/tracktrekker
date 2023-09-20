@@ -15,6 +15,6 @@ export const descriptions = {
     speechiness:
         "A measure of presence of spoken word in the track. Values above 0.66 are likely all spoken words, and values under 0.33 likely have no speech.",
     tempo: "Estimated Beats per Minute of a track.",
-    valence:
+    happiness:
         "A measure of the positiveness of a track, where 1 is most cheerful or euphoric sounding.",
 };

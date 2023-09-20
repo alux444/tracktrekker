@@ -9,6 +9,14 @@ import { AudioContext } from "./Views";
 import { DevContext } from "../../App";
 import usePlaylist from "../../utils/usePlaylist";
 
+type SortBy =
+    | "none"
+    | "popularity"
+    | "energy"
+    | "acousticness"
+    | "dancability"
+    | "happiness";
+
 const ResultsPage = ({
     query,
     goBack,
@@ -97,6 +105,19 @@ const ResultsPage = ({
           )
         : [];
 
+    const ascendingOrder = uniqueTracks.sort(
+        (a, b) => b.popularity - a.popularity
+    );
+    const descendingOrder = uniqueTracks.sort(
+        (a, b) => a.popularity - b.popularity
+    );
+
+    // const sortedItems = data.sort((a, b) => {
+    //     const popularityA = a.popularity || 0;
+    //     const popularityB = b.popularity || 0;
+    //     return popularityB - popularityA;
+    // });
+
     const displaysPerPage = 8;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
@@ -152,6 +173,9 @@ const ResultsPage = ({
                         Created playlist on your Spotify!
                     </span>
                 )}
+                <div>
+                    <p>Sort by:</p>
+                </div>
             </div>
             {songs.length > 0 ? (
                 <div

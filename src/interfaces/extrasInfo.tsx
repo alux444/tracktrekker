@@ -23,7 +23,7 @@ export type ExtraInfo = {
         target: number;
     };
 
-    valence?: {
+    happiness?: {
         min: number;
         max: number;
         target: number;

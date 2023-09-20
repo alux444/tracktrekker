@@ -37,6 +37,8 @@ const useSpotify = () => {
 
         try {
             const response = await axios.get(url, { headers });
+            const res = response.data;
+            res.happiness = res.valence;
             return response.data;
         } catch (error) {
             console.log(error);
