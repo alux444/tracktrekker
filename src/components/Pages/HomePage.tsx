@@ -10,11 +10,12 @@ import AskForSongs from "../AskFor/AskForSongs";
 import AskForArtists from "../AskFor/AskForArtists";
 import AskForGenres from "../AskFor/AskForGenres";
 import { RecommendForm } from "../../interfaces/recommendForm";
-import ResultsPage from "./ResultsPage";
+import ResultsPage, { SortOption } from "./ResultsPage";
 import LandingPage from "./LandingPage";
 import PromptScreen from "./PromptScreen";
 import { PromptPageContext } from "./Views";
 import UserTopItemsPage from "./UserTopItemsPage";
+import { ExtraInfo } from "../../interfaces/extrasInfo";
 
 const HomePage = () => {
     const { token } = useContext(TokenContext);
@@ -47,6 +48,41 @@ const HomePage = () => {
         console.log(form);
     };
 
+    const changeSort = (sortBy: SortOption) => {
+        const key = sortBy.sortBy;
+
+        const max: number = sortBy.sortBy == "popularity" ? 100 : 1;
+        if (currentQuery) {
+            const newExtras: ExtraInfo = currentQuery.extras;
+
+            if (key === "none") {
+                for (const extraKey in newExtras) {
+                    if (
+                        Object.prototype.hasOwnProperty.call(
+                            newExtras,
+                            extraKey
+                        )
+                    ) {
+                        newExtras[extraKey].target = -1;
+                    }
+                }
+            } else {
+                if (!newExtras[key]) {
+                    newExtras[key] = {
+                        min: 0,
+                        max: max,
+                        target: sortBy.descending ? max : 0,
+                    };
+                } else {
+                    newExtras[key].target = sortBy.descending ? max : 0;
+                }
+            }
+
+            console.log(newExtras);
+            return;
+        }
+    };
+
     const returnToSongs = () => {
         setPromptPage("songs");
     };
@@ -69,6 +105,7 @@ const HomePage = () => {
                             query={currentQuery}
                             goBack={returnToSongs}
                             filters={queryFilters}
+                            changeSort={changeSort}
                         />
                     )}
                 </div>

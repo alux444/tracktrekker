@@ -9,7 +9,7 @@ import { AudioContext } from "./Views";
 import { DevContext } from "../../App";
 import usePlaylist from "../../utils/usePlaylist";
 
-type SortBy =
+export type SortBy =
     | "none"
     | "popularity"
     | "energy"
@@ -17,7 +17,7 @@ type SortBy =
     | "danceability"
     | "happiness";
 
-type SortOption = { label: string; sortBy: SortBy; descending: boolean };
+export type SortOption = { label: string; sortBy: SortBy; descending: boolean };
 
 const sortableOptions: SortOption[] = [
     { label: "None", sortBy: "none", descending: true },
@@ -46,12 +46,12 @@ const sortableOptions: SortOption[] = [
     {
         label: "Danceability (Ascending)",
         sortBy: "danceability",
-        descending: true,
+        descending: false,
     },
     {
         label: "Danceability (Descending)",
         sortBy: "danceability",
-        descending: false,
+        descending: true,
     },
     { label: "Happiness (Ascending)", sortBy: "happiness", descending: false },
     { label: "Happiness (Descending)", sortBy: "happiness", descending: true },
@@ -61,10 +61,12 @@ const ResultsPage = ({
     query,
     goBack,
     filters,
+    changeSort,
 }: {
     query: RecommendForm;
     goBack: () => void;
     filters: number;
+    changeSort: (SortBy) => void;
 }) => {
     const { devMode } = useContext(DevContext);
     const { audio, setAudioIsPlaying } = useContext(AudioContext);
@@ -124,6 +126,10 @@ const ResultsPage = ({
     }, [currentPage, songs]);
 
     useEffect(() => {
+        changeSort(sortingOrder);
+    }, [sortingOrder]);
+
+    useEffect(() => {
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {
             e.preventDefault();
             e.returnValue = "Close tab?";
@@ -150,22 +156,13 @@ const ResultsPage = ({
           )
         : [];
 
-    const ascendingOrder = uniqueTracks.sort(
-        (a, b) => b[sortingOrder.sortBy] - a[sortingOrder.sortBy]
-    );
-    const descendingOrder = uniqueTracks.sort(
-        (a, b) => a[sortingOrder.sortBy] - b[sortingOrder.sortBy]
-    );
-
     const displaysPerPage = 8;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
-    const currentTracks = sortingOrder.descending
-        ? descendingOrder.slice(indexOfFirstItem, indexOfLastItem)
-        : ascendingOrder.slice(indexOfFirstItem, indexOfLastItem);
+    const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
 
     const results = currentTracks.map((song) => (
-        <SongDisplay songInfo={song} statsButton={true} />
+        <SongDisplay songInfo={song} statsButton={true} key={song.id} />
     ));
 
     const handleSortChange = (value: SortOption) => {
