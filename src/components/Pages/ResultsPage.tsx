@@ -14,8 +14,48 @@ type SortBy =
     | "popularity"
     | "energy"
     | "acousticness"
-    | "dancability"
+    | "danceability"
     | "happiness";
+
+type SortOption = { label: string; sortBy: SortBy; descending: boolean };
+
+const sortableOptions: SortOption[] = [
+    { label: "None", sortBy: "none", descending: true },
+    {
+        label: "Popularity (Ascending)",
+        sortBy: "popularity",
+        descending: false,
+    },
+    {
+        label: "Popularity (Descending)",
+        sortBy: "popularity",
+        descending: true,
+    },
+    { label: "Energy (Ascending)", sortBy: "energy", descending: false },
+    { label: "Energy (Descending)", sortBy: "energy", descending: true },
+    {
+        label: "Acousticness (Ascending)",
+        sortBy: "acousticness",
+        descending: false,
+    },
+    {
+        label: "Acousticness (Descending)",
+        sortBy: "acousticness",
+        descending: true,
+    },
+    {
+        label: "Danceability (Ascending)",
+        sortBy: "danceability",
+        descending: true,
+    },
+    {
+        label: "Danceability (Descending)",
+        sortBy: "danceability",
+        descending: false,
+    },
+    { label: "Happiness (Ascending)", sortBy: "happiness", descending: false },
+    { label: "Happiness (Descending)", sortBy: "happiness", descending: true },
+];
 
 const ResultsPage = ({
     query,
@@ -33,6 +73,8 @@ const ResultsPage = ({
     const [message, setMessage] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [playlistSaved, setPlaylistSaved] = useState<boolean>(false);
+    const [sortBy, setSortBy] = useState<SortBy>("none");
+    const [descending, setDescending] = useState<boolean>(true);
 
     const { createPlaylist } = usePlaylist();
 
@@ -105,12 +147,8 @@ const ResultsPage = ({
           )
         : [];
 
-    const ascendingOrder = uniqueTracks.sort(
-        (a, b) => b.popularity - a.popularity
-    );
-    const descendingOrder = uniqueTracks.sort(
-        (a, b) => a.popularity - b.popularity
-    );
+    const ascendingOrder = uniqueTracks.sort((a, b) => b[sortBy] - a[sortBy]);
+    const descendingOrder = uniqueTracks.sort((a, b) => a[sortBy] - b[sortBy]);
 
     // const sortedItems = data.sort((a, b) => {
     //     const popularityA = a.popularity || 0;
@@ -126,6 +164,14 @@ const ResultsPage = ({
     const results = currentTracks.map((song) => (
         <SongDisplay songInfo={song} statsButton={true} />
     ));
+
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedTerm = event.target.value as
+            | "short_term"
+            | "medium_term"
+            | "long_term";
+        setCurrentTerm(selectedTerm);
+    };
 
     return (
         <div className="h-full flex flex-col items-center align-center gap-2 mt-12">
@@ -174,7 +220,15 @@ const ResultsPage = ({
                     </span>
                 )}
                 <div>
-                    <p>Sort by:</p>
+                    <p>Sort By:</p>
+                    <select
+                        className="border-[2px] p-1 border-purple-400 bg-dark3 rounded-[8px]"
+                        value={sortBy}
+                    >
+                        {sortableOptions.map((option) => (
+                            <option>{option.label}</option>
+                        ))}
+                    </select>
                 </div>
             </div>
             {songs.length > 0 ? (
