@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import useSpotify from "../../utils/useSpotify";
-import { AudioFeatures } from "../../interfaces/AudioFeatures";
+import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
 import { AudioContext } from "../Pages/Views";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -23,9 +23,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 const SongDisplay = ({
     songInfo,
     statsButton,
+    addFeatures,
 }: {
     songInfo: SongInfo;
     statsButton: boolean;
+    addFeatures: ((string, AudioFeatures) => void) | null;
 }) => {
     const {
         audio,
@@ -75,6 +77,10 @@ const SongDisplay = ({
             );
             if (res !== undefined) {
                 setFeatures(res);
+
+                if (addFeatures) {
+                    addFeatures(songInfo.id, res);
+                }
             }
         };
         fetchFeaturesForThisSong();

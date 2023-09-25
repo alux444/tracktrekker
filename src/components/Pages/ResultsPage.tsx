@@ -95,6 +95,16 @@ const ResultsPage = ({
         });
     }
 
+    const addFeatureToSong = (id: string, features: AudioFeatures) => {
+        const newSongs = songsWithFeatures;
+        for (let i = 0; i < songsWithFeatures.length; i++) {
+            if (songsWithFeatures[i].id === id) {
+                songsWithFeatures[i].features = features;
+            }
+        }
+        setSongsWithFeatures(newSongs);
+    };
+
     const getSongs = async () => {
         const res = await getRecommended(query, 80);
 
@@ -179,17 +189,8 @@ const ResultsPage = ({
     ));
 
     const handleSortChange = (value: SortOption) => {
+        console.log(songsWithFeatures);
         setSortingOrder(value);
-    };
-
-    const addFeatureToSong = (id: string, features: AudioFeatures) => {
-        const newSongs = songsWithFeatures;
-        for (let i = 0; i < songsWithFeatures.length; i++) {
-            if (songsWithFeatures[i].id === id) {
-                songsWithFeatures[i].features = features;
-            }
-        }
-        setSongsWithFeatures(newSongs);
     };
 
     return (
