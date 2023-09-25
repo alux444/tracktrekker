@@ -37,7 +37,7 @@ const FeaturesDisplay = ({
                     <SongDisplay
                         songInfo={songInfo}
                         statsButton={false}
-                        addFeatures={null}
+                        features={null}
                     />
                 </div>
                 <div className="flex gap-1 flex-col justify-center p-4 w-full">

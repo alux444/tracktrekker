@@ -8,7 +8,6 @@ import Pagination from "../Misc/Pagination";
 import { AudioContext } from "./Views";
 import { DevContext } from "../../App";
 import usePlaylist from "../../utils/usePlaylist";
-import { AudioFeatures } from "../../interfaces/audioFeatures";
 
 export type SortBy =
     | "none"
@@ -71,9 +70,8 @@ const ResultsPage = ({
 }) => {
     const { devMode } = useContext(DevContext);
     const { audio, setAudioIsPlaying } = useContext(AudioContext);
-    const { getRecommended } = useSpotify();
+    const { getRecommended, getFeatures } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
-    const [songsWithFeatures, setSongsWithFeatures] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [playlistSaved, setPlaylistSaved] = useState<boolean>(false);
@@ -95,16 +93,6 @@ const ResultsPage = ({
         });
     }
 
-    const addFeatureToSong = (id: string, features: AudioFeatures) => {
-        const newSongs = songsWithFeatures;
-        for (let i = 0; i < songsWithFeatures.length; i++) {
-            if (songsWithFeatures[i].id === id) {
-                songsWithFeatures[i].features = features;
-            }
-        }
-        setSongsWithFeatures(newSongs);
-    };
-
     const getSongs = async () => {
         const res = await getRecommended(query, 80);
 
@@ -116,6 +104,9 @@ const ResultsPage = ({
             return;
         }
 
+        const songIds = res.tracks.map((song) => song.id).join(",");
+        const features = await getFeatures(songIds);
+        console.log(features);
         setSongs(res.tracks);
     };
 
@@ -125,7 +116,6 @@ const ResultsPage = ({
 
     useEffect(() => {
         setPlaylistSaved(false);
-        setSongsWithFeatures(songs);
     }, [songs]);
 
     useEffect(() => {
@@ -165,7 +155,7 @@ const ResultsPage = ({
     };
 
     const uniqueTracks = songs
-        ? songsWithFeatures.filter(
+        ? songs.filter(
               (song, index, self) =>
                   index ===
                   self.findIndex(
@@ -174,22 +164,48 @@ const ResultsPage = ({
           )
         : [];
 
+    const ascendingOrder = uniqueTracks.sort((a, b) => {
+        const aFeatures = a.features?.[sortingOrder.sortBy];
+        const bFeatures = b.features?.[sortingOrder.sortBy];
+
+        if (typeof aFeatures === "number" && typeof bFeatures === "number") {
+            return aFeatures - bFeatures;
+        }
+
+        return 0;
+    });
+
+    const descendingOrder = uniqueTracks.sort((a, b) => {
+        const aFeatures = a.features?.[sortingOrder.sortBy];
+        const bFeatures = b.features?.[sortingOrder.sortBy];
+
+        if (typeof aFeatures === "number" && typeof bFeatures === "number") {
+            return bFeatures - aFeatures;
+        }
+
+        return 0;
+    });
+
     const displaysPerPage = 8;
     const indexOfLastItem = currentPage * displaysPerPage;
     const indexOfFirstItem = indexOfLastItem - displaysPerPage;
-    const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
+    const currentTracks =
+        sortingOrder.sortBy == "none"
+            ? uniqueTracks.slice(indexOfFirstItem, indexOfLastItem)
+            : sortingOrder.descending
+            ? descendingOrder.slice(indexOfFirstItem, indexOfLastItem)
+            : ascendingOrder.slice(indexOfFirstItem, indexOfLastItem);
 
     const results = currentTracks.map((song) => (
         <SongDisplay
             songInfo={song}
             statsButton={true}
             key={song.id}
-            addFeatures={addFeatureToSong}
+            features={null}
         />
     ));
 
     const handleSortChange = (value: SortOption) => {
-        console.log(songsWithFeatures);
         setSortingOrder(value);
     };
 
