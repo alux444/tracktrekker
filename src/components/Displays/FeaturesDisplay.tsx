@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { AudioFeatures } from "../../interfaces/audioFeatures";
+import { AudioFeatures } from "../../interfaces/AudioFeatures";
 import useOutsideClick from "../../utils/useOutsideClose";
 import { SongInfo } from "../../interfaces/songInfo";
 import SongDisplay from "./SongDisplay";

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
 import useSpotify from "../../utils/useSpotify";
-import { AudioFeatures } from "../../interfaces/audioFeatures";
+import { AudioFeatures } from "../../interfaces/AudioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
 import { AudioContext } from "../Pages/Views";
 import BarChartIcon from "@mui/icons-material/BarChart";

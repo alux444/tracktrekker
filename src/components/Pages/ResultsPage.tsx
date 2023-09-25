@@ -8,6 +8,7 @@ import Pagination from "../Misc/Pagination";
 import { AudioContext } from "./Views";
 import { DevContext } from "../../App";
 import usePlaylist from "../../utils/usePlaylist";
+import { AudioFeatures } from "../../interfaces/audioFeatures";
 
 export type SortBy =
     | "none"
@@ -72,6 +73,7 @@ const ResultsPage = ({
     const { audio, setAudioIsPlaying } = useContext(AudioContext);
     const { getRecommended } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
+    const [songsWithFeatures, setSongsWithFeatures] = useState<SongInfo[]>([]);
     const [message, setMessage] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [playlistSaved, setPlaylistSaved] = useState<boolean>(false);
@@ -113,6 +115,7 @@ const ResultsPage = ({
 
     useEffect(() => {
         setPlaylistSaved(false);
+        setSongsWithFeatures(songs);
     }, [songs]);
 
     useEffect(() => {
@@ -152,7 +155,7 @@ const ResultsPage = ({
     };
 
     const uniqueTracks = songs
-        ? songs.filter(
+        ? songsWithFeatures.filter(
               (song, index, self) =>
                   index ===
                   self.findIndex(
@@ -167,11 +170,26 @@ const ResultsPage = ({
     const currentTracks = uniqueTracks.slice(indexOfFirstItem, indexOfLastItem);
 
     const results = currentTracks.map((song) => (
-        <SongDisplay songInfo={song} statsButton={true} key={song.id} />
+        <SongDisplay
+            songInfo={song}
+            statsButton={true}
+            key={song.id}
+            addFeatures={addFeatureToSong}
+        />
     ));
 
     const handleSortChange = (value: SortOption) => {
         setSortingOrder(value);
+    };
+
+    const addFeatureToSong = (id: string, features: AudioFeatures) => {
+        const newSongs = songsWithFeatures;
+        for (let i = 0; i < songsWithFeatures.length; i++) {
+            if (songsWithFeatures[i].id === id) {
+                songsWithFeatures[i].features = features;
+            }
+        }
+        setSongsWithFeatures(newSongs);
     };
 
     return (
