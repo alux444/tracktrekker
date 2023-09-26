@@ -8,7 +8,7 @@ import { ArtistInfo } from "../interfaces/artistInfo";
 
 const useSpotify = () => {
     const { token } = useContext(TokenContext);
-    const { songCart } = useContext(DevContext);
+    const { savedSongs } = useContext(DevContext);
 
     const getGenres = async () => {
         const url =
@@ -91,7 +91,6 @@ const useSpotify = () => {
                 headers,
                 params: query,
             });
-            console.log(response.data);
             if (response.data.tracks) {
                 return response.data;
             } else {
@@ -119,7 +118,6 @@ const useSpotify = () => {
                     limit: 32,
                 },
             });
-            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error("Error:", error);
@@ -236,26 +234,14 @@ const useSpotify = () => {
     };
 
     const getSavedRecommendations = async () => {
-        if (songCart.length == 0) {
-            console.log("No saved songs");
+        if (savedSongs.length == 0) {
             return;
         }
 
         const search: string[] = [];
 
-        if (songCart.length > 5) {
-            const uniqueNumbers: number[] = [];
-
-            while (uniqueNumbers.length < 5) {
-                const randomNumber = Math.floor(Math.random() * 6);
-
-                if (!uniqueNumbers.includes(randomNumber)) {
-                    uniqueNumbers.push(randomNumber);
-                }
-            }
-        } else {
-            songCart.map((song) => search.push(song.id));
-        }
+        const randomIndex = Math.floor(Math.random() * savedSongs.length);
+        search.push(savedSongs[randomIndex].id);
 
         const query: RecommendForm = {
             seed_artists: [],
@@ -265,8 +251,16 @@ const useSpotify = () => {
         };
 
         const res = await getRecommended(query, 10);
-        console.log(res);
-        return res;
+
+        if (res !== 2) {
+            return {
+                res: res.tracks,
+                songName: savedSongs[randomIndex].name,
+                artist: savedSongs[randomIndex].artists[0].name,
+            };
+        } else {
+            return -1;
+        }
     };
 
     return {

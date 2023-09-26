@@ -17,7 +17,7 @@ const useManageQuery = () => {
     const { songs, setSongs } = useContext(SongsInfoContext);
     const { artists, setArtists } = useContext(ArtistInfoContext);
     const { genres, setGenres } = useContext(GenreContext);
-    const { songCart, setSongCart } = useContext(DevContext);
+    const { savedSongs, setSavedSongs } = useContext(DevContext);
 
     const addSong = (song: SongInfo) => {
         if (!songSeeds.includes(song.id)) {
@@ -38,17 +38,17 @@ const useManageQuery = () => {
     };
 
     const addToCart = (song: SongInfo) => {
-        if (!songCart.includes(song)) {
-            const updatedSongs = [...songCart, song];
-            setSongCart(updatedSongs);
+        if (!savedSongs.includes(song)) {
+            const updatedSongs = [...savedSongs, song];
+            setSavedSongs(updatedSongs);
         }
     };
 
     const removeFromCart = (song: SongInfo) => {
-        const updatedSongs = songCart.filter(
+        const updatedSongs = savedSongs.filter(
             (thisSong) => thisSong.id !== song.id
         );
-        setSongCart(updatedSongs);
+        setSavedSongs(updatedSongs);
     };
 
     const addArtist = (artist: ArtistInfo) => {

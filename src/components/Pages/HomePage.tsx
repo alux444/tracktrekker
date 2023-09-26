@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     ArtistSeedContext,
     ExtrasContext,
@@ -15,7 +15,7 @@ import LandingPage from "./LandingPage";
 import PromptScreen from "./PromptScreen";
 import { PromptPageContext } from "./Views";
 import UserTopItemsPage from "./UserTopItemsPage";
-import { ExtraInfo } from "../../interfaces/extrasInfo";
+import useLocalStorage from "../../utils/useLocalStorage";
 
 const HomePage = () => {
     const { token } = useContext(TokenContext);
@@ -27,6 +27,12 @@ const HomePage = () => {
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
     const { extras, setExtras } = useContext(ExtrasContext);
+
+    const { getSaved } = useLocalStorage();
+
+    useEffect(() => {
+        getSaved();
+    }, []);
 
     const generateForm = () => {
         const genreValues: string[] = [];
@@ -45,45 +51,7 @@ const HomePage = () => {
 
         setCurrentQuery(form);
         setPromptPage("results");
-    };
-
-    const changeSort = (sortBy: SortOption) => {
-        const key = sortBy.sortBy;
-
-        const max: number = sortBy.sortBy == "popularity" ? 100 : 1;
-        if (currentQuery) {
-            const newExtras: ExtraInfo = extras;
-
-            if (key === "none") {
-                for (const extraKey in newExtras) {
-                    if (
-                        Object.prototype.hasOwnProperty.call(
-                            newExtras,
-                            extraKey
-                        )
-                    ) {
-                        if (newExtras[extraKey]) {
-                            newExtras[extraKey].target = -1;
-                        }
-                    }
-                }
-            } else {
-                if (!newExtras[key]) {
-                    newExtras[key] = {
-                        min: 0,
-                        max: max,
-                        target: sortBy.descending ? max : 0,
-                    };
-                } else {
-                    newExtras[key]!.target = sortBy.descending ? max : 0;
-                }
-            }
-
-            setExtras(newExtras);
-            generateForm();
-            return;
-        }
-    };
+    }
 
     const returnToSongs = () => {
         setPromptPage("songs");

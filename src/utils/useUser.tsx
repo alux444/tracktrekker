@@ -1,42 +1,18 @@
 import axios from "axios";
 import { useContext } from "react";
-import { DevContext } from "../App";
-
-type HashParams = {
-    access_token?: string;
-};
+import { DevContext, TokenContext } from "../App";
+import useCookieManager from "./useCookieManager";
 
 const useUser = () => {
     const { setUserId } = useContext(DevContext);
-
-    const redirectToSpotifyLogin = async () => {
-        const clientId = import.meta.env.VITE_ID;
-        const redirectUri = encodeURIComponent(
-            "https://alux444.github.io/tracktrekker/"
-        );
-        // const redirectUri = encodeURIComponent(
-        //     "http://localhost:5173/tracktrekker/"
-        // );
-        const scopes = encodeURIComponent(
-            "user-top-read,playlist-modify-public,playlist-modify-private,user-read-private,user-read-email"
-        );
-        const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scopes}&show_dialog=true`;
-        window.location.href = authUrl;
-    };
-
-    const extractAccessTokenFromURL = (): string | null => {
-        const hashParams: HashParams = window.location.hash
-            .substr(1)
-            .split("&")
-            .reduce((result, item) => {
-                const parts = item.split("=");
-                result[parts[0]] = parts[1];
-                return result;
-            }, {});
-
-        removeAccessTokenFromURL();
-        return hashParams.access_token || null;
-    };
+    const { setToken } = useContext(TokenContext);
+    const {
+        getAuth,
+        getTokenFromUrl,
+        findTokenFromCookie,
+        checkCookie,
+        deleteCookies,
+    } = useCookieManager();
 
     const removeAccessTokenFromURL = () => {
         window.history.replaceState(
@@ -47,14 +23,20 @@ const useUser = () => {
     };
 
     const promptUserLogin = async () => {
-        const code = extractAccessTokenFromURL();
-        console.log(code);
-        if (code === null) {
-            redirectToSpotifyLogin();
-            return null;
+        const res = await getTokenFromUrl();
+        if (res == null) {
+            await getAuth();
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get("code");
+            if (code) {
+                window.location.reload();
+            }
         } else {
-            return code;
+            removeAccessTokenFromURL();
+            await getUserId(res);
         }
+
+        return 1;
     };
 
     const getUserId = async (token: string) => {
@@ -69,12 +51,57 @@ const useUser = () => {
             setUserId(response.data.id);
             return response.data;
         } catch (error) {
-            console.log(error);
+            return -1;
+        }
+    };
+
+    const initialiseCookies = async () => {
+        checkCookie();
+        const hashCode = getTokenFromUrl();
+        let token = findTokenFromCookie();
+
+        if (!token && hashCode) {
+            token = getTokenFromUrl();
+        } else if (token && hashCode) {
+            token = getTokenFromUrl();
+        }
+
+        window.location.hash = "";
+
+        if (token) {
+            const isTokenValid = await checkTokenIsValid(token);
+            console.log(isTokenValid);
+
+            if (!isTokenValid) {
+                deleteCookies();
+                return false;
+            }
+
+            await getUserId(token);
+            setToken(token);
+            return true;
+        }
+        return false;
+    };
+
+    const checkTokenIsValid = async (token: string) => {
+        const url =
+            "https://api.spotify.com/v1/recommendations/available-genre-seeds";
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        try {
+            const response = await axios.get(url, { headers });
+            return response;
+        } catch (error) {
+            console.error("Error:", error);
             return null;
         }
     };
 
-    return { promptUserLogin, getUserId };
+    return { promptUserLogin, getUserId, initialiseCookies };
 };
 
 export default useUser;

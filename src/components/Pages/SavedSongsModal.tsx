@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import useOutsideClick from "../../utils/useOutsideClose";
 import { DevContext } from "../../App";
-import CartSongDisplay from "../Displays/CartSongDisplay";
 import usePlaylist from "../../utils/usePlaylist";
+import SavedSongDisplay from "../Displays/SavedSongDisplay";
 
-const SongCart = ({ onClose }: { onClose: () => void }) => {
-    const { devMode, songCart, setSongCart } = useContext(DevContext);
+const SavedSongsModal = ({ onClose }: { onClose: () => void }) => {
+    const { devMode, savedSongs, setSavedSongs } = useContext(DevContext);
     const [saved, setSaved] = useState<boolean>(false);
 
     const modalRef = useRef(null);
@@ -14,10 +14,10 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
 
     useEffect(() => {
         setSaved(false);
-    }, [songCart]);
+    }, [savedSongs]);
 
-    const cart = songCart.map((song) => (
-        <CartSongDisplay songInfo={song} key={song.id} />
+    const cart = savedSongs.map((song) => (
+        <SavedSongDisplay songInfo={song} key={song.id} />
     ));
 
     return (
@@ -35,19 +35,19 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
                 <p className="grad text-lg">Saved Songs</p>
                 <p>Click the heart button to save songs!</p>
                 <p className="">
-                    {songCart.length} {songCart.length == 1 ? "Song" : "Songs"}{" "}
-                    Saved
+                    {savedSongs.length}{" "}
+                    {savedSongs.length == 1 ? "Song" : "Songs"} Saved
                 </p>
-                {songCart.length > 0 && (
+                {savedSongs.length > 0 && (
                     <button
                         className="buttoncancel"
-                        onClick={() => setSongCart([])}
+                        onClick={() => setSavedSongs([])}
                     >
                         <span>Clear Songs</span>
                     </button>
                 )}
                 {cart}
-                {songCart.length > 0 &&
+                {savedSongs.length > 0 &&
                     devMode &&
                     (saved ? (
                         <p className="grad">Saved to your Spotify!</p>
@@ -55,7 +55,7 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
                         <button
                             className="grad button2"
                             onClick={() => {
-                                createPlaylist(songCart);
+                                createPlaylist(savedSongs);
                                 setSaved(true);
                             }}
                         >
@@ -67,4 +67,4 @@ const SongCart = ({ onClose }: { onClose: () => void }) => {
     );
 };
 
-export default SongCart;
+export default SavedSongsModal;

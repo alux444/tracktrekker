@@ -2,14 +2,18 @@ describe("E2E - Searching for song, getting results", () => {
     it("should visit", () => {
         cy.visit("http://localhost:5173/tracktrekker/");
 
+        cy.get("#navbar").should("exist");
+        cy.get("#footer").should("exist");
+        cy.get("#landing").should("exist");
         cy.contains("Get Started").click();
 
+        cy.get("#landing").should("not.exist");
         //select a song
+
         cy.get("#getResultsButton").should("not.exist");
         cy.contains("Songs").click();
         cy.get("#askForSongs").should("be.visible");
         cy.get("#songSearchBar").type("Miracle");
-        cy.get("#searchForm").submit();
         cy.get("#searchResults").should("be.visible");
         cy.get(".songDisplay").eq(0).find("#songAddButton").click();
         cy.get(".songDisplay").eq(1).find("#songAddButton").click();
@@ -24,7 +28,6 @@ describe("E2E - Searching for song, getting results", () => {
         cy.get("#askForSongs").should("not.exist");
         cy.get("#askForArtists").should("be.visible");
         cy.get("#artistSearchBar").type("keshi");
-        cy.get("#searchForm").submit();
         cy.get("#searchResults").should("be.visible");
         cy.get(".artistDisplay").eq(0).find("#artistAddButton").click();
         cy.get(".artistDisplay").eq(1).find("#artistAddButton").click();

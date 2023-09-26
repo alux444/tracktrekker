@@ -9,7 +9,6 @@ const usePlaylist = () => {
 
     const createPlaylist = async (songs: SongInfo[]) => {
         const num: number = Math.floor(Math.random() * 1000);
-        console.log(userId);
 
         const url = `https://api.spotify.com/v1/users/${userId}/playlists`;
 
@@ -30,7 +29,6 @@ const usePlaylist = () => {
             const response = await axios.post(url, body, {
                 headers,
             });
-            console.log(response.data);
             playlistId = response.data.id;
         } catch (error) {
             console.log(error);

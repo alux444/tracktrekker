@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DevContext, TokenContext } from "../../App";
 import hero from "../../imgs/hero.jpg";
 import useUser from "../../utils/useUser";
@@ -9,30 +9,44 @@ const LandingPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { devMode, setDevMode } = useContext(DevContext);
 
-    const { promptUserLogin, getUserId } = useUser();
+    const { promptUserLogin, initialiseCookies } = useUser();
+
+    useEffect(() => {
+        const checkForCookies = async () => {
+            const cookiesExist = await initialiseCookies();
+
+            if (cookiesExist) {
+                setLoading(false);
+                setDevMode(true);
+                return;
+            }
+        };
+        checkForCookies();
+    }, []);
 
     const setAccessToken = async () => {
         setLoading(true);
-        let token: string | null;
+
         if (devMode) {
-            token = await promptUserLogin();
-            if (token != null) {
-                getUserId(token);
+            const res: number = await promptUserLogin();
+            if (res == null) {
+                const token = await getAccessToken();
+                setToken(token);
+                setDevMode(false);
             }
         } else {
-            token = await getAccessToken();
-        }
-        if (token !== null) {
-            console.log(token);
+            const token = await getAccessToken();
             setToken(token);
-            setLoading(false);
-        } else {
-            console.log("error getting token");
         }
+
+        setLoading(false);
     };
 
     return (
-        <div className="p-3 w-[80vw] gap-5 items-center flex flex-col md:flex-row justify-center">
+        <div
+            id="landing"
+            className="p-3 w-[80vw] gap-5 items-center flex flex-col md:flex-row justify-center"
+        >
             <div className="flex flex-col gap-3 items-center md:items-center">
                 <div className="flex flex-col">
                     <h2 className="grad text-4xl ">Find</h2>
