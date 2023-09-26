@@ -26,7 +26,7 @@ const SearchForm = ({
     const [error, setError] = useState<boolean>(false);
 
     const { getSearch } = useSpotify();
-    const { getTracks, getArtists } = useSpotify();
+    const { getTracks, getArtists, getFeatures } = useSpotify();
 
     useEffect(() => {
         if (audio !== null) {
@@ -102,7 +102,13 @@ const SearchForm = ({
             setArtistResults(res as ArtistInfo[]);
             setTrackResults([]);
         } else {
-            setTrackResults(res as SongInfo[]);
+            const tracks = res as SongInfo[];
+            const songIds = res.map((song) => song.id).join(",");
+            const features = await getFeatures(songIds);
+            for (let i = 0; i < tracks.length; i++) {
+                tracks[i].features = features[i];
+            }
+            setTrackResults(tracks);
             setArtistResults([]);
         }
     };
