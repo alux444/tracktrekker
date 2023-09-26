@@ -159,7 +159,7 @@ const ResultsPage = ({
           )
         : [];
 
-    const ascendingOrder = uniqueTracks.sort((a, b) => {
+    const ascendingOrder = [...uniqueTracks].sort((a, b) => {
         const aFeatures = a.features?.[sortingOrder.sortBy];
         const bFeatures = b.features?.[sortingOrder.sortBy];
 
@@ -170,7 +170,7 @@ const ResultsPage = ({
         return 0;
     });
 
-    const descendingOrder = uniqueTracks.sort((a, b) => {
+    const descendingOrder = [...uniqueTracks].sort((a, b) => {
         const aFeatures = a.features?.[sortingOrder.sortBy];
         const bFeatures = b.features?.[sortingOrder.sortBy];
 
@@ -196,7 +196,8 @@ const ResultsPage = ({
     ));
 
     const handleSortChange = (value: SortOption) => {
-        console.log(value);
+        console.log(ascendingOrder);
+        console.log(descendingOrder);
         setSortingOrder(value);
     };
 
