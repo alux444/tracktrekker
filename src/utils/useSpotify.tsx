@@ -42,7 +42,9 @@ const useSpotify = () => {
         try {
             const response = await axios.get(url, { headers, params: query });
             const res = response.data;
-            res.happiness = res.valence;
+            for (let i = 0; i < res.audio_features.length; i++) {
+                res.audio_features[i].happiness = res.audio_features[i].valence;
+            }
             return response.data;
         } catch (error) {
             console.log(error);

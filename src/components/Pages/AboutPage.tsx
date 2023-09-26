@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const AboutPage = () => {
     const [expandHistory, setExpandHistory] = useState(false);
+
     return (
         <div className="flex justify-center text-center flex-wrap flex-col items-center p-2">
             <h2 className="text-lg grad">About TrackTrekker</h2>

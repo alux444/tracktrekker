@@ -104,8 +104,10 @@ const ResultsPage = ({
         const songIds = res.tracks.map((song) => song.id).join(",");
         const features = await getFeatures(songIds);
         if (features) {
-            for (let i = 0; i < features.length; i++) {
-                res.tracks[i].features = features[i];
+            for (let i = 0; i < features.audio_features.length; i++) {
+                features.audio_features[i].popularity =
+                    res.tracks[i].popularity;
+                res.tracks[i].features = features.audio_features[i];
             }
         }
         setSongs(res.tracks);
@@ -157,7 +159,7 @@ const ResultsPage = ({
           )
         : [];
 
-    const ascendingOrder = uniqueTracks.sort((a, b) => {
+    const ascendingOrder = [...uniqueTracks].sort((a, b) => {
         const aFeatures = a.features?.[sortingOrder.sortBy];
         const bFeatures = b.features?.[sortingOrder.sortBy];
 
@@ -168,7 +170,7 @@ const ResultsPage = ({
         return 0;
     });
 
-    const descendingOrder = uniqueTracks.sort((a, b) => {
+    const descendingOrder = [...uniqueTracks].sort((a, b) => {
         const aFeatures = a.features?.[sortingOrder.sortBy];
         const bFeatures = b.features?.[sortingOrder.sortBy];
 
@@ -194,6 +196,8 @@ const ResultsPage = ({
     ));
 
     const handleSortChange = (value: SortOption) => {
+        console.log(ascendingOrder);
+        console.log(descendingOrder);
         setSortingOrder(value);
     };
 

@@ -81,10 +81,12 @@ const SearchForm = ({
         const songIds = res.tracks.items.map((song) => song.id).join(",");
         const features = await getFeatures(songIds);
         if (features) {
-            for (let i = 0; i < features.length; i++) {
-                res.tracks[i].features = features[i];
+            for (let i = 0; i < features.audio_features.length; i++) {
+                res.tracks.items[i].features = features.audio_features[i];
+                console.log("a");
             }
         }
+        console.log(res.tracks.items);
         setTrackResults(res.tracks.items);
         setArtistResults(res.artists.items.slice(0, 30));
         setLoading(false);
