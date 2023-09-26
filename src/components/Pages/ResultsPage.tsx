@@ -61,12 +61,10 @@ const ResultsPage = ({
     query,
     goBack,
     filters,
-    changeSort,
 }: {
     query: RecommendForm;
     goBack: () => void;
     filters: number;
-    changeSort: (SortBy) => void;
 }) => {
     const { devMode } = useContext(DevContext);
     const { audio, setAudioIsPlaying } = useContext(AudioContext);
@@ -84,7 +82,6 @@ const ResultsPage = ({
     const { createPlaylist } = usePlaylist();
 
     const topRef = useRef(null);
-    const isInitialMount = useRef(true);
 
     function scrollToTop(): void {
         window.scrollTo({
@@ -106,8 +103,10 @@ const ResultsPage = ({
 
         const songIds = res.tracks.map((song) => song.id).join(",");
         const features = await getFeatures(songIds);
-        for (let i = 0; i < features.length; i++) {
-            res.tracks[i].features = features[i];
+        if (features) {
+            for (let i = 0; i < features.length; i++) {
+                res.tracks[i].features = features[i];
+            }
         }
         setSongs(res.tracks);
     };
@@ -130,14 +129,6 @@ const ResultsPage = ({
             setAudioIsPlaying(false);
         }
     }, [currentPage, songs]);
-
-    useEffect(() => {
-        if (!isInitialMount.current) {
-            changeSort(sortingOrder);
-        } else {
-            isInitialMount.current = false;
-        }
-    }, [sortingOrder]);
 
     useEffect(() => {
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {

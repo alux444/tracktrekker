@@ -28,7 +28,7 @@ const SearchForm = ({
     const [loading, setLoading] = useState<boolean>(false);
     const debouncedSearch = useDebounce(query, 500);
 
-    const { getSearch } = useSpotify();
+    const { getSearch, getFeatures } = useSpotify();
     // const { getTracks, getArtists } = useSpotify();
 
     useEffect(() => {
@@ -78,6 +78,13 @@ const SearchForm = ({
             setError(true);
         }
 
+        const songIds = res.tracks.items.map((song) => song.id).join(",");
+        const features = await getFeatures(songIds);
+        if (features) {
+            for (let i = 0; i < features.length; i++) {
+                res.tracks[i].features = features[i];
+            }
+        }
         setTrackResults(res.tracks.items);
         setArtistResults(res.artists.items.slice(0, 30));
         setLoading(false);
