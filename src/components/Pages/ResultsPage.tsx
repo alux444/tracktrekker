@@ -106,7 +106,9 @@ const ResultsPage = ({
 
         const songIds = res.tracks.map((song) => song.id).join(",");
         const features = await getFeatures(songIds);
-        console.log(features);
+        for (let i = 0; i < features.length; i++) {
+            res.tracks[i].features = features[i];
+        }
         setSongs(res.tracks);
     };
 
@@ -197,12 +199,7 @@ const ResultsPage = ({
             : ascendingOrder.slice(indexOfFirstItem, indexOfLastItem);
 
     const results = currentTracks.map((song) => (
-        <SongDisplay
-            songInfo={song}
-            statsButton={true}
-            key={song.id}
-            features={null}
-        />
+        <SongDisplay songInfo={song} statsButton={true} key={song.id} />
     ));
 
     const handleSortChange = (value: SortOption) => {

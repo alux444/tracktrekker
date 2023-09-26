@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
-import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
 import { AudioContext } from "../Pages/Views";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -22,11 +21,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 const SongDisplay = ({
     songInfo,
     statsButton,
-    features,
 }: {
     songInfo: SongInfo;
     statsButton: boolean;
-    features: AudioFeatures | null;
 }) => {
     const {
         audio,
@@ -285,9 +282,9 @@ const SongDisplay = ({
                         </div>
                     </div>
                 </div>
-                {features && thisShowStats && (
+                {songInfo.features && thisShowStats && (
                     <FeaturesDisplay
-                        features={features}
+                        features={songInfo.features}
                         onClose={() => setThisShowStats(false)}
                         songInfo={songInfo}
                     />
