@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { SongInfo } from "../../interfaces/songInfo";
 import useManageQuery from "../../utils/useManageQuery";
-import useSpotify from "../../utils/useSpotify";
-import { AudioFeatures } from "../../interfaces/audioFeatures";
 import FeaturesDisplay from "./FeaturesDisplay";
 import { AudioContext } from "../Pages/Views";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -43,10 +41,7 @@ const SongDisplay = ({
     const [thisShowStats, setThisShowStats] = useState<boolean>(false);
     const [selected, setSelected] = useState(false);
     const [inCart, setInCart] = useState(false);
-    const [features, setFeatures] = useState<AudioFeatures | undefined>();
     const { addSong, removeSong, addToCart, removeFromCart } = useManageQuery();
-
-    const { getFeatures } = useSpotify();
 
     useEffect(() => {
         const checkSongStatus = () => {
@@ -67,18 +62,6 @@ const SongDisplay = ({
         };
         checksavedSongsStatus();
     }, [savedSongs, songInfo]);
-
-    useEffect(() => {
-        const fetchFeaturesForThisSong = async () => {
-            const res: AudioFeatures | undefined = await getFeatures(
-                songInfo.id
-            );
-            if (res !== undefined) {
-                setFeatures(res);
-            }
-        };
-        fetchFeaturesForThisSong();
-    }, [songInfo]);
 
     const playPreview = () => {
         if (songInfo.preview_url) {
@@ -266,7 +249,7 @@ const SongDisplay = ({
                                             </span>
                                         </button>
                                     )}
-                                    {statsButton && (
+                                    {statsButton && songInfo.features && (
                                         <button
                                             className="w-full"
                                             type="button"
@@ -299,9 +282,9 @@ const SongDisplay = ({
                         </div>
                     </div>
                 </div>
-                {features && thisShowStats && (
+                {songInfo.features && thisShowStats && (
                     <FeaturesDisplay
-                        features={features}
+                        features={songInfo.features}
                         onClose={() => setThisShowStats(false)}
                         songInfo={songInfo}
                     />

@@ -63,9 +63,9 @@ const FeaturesDisplay = ({
                     />
                     <StatsBar
                         scale={1}
-                        value={features.valence}
+                        value={features.happiness}
                         filters={filters}
-                        type={"valence"}
+                        type={"happiness"}
                     />
                 </div>
                 <div className="grad flex gap-1 flex-wrap items-center">

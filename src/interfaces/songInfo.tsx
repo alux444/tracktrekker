@@ -1,3 +1,5 @@
+import { AudioFeatures } from "./audioFeatures";
+
 export interface SongInfo {
     album: {
         album_type: string;
@@ -58,4 +60,5 @@ export interface SongInfo {
     track_number: number;
     type: string;
     uri: string;
+    features: AudioFeatures | undefined;
 }

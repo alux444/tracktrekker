@@ -54,9 +54,9 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ onClose }) => {
                     />
 
                     <ExtraCriteriaTriple
-                        criteriaName="valence"
+                        criteriaName="happiness"
                         maxValue={1}
-                        dialog={descriptions.valence}
+                        dialog={descriptions.happiness}
                     />
                 </div>
             </div>

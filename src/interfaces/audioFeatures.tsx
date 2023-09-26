@@ -8,7 +8,7 @@ export type AudioFeatures = {
     acousticness: number;
     instrumentalness: number;
     liveness: number;
-    valence: number;
+    happiness: number;
     tempo: number;
     type: string;
     id: string;
