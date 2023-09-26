@@ -104,8 +104,10 @@ const ResultsPage = ({
         const songIds = res.tracks.map((song) => song.id).join(",");
         const features = await getFeatures(songIds);
         if (features) {
-            for (let i = 0; i < features.length; i++) {
-                res.tracks[i].features = features[i];
+            for (let i = 0; i < features.audio_features.length; i++) {
+                features.audio_features[i].popularity =
+                    res.tracks[i].popularity;
+                res.tracks[i].features = features.audio_features[i];
             }
         }
         setSongs(res.tracks);
@@ -194,6 +196,7 @@ const ResultsPage = ({
     ));
 
     const handleSortChange = (value: SortOption) => {
+        console.log(value);
         setSortingOrder(value);
     };
 
