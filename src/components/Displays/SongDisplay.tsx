@@ -249,7 +249,7 @@ const SongDisplay = ({
                                             </span>
                                         </button>
                                     )}
-                                    {statsButton && (
+                                    {statsButton && songInfo.features && (
                                         <button
                                             className="w-full"
                                             type="button"
