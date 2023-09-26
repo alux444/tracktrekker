@@ -10,7 +10,7 @@ import AskForSongs from "../AskFor/AskForSongs";
 import AskForArtists from "../AskFor/AskForArtists";
 import AskForGenres from "../AskFor/AskForGenres";
 import { RecommendForm } from "../../interfaces/recommendForm";
-import ResultsPage from "./ResultsPage";
+import ResultsPage, { SortOption } from "./ResultsPage";
 import LandingPage from "./LandingPage";
 import PromptScreen from "./PromptScreen";
 import { PromptPageContext } from "./Views";
@@ -26,7 +26,7 @@ const HomePage = () => {
     const { songSeeds } = useContext(SongSeedContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
-    const { extras } = useContext(ExtrasContext);
+    const { extras, setExtras } = useContext(ExtrasContext);
 
     const { getSaved } = useLocalStorage();
 
@@ -51,7 +51,7 @@ const HomePage = () => {
 
         setCurrentQuery(form);
         setPromptPage("results");
-    };
+    }
 
     const returnToSongs = () => {
         setPromptPage("songs");
@@ -75,6 +75,7 @@ const HomePage = () => {
                             query={currentQuery}
                             goBack={returnToSongs}
                             filters={queryFilters}
+                            changeSort={changeSort}
                         />
                     )}
                 </div>

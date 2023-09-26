@@ -3,7 +3,7 @@ import { ExtraInfo } from "../../interfaces/extrasInfo";
 type FilterOption =
     | "popularity"
     | "energy"
-    | "valence"
+    | "happiness"
     | "danceability"
     | "acousticness";
 

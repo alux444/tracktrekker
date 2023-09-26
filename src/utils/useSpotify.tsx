@@ -28,15 +28,21 @@ const useSpotify = () => {
         }
     };
 
-    const getFeatures = async (songId: string) => {
-        const url = `https://api.spotify.com/v1/audio-features/${songId}`;
+    const getFeatures = async (songIds: string) => {
+        const url = `https://api.spotify.com/v1/audio-features`;
 
         const headers = {
             Authorization: `Bearer ${token}`,
         };
 
+        const query = {
+            ids: songIds,
+        };
+
         try {
-            const response = await axios.get(url, { headers });
+            const response = await axios.get(url, { headers, params: query });
+            const res = response.data;
+            res.happiness = res.valence;
             return response.data;
         } catch (error) {
             console.log(error);
