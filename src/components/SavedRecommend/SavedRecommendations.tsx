@@ -11,7 +11,7 @@ type NameAndArtist = {
 
 const SavedRecommendations = ({ error }: { error: boolean }) => {
     const { audio, setAudioIsPlaying } = useContext(AudioContext);
-    const { getSavedRecommendations } = useSpotify();
+    const { getSavedRecommendations, getFeatures } = useSpotify();
     const [results, setResults] = useState<SongInfo[]>([]);
     const [songSearched, setSongSearched] = useState<NameAndArtist>();
     const [message, setMessage] = useState<boolean>(false);
@@ -30,6 +30,13 @@ const SavedRecommendations = ({ error }: { error: boolean }) => {
             setResults([]);
             setMessage(true);
             return;
+        }
+        const songIds = res.res.map((song) => song.id).join(",");
+        const features = await getFeatures(songIds);
+        if (features) {
+            for (let i = 0; i < features.audio_features.length; i++) {
+                res.res[i].features = features.audio_features[i];
+            }
         }
         setResults(res.res);
         setSongSearched({ name: res.songName, artist: res.artist });
