@@ -217,11 +217,9 @@ const ResultsPage = ({
             </p>
             <div className="flex flex-col gap-1 text-center items-center">
                 <div className="flex gap-1">
-                    {sortingOrder.sortBy == "none" && (
-                        <button className="button2" onClick={getSongs}>
-                            <span className="grad">Reroll</span>
-                        </button>
-                    )}
+                    <button className="button2" onClick={getSongs}>
+                        <span className="grad">Reroll</span>
+                    </button>
                     <div className="flex text-center items-center">
                         {devMode && !playlistSaved && (
                             <button
