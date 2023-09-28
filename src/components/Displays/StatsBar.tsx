@@ -10,7 +10,6 @@ type FilterOption =
 type Range = {
     upper: number;
     lower: number;
-    target: number;
 };
 
 const colours = [
@@ -47,7 +46,6 @@ const StatsBar = ({
         filtersRange = {
             upper: (filters[type]!.max / scale) * 100,
             lower: (filters[type]!.min / scale) * 100,
-            target: filters[type]!.target,
         };
     }
 
