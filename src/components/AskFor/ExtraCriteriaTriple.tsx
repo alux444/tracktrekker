@@ -3,7 +3,7 @@ import { ExtrasContext } from "../../App";
 import { ExtraInfo } from "../../interfaces/extrasInfo";
 import "./multislider.css";
 
-type MinMaxTargConfig = [number, number, number];
+type MinMaxDouble = [number, number];
 
 const ExtraCriteriaTriple = ({
     criteriaName,
@@ -20,26 +20,24 @@ const ExtraCriteriaTriple = ({
 
     const criteria = extras?.[criteriaName];
 
-    const initialMinMaxTarg: MinMaxTargConfig = criteria
-        ? [criteria.min, criteria.max, criteria.target ? criteria.target : -1]
-        : [0, maxValue, -1];
+    const initialMinMax: MinMaxDouble = criteria
+        ? [criteria.min, criteria.max]
+        : [0, maxValue];
 
     const [showSelection, setShowSelection] = useState<boolean>(initial);
     const [showDesc, setShowDesc] = useState<boolean>(false);
-    const [min, setMin] = useState<number>(initialMinMaxTarg[0]);
-    const [max, setMax] = useState<number>(initialMinMaxTarg[1]);
-    const [targ, setTarg] = useState<number>(initialMinMaxTarg[2]);
+    const [min, setMin] = useState<number>(initialMinMax[0]);
+    const [max, setMax] = useState<number>(initialMinMax[1]);
 
     useEffect(() => {
         const initial = criteriaName in extras;
         const criteria = extras?.[criteriaName];
-        const initialMinMaxTarg: MinMaxTargConfig = criteria
-            ? [criteria.min, criteria.max, criteria.target]
-            : [0, maxValue, -1];
+        const initialMinMax: MinMaxDouble = criteria
+            ? [criteria.min, criteria.max]
+            : [0, maxValue];
         setShowSelection(initial);
-        setMin(initialMinMaxTarg[0]);
-        setMax(initialMinMaxTarg[1]);
-        setTarg(initialMinMaxTarg[2]);
+        setMin(initialMinMax[0]);
+        setMax(initialMinMax[1]);
     }, [extras]);
 
     const updateForm = () => {
@@ -52,7 +50,6 @@ const ExtraCriteriaTriple = ({
         updatedExtras[criteriaName] = {
             min: min,
             max: max,
-            target: targ,
         };
 
         setExtras(updatedExtras);
@@ -61,7 +58,7 @@ const ExtraCriteriaTriple = ({
     useEffect(() => {
         const timer = setTimeout(updateForm, 500);
         return () => clearTimeout(timer);
-    }, [min, max, targ, showSelection]);
+    }, [min, max, showSelection]);
 
     const handleChangeMin = (e: ChangeEvent<HTMLInputElement>) => {
         const val: number = parseFloat(e.target.value);
@@ -81,28 +78,12 @@ const ExtraCriteriaTriple = ({
         }
     };
 
-    const handleChangeTarg = (e: ChangeEvent<HTMLInputElement>) => {
-        setTarg(parseFloat(e.target.value));
-    };
-
-    const enableTarget = () => {
-        const val: number = parseFloat(
-            Math.abs((max - min) / 2 + min).toFixed(maxValue == 1 ? 2 : 0)
-        );
-        setTarg(val);
-    };
-
-    const disableTarget = () => {
-        setTarg(-1);
-    };
-
     const resetSelection = () => {
         setShowSelection(true);
         const updatedExtras: ExtraInfo = { ...extras };
         updatedExtras[criteriaName] = {
             min: min,
             max: max,
-            target: targ,
         };
 
         setExtras(updatedExtras);
@@ -150,21 +131,6 @@ const ExtraCriteriaTriple = ({
                                 >
                                     Disable Filter
                                 </button>
-                                {targ !== -1 ? (
-                                    <button
-                                        onClick={disableTarget}
-                                        className="buttoncancel h-fit"
-                                    >
-                                        Disable Target
-                                    </button>
-                                ) : (
-                                    <button
-                                        onClick={enableTarget}
-                                        className="buttonselect h-fit"
-                                    >
-                                        Enable Target
-                                    </button>
-                                )}
                                 <button
                                     className="buttonprev"
                                     onClick={() => setShowDesc(!showDesc)}
@@ -185,14 +151,6 @@ const ExtraCriteriaTriple = ({
                                         ? (max * 100).toFixed(0)
                                         : max}
                                 </p>
-                                {targ !== -1 && (
-                                    <p>
-                                        Target:{" "}
-                                        {maxValue === 1
-                                            ? (targ * 100).toFixed(0)
-                                            : targ}
-                                    </p>
-                                )}
                                 <div className="range-slider flex h-[30px] mt-[20px] w-[200px] lg:w-[300px]">
                                     <input
                                         className="min"
@@ -210,16 +168,6 @@ const ExtraCriteriaTriple = ({
                                         value={max}
                                         onChange={handleChangeMax}
                                     />
-                                    {targ !== -1 && (
-                                        <input
-                                            className="targ"
-                                            type="range"
-                                            step={maxValue / 100}
-                                            max={maxValue}
-                                            value={targ}
-                                            onChange={handleChangeTarg}
-                                        />
-                                    )}
                                 </div>
                             </div>
                         </div>
