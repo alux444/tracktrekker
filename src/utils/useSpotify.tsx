@@ -61,9 +61,6 @@ const useSpotify = () => {
                 if (value) {
                     extraParams[`min_${key}`] = value.min;
                     extraParams[`max_${key}`] = value.max;
-                    if (value.target !== -1) {
-                        extraParams[`target_${key}`] = value.target;
-                    }
                 }
             }
         }

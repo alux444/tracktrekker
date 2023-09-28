@@ -20,12 +20,8 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ onClose }) => {
                 <div className="flex flex-col text-center text-wrap justify-center w-full">
                     <h2 className="text-lg grad">Manage Filters</h2>
                     <p>
-                        All search results will be FILTERED to be within your
+                        All search results will be filtered to be within your
                         min to max range.
-                    </p>
-                    <p>
-                        With target, results will be SORTED based on CLOSEST to
-                        your given target.
                     </p>
                 </div>
                 <div className="flex flex-col gap-3 w-full">
