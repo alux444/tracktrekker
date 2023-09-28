@@ -100,7 +100,7 @@ const ExtraCriteriaTriple = ({
         <div className="flex flex-col items-center text-center w-full">
             <div className="flex gap-2 justify-center items-center align-center">
                 {!showSelection && (
-                    <div className="flex gap-1 flex-col items-center">
+                    <div className="flex gap-1 items-center">
                         <button onClick={resetSelection} className="button2">
                             <span className="grad">
                                 Enable {criteriaName.charAt(0).toUpperCase()}
@@ -108,34 +108,36 @@ const ExtraCriteriaTriple = ({
                             </span>
                         </button>
                         <button
-                            className="buttonprev"
+                            className="buttonquestion"
                             onClick={() => setShowDesc(!showDesc)}
                         >
-                            What is {criteriaName}?
+                            ?
                         </button>
                     </div>
                 )}
                 {showSelection && (
                     <div className="flex flex-col justify-center items-center align-center">
-                        <div className="flex flex-col gap-1 items-center p-1">
-                            <p className="grad">
-                                {" "}
-                                {criteriaName.charAt(0).toUpperCase()}
-                                {criteriaName.slice(1)}
-                            </p>
-
+                        <div className="flex flex-col gap-1 items-center p-">
                             <div className="flex gap-1 items-center">
+                                <p className="grad text-lg">
+                                    {" "}
+                                    {criteriaName.charAt(0).toUpperCase()}
+                                    {criteriaName.slice(1)}
+                                </p>
+                                <button
+                                    className="buttonquestion"
+                                    onClick={() => setShowDesc(!showDesc)}
+                                >
+                                    ?
+                                </button>
+                            </div>
+
+                            <div className="flex gap-1 pt-1 items-center">
                                 <button
                                     onClick={clearSelection}
                                     className="buttoncancel h-min"
                                 >
                                     Disable Filter
-                                </button>
-                                <button
-                                    className="buttonprev"
-                                    onClick={() => setShowDesc(!showDesc)}
-                                >
-                                    Description
                                 </button>
                             </div>
                         </div>
