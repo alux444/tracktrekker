@@ -177,7 +177,11 @@ const SearchForm = ({
 
     return (
         <div className="flex flex-col p-2 w-screen items-center gap-1">
-            <form id="searchForm" className="flex flex-col gap-2 items-center">
+            <form
+                id="searchForm"
+                className="flex flex-col gap-2 items-center"
+                onSubmit={(e) => e.preventDefault()}
+            >
                 <input
                     id={type === "track" ? "songSearchBar" : "artistSearchBar"}
                     placeholder={
