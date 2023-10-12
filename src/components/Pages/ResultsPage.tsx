@@ -130,7 +130,7 @@ const ResultsPage = ({
             audio.pause();
             setAudioIsPlaying(false);
         }
-    }, [currentPage, songs]);
+    }, [currentPage, songs, sortingOrder]);
 
     useEffect(() => {
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {
