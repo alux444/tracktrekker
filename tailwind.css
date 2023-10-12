@@ -1682,6 +1682,10 @@ input[type="range"]::-webkit-slider-thumb {
     width: 40vw;
   }
 
+  .sm\:w-\[50\%\] {
+    width: 50%;
+  }
+
   .sm\:justify-start {
     justify-content: flex-start;
   }

@@ -63,7 +63,7 @@ const ArtistDisplay = ({
                     selected &&
                     songs.length + artists.length + genres.length > 5 &&
                     "border-lightred"
-                } hover flex flex-col md:flex-row justify-between gap-2 items-center border-[1px] border-dark2 p-3 w-fit rounded-[20px]`}
+                } hover flex flex-col justify-between gap-2 items-center border-[1px] border-dark2 p-3 w-fit rounded-[20px]`}
             >
                 <div className="flex flex-col gap-1 text-center items-center">
                     <div className="flex flex-wrap gap-1">
@@ -154,7 +154,7 @@ const ArtistDisplay = ({
                 </div>
 
                 {type === "search" && (
-                    <div className="flex flex-col w-[90vw] sm:w-[40vw] lg:w-[25vw] xl:w-[20vw] md:w-[35vw]">
+                    <div className="flex flex-col w-[90vw] sm:w-[40vw]">
                         {allSongs}
                     </div>
                 )}
