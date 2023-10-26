@@ -6,7 +6,7 @@ import SongDisplay from "../Displays/SongDisplay";
 import VolumeSlider from "../Misc/VolumeSlider";
 import Pagination from "../Misc/Pagination";
 import { AudioContext } from "./Views";
-import { DevContext } from "../../App";
+import { LoginContext } from "../../App";
 import usePlaylist from "../../utils/usePlaylist";
 
 export type SortBy =
@@ -66,7 +66,7 @@ const ResultsPage = ({
     goBack: () => void;
     filters: number;
 }) => {
-    const { devMode } = useContext(DevContext);
+    const { loginMode } = useContext(LoginContext);
     const { audio, setAudioIsPlaying } = useContext(AudioContext);
     const { getRecommended, getFeatures } = useSpotify();
     const [songs, setSongs] = useState<SongInfo[]>([]);
@@ -221,7 +221,7 @@ const ResultsPage = ({
                         <span className="grad">Reroll</span>
                     </button>
                     <div className="flex text-center items-center">
-                        {devMode && !playlistSaved && (
+                        {loginMode && !playlistSaved && (
                             <button
                                 className="button2"
                                 onClick={() => {
@@ -242,7 +242,7 @@ const ResultsPage = ({
                         <span>Back to Search</span>
                     </button>
                 </div>
-                {devMode && playlistSaved && (
+                {loginMode && playlistSaved && (
                     <span className="grad">
                         Created playlist on your Spotify!
                     </span>

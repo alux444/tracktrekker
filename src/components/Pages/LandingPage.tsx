@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { DevContext, TokenContext } from "../../App";
+import { LoginContext, TokenContext } from "../../App";
 import hero from "../../imgs/hero.jpg";
 import useUser from "../../utils/useUser";
 import getAccessToken from "../../utils/noAuthAccessToken";
@@ -7,7 +7,7 @@ import getAccessToken from "../../utils/noAuthAccessToken";
 const LandingPage = () => {
     const { setToken } = useContext(TokenContext);
     const [loading, setLoading] = useState<boolean>(false);
-    const { devMode, setDevMode } = useContext(DevContext);
+    const { loginMode, setLoginMode } = useContext(LoginContext);
 
     const { promptUserLogin, initialiseCookies } = useUser();
 
@@ -17,7 +17,7 @@ const LandingPage = () => {
 
             if (cookiesExist) {
                 setLoading(false);
-                setDevMode(true);
+                setLoginMode(true);
                 return;
             }
         };
@@ -27,12 +27,12 @@ const LandingPage = () => {
     const setAccessToken = async () => {
         setLoading(true);
 
-        if (devMode) {
+        if (loginMode) {
             const res: number = await promptUserLogin();
             if (res == null) {
                 const token = await getAccessToken();
                 setToken(token);
-                setDevMode(false);
+                setLoginMode(false);
             }
         } else {
             const token = await getAccessToken();
@@ -69,9 +69,9 @@ const LandingPage = () => {
                     src={hero}
                     className="max-h-[35vh] max-w-[90vw] lg:max-h-[55vh] lg:max-w-[40vw]"
                 />
-                <button onClick={() => setDevMode(!devMode)}>
+                <button onClick={() => setLoginMode(!loginMode)}>
                     <span className="grad">
-                        {devMode ? "Developer Mode" : "TrackTrekker"}
+                        {loginMode ? "Developer Mode" : "TrackTrekker"}
                     </span>
                 </button>
             </div>

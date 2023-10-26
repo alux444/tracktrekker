@@ -2,7 +2,7 @@ import { useContext } from "react";
 import {
     ArtistInfoContext,
     ArtistSeedContext,
-    DevContext,
+    LoginContext,
     GenreContext,
     SongSeedContext,
     SongsInfoContext,
@@ -17,7 +17,7 @@ const useManageQuery = () => {
     const { songs, setSongs } = useContext(SongsInfoContext);
     const { artists, setArtists } = useContext(ArtistInfoContext);
     const { genres, setGenres } = useContext(GenreContext);
-    const { savedSongs, setSavedSongs } = useContext(DevContext);
+    const { savedSongs, setSavedSongs } = useContext(LoginContext);
 
     const addSong = (song: SongInfo) => {
         if (!songSeeds.includes(song.id)) {

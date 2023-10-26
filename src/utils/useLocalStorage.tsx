@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { DevContext } from "../App";
+import { LoginContext } from "../App";
 
 const useLocalStorage = () => {
-    const { savedSongs, setSavedSongs } = useContext(DevContext);
+    const { savedSongs, setSavedSongs } = useContext(LoginContext);
 
     const updateSaved = () => {
         localStorage.setItem("saved", JSON.stringify(savedSongs));

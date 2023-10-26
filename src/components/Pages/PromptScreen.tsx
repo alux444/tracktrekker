@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import {
     ArtistSeedContext,
-    DevContext,
+    LoginContext,
     ExtrasContext,
     GenreContext,
     SongSeedContext,
@@ -12,7 +12,7 @@ import TutorialModal from "../Tutorial/TutorialModal";
 import AskForExtra from "../AskFor/AskForExtra";
 
 const PromptScreen = ({ submit }: { submit: () => void }) => {
-    const { devMode } = useContext(DevContext);
+    const { loginMode } = useContext(LoginContext);
     const { promptPage, setPromptPage } = useContext(PromptPageContext);
 
     const { songSeeds } = useContext(SongSeedContext);
@@ -55,7 +55,7 @@ const PromptScreen = ({ submit }: { submit: () => void }) => {
                     {expandTutorial && (
                         <TutorialModal onClose={closeTutorial} />
                     )}
-                    {devMode && (
+                    {loginMode && (
                         <button className="button2" onClick={switchCustomMode}>
                             {promptPage === "user"
                                 ? "To Custom Search"

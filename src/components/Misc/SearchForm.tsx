@@ -7,7 +7,7 @@ import SongDisplay from "../Displays/SongDisplay";
 import { AudioContext } from "../Pages/Views";
 import Pagination from "./Pagination";
 import SavedRecommendations from "../SavedRecommend/SavedRecommendations";
-import { DevContext } from "../../App";
+import { LoginContext } from "../../App";
 import useDebounce from "../../utils/useDebounce";
 
 const SearchForm = ({
@@ -18,7 +18,7 @@ const SearchForm = ({
     scrollToTop: () => void;
 }) => {
     const { audio, setAudio, setAudioIsPlaying } = useContext(AudioContext);
-    const { savedSongs } = useContext(DevContext);
+    const { savedSongs } = useContext(LoginContext);
 
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import useOutsideClick from "../../utils/useOutsideClose";
-import { DevContext } from "../../App";
+import { LoginContext } from "../../App";
 import usePlaylist from "../../utils/usePlaylist";
 import SavedSongDisplay from "../Displays/SavedSongDisplay";
 
 const SavedSongs = ({ onClose }: { onClose: () => void }) => {
-    const { devMode, savedSongs, setSavedSongs } = useContext(DevContext);
+    const { loginMode, savedSongs, setSavedSongs } = useContext(LoginContext);
     const [saved, setSaved] = useState<boolean>(false);
 
     const modalRef = useRef(null);
@@ -48,7 +48,7 @@ const SavedSongs = ({ onClose }: { onClose: () => void }) => {
                 )}
                 {cart}
                 {savedSongs.length > 0 &&
-                    devMode &&
+                    loginMode &&
                     (saved ? (
                         <p className="grad">Saved to your Spotify!</p>
                     ) : (

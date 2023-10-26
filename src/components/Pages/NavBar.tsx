@@ -4,7 +4,7 @@ import { PromptPageContext, page } from "./Views";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import SavedSongsModal from "./SavedSongsModal";
-import { DevContext } from "../../App";
+import { LoginContext } from "../../App";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useLocalStorage from "../../utils/useLocalStorage";
 import useCookieManager from "../../utils/useCookieManager";
@@ -18,7 +18,7 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = ({ currentPage, toHome, toAbout }) => {
     const { setPromptPage } = useContext(PromptPageContext);
-    const { userId, savedSongs } = useContext(DevContext);
+    const { userId, savedSongs } = useContext(LoginContext);
 
     const [openCart, setOpenCart] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
