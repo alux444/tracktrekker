@@ -789,6 +789,10 @@ video {
   min-height: 100vh;
 }
 
+.w-\[100\%\] {
+  width: 100%;
+}
+
 .w-\[100vw\] {
   width: 100vw;
 }
@@ -1274,6 +1278,10 @@ video {
   --light: #dddcf2;
   --lightred: #fd9899;
 }
+
+/* * {
+    border: 1px solid red;
+} */
 
 body {
   margin: 0;

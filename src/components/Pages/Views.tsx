@@ -116,7 +116,7 @@ const Views = () => {
                     setVolume,
                 }}
             >
-                <div className="flex gap-2 flex-col justify-between min-h-screen items-center h-fit w-screen text-xs md:text-sm lg:text-md">
+                <div className="flex gap-2 flex-col justify-between min-h-screen items-center h-fit w-[100%] text-xs md:text-sm lg:text-md ">
                     <NavBar
                         currentPage={currentPage}
                         toHome={toHome}

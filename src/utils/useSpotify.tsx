@@ -1,14 +1,14 @@
 import axios from "axios";
 import { RecommendForm } from "../interfaces/recommendForm";
 import { useContext } from "react";
-import { DevContext, TokenContext } from "../App";
+import { LoginContext, TokenContext } from "../App";
 import { ExtraInfo } from "../interfaces/extrasInfo";
 import { SongInfo } from "../interfaces/songInfo";
 import { ArtistInfo } from "../interfaces/artistInfo";
 
 const useSpotify = () => {
     const { token } = useContext(TokenContext);
-    const { savedSongs } = useContext(DevContext);
+    const { savedSongs } = useContext(LoginContext);
 
     const getGenres = async () => {
         const url =

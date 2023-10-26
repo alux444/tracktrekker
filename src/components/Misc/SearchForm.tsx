@@ -7,7 +7,7 @@ import SongDisplay from "../Displays/SongDisplay";
 import { AudioContext } from "../Pages/Views";
 import Pagination from "./Pagination";
 import SavedRecommendations from "../SavedRecommend/SavedRecommendations";
-import { DevContext } from "../../App";
+import { LoginContext } from "../../App";
 import useDebounce from "../../utils/useDebounce";
 
 const SearchForm = ({
@@ -18,7 +18,7 @@ const SearchForm = ({
     scrollToTop: () => void;
 }) => {
     const { audio, setAudio, setAudioIsPlaying } = useContext(AudioContext);
-    const { savedSongs } = useContext(DevContext);
+    const { savedSongs } = useContext(LoginContext);
 
     const [query, setQuery] = useState<string>("");
     const [trackResults, setTrackResults] = useState<SongInfo[]>([]);
@@ -176,7 +176,7 @@ const SearchForm = ({
     ));
 
     return (
-        <div className="flex flex-col p-2 w-screen items-center gap-1">
+        <div className="flex flex-col p-2 w-[95vw] items-center gap-1">
             <form
                 id="searchForm"
                 className="flex flex-col gap-2 items-center"

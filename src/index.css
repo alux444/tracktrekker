@@ -11,6 +11,10 @@
     --lightred: #fd9899;
 }
 
+/* * {
+    border: 1px solid red;
+} */
+
 body {
     margin: 0;
     color: var(--light);

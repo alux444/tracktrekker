@@ -61,16 +61,16 @@ export const ExtrasContext = createContext<{
     setExtras: () => {},
 });
 
-export const DevContext = createContext<{
-    devMode: boolean;
-    setDevMode: React.Dispatch<React.SetStateAction<boolean>>;
+export const LoginContext = createContext<{
+    loginMode: boolean;
+    setLoginMode: React.Dispatch<React.SetStateAction<boolean>>;
     userId: string;
     setUserId: React.Dispatch<React.SetStateAction<string>>;
     savedSongs: SongInfo[];
     setSavedSongs: React.Dispatch<React.SetStateAction<SongInfo[]>>;
 }>({
-    devMode: false,
-    setDevMode: () => {},
+    loginMode: false,
+    setLoginMode: () => {},
     userId: "",
     setUserId: () => {},
     savedSongs: [],
@@ -97,7 +97,7 @@ function App() {
     const [extras, setExtras] = useState<ExtraInfo>({});
 
     //dev context
-    const [devMode, setDevMode] = useState<boolean>(false);
+    const [loginMode, setLoginMode] = useState<boolean>(false);
     const [userId, setUserId] = useState<string>("");
     const [savedSongs, setSavedSongs] = useState<SongInfo[]>([]);
 
@@ -117,20 +117,20 @@ function App() {
                                 <ExtrasContext.Provider
                                     value={{ extras, setExtras }}
                                 >
-                                    <DevContext.Provider
+                                    <LoginContext.Provider
                                         value={{
-                                            devMode,
-                                            setDevMode,
+                                            loginMode,
+                                            setLoginMode,
                                             userId,
                                             setUserId,
                                             savedSongs,
                                             setSavedSongs,
                                         }}
                                     >
-                                        <div className="light flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
+                                        <div className="light">
                                             <Views />
                                         </div>
-                                    </DevContext.Provider>
+                                    </LoginContext.Provider>
                                 </ExtrasContext.Provider>
                             </GenreContext.Provider>
                         </ArtistInfoContext.Provider>

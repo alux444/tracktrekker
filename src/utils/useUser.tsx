@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useContext } from "react";
-import { DevContext, TokenContext } from "../App";
+import { LoginContext, TokenContext } from "../App";
 import useCookieManager from "./useCookieManager";
 
 const useUser = () => {
-    const { setUserId } = useContext(DevContext);
+    const { setUserId } = useContext(LoginContext);
     const { setToken } = useContext(TokenContext);
     const {
         getAuth,

@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { DevContext, TokenContext } from "../App";
+import { LoginContext, TokenContext } from "../App";
 import axios from "axios";
 import { SongInfo } from "../interfaces/songInfo";
 
 const usePlaylist = () => {
     const { token } = useContext(TokenContext);
-    const { userId } = useContext(DevContext);
+    const { userId } = useContext(LoginContext);
 
     const createPlaylist = async (songs: SongInfo[]) => {
         const num: number = Math.floor(Math.random() * 1000);

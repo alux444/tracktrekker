@@ -4,7 +4,7 @@ import useManageQuery from "../../utils/useManageQuery";
 import { AudioContext } from "../Pages/Views";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import { DevContext } from "../../App";
+import { LoginContext } from "../../App";
 import { FavoriteOutlined } from "@mui/icons-material";
 
 const SavedSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
@@ -16,7 +16,7 @@ const SavedSongDisplay = ({ songInfo }: { songInfo: SongInfo }) => {
         currentPlayingId,
         setCurrentPlayingId,
     } = useContext(AudioContext);
-    const { savedSongs } = useContext(DevContext);
+    const { savedSongs } = useContext(LoginContext);
 
     const [inCart, setInCart] = useState(false);
     const { removeFromCart } = useManageQuery();

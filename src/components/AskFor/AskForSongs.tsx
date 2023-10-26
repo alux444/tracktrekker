@@ -16,7 +16,7 @@ const AskForSongs = () => {
     }
     return (
         <div
-            className="flex flex-col gap-2 justify-center items-center align-center w-full p-5"
+            className="flex flex-col gap-2 justify-center items-center align-center w-full p-5 "
             ref={topRef}
             id="askForSongs"
         >

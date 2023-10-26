@@ -11,7 +11,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import {
     ArtistSeedContext,
-    DevContext,
+    LoginContext,
     GenreContext,
     SongsInfoContext,
 } from "../../App";
@@ -34,7 +34,7 @@ const SongDisplay = ({
         setCurrentPlayingId,
     } = useContext(AudioContext);
     const { songs } = useContext(SongsInfoContext);
-    const { savedSongs } = useContext(DevContext);
+    const { savedSongs } = useContext(LoginContext);
     const { artistSeeds } = useContext(ArtistSeedContext);
     const { genres } = useContext(GenreContext);
 
