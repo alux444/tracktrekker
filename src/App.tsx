@@ -69,7 +69,7 @@ export const LoginContext = createContext<{
     savedSongs: SongInfo[];
     setSavedSongs: React.Dispatch<React.SetStateAction<SongInfo[]>>;
 }>({
-    loginMode: true,
+    loginMode: false,
     setLoginMode: () => {},
     userId: "",
     setUserId: () => {},
@@ -97,7 +97,7 @@ function App() {
     const [extras, setExtras] = useState<ExtraInfo>({});
 
     //dev context
-    const [loginMode, setLoginMode] = useState<boolean>(true);
+    const [loginMode, setLoginMode] = useState<boolean>(false);
     const [userId, setUserId] = useState<string>("");
     const [savedSongs, setSavedSongs] = useState<SongInfo[]>([]);
 
@@ -127,7 +127,7 @@ function App() {
                                             setSavedSongs,
                                         }}
                                     >
-                                        <div className="light flex justify-between align-center items-center min-h-screen w-screen overflow-auto">
+                                        <div className="light">
                                             <Views />
                                         </div>
                                     </LoginContext.Provider>

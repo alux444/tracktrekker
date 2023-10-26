@@ -2,7 +2,7 @@ import logo from "../../imgs/logoGreen.png";
 
 const Footer = () => {
     return (
-        <div id="footer" className="p-[10px] p-3 mt-3 mb-3">
+        <div id="footer" className="p-[10px] mt-3 mb-3">
             <hr></hr>
             <div className="flex justify-center items-center gap-2 p-1">
                 <small>© 2023 alux444</small>

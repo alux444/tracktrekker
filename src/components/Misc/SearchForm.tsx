@@ -176,7 +176,7 @@ const SearchForm = ({
     ));
 
     return (
-        <div className="flex flex-col p-2 w-screen items-center gap-1">
+        <div className="flex flex-col p-2 w-[95vw] items-center gap-1">
             <form
                 id="searchForm"
                 className="flex flex-col gap-2 items-center"
