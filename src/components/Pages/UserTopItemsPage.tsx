@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useSpotify from "../../utils/useSpotify";
 import { ArtistInfo } from "../../interfaces/artistInfo";
 import { SongInfo } from "../../interfaces/songInfo";
@@ -6,6 +6,7 @@ import Pagination from "../Misc/Pagination";
 import SongDisplay from "../Displays/SongDisplay";
 import ArtistDisplay from "../Displays/ArtistDisplay";
 import VolumeSlider from "../Misc/VolumeSlider";
+import { AudioContext } from "./Views";
 
 const UserTopItemsPage = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -17,11 +18,19 @@ const UserTopItemsPage = () => {
     const [topSongs, setTopSongs] = useState<SongInfo[]>([]);
     const [error, setError] = useState<boolean>(false);
 
+    const { audio, setAudioIsPlaying } = useContext(AudioContext);
     const { getTopItems } = useSpotify();
 
     useEffect(() => {
         setCurrentPage(1);
     }, [showSongs, currentTerm]);
+
+    useEffect(() => {
+        if (audio !== null) {
+            audio.pause();
+            setAudioIsPlaying(false);
+        }
+    }, [currentPage, showSongs, currentTerm]);
 
     useEffect(() => {
         const getAllItems = async () => {
