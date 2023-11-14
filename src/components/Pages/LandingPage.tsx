@@ -44,6 +44,7 @@ const LandingPage = () => {
 
     const loginAsGuest = async () => {
         setLoading(true);
+        setLoginMode(false);
 
         const token = await getAccessToken();
         setToken(token);
