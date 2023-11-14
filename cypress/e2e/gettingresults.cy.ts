@@ -5,7 +5,7 @@ describe("E2E - Searching for song, getting results", () => {
         cy.get("#navbar").should("exist");
         cy.get("#footer").should("exist");
         cy.get("#landing").should("exist");
-        cy.contains("Get Started").click();
+        cy.contains("Continue as Guest").click();
 
         cy.get("#landing").should("not.exist");
         //select a song
