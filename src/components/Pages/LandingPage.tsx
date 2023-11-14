@@ -78,7 +78,7 @@ const LandingPage = () => {
                         onClick={loginAsGuest}
                         disabled={loading}
                     >
-                        Continue as Guest
+                        {loading ? "Loading..." : "Continue as Guest"}
                     </button>
                 </div>
             </div>

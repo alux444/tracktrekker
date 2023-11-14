@@ -69,7 +69,7 @@ export const LoginContext = createContext<{
     savedSongs: SongInfo[];
     setSavedSongs: React.Dispatch<React.SetStateAction<SongInfo[]>>;
 }>({
-    loginMode: false,
+    loginMode: true,
     setLoginMode: () => {},
     userId: "",
     setUserId: () => {},
@@ -97,7 +97,7 @@ function App() {
     const [extras, setExtras] = useState<ExtraInfo>({});
 
     //dev context
-    const [loginMode, setLoginMode] = useState<boolean>(false);
+    const [loginMode, setLoginMode] = useState<boolean>(true);
     const [userId, setUserId] = useState<string>("");
     const [savedSongs, setSavedSongs] = useState<SongInfo[]>([]);
 
