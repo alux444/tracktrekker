@@ -19,7 +19,7 @@ const UserTopItemsPage = () => {
     const [error, setError] = useState<boolean>(false);
 
     const { audio, setAudioIsPlaying } = useContext(AudioContext);
-    const { getTopItems } = useSpotify();
+    const { getTopItems, getFeatures } = useSpotify();
 
     useEffect(() => {
         setCurrentPage(1);
@@ -35,12 +35,22 @@ const UserTopItemsPage = () => {
     useEffect(() => {
         const getAllItems = async () => {
             const songs = await getTopItems(currentTerm, "track");
+
+            const songIds = songs.map((song) => song.id).join(",");
+            const features = await getFeatures(songIds);
+            if (features) {
+                for (let i = 0; i < features.audio_features.length; i++) {
+                    features.audio_features[i].popularity = songs[i].popularity;
+                    songs[i].features = features.audio_features[i];
+                }
+            }
+            setTopSongs(songs);
+
             const artists = await getTopItems(currentTerm, "artist");
             if (songs === null || artists === null) {
                 setError(true);
                 return;
             }
-            setTopSongs(songs);
             setTopArtists(artists);
         };
         getAllItems();

@@ -54,6 +54,7 @@ const SavedSongsModal = ({ onClose }: { onClose: () => void }) => {
                     ) : (
                         <button
                             className="grad button2"
+                            style={{ minHeight: "2rem" }}
                             onClick={() => {
                                 createPlaylist(savedSongs);
                                 setSaved(true);

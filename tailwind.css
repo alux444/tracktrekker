@@ -1720,10 +1720,6 @@ input[type="range"]::-webkit-slider-thumb {
     flex-direction: row;
   }
 
-  .md\:items-center {
-    align-items: center;
-  }
-
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
