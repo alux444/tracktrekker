@@ -7,8 +7,8 @@ const useCookieManager = () => {
     const scope =
         "user-top-read,playlist-modify-public,playlist-modify-private,user-read-private,user-read-email";
 
-    // const redirectUri = "https://alux444.github.io/tracktrekker/";
-    const redirectUri = "http://localhost:5173/tracktrekker/";
+    const redirectUri = "https://alux444.github.io/tracktrekker/";
+    // const redirectUri = "http://localhost:5173/tracktrekker/";
 
     const generateRandomString = (length: number) => {
         let text = "";
