@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import useOutsideClick from "../../utils/useOutsideClose";
 import { LoginContext } from "../../App";
 import usePlaylist from "../../utils/usePlaylist";
-import SavedSongDisplay from "../Displays/SavedSongDisplay";
+import SongDisplay from "../Displays/SongDisplay";
 
 const SavedSongsModal = ({ onClose }: { onClose: () => void }) => {
     const { loginMode, savedSongs, setSavedSongs } = useContext(LoginContext);
@@ -17,7 +17,7 @@ const SavedSongsModal = ({ onClose }: { onClose: () => void }) => {
     }, [savedSongs]);
 
     const cart = savedSongs.map((song) => (
-        <SavedSongDisplay songInfo={song} key={song.id} />
+        <SongDisplay songInfo={song} key={song.id} statsButton={true} />
     ));
 
     return (
@@ -46,7 +46,9 @@ const SavedSongsModal = ({ onClose }: { onClose: () => void }) => {
                         <span>Clear Songs</span>
                     </button>
                 )}
-                {cart}
+
+                <div className="w-[95%]">{cart}</div>
+
                 {savedSongs.length > 0 &&
                     loginMode &&
                     (saved ? (
