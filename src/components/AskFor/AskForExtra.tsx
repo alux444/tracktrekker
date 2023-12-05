@@ -15,8 +15,14 @@ const AskForExtra: React.FC<AskForExtrasProps> = ({ onClose }) => {
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50 w-screen h-screen">
             <div
                 ref={modalRef}
-                className="bg-dark3 flex flex-col p-3 gap-2 rounded-lg shadow-md flex items-center w-fit max-h-[90vh] max-w-[90vw] overflow-auto"
+                className="bg-dark3 flex flex-col p-3 gap-2 rounded-lg shadow-md flex items-center w-fit max-h-[90vh] max-w-[90vw] overflow-auto relative"
             >
+                <button
+                    className="absolute top-2 right-3 cursor-pointer"
+                    onClick={onClose}
+                >
+                    <span>&times;</span>
+                </button>
                 <div className="flex flex-col text-center text-wrap justify-center w-full">
                     <h2 className="text-lg grad">Manage Filters</h2>
                     <p>

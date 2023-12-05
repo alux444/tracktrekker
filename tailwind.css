@@ -845,6 +845,10 @@ video {
   width: 80vw;
 }
 
+.w-\[90\%\] {
+  width: 90%;
+}
+
 .w-\[90vw\] {
   width: 90vw;
 }
