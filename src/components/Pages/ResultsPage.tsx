@@ -272,7 +272,7 @@ const ResultsPage = ({
             </div>
             {songs.length > 0 ? (
                 <div
-                    className="flex flex-col justify-center w-[1vw] items-center"
+                    className="flex flex-col justify-center items-center"
                     id="recommendResults"
                 >
                     <div className="p-5 flex w-[95%] flex-col w-screen md:w-[70vw] lg:w-[60vw] xl:w-[50vw]">
