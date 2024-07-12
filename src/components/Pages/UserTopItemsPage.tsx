@@ -90,7 +90,7 @@ const UserTopItemsPage = () => {
             ? "Past 4 weeks"
             : currentTerm === "medium_term"
             ? "Past 6 months"
-            : "All Time";
+            : "Past Year";
 
     return (
         <div className="flex gap-2 items-center justify-center flex-col w-screen p-3">
@@ -109,7 +109,7 @@ const UserTopItemsPage = () => {
                     >
                         <option value="short_term">Past 4 weeks</option>
                         <option value="medium_term">Past 6 months</option>
-                        <option value="long_term">All time</option>
+                        <option value="long_term">Past Year</option>
                     </select>
                 </div>
             </div>
