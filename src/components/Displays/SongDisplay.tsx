@@ -174,10 +174,10 @@ const SongDisplay = ({
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <img
-                                src={songInfo.album.images[1].url}
+                            {songInfo.album.images?.[1] && songInfo.album.images[1].url && <img
+                                src={songInfo.album.images?.[1].url}
                                 className="float-left md:max-w-[80px] md:max-h-[80px] max-h-[70px] max-w-[70px]"
-                            />
+                            />}
                         </a>
 
                         <div
